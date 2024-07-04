@@ -33,6 +33,41 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-home',
                         routerLink: ['/']
                     },
+                    {
+                        label: 'Carreras técnicas',
+                        icon: 'pi pi-book',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Ciclos',
+                        icon: 'pi pi-bell',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Áreas de Formación',
+                        icon: 'pi pi-briefcase',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Unidades Formativas',
+                        icon: 'pi pi-credit-card',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Unidades Didácticas',
+                        icon: 'pi pi-envelope',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Estado de Cursos',
+                        icon: 'pi pi-id-card',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Tipo de Materia',
+                        icon: 'pi pi-inbox',
+                        routerLink: ['/']
+                    },
                     
                 ]
             },
