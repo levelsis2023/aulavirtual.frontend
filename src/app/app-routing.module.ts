@@ -13,7 +13,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'instituciones', component: AppLayoutComponent,
+        path: 'pl-virtual', component: AppLayoutComponent,
         loadChildren: () => import('./components/onlineclasses/online-classes.module').then(m => m.OnlineClassesModule) 
        
     },

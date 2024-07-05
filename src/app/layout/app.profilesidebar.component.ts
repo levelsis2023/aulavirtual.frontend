@@ -7,6 +7,8 @@ import { LayoutService } from './service/app.layout.service';
 })
 export class AppProfileSidebarComponent {
 
+    nombreUser: string ="HAROLD JAMS CARRILLO";
+
     constructor(public layoutService: LayoutService) { }
 
     get visible(): boolean {
