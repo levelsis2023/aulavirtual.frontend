@@ -1,6 +1,6 @@
 <p-panel>
     <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Registrar Institución</span>
+        <span class="text-primary font-semibold text-xl">Configuraciones</span>
     </ng-template>
     <ng-template pTemplate="content">
         <div class="row">
@@ -8,66 +8,84 @@
                 <div class="field md:col-6">
                     <span class="p-float-label p-input-icon-left">
                         <i class="pi pi-user-edit"></i>
-                        <input type="text" id="nombreInstitucion" pInputText>
-                        <label for="nombreInstitucion">Nombre de Institución</label>
+                        <input type="text" id="codigo" pInputText>
+                        <label for="codigo">Código</label>
                     </span>
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
                 <div class="field md:col-6">
                     <span class="p-float-label p-input-icon-left">
                         <i class="pi pi-user-edit"></i>
-                        <input type="text" id="director" pInputText>
-                        <label for="director">Director</label>
+                        <input type="text" id="nombrecarrera" pInputText>
+                        <label for="nombrecarrera">Unidad Informativa</label>
                     </span>
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid">
+            <div class="grid p-fluid ">
                 <div class="field md:col-6">
                     <span class="p-float-label p-input-icon-left">
                         <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">Siglas</label>
+                        <input type="text" id="codigo" pInputText>
+                        <label for="codigo">Ciclos</label>
                     </span>
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
                 <div class="field md:col-6">
                     <span class="p-float-label p-input-icon-left">
                         <i class="pi pi-user-edit"></i>
-                        <input type="text" id="logotipo" pInputText>
-                        <label for="logotipo">Logotipo</label>
+                        <input type="text" id="nombrecarrera" pInputText>
+                        <label for="nombrecarrera">Créditos</label>
                     </span>
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid">
+            <div class="grid p-fluid ">
                 <div class="field md:col-6">
                     <span class="p-float-label p-input-icon-left">
                         <i class="pi pi-user-edit"></i>
-                        <input type="text" id="colorFondo" pInputText>
-                        <label for="colorFondo">Color de fondo</label>
+                        <input type="text" id="codigo" pInputText>
+                        <label for="codigo">% Creditos</label>
                     </span>
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
                 <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-calendar
+                          inputId="horaprogramada"                           
+                          (onSelect)="capturarHora($event)"
+                          [showTime]="true"
+                          [showSeconds]="false"
+                          dateFormat="dd-mm-yy"
+                          [timeOnly]="true"
+                        ></p-calendar>
+                        <label for="horaprogramada">Horas</label>
+                      </span>
+                      <small style="color: brown;">Campo oblicatorio *</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">
+                <div class="field md:col-6">
                     <span class="p-float-label p-input-icon-left">
                         <i class="pi pi-user-edit"></i>
-                        <input type="text" id="colorTexto" pInputText>
-                        <label for="colorTexto">Color de texto</label>
+                        <input type="text" id="codigo" pInputText>
+                        <label for="codigo">Áreas de formación</label>
                     </span>
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
+                
             </div>
         </div>
         <div class="row mb-5 text-right">               
-                    <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
-                    <button pButton label="Cancelar" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
+            <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
+            <button pButton label="Cancelar" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
         </div>
-        
+
     </ng-template>
-    
 </p-panel>

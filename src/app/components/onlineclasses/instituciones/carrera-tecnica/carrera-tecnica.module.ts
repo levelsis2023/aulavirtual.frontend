@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { InstitucionesRoutingModule } from './instituciones-routing.module';
-import { RegitroInstitucionesComponent } from './regitro-instituciones/regitro-instituciones.component';
-
 import { RouterModule } from '@angular/router'
-
 import { ToastModule } from 'primeng/toast'
 import { FormsModule } from '@angular/forms'
 import { TableModule } from 'primeng/table'
@@ -27,45 +22,36 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { BandejaInstitucionesComponent } from './bandeja/bandeja-instituciones/bandeja-instituciones.component';
-import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
-import { ConfiguracionesComponent } from './configuraciones/configuraciones.component'
+import { CarreraTecnicaRoutingModule } from './carrera-tecnica-routing.module';
+import { CarreraTecnicaComponent } from './carrera-tecnica.component';
 
 
 @NgModule({
   declarations: [
-    RegitroInstitucionesComponent,
-    BandejaInstitucionesComponent,
-    CarreraTecnicaComponent,
-    ConfiguracionesComponent
+    
   ],
   imports: [
-      CommonModule,
-      InstitucionesRoutingModule,      
-      FormsModule,
-      CalendarModule,
-      TableModule,
-      RatingModule,
-      ButtonModule,
-      SliderModule,
-      InputTextModule,
-      InputTextareaModule,
-      ToggleButtonModule,
-      RippleModule,
-      MultiSelectModule,
-      DropdownModule,
-      PanelModule,
-      ProgressBarModule,
-      ToastModule,
-      ConfirmPopupModule,
-      FileUploadModule,
-      TooltipModule,
-      ToastModule,
-      PanelModule,
-      TableModule,
-      ConfirmPopupModule,
-      ConfirmDialogModule,
-      FileUploadModule
+    CommonModule,
+    CarreraTecnicaRoutingModule,
+    FormsModule,
+    CalendarModule,   
+    RatingModule,
+    ButtonModule,
+    SliderModule,
+    InputTextModule,
+    InputTextareaModule,
+    ToggleButtonModule,
+    RippleModule,
+    MultiSelectModule,
+    DropdownModule,
+    PanelModule,
+    ProgressBarModule,   
+    FileUploadModule,
+    TooltipModule,
+    ToastModule,   
+    TableModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule
   ]
 })
-export class InstitucionesModule { }
+export class CarreraTecnicaModule { }

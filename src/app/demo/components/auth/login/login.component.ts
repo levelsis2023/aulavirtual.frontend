@@ -53,7 +53,7 @@ irAlLogin() {
 			icon: 'success',
 			confirmButtonText: 'Aceptar',
 		}).then(() => {
-			this.router.navigate(['/instituciones']);
+			this.router.navigate(['/pl-virtual']);
 		});
 	} else {
 		Swal.fire({

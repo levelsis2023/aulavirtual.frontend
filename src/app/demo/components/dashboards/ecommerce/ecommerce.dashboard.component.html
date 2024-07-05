@@ -1,10 +1,10 @@
 <div class="grid">
     <div class="col-12 md:col-6 xl:col-3">
         <div class="card h-full">
-            <span class="font-semibold text-lg">Sales</span>
+            <span class="font-semibold text-lg">Instituciones</span>
             <div class="flex justify-content-between align-items-start mt-3">
                 <div class="w-6">
-                    <span class="text-4xl font-bold text-900">120</span>
+                    <span class="text-4xl font-bold text-900">30</span>
                     <div class="text-green-500">
                         <span class="font-medium">+12%</span>
                         <i class="pi pi-arrow-up text-xs ml-2"></i>
@@ -20,10 +20,10 @@
     </div>
     <div class="col-12 md:col-6 xl:col-3">
         <div class="card h-full">
-            <span class="font-semibold text-lg">Revenue</span>
+            <span class="font-semibold text-lg">Alumnos</span>
             <div class="flex justify-content-between align-items-start mt-3">
                 <div class="w-6">
-                    <span class="text-4xl font-bold text-900">$4500</span>
+                    <span class="text-4xl font-bold text-900">500</span>
                     <div class="text-green-500">
                         <span class="font-medium">+20%</span>
                         <i class="pi pi-arrow-up text-xs ml-2"></i>
@@ -39,10 +39,10 @@
     </div>
     <div class="col-12 md:col-6 xl:col-3">
         <div class="card h-full">
-            <span class="font-semibold text-lg">Visitors</span>
+            <span class="font-semibold text-lg">Visitas</span>
             <div class="flex justify-content-between align-items-start mt-3">
                 <div class="w-6">
-                    <span class="text-4xl font-bold text-900">360</span>
+                    <span class="text-4xl font-bold text-900">2000</span>
                     <div class="text-pink-500">
                         <span class="font-medium">+24%</span>
                         <i class="pi pi-arrow-down text-xs ml-2"></i>
@@ -58,104 +58,27 @@
     </div>
     <div class="col-12 md:col-6 xl:col-3">
         <div class="card h-full">
-            <span class="font-semibold text-lg">Stock</span>
+            <span class="font-semibold text-lg">Carreras Tecnicas</span>
             <div class="flex justify-content-between align-items-start mt-3">
                 <div class="w-6">
-                    <span class="text-4xl font-bold text-900">164</span>
+                    <span class="text-4xl font-bold text-900">35</span>
                     <div class="text-green-500">
                         <span class="font-medium">+30%</span>
                         <i class="pi pi-arrow-up text-xs ml-2"></i>
                     </div>
                 </div>
                 <div class="w-6 text-right"> 
-                    <p-knob [(ngModel)]="knobValue" valueTemplate="{value}%" [readonly]="true" [strokeWidth]="2" [size]="90" styleClass="-mt-5"></p-knob>
+                    <p-knob [(ngModel)]="knobValue" valueTemplate="{value}%" [readonly]="true" [strokeWidth]="2" [size]="50" styleClass="-mt-5"></p-knob>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-12 xl:col-12">
+        <div class="card h-full flex justify-content-center align-items-center">
+            <img src="assets/layout/images/background_amazonas.jpeg" alt="Imagen de Amazonas" style="max-width: 100%; width: auto; height: auto;">
+        </div>
+    </div>
+    
+    
 
-    <div class="col-12 xl:col-9">
-        <div class="card h-full">
-            <div class="flex align-items-start justify-content-between mb-6">
-                <span class="text-900 text-xl font-semibold">Revenue Overview</span>
-                <p-dropdown [options]="weeks" [(ngModel)]="selectedWeek" styleClass="w-10rem" optionLabel="label" (onChange)="onWeekChange()"></p-dropdown>
-            </div>
-            <p-chart type="bar" [data]="barData" [options]="barOptions" height="300px"></p-chart>
-        </div>
-    </div>
-    <div class="col-12 xl:col-3">
-        <div class="card h-full">
-            <div class="text-900 text-xl font-semibold mb-6">Sales by Category</div>
-            <p-chart type="pie" [data]="pieData" [options]="pieOptions" height="300px"></p-chart>
-        </div>
-    </div>
-
-    <div class="col-12 lg:col-8">
-        <div class="card">
-            <div class="flex flex-column md:flex-row md:align-items-start md:justify-content-between mb-3">
-                <div class="text-900 text-xl font-semibold mb-3 md:mb-0">Recent Sales</div>
-                <div class="inline-flex align-items-center">
-                    <span class="p-input-icon-left flex-auto">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search" class="w-full" style="border-radius: 2rem"/>
-                    </span>
-                    <button pButton pRipple icon="pi pi-upload" class="p-button-rounded mx-3" (click)="dt.exportCSV()"></button>
-                </div>
-            </div>
-            <p-table #dt [value]="products" [columns]="cols" [paginator]="true" [rows]="5" responsiveLayout="scroll" [globalFilterFields]="['name','category','inventoryStatus']">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pSortableColumn="name" style="min-width:12rem" class="white-space-nowrap">Name
-                            <p-sortIcon field="name"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="category" style="min-width:10rem" class="white-space-nowrap">Category
-                            <p-sortIcon field="category"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="price" style="min-width:10rem" class="white-space-nowrap">Price
-                            <p-sortIcon field="price"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="inventoryStatus" style="min-width:10rem" class="white-space-nowrap">Status
-                            <p-sortIcon field="inventoryStatus"></p-sortIcon>
-                        </th>
-                        <th></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product>
-                    <tr>
-                        <td>{{product.name}}</td>
-                        <td>
-                            <span class="p-column-title">Category</span>
-                            {{product.category}}</td>
-                        <td>
-                            <span class="p-column-title">Price</span>
-                            {{product.price | currency:'USD'}}</td>
-                        <td>
-                            <span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
-                        </td>
-                        <td style="text-align: center">
-                            <button pButton type="button" icon="pi pi-search" class="p-button-outlined p-button-rounded"></button>
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-    </div>
-    <div class="col-12 lg:col-4">
-        <div class="card h-full">
-            <div class="text-900 text-xl font-semibold mb-3">Top Products</div>
-            <ul class="list-none p-0 m-0">
-                <li *ngFor="let product of products | slice:0:6" class="flex align-items-center justify-content-between p-3">
-                    <div class="inline-flex align-items-center">
-                        <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" width="75" class="shadow-2 flex-shrink-0" />
-                        <div class="flex flex-column ml-3">
-                            <span class="font-medium text-lg mb-1">{{product.name}}</span>
-                            <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false" [iconOnStyle]="{'fontSize':'12px'}"  [iconOffStyle]="{'fontSize':'12px'}"></p-rating>
-                        </div>
-                    </div>
-                    <span class="ml-auto font-semibold text-xl p-text-secondary">${{product.price}}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>

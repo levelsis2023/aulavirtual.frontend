@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { InstitucionesRoutingModule } from './instituciones-routing.module';
-import { RegitroInstitucionesComponent } from './regitro-instituciones/regitro-instituciones.component';
-
+import { BandejaInstitucionesRoutingModule } from './bandeja-instituciones-routing.module';
 import { RouterModule } from '@angular/router'
-
 import { ToastModule } from 'primeng/toast'
 import { FormsModule } from '@angular/forms'
 import { TableModule } from 'primeng/table'
@@ -27,21 +23,17 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { BandejaInstitucionesComponent } from './bandeja/bandeja-instituciones/bandeja-instituciones.component';
-import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
-import { ConfiguracionesComponent } from './configuraciones/configuraciones.component'
+import { BandejaInstitucionesComponent } from './bandeja-instituciones.component';
+
 
 
 @NgModule({
   declarations: [
-    RegitroInstitucionesComponent,
-    BandejaInstitucionesComponent,
-    CarreraTecnicaComponent,
-    ConfiguracionesComponent
+    BandejaInstitucionesComponent
   ],
   imports: [
-      CommonModule,
-      InstitucionesRoutingModule,      
+      CommonModule,     
+      BandejaInstitucionesRoutingModule,          
       FormsModule,
       CalendarModule,
       TableModule,
@@ -68,4 +60,4 @@ import { ConfiguracionesComponent } from './configuraciones/configuraciones.comp
       FileUploadModule
   ]
 })
-export class InstitucionesModule { }
+export class BandejaInstitucionesModule { }

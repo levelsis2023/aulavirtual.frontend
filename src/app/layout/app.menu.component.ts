@@ -28,20 +28,26 @@ export class AppMenuComponent implements OnInit {
                 label: 'Instituciones',
                 icon: 'pi pi-building',
                 items: [
+                    
+                    {
+                        label: 'Registro',
+                        icon: 'pi pi-file-edit',
+                        routerLink: ['/pl-virtual/registro-instituciones']
+                    },
                     {
                         label: 'Bandeja',
-                        icon: 'pi pi-fw pi-home',
-                        routerLink: ['/']
+                        icon: 'pi pi-bars',
+                        routerLink: ['/pl-virtual/bandeja-instituciones']
                     },
                     {
                         label: 'Carreras técnicas',
                         icon: 'pi pi-book',
-                        routerLink: ['/']
+                        routerLink: ['/pl-virtual/carrera-tecnica']
                     },
                     {
-                        label: 'Ciclos',
-                        icon: 'pi pi-bell',
-                        routerLink: ['/']
+                        label: 'Configuraciones',
+                        icon: 'pi pi-wrench',
+                        routerLink: ['/pl-virtual/configuraciones']
                     },
                     {
                         label: 'Áreas de Formación',
