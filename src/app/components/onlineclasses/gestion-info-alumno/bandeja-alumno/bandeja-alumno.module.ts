@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InstitucionesRoutingModule } from './instituciones-routing.module';
-import { RegitroInstitucionesComponent } from './regitro-instituciones/regitro-instituciones.component';
-
+import { BandejaAlumnoRoutingModule } from './bandeja-alumno-routing.module';
+import { BandejaAlumnoComponent } from './bandeja-alumno.component';
 import { RouterModule } from '@angular/router'
-
 import { ToastModule } from 'primeng/toast'
 import { FormsModule } from '@angular/forms'
 import { TableModule } from 'primeng/table'
@@ -27,26 +25,16 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { BandejaInstitucionesComponent } from './bandeja/bandeja-instituciones/bandeja-instituciones.component';
-import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
-import { ConfiguracionesComponent } from './configuraciones/configuraciones.component'
-import { RegistrarAlumnosComponent } from '../gestion-info-alumno/registrar-alumno/registrar-alumnos.component';
-import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/bandeja-alumno.component';
 
 
 @NgModule({
   declarations: [
-    RegitroInstitucionesComponent,
-    BandejaInstitucionesComponent,
-    CarreraTecnicaComponent,
-    ConfiguracionesComponent,
-    RegistrarAlumnosComponent,
-    BandejaAlumnoComponent
+    
   ],
   imports: [
-      CommonModule,
-      InstitucionesRoutingModule,      
-      FormsModule,
+    CommonModule,
+    BandejaAlumnoRoutingModule,
+    FormsModule,
       CalendarModule,
       TableModule,
       RatingModule,
@@ -72,4 +60,4 @@ import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/ba
       FileUploadModule
   ]
 })
-export class InstitucionesModule { }
+export class BandejaAlumnoModule { }

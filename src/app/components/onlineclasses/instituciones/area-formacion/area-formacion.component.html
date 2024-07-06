@@ -1,0 +1,62 @@
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Área de Formación</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="grid p-fluid ">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="nombreInstitucion" pInputText>
+                        <label for="nombreInstitucion">Nombre de Área de información</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listcarreras"
+                            [(ngModel)]="tipoDocumentoSeleccionado" optionLabel="name" ></p-dropdown>
+                        <label for="dropdown">Selecione carrera</label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                  
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-multiSelect inputId="dropdown" class="custom-multiselect" [options]="cantciclos"
+                                [(ngModel)]="valuecantciclos" optionLabel="name" ></p-multiSelect>
+                        <label for="dropdown">Selecione ciclos </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="row">
+           
+                <div class="grid p-fluid ">
+                    <div class="field md:col-6">
+                   
+              
+               </div>
+              </div>
+        </div>
+     
+      
+        
+
+        <div class="row mb-5 text-right">               
+            <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
+            <button pButton label="Cancelar" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
+        </div>
+    </ng-template>
+</p-panel>
+
+

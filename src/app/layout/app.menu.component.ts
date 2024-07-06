@@ -45,24 +45,25 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/pl-virtual/carrera-tecnica']
                     },
                     {
-                        label: 'Configuraciones',
-                        icon: 'pi pi-wrench',
-                        routerLink: ['/pl-virtual/configuraciones']
-                    },
+                        label: 'Ciclos',
+                        icon: 'pi pi-palette',
+                        routerLink: ['/pl-virtual/ciclos-academicos']
+                    },          
+                    
                     {
                         label: 'Áreas de Formación',
                         icon: 'pi pi-briefcase',
-                        routerLink: ['/']
+                        routerLink: ['/pl-virtual/area-formacion']
                     },
                     {
                         label: 'Unidades Formativas',
                         icon: 'pi pi-credit-card',
-                        routerLink: ['/']
+                        routerLink: ['/pl-virtual/unidades-formativas']
                     },
                     {
                         label: 'Unidades Didácticas',
                         icon: 'pi pi-envelope',
-                        routerLink: ['/']
+                        routerLink: ['/pl-virtual/unidades-didacticas']
                     },
                     {
                         label: 'Estado de Cursos',
@@ -74,6 +75,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-inbox',
                         routerLink: ['/']
                     },
+                    {
+                        label: 'Configuraciones',
+                        icon: 'pi pi-wrench',
+                        routerLink: ['/pl-virtual/configuraciones']
+                    },
                     
                 ]
             },
@@ -83,14 +89,14 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'Bandeja',
-                        icon: 'pi pi-clipboard',
-                        routerLink: ['/']
+                        icon: 'pi pi-bars',
+                        routerLink: ['/pl-virtual/bandeja-alumno']
                         
                     },
                     {
-                        label: 'Matricula',
+                        label: 'Registrar',
                         icon: 'pi pi-user-edit',
-                        routerLink: ['/apps/chat']
+                        routerLink: ['/pl-virtual/registro-alumno']
                     },
                     {
                         label: 'Reuniones',
