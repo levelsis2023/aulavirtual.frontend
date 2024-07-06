@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { InstitucionesRoutingModule } from './instituciones-routing.module';
-import { RegitroInstitucionesComponent } from './regitro-instituciones/regitro-instituciones.component';
-
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { GestionInfoAlumnoRoutingModule } from './gestion-info-alumno-routing.module';
 import { RouterModule } from '@angular/router'
 
 import { ToastModule } from 'primeng/toast'
@@ -27,26 +24,35 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { BandejaInstitucionesComponent } from './bandeja/bandeja-instituciones/bandeja-instituciones.component';
-import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
-import { ConfiguracionesComponent } from './configuraciones/configuraciones.component'
-import { RegistrarAlumnosComponent } from '../gestion-info-alumno/registrar-alumno/registrar-alumnos.component';
-import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/bandeja-alumno.component';
+import { RegistrarAlumnosComponent } from './registrar-alumno/registrar-alumnos.component';
+import { BandejaAlumnoComponent } from './bandeja-alumno/bandeja-alumno.component';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { LoadingInterceptorService } from 'src/app/layout/service/loading-interceptor.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
+}
 
 
 @NgModule({
   declarations: [
-    RegitroInstitucionesComponent,
-    BandejaInstitucionesComponent,
-    CarreraTecnicaComponent,
-    ConfiguracionesComponent,
-    RegistrarAlumnosComponent,
-    BandejaAlumnoComponent
+       
   ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptorService,
+      multi: true
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: DialogService, useClass: DialogService }
+],
   imports: [
-      CommonModule,
-      InstitucionesRoutingModule,      
-      FormsModule,
+    CommonModule,
+    GestionInfoAlumnoRoutingModule,
+    FormsModule,
       CalendarModule,
       TableModule,
       RatingModule,
@@ -69,7 +75,14 @@ import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/ba
       TableModule,
       ConfirmPopupModule,
       ConfirmDialogModule,
-      FileUploadModule
+      FileUploadModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
   ]
 })
-export class InstitucionesModule { }
+export class GestionInfoAlumnoModule { }
