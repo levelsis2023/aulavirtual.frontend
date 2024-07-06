@@ -14,7 +14,7 @@ src/assets/layout/css/*.css
 src/assets/sass/theme/_vendor_extensions
 
 # compiled output
-/dist
+
 /tmp
 /out-tsc
 
