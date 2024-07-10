@@ -16,6 +16,14 @@ const routes: Routes = [];
     { path: 'area-formacion', data: { breadcrumb: 'Área de Formación' }, loadChildren: () => import('./instituciones/area-formacion/area-formacion.module').then(m => m.AreaFormacionModule) },
     { path: 'unidades-formativas', data: { breadcrumb: 'Unidades Formativas' }, loadChildren: () => import('./instituciones/unidades-formativas/unidades-formativas.module').then(m => m.UnidadesFormativasModule) },
     { path: 'unidades-didacticas', data: { breadcrumb: 'Unidades Didacticas' }, loadChildren: () => import('./instituciones/unidades-didacticas/unidades-didacticas.module').then(m => m.UnidadesDidacticasModule) },
+    { path: 'estado-cursos', data: { breadcrumb: 'Estado de Cursos' }, loadChildren: () => import('./instituciones/estado-cursos/estado-cursos.module').then(m => m.EstadoCursosModule) },
+    { path: 'tipo-curso', data: { breadcrumb: 'Tipo de Curso' }, loadChildren: () => import('./instituciones/tipo-curso/tipo-curso.module').then(m => m.TipoCursoModule) },
+    { path: 'asigna-curso-docente', data: { breadcrumb: 'Asingna Curso Docente' }, loadChildren: () => import('./configuraciones/asigna-curso-docente/asgina-curso-docente.module').then(m => m.AsginaCursoDocenteModule) },
+    { path: 'bandeja-curso-docente', data: { breadcrumb: 'Bandeja de Curso del Docente' }, loadChildren: () => import('./configuraciones/bandeja-curso-docente/bandeja-curso-docente.module').then(m => m.BandejaCursoDocenteModule) },
+    { path: 'bandeja-usuarios', data: { breadcrumb: 'Bandeja de Usuarios' }, loadChildren: () => import('./roles-permisos/bandeja-usuarios/bandeja-usuarios.module').then(m => m.BandejaUsuariosModule) },
+    
+
+
   ])],
   exports: [RouterModule]
 })

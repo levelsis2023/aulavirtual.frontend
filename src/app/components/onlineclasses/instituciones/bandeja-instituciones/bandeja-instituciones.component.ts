@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -18,6 +19,7 @@ export class BandejaInstitucionesComponent {
 
   constructor(
     private router: Router,
+    private dialogService: DialogService,
  
   
   ) { }

@@ -54,18 +54,12 @@
                     <small style="color: brown;">Campo obligatorio *</small>
                 </div>
                 <div class="field md:col-6">
-                    <span class="p-float-label">
-                        <p-calendar
-                          inputId="horaprogramada"                           
-                          (onSelect)="capturarHora($event)"
-                          [showTime]="true"
-                          [showSeconds]="false"
-                          dateFormat="dd-mm-yy"
-                          [timeOnly]="true"
-                        ></p-calendar>
-                        <label for="horaprogramada">Horas</label>
-                      </span>
-                      <small style="color: brown;">Campo oblicatorio *</small>
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="horas" pInputText>
+                        <label for="horas">Horas</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
                 </div>
             </div>
         </div>

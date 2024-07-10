@@ -3,11 +3,14 @@ import { CommonModule, HashLocationStrategy, LocationStrategy, registerLocaleDat
 import localeEs from '@angular/common/locales/es';
 import { OnlineClassesRoutingModule } from './online-classes-routing.module';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingInterceptorService } from 'src/app/layout/service/loading-interceptor.service';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { AppComponent } from 'src/app/app.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
@@ -15,7 +18,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   declarations: [],
-  providers: [
+  providers: [DialogService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptorService,
@@ -34,8 +37,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient],
       },
-  })
-  ]
+      
+  }),
+    DialogModule,
+    ButtonModule,
+    DynamicDialogModule
+  ],
+  bootstrap: [AppComponent]
 })
 export class OnlineClassesModule { 
 

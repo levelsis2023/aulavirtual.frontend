@@ -1,0 +1,74 @@
+<p-panel>        
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Asignar Curso al Docente</span>
+    </ng-template>
+        <ng-template pTemplate="content">
+        <div class="row">
+            <div class="grid p-fluid ">
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="nombreInstitucion" pInputText>
+                        <label for="nombreInstitucion">Nombre de Institución</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="director" pInputText>
+                        <label for="director">Director</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid">
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="siglas" pInputText>
+                        <label for="siglas">Siglas</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="logotipo" pInputText>
+                        <label for="logotipo">Logotipo</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid">
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="colorFondo" pInputText>
+                        <label for="colorFondo">Color de fondo</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="colorTexto" pInputText>
+                        <label for="colorTexto">Color de texto</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 text-right">               
+                    <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
+                    <button pButton label="Cancelar" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
+        </div>
+        
+    </ng-template>
+    
+</p-panel>
+
