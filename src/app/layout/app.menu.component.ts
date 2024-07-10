@@ -2,8 +2,9 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { OptionsDto } from '../seguridad/options-dto';
 import { SeguridadService } from '../seguridad/service/seguridad.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PL_TOKEN, VAR_URL } from '../components/onlineclasses/utils/Utils';
+import { style } from '@angular/animations';
 
 @Component({
     selector: 'app-menu',
@@ -25,146 +26,211 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Instituciones',
+                label: 'Plataforma Virtual',
                 icon: 'pi pi-building',
                 items: [
-                    
                     {
-                        label: 'Registro',
-                        icon: 'pi pi-file-edit',
-                        routerLink: ['/pl-virtual/registro-instituciones']
-                    },
-                    {
-                        label: 'Bandeja',
-                        icon: 'pi pi-bars',
-                        routerLink: ['/pl-virtual/bandeja-instituciones']
-                    },
-                    {
-                        label: 'Carreras técnicas',
-                        icon: 'pi pi-book',
-                        routerLink: ['/pl-virtual/carrera-tecnica']
-                    },
-                    {
-                        label: 'Ciclos',
-                        icon: 'pi pi-palette',
-                        routerLink: ['/pl-virtual/ciclos-academicos']
-                    },          
-                    
-                    {
-                        label: 'Áreas de Formación',
-                        icon: 'pi pi-briefcase',
-                        routerLink: ['/pl-virtual/area-formacion']
-                    },
-                    {
-                        label: 'Unidades Formativas',
-                        icon: 'pi pi-credit-card',
-                        routerLink: ['/pl-virtual/unidades-formativas']
-                    },
-                    {
-                        label: 'Unidades Didácticas',
-                        icon: 'pi pi-envelope',
-                        routerLink: ['/pl-virtual/unidades-didacticas']
-                    },
-                    {
-                        label: 'Estado de Cursos',
-                        icon: 'pi pi-id-card',
-                        routerLink: ['/']
-                    },
-                    {
-                        label: 'Tipo de Materia',
-                        icon: 'pi pi-inbox',
-                        routerLink: ['/']
-                    },
-                    {
-                        label: 'Configuraciones',
-                        icon: 'pi pi-wrench',
-                        routerLink: ['/pl-virtual/configuraciones']
-                    },
-                    
-                ]
-            },
-            {
-                label: 'Alumno',
-                icon: 'pi pi-users',
-                items: [
-                    {
-                        label: 'Bandeja',
-                        icon: 'pi pi-bars',
-                        routerLink: ['/pl-virtual/bandeja-alumno']
-                        
-                    },
-                    {
-                        label: 'Registrar',
-                        icon: 'pi pi-user-edit',
-                        routerLink: ['/pl-virtual/registro-alumno']
-                    },
-                    {
-                        label: 'Reuniones',
-                        icon: 'pi pi-fw pi-calendar',
-                        routerLink: ['/apps/calendar']
-                    },
-                    
-                    {
-                        label: 'Cursos',
-                        icon: 'pi pi-fw pi-folder',
-                        routerLink: ['/apps/files']
-                    },
-                    {
-                        label: 'Foros',
-                        icon: 'pi pi-sitemap',
-                        routerLink: ['/apps/kanban']
-                    },
-                    
-                    {
-                        label: 'Calificaiones',
-                        icon: 'pi pi-id-card',
-                        routerLink: ['/apps/tasklist']
-                    }
-                ]
-            },
-            
-            {
-                label: 'Docente',
-                icon: 'pi pi-fw pi-align-left',
-                items: [
-                    {
-                        label: 'Datos personales',
-                        icon: 'pi pi-fw pi-align-left',
-                        routerLink: ['/']
-                        
-                    },
-                    {
-                        label: 'Capacitaciones',
-                        icon: 'pi pi-fw pi-align-left',
+                        label: 'Modulo Aula Virtual',
+                        icon: 'pi pi-play',
                         items: [
                             {
-                                label: 'Cursos',
-                                icon: 'pi pi-fw pi-align-left',
-                                items: [
+                                label: 'Configuración General',                        
+                                icon: 'pi pi-cog',
+                                items:[
                                     {
-                                        label: 'Curso 1',
-                                        icon: 'pi pi-fw pi-align-left',
+                                        label: 'Institución',
+                                        icon: 'pi pi-building',
+                                        items: [
+                                           /* {
+                                                label: 'Registro de Instituciones',
+                                                icon: 'pi pi-file-edit',
+                                                routerLink: ['/pl-virtual/registro-instituciones']
+                                            },*/
+                                            {
+                                                label: 'Bandeja',
+                                                icon: 'pi pi-bars',
+                                                routerLink: ['/pl-virtual/bandeja-instituciones']
+                                            },
+                                        ]
                                     },
                                     {
-                                        label: 'Curso 2',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    }
+                                        label: 'Roles y Permisos',
+                                        icon: 'pi pi-users',
+                                        routerLink: ['/pl-virtual/bandeja-usuarios']
+                                    },
+                                   {
+                                    label: 'Mantenimientos',
+                                    icon: 'pi pi-wrench',
+                                    items: [
+                                       
+                                        {
+                                            label: 'Carreras técnicas',
+                                            icon: 'pi pi-book',
+                                            routerLink: ['/pl-virtual/carrera-tecnica']
+                                        },
+                                        {
+                                            label: 'Ciclos',
+                                            icon: 'pi pi-send',
+                                            routerLink: ['/pl-virtual/ciclos-academicos']
+                                        },          
+                                        
+                                        {
+                                            label: 'Áreas de Formación',
+                                            icon: 'pi pi-briefcase',
+                                            routerLink: ['/pl-virtual/area-formacion']
+                                        },
+                                        {
+                                            label: 'Unidades Formativas',
+                                            icon: 'pi pi-credit-card',
+                                            routerLink: ['/pl-virtual/unidades-formativas']
+                                        },
+                                        {
+                                            label: 'Unidades Didácticas',
+                                            icon: 'pi pi-envelope',
+                                            routerLink: ['/pl-virtual/unidades-didacticas']
+                                        },
+                                        {
+                                            label: 'Estado de Cursos',
+                                            icon: 'pi pi-id-card',
+                                            routerLink: ['/pl-virtual/estado-cursos']
+                                        },
+                                        {
+                                            label: 'Tipo de Curso',
+                                            icon: 'pi pi-inbox',
+                                            routerLink: ['/pl-virtual/tipo-curso']
+                                        },
+                                       /* {
+                                            label: 'Configuraciones',
+                                            icon: 'pi pi-wrench',
+                                            routerLink: ['/pl-virtual/configuraciones']
+                                        },*/
+            
+                                    ]
+                                   },
+                                  /* {
+                                    label: 'Configuración',
+                                    icon: 'pi pi-cog',
+                                    items: [
+                                        {
+                                            label: 'Bandeja de curso Docente',
+                                            icon: 'pi pi-bars',
+                                            routerLink: ['/pl-virtual/bandeja-curso-docente']
+                                        },
+                                        {
+                                            label: 'Asignación de curso Docente',
+                                            icon: 'pi pi-bars',
+                                            routerLink: ['/pl-virtual/asigna-curso-docente']
+                                        }
+                                    ]
+                                   }, */
+                                   
                                 ]
+        
                             },
                             {
-                                label: 'Submenu 2.2',
-                                icon: 'pi pi-fw pi-align-left',
+                                label: 'Alumno',
+                                icon: 'pi pi-users',
                                 items: [
                                     {
-                                        label: 'Submenu 2.2.1',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    }
+                                        label: 'Bandeja',
+                                        icon: 'pi pi-bars',
+                                        routerLink: ['/pl-virtual/bandeja-alumno']
+                                        
+                                    },
+                                    {
+                                        label: 'Datos Personales',
+                                        icon: 'pi pi-user-edit',
+                                        routerLink: ['/pl-virtual/registro-alumno']
+                                    },
+                                    {
+                                        label: 'Asignaturas',
+                                        icon: 'pi pi-fw pi-calendar',
+                                        routerLink: ['']
+                                    },
+                                    
+                                    {
+                                        label: 'Practicas',
+                                        icon: 'pi pi-fw pi-folder',
+                                        routerLink: ['/apps/files']
+                                    },
+                                    {
+                                        label: 'Horarios',
+                                        icon: 'pi pi-share-alt',
+                                        routerLink: ['/apps/calendar']
+                                    },
+                                    
+                                    {
+                                        label: 'Foros',
+                                        icon: 'pi pi-comment',
+                                        routerLink: ['/apps/tasklist']
+                                    },
+                                    {
+                                        label: 'Avance Curricular',
+                                        icon: 'pi pi-sitemap',
+                                        routerLink: ['/apps/tasklist']
+                                    },
+                                    {
+                                        label: 'Record de pago',
+                                        icon: 'pi pi-money-bill',
+                                        routerLink: ['/apps/tasklist']
+                                    },
+                                    {
+                                        label: 'Otros cursos',
+                                        icon: 'pi pi-shopping-bag',
+                                        routerLink: ['/apps/tasklist']
+                                    },
+                                    {
+                                        label: 'Capacitaciones',
+                                        icon: 'pi pi-sun',
+                                        routerLink: ['/apps/tasklist']
+                                    },
+
+    
                                 ]
-                            }
+                           },
+                           {
+                            label: 'Docente',
+                            icon: 'pi pi-fw pi-briefcase',
+                            items: [
+                                {
+                                    label: 'Datos personales',
+                                    icon: 'pi pi-file-edit',
+                                    routerLink: ['/']
+                                    
+                                },
+                                {
+                                    label: 'Horarios',
+                                    icon: 'pi pi-share-alt',
+                                    routerLink: ['/']
+                                    
+                                },  
+                                {
+                                    label: 'Asignaturas',
+                                    icon: 'pi pi-fw pi-calendar',
+                                    routerLink: ['/']
+                                    
+                                },   
+                                {
+                                    label: 'Foros',
+                                    icon: 'pi pi-comment',
+                                    routerLink: ['/']
+                                    
+                                }, 
+
+                            ]
+                           }	
+                            
+
                         ]
-                    }
+                    },
+                                
+                   
+                    
+                    
                 ]
-            },
+              }
+                   
+            
            
         ];
     }

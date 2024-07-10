@@ -32,6 +32,11 @@ import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.compo
 import { ConfiguracionesComponent } from './configuraciones/configuraciones.component'
 import { RegistrarAlumnosComponent } from '../gestion-info-alumno/registrar-alumno/registrar-alumnos.component';
 import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/bandeja-alumno.component';
+import { AsignaCursoDocenteComponent } from '../configuraciones/asigna-curso-docente/asigna-curso-docente.component';
+import { RegistroCursoDocenteComponent } from '../configuraciones/dialog/registro-curso-docente/registro-curso-docente.component';
+import { EditorModule } from 'primeng/editor';
+
+
 
 
 @NgModule({
@@ -41,11 +46,15 @@ import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/ba
     CarreraTecnicaComponent,
     ConfiguracionesComponent,
     RegistrarAlumnosComponent,
-    BandejaAlumnoComponent
+    BandejaAlumnoComponent,
+    AsignaCursoDocenteComponent,
+    RegistroCursoDocenteComponent,
+    
+    
   ],
   imports: [
       CommonModule,
-      InstitucionesRoutingModule,      
+      InstitucionesRoutingModule,     
       FormsModule,
       CalendarModule,
       TableModule,
@@ -69,7 +78,9 @@ import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/ba
       TableModule,
       ConfirmPopupModule,
       ConfirmDialogModule,
-      FileUploadModule
+      FileUploadModule,
+      EditorModule,
+       
   ]
 })
 export class InstitucionesModule { }

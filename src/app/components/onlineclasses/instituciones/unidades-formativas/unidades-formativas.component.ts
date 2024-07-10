@@ -24,7 +24,7 @@ export class UnidadesFormativasComponent {
 
 
   listareaformativa!: modellistareaformativa[];
-  tipoDocumentoSeleccionado: modellistareaformativa | undefined;
+  selectunidadfromativa: modellistareaformativa | undefined;
 
 
   tipoDoc: modellistareaformativa | undefined;
