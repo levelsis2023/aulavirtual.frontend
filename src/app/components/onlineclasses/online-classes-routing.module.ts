@@ -21,6 +21,7 @@ const routes: Routes = [];
     { path: 'asigna-curso-docente', data: { breadcrumb: 'Asingna Curso Docente' }, loadChildren: () => import('./configuraciones/asigna-curso-docente/asgina-curso-docente.module').then(m => m.AsginaCursoDocenteModule) },
     { path: 'bandeja-curso-docente', data: { breadcrumb: 'Bandeja de Curso del Docente' }, loadChildren: () => import('./configuraciones/bandeja-curso-docente/bandeja-curso-docente.module').then(m => m.BandejaCursoDocenteModule) },
     { path: 'bandeja-usuarios', data: { breadcrumb: 'Bandeja de Usuarios' }, loadChildren: () => import('./roles-permisos/bandeja-usuarios/bandeja-usuarios.module').then(m => m.BandejaUsuariosModule) },
+    { path: 'parametro-maestro', data: { breadcrumb: 'Mantenimiento de Maestros' }, loadChildren: () => import('./mantenimiento-maestro/mantenimiento-maestro.module').then(m => m.MantenimientoMaestroModule) },
     
 
 

@@ -8,7 +8,7 @@ import { RegistraUsuarioComponent } from '../dialog/registra-usuario/registra-us
   selector: 'app-bandeja-usuarios',
   templateUrl: './bandeja-usuarios.component.html',
   styleUrls: ['./bandeja-usuarios.component.scss'],
-  providers: [DialogService] // Provide DialogService here
+  //providers: [DialogService] // Provide DialogService here
 })
 export class BandejaUsuariosComponent {
 
