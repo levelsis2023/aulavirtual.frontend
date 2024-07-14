@@ -1,0 +1,137 @@
+<p-panel> 
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Cursos</span>
+    </ng-template>
+    
+    
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="grid p-fluid ">                
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Código</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Nombre de curso</label>
+                    </span>
+                </div>
+    
+            </div>
+    
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">                
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
+                            optionLabel="name" ></p-dropdown>
+                        <label for="dropdown">Ciclo </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                  
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
+                            optionLabel="name" ></p-dropdown>
+                        <label for="dropdown">Áreas de formación </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>    
+            </div>    
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">                
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
+                            optionLabel="name" ></p-dropdown>
+                        <label for="dropdown">Módulo formativo </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                  
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Cantidad de créditos</label>
+                    </span>
+                </div>  
+            </div>    
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">                
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">% de créditos</label>
+                    </span>
+                </div>  
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Cantidad de horas</label>
+                    </span>
+                </div>  
+            </div>    
+        </div>
+        <div class="row mt-2">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <label for="">Digite el  syllabus</label>
+                    <p-editor                      
+                    [style]="{ height: '90px' }"  
+                   
+                        placeholder="">
+                    </p-editor>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">                
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
+                            optionLabel="name" ></p-dropdown>
+                        <label for="dropdown">Asignación de docentes </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                  
+                </div>
+               
+            </div>    
+        </div>
+       <!-- <div class="row">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-3">
+                    <button pButton label="Registrar Cursos" icon="pi pi-book" iconPos="right" (click)="verCursos()"></button>
+                </div>
+            </div>
+        </div>  
+            
+         
+       
+        <div *ngIf="mostrarCursos">
+            <app-table-select-cursos (cursosSeleccionados)="capturarCursosSeleccionados($event)"></app-table-select-cursos>
+          </div>  -->
+
+          <div class="row">
+            <div class="flex justify-content-end flex-column sm:flex-row">
+                <div class="flex flex-wrap gap-2">
+                    <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm"
+                            (click)="GuardarCurso()"></button>                   
+                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean"
+                            (click)="closeModal()"></button>
+                </div>
+            </div>
+         </div>
+    
+       </ng-template>
+           
+    </p-panel>
+

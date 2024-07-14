@@ -11,13 +11,16 @@ import { LoadingInterceptorService } from 'src/app/layout/service/loading-interc
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { AppComponent } from 'src/app/app.component';
+import { TableSelectCursosComponent } from './utils/table-select-cursos/table-select-cursos.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    
+  ],
   providers: [DialogService,
     {
       provide: HTTP_INTERCEPTORS,

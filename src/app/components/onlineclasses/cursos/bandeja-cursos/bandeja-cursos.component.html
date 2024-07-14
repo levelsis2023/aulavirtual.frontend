@@ -1,13 +1,13 @@
 <p-panel>
     <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Bandeja de Maestro</span>
+        <span class="text-primary font-semibold text-xl">Bandeja de Cursos</span>
     </ng-template>
     <ng-template pTemplate="content">
         
         <div class="row">
             <div class="grid p-fluid ">
                 <div class="field md:col-12">
-                    <p-table #dt1 [value]="miembrosList" dataKey="nuIdMiembro" [rows]="10" [loading]="loading"
+                    <p-table #dt1 [value]="cursosList" dataKey="nuIdMiembro" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
                         [globalFilterFields]="['nuIdMiembro','txnombre','txitemdescription','nu_item','dominio','created_at']"
                         responsiveLayout="scroll" class="w-full custom-search-input">
@@ -16,7 +16,7 @@
                                 <div class="flex-grow-1 mb-2 mr-2">
                                     <span class="p-input-icon-left w-full">
                                         <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
-                                            placeholder="Buscar miembro" class="w-full" />
+                                            placeholder="Buscar cursos" class="w-full" />
                                     </span>
 
                                 </div>                               
@@ -32,34 +32,35 @@
 
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Item
+                                        Código
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Nombre
+                                        Nombre del curso
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Abreviatura
+                                        Carrera técnica
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Grupo
+                                        Área de formación
                                     </div>
                                 </th>
-                                <th style="min-width: 10rem" scope="col3">
+                                <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Dominio
+                                        Creditos
                                     </div>
                                 </th>
-                                <th style="min-width: 10rem" scope="col3">
+                                <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Acciones
+                                       Configuración
                                     </div>
                                 </th>
+                               
                             </tr>
 
                         </ng-template>
@@ -75,21 +76,21 @@
                                     {{ miembro.nu_item }}
                                 </td>
                                 <td>
-                                    {{ miembro.tx_item_description }}
-                                </td>
+                                    {{ miembro.nu_item }}
+                                </td> 
                                 <td>
-                                    {{ miembro.dominio }}
-                                </td>
+                                    {{ miembro.nu_item }}
+                                </td>                               
                                <td class="text-center">
 
-                                    <button pButton class="p-button-rounded p-button-text custom-edit-button" (click)="editarMiembro(miembro)" title="Editar miembro">
+                                    <button pButton class="p-button-rounded p-button-text custom-edit-button" (click)="editarMiembro()" title="Editar Curso">
                                         <i class="pi pi-user-edit" aria-hidden="true" [style]="{'color': 'var(--primary-color)', 'font-size': '1.5rem'}"></i>
                                     </button>
-                                    <button pButton class="p-button-danger p-button-rounded" (click)="eliminarMiembro($event, miembro)" title="Eliminar miembro">
+                                    <button pButton class="p-button-danger p-button-rounded" (click)="eliminarMiembro()" title="Eliminar miembro">
                                         <i class="pi pi-trash" aria-hidden="true" [ngStyle]="{'color': 'var(--error-color)', 'font-size': '1.5rem'}" ></i>
                                     </button>
                                     <button *ngIf="miembro.historico" pButton class="p-button-rounded p-button-text"
-                                        (click)="eliminarMiembro($event,miembro)" title="Eliminar">
+                                        (click)="eliminarMiembro()" title="Eliminar">
                                         <span class="pi pi-circle-fill" [style.color]="'red'"></span>
                                     </button>
 
@@ -112,3 +113,5 @@
         </div>
     </ng-template>
 </p-panel>
+
+

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BandejaAlumnoRoutingModule } from './bandeja-alumno-routing.module';
-import { BandejaAlumnoComponent } from './bandeja-alumno.component';
+
 import { RouterModule } from '@angular/router'
 import { ToastModule } from 'primeng/toast'
 import { FormsModule } from '@angular/forms'
@@ -25,11 +25,18 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { TranslateModule } from '@ngx-translate/core';
+import { BandejaAlumnoComponent } from './bandeja-alumno.component';
+import { RegAlumnoComponent } from '../dialog/reg-alumno/reg-alumno.component';
+
 
 
 @NgModule({
   declarations: [
-    
+   BandejaAlumnoComponent, 
+   RegAlumnoComponent
   ],
   imports: [
     CommonModule,
@@ -52,12 +59,18 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
       ConfirmPopupModule,
       FileUploadModule,
       TooltipModule,
-      ToastModule,
-      PanelModule,
-      TableModule,
+      ToastModule,     
       ConfirmPopupModule,
       ConfirmDialogModule,
-      FileUploadModule
-  ]
+      FileUploadModule,
+      DialogModule,    
+      DynamicDialogModule,      
+      TranslateModule,
+      RippleModule,
+      MultiSelectModule,
+      
+      
+  ],
+  providers: [MessageService],
 })
 export class BandejaAlumnoModule { }

@@ -36,7 +36,13 @@ export class AppMenuComponent implements OnInit {
                                 {
                                 label: 'Configuración',                        
                                 icon: 'pi pi-cog',
-                                routerLink: ['/pl-virtual/bandeja-instituciones']
+                                items:[
+                                    {  label: 'Instituciones',
+                                        icon: 'pi pi-building',
+                                        routerLink: ['/pl-virtual/registro-instituciones']
+                                    }
+                                ]
+                               // routerLink: ['/pl-virtual/bandeja-instituciones']
                                 },
                                 {
                                     label: 'Roles',
@@ -91,33 +97,33 @@ export class AppMenuComponent implements OnInit {
                                    {
                                     label: 'Carreras técnicas',
                                     icon: 'pi pi-book',
-                                    routerLink: ['/pl-virtual/carrera-tecnica']
+                                    routerLink: ['/pl-virtual/bandeja-carrtecnicas']
                                    },
                                    {
                                     label: 'Alumno',
                                     icon: 'pi pi-users',
                                     items: [
-                                        {
+                                        /*{
                                             label: 'Bandeja',
                                             icon: 'pi pi-bars',
                                             routerLink: ['/pl-virtual/bandeja-alumno']
                                             
-                                        },
+                                        },*/
                                         {
                                             label: 'Datos Personales',
                                             icon: 'pi pi-user-edit',
-                                            routerLink: ['/pl-virtual/registro-alumno']
+                                            routerLink: ['/pl-virtual/bandeja-alumno']
                                         },
                                         {
-                                            label: 'Asignaturas',
+                                            label: 'Cursos',
                                             icon: 'pi pi-fw pi-calendar',
-                                            routerLink: ['']
+                                            routerLink: ['/pl-virtual/bandeja-curso']
                                         },
                                         
                                         {
                                             label: 'Practicas',
                                             icon: 'pi pi-fw pi-folder',
-                                            routerLink: ['/apps/files']
+                                            routerLink: ['']
                                         },
                                         {
                                             label: 'Horarios',
@@ -133,22 +139,22 @@ export class AppMenuComponent implements OnInit {
                                         {
                                             label: 'Avance Curricular',
                                             icon: 'pi pi-sitemap',
-                                            routerLink: ['/apps/tasklist']
+                                            routerLink: ['']
                                         },
                                         {
                                             label: 'Record de pago',
                                             icon: 'pi pi-money-bill',
-                                            routerLink: ['/apps/tasklist']
+                                            routerLink: ['']
                                         },
                                         {
                                             label: 'Otros cursos',
                                             icon: 'pi pi-shopping-bag',
-                                            routerLink: ['/apps/tasklist']
+                                            routerLink: ['']
                                         },
                                         {
                                             label: 'Capacitaciones',
                                             icon: 'pi pi-sun',
-                                            routerLink: ['/apps/tasklist']
+                                            routerLink: ['']
                                         },
     
         

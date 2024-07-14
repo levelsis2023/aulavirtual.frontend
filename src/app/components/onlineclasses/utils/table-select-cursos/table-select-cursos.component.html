@@ -1,0 +1,25 @@
+<p-table [value]="cursos" [(selection)]="selectedCursos" [paginator]="true" [rows]="10" selectionMode="multiple">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3em">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Nombre del Curso</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-curso>
+      <tr [pSelectableRow]="curso">
+        <td>
+          <p-tableCheckbox [value]="curso"></p-tableCheckbox>
+        </td>
+        <td>{{ curso.nombre }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <button pButton label="Seleccionar" (click)="seleccionarCursos()"></button>
+  
+  <h3>Cursos seleccionados:</h3>
+  <ul>
+    <li *ngFor="let curso of selectedCursos">{{ curso.nombre }}</li>
+  </ul>
+  

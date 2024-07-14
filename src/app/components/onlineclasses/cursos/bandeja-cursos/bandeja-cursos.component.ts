@@ -2,29 +2,37 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { Miembro, Parametro } from '../../interface/general';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Router } from '@angular/router';
 import { GeneralService } from '../../service/general.service';
-import { RegMaestrosComponent } from '../dialog/reg-maestros/reg-maestros.component';
+import { Router } from '@angular/router';
+import { RegCursosComponent } from '../dialog/reg-cursos/reg-cursos.component';
 
 @Component({
-  selector: 'app-mantenimiento-maestro',
-  templateUrl: './mantenimiento-maestro.component.html',
-  styleUrls: ['./mantenimiento-maestro.component.scss']
+  selector: 'app-bandeja-cursos',
+  templateUrl: './bandeja-cursos.component.html',
+  styleUrls: ['./bandeja-cursos.component.scss']
 })
-export class MantenimientoMaestroComponent {
+export class BandejaCursosComponent {
+
+
+  cursosList: Parametro[] = [];
   loading: boolean = false;
-  miembrosList: Parametro[] = [];
+
 
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt1') tabledt1: Table | undefined;
   @Input() miembro: Miembro[] = [];
   @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
 
+
   ref: DynamicDialogRef | undefined;
+  miembrosList: any;
   constructor(
     private dialogService: DialogService,
     private maestroService: GeneralService,
-    private router: Router,  
+    private router: Router,
+    
+  
+   
   ) { }
 
 
@@ -41,7 +49,7 @@ export class MantenimientoMaestroComponent {
 
   }
   navigateToNuevo(){
-    this.ref = this.dialogService.open(RegMaestrosComponent, {  
+    this.ref = this.dialogService.open(RegCursosComponent, {  
       width: '60%',
       styleClass: 'custom-dialog-header'
     });
@@ -50,23 +58,21 @@ export class MantenimientoMaestroComponent {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
     });
+    }
 
-  }
-
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal(
-      (event.target as HTMLInputElement).value,
-      'contains'
-    )
-  }
-
-
-  editarMiembro(miembro: Miembro[]){
-
-  }
-
-  eliminarMiembro(e: any, miembro: Miembro[]){
-
-  }
-
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal(
+        (event.target as HTMLInputElement).value,
+        'contains'
+      )
+    }
+  
+  
+    editarMiembro(){
+  
+    }
+  
+    eliminarMiembro(){
+  
+    }
 }

@@ -35,10 +35,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 
+
 @NgModule({
   declarations: [
     
          RolesPermisosComponent,
+               
          
          
     
@@ -57,15 +59,13 @@ import { TranslateModule } from '@ngx-translate/core';
       ToggleButtonModule,
       RippleModule,
       MultiSelectModule,
-      DropdownModule,
-      PanelModule,
+      DropdownModule,      
       ProgressBarModule,
       ToastModule,
       ConfirmPopupModule,
       FileUploadModule,
       TooltipModule,
-      ToastModule,
-      PanelModule,
+      ToastModule,      
       TableModule,
       ConfirmPopupModule,
       ConfirmDialogModule,

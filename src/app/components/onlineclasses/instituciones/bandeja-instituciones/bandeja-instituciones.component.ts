@@ -38,7 +38,7 @@ export class BandejaInstitucionesComponent {
   }
 
   navigateToNuevo(): void {
-    this.router.navigate(['/pl-virtual/registro-instituciones']);
+   // this.router.navigate(['/pl-virtual/bandeja-instituciones']);
   }
 
   onGlobalFilter(table: Table, event: Event) {

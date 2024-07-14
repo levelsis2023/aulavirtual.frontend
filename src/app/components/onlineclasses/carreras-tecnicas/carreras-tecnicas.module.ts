@@ -29,45 +29,51 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MantenimientoMaestroRoutingModule } from './mantenimiento-maestro-routing.module';
-import { MantenimientoMaestroComponent } from './mantenimiento-maestro/mantenimiento-maestro.component';
-import { RegMaestrosComponent } from './dialog/reg-maestros/reg-maestros.component';
+
+import { CarrerasTecnicasRoutingModule } from './carreras-tecnicas-routing.module';
+import { BandejaCarreratecnicaComponent } from './bandeja-carreratecnica/bandeja-carreratecnica.component';
+import { RegCarrerastecnicasComponent } from './dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
+import { TableSelectCursosComponent } from '../utils/table-select-cursos/table-select-cursos.component';
+
 
 
 @NgModule({
-  declarations: [MantenimientoMaestroComponent, RegMaestrosComponent],
+  declarations: [
+    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent
+    
+  ],
   imports: [
     CommonModule,
-    MantenimientoMaestroRoutingModule,
+    CarrerasTecnicasRoutingModule,
     FormsModule,     
-      CalendarModule,
-      TableModule,
-      RatingModule,
-      ButtonModule,
-      SliderModule,
-      InputTextModule,
-      InputTextareaModule,
-      ToggleButtonModule,
-      RippleModule,
-      MultiSelectModule,
-      DropdownModule,
-      PanelModule,
-      ProgressBarModule,
-      ToastModule,
-      ConfirmPopupModule,
-      FileUploadModule,
-      TooltipModule,
-      ToastModule,
-      PanelModule,
-      TableModule,
-      ConfirmPopupModule,
-      ConfirmDialogModule,
-      FileUploadModule,
-      EditorModule,
-      DialogModule,    
-      DynamicDialogModule,      
-      TranslateModule
-
+    CalendarModule,
+    TableModule,
+    RatingModule,
+    ButtonModule,
+    SliderModule,
+    InputTextModule,
+    InputTextareaModule,
+    ToggleButtonModule,
+    RippleModule,
+    MultiSelectModule,
+    DropdownModule,
+    PanelModule,
+    ProgressBarModule,
+    ToastModule,
+    ConfirmPopupModule,
+    FileUploadModule,
+    TooltipModule,
+    ToastModule,
+    PanelModule,
+    TableModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
+    FileUploadModule,
+    EditorModule,
+    DialogModule,    
+    DynamicDialogModule,      
+    TranslateModule
+    
   ]
 })
-export class MantenimientoMaestroModule { }
+export class CarrerasTecnicasModule { }

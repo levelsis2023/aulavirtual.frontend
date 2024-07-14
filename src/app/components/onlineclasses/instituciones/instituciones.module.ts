@@ -30,8 +30,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BandejaInstitucionesComponent } from './bandeja/bandeja-instituciones/bandeja-instituciones.component';
 import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
 import { ConfiguracionesComponent } from './configuraciones/configuraciones.component'
-import { RegistrarAlumnosComponent } from '../gestion-info-alumno/registrar-alumno/registrar-alumnos.component';
-import { BandejaAlumnoComponent } from '../gestion-info-alumno/bandeja-alumno/bandeja-alumno.component';
 import { AsignaCursoDocenteComponent } from '../configuraciones/asigna-curso-docente/asigna-curso-docente.component';
 import { RegistroCursoDocenteComponent } from '../configuraciones/dialog/registro-curso-docente/registro-curso-docente.component';
 import { EditorModule } from 'primeng/editor';
@@ -44,9 +42,7 @@ import { EditorModule } from 'primeng/editor';
     RegitroInstitucionesComponent,
     BandejaInstitucionesComponent,
     CarreraTecnicaComponent,
-    ConfiguracionesComponent,
-    RegistrarAlumnosComponent,
-    BandejaAlumnoComponent,
+    ConfiguracionesComponent,    
     AsignaCursoDocenteComponent,
     RegistroCursoDocenteComponent,
     

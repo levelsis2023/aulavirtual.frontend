@@ -142,4 +142,9 @@ ngOnInit(){
 closeDialog() {
       this.visible = false;
   }
+
+
+  closeModal(){
+    this.ref.close({register: false});
+  }
 }

@@ -16,6 +16,10 @@ constructor(private router: Router){
 
 
   regresar(){
+   // this.router.navigate(['/pl-virtual/bandeja-instituciones']);
+  }
+
+  guardar(){
     this.router.navigate(['/pl-virtual/bandeja-instituciones']);
   }
 

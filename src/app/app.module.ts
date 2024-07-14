@@ -12,13 +12,17 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { environment } from './environment/environment.development';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
   }
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        
     ],
     imports: [
         BrowserModule,
@@ -28,6 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ButtonModule,
         DynamicDialogModule,
         HttpClientModule,
+        TableModule,
+        CalendarModule,
         
        
         
