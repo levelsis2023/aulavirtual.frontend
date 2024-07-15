@@ -1,0 +1,64 @@
+<p-panel> 
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Horario</span>
+    </ng-template>
+    
+    <ng-template pTemplate="content">
+        <div class="row mb-4">
+            <div class="grid p-fluid ">                
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-multiSelect inputId="dropdownCarrera" [options]="carrerasTecnicas" [(ngModel)]="selectedCarrera" optionLabel="name"></p-multiSelect>
+                        <label for="dropdownCarrera">Carrera Técnica </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-multiSelect inputId="dropdownCurso" [options]="cursos" [(ngModel)]="selectedCurso" optionLabel="name"></p-multiSelect>
+                        <label for="dropdownCurso">Curso </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>    
+            </div>    
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid ">  
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-multiSelect inputId="dropdownDias" [options]="dias" [(ngModel)]="selectedDias" optionLabel="name" (onChange)="onDiasChange()"></p-multiSelect>
+                        <label for="dropdownDias">Días </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>               
+            </div>    
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div *ngFor="let dia of selectedDias" class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-calendar
+                          inputId="horaprogramada"
+                          [(ngModel)]="horariosProgramados[dia.name]"   
+                          (onSelect)="capturarHora($event)"
+                          [showTime]="true"
+                          [showSeconds]="false"
+                          dateFormat="dd-mm-yy"
+                          [timeOnly]="true"
+                        ></p-calendar>
+                        <label for="horaprogramada">Horario {{ dia.name }}</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="flex justify-content-end flex-column sm:flex-row">
+                <div class="flex flex-wrap gap-2">
+                    <button pButton icon="pi pi-plus" label="Grear horario" iconPos="right" class="p-button-success p-button-sm" (click)="guardarHorario()"></button>
+                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal()"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-panel>

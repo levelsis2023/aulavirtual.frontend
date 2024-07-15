@@ -1,0 +1,127 @@
+
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Docente</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="row mb-4">
+            <div class="grid p-fluid ">                
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="tipodocu"
+                            [(ngModel)]="tipoDocumentoSeleccionado" optionLabel="name" ></p-dropdown>
+                        <label for="dropdown">Tipo de documento de identidad </label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="nrodocumento" pInputText>
+                        <label for="nrodocumento">Numero de Documento</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="row mb-4">           
+            <div class="grid p-fluid ">
+               
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="siglas" pInputText>
+                        <label for="siglas">Apellido Materno</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="logotipo" pInputText>
+                        <label for="logotipo">Apellido Paterno</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                
+            </div>
+        </div>         
+        <div class="row">
+            <div class="grid p-fluid"> 
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="colorFondo" pInputText>
+                        <label for="colorFondo">Correo electronico</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>              
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="colorFondo" pInputText>
+                        <label for="colorFondo">Nro de Celular</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid">
+                <div class="field md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" id="colorFondo" pInputText>
+                        <label for="colorFondo">Profesión</label>
+                    </span>
+                    <small style="color: brown;">Campo obligatorio *</small>
+                </div>
+                <div class="field  md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="responsable" [autoDisplayFirst]="false"  [showClear]="true"
+                                    optionLabel="txAbreviatura"></p-dropdown>
+                        <label class="required">Grado academico</label>
+                    </span>
+                </div>
+            </div>
+        </div>         
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                    <div class="field md:col-6">                
+                         <p-toast />
+                          <p-fileUpload 
+                        mode="basic" 
+                        chooseLabel="Adjuntar CV documentado" 
+                        chooseIcon="pi pi-upload"
+                        name="demo[]" 
+                        url="https://www.primefaces.org/cdn/api/upload.php" 
+                        accept="image/*"                        
+                        (onUpload)="onUpload($event)" />                
+             
+                    </div>
+                    <div class="field md:col-6">                
+                        <p-toast />
+                         <p-fileUpload 
+                       mode="basic" 
+                       chooseLabel="Adjunte otros documentos" 
+                       chooseIcon="pi pi-upload"
+                       name="demo[]" 
+                       url="https://www.primefaces.org/cdn/api/upload.php" 
+                       accept="image/*"                        
+                       (onUpload)="onUpload($event)" />                
+            
+                   </div>
+            </div>            
+        </div>
+        <div class="row mb-5 text-right">               
+                    <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
+                    <button pButton label="Cancelar" (click)="closeModal()" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
+        </div>
+        
+    </ng-template>
+    
+</p-panel>
+
+

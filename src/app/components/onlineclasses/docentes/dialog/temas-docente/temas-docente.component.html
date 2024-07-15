@@ -1,0 +1,54 @@
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Temas</span>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field md:col-6">
+                    <span class="p-float-label">
+                        <p-multiSelect inputId="dropdowncurso" [options]="cursos" [(ngModel)]="selectedCursos" optionLabel="name" (onChange)="onCursosChange()"></p-multiSelect>
+                        <label for="dropdownCurso">Seleccione curso</label>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </span>
+                </div>
+                <div class="field md:col-6">
+                    <div class="flex flex-column">
+                        <span><strong>Día:</strong> {{ currentDay }}</span>
+                        <span><strong>Fecha:</strong> {{ currentDate }}</span>
+                        <span><strong>Hora:</strong> {{ currentTime }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4" *ngFor="let curso of selectedCursos; let i = index">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" pInputText [(ngModel)]="curso.tema" name="tema{{i}}">
+                        <label for="tema{{i}}">Ingrese tema</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" pInputText [(ngModel)]="curso.tema" name="tema{{i}}">
+                        <label for="tema{{i}}">Link de clase</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="flex justify-content-end flex-column sm:flex-row">
+                <div class="flex flex-wrap gap-2">
+                    <button pButton icon="pi pi-plus" label="Guardar Temas" iconPos="right" class="p-button-success p-button-sm" (click)="guardartemas()"></button>
+                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal()"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-panel>

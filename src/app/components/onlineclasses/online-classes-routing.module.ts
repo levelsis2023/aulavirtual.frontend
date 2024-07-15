@@ -24,6 +24,8 @@ const routes: Routes = [];
     { path: 'parametro-maestro', data: { breadcrumb: 'Mantenimiento de Maestros' }, loadChildren: () => import('../onlineclasses/mantenimiento-maestro/mantenimiento-maestro.module').then(m => m.MantenimientoMaestroModule) },
     { path: 'bandeja-carrtecnicas', data: { breadcrumb: 'Bandeja de Carreras técnicas' }, loadChildren: () => import('../onlineclasses/carreras-tecnicas/carreras-tecnicas.module').then(m => m.CarrerasTecnicasModule) },
     { path: 'bandeja-curso', data: { breadcrumb: 'Bandeja de cursos' }, loadChildren: () => import('../onlineclasses/cursos/cursos.module').then(m => m.CursosModule) },
+    { path: 'bandeja-docente', data: { breadcrumb: 'Bandeja del docente' }, loadChildren: () => import('../onlineclasses/docentes/docentes.module').then(m => m.DocentesModule) },
+    { path: 'cursos-docente', data: { breadcrumb: 'Cursos del Docente' }, loadChildren: () => import('../onlineclasses/docentes/cursos-docentes/cursos-docente.module').then(m => m.CursosDocenteModule) },
     
 
     
