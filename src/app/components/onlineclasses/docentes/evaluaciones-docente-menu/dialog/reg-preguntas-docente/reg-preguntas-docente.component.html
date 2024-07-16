@@ -1,0 +1,126 @@
+
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Preguntas</span>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Nro de Pregunta</label>
+                    </span>
+                </div>
+                
+              
+             </div>  
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+            <div class="field col-12 md:col-12">            
+                    <label for="">Pregunta</label>
+                    <p-editor                     
+                    [style]="{ height:'70px'}"  
+                    placeholder="">
+                    </p-editor>              
+                
+            </div>    
+            </div>
+        </div>       
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <label for="">Respuesta alumno</label>
+                    <p-editor                    
+                    [style]="{ height: '70px' }"  
+                    placeholder="">
+                    </p-editor>                    
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <label for="">Observaciones docente</label>
+                    <p-editor                    
+                    [style]="{ height: '70px' }"  
+                    placeholder="">
+                    </p-editor>                    
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Ver</label>
+                    </span>
+                </div>
+                
+              
+             </div>  
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Calificación %</label>
+                    </span>
+                </div>
+                
+              
+             </div>  
+        </div>
+        <div class="row bm-4">
+            <div class="grid p-fluid">
+                <div class="field md:col-12">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdownAula" [options]="estados" [(ngModel)]="selectedEstado" optionLabel="name" (onChange)="onAulaChange()"></p-dropdown>
+                        <label for="dropdownAula">Estados</label>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Puntos valor</label>
+                    </span>
+                </div>
+                
+              
+             </div>  
+        </div>
+        <div class="row mb-4">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <input type="text" pInputText >
+                        <label class="required">Intentos permitidos</label>
+                    </span>
+                </div>
+                
+              
+             </div>  
+        </div>
+
+        <div class="row">
+            <div class="flex justify-content-end flex-column sm:flex-row">
+                <div class="flex flex-wrap gap-2">
+                    <button pButton icon="pi pi-plus" label="Guardar Preguntas" iconPos="right" class="p-button-success p-button-sm" (click)="guardarpreguntas()"></button>
+                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal()"></button>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+</p-panel>
+
+

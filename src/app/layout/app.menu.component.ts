@@ -177,14 +177,20 @@ export class AppMenuComponent implements OnInit {
                                         
                                     },  
                                     {
-                                        label: 'Asignaturas',
+                                        label: 'Evaluaciones',
                                         icon: 'pi pi-fw pi-calendar',
-                                        routerLink: ['/']
+                                        routerLink: ['/pl-virtual/evaluacion-docente']
                                         
                                     },   
                                     {
                                         label: 'Foros',
                                         icon: 'pi pi-comment',
+                                        routerLink: ['/']
+                                        
+                                    }, 
+                                    {
+                                        label: 'Asistencia',
+                                        icon: 'pi pi-users',
                                         routerLink: ['/']
                                         
                                     }, 

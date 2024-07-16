@@ -74,14 +74,9 @@
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Asistió
+                                        Asistencia
                                     </div>
-                                </th>
-                                <th style="min-width: 10rem" scope="col">
-                                    <div class="flex justify-content-between align-items-center">
-                                        No asistió
-                                    </div>
-                                </th>
+                                </th>                              
                             </tr>
                         </ng-template>
 
@@ -91,11 +86,10 @@
                                 <td>{{ alumno.nombresCompletos }}</td>
                                 <td>{{ alumno.nroDocumento }}</td>
                                 <td class="flex justify-content-center align-items-center">
-                                    <p-checkbox [(ngModel)]="alumno.asistio" [binary]="true" (onChange)="updateAttendance(alumno, true)"></p-checkbox>
+                                    <p-checkbox [(ngModel)]="alumno.asistio" [binary]="true" label="Asistio" (onChange)="updateAttendance(alumno, true)"></p-checkbox>
+                                    <p-checkbox [(ngModel)]="alumno.noAsistio" [binary]="true" label="No asistio" (onChange)="updateAttendance(alumno, false)"></p-checkbox>
                                 </td>
-                                <td class="flex justify-content-center align-items-center">
-                                    <p-checkbox [(ngModel)]="alumno.noAsistio" [binary]="true" (onChange)="updateAttendance(alumno, false)"></p-checkbox>
-                                </td>
+                                
                             </tr>
                         </ng-template>
 
