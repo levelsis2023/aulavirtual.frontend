@@ -115,16 +115,26 @@ export class AppMenuComponent implements OnInit {
                                             routerLink: ['/pl-virtual/bandeja-alumno']
                                         },
                                         {
+                                            label: 'Documentos de Gestión',
+                                            icon: 'pi pi-file',
+                                            routerLink: ['/pl-virtual/documentos-alumnos']
+                                        },
+                                        {
+                                            label: 'Avance Curricular',
+                                            icon: 'pi pi-sitemap',
+                                            routerLink: ['/pl-virtual/avance-curricular']
+                                        },
+                                        {
                                             label: 'Cursos',
                                             icon: 'pi pi-fw pi-calendar',
                                             routerLink: ['/pl-virtual/bandeja-curso']
                                         },
                                         
-                                        {
+                                       /* {
                                             label: 'Practicas',
                                             icon: 'pi pi-fw pi-folder',
                                             routerLink: ['']
-                                        },
+                                        },*/
                                         {
                                             label: 'Horarios',
                                             icon: 'pi pi-share-alt',
@@ -135,12 +145,7 @@ export class AppMenuComponent implements OnInit {
                                             label: 'Foros',
                                             icon: 'pi pi-comment',
                                             routerLink: ['/apps/tasklist']
-                                        },
-                                        {
-                                            label: 'Avance Curricular',
-                                            icon: 'pi pi-sitemap',
-                                            routerLink: ['']
-                                        },
+                                        },                                       
                                         {
                                             label: 'Record de pago',
                                             icon: 'pi pi-money-bill',

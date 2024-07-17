@@ -22,33 +22,24 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
-import { EditorModule } from 'primeng/editor';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { AppComponent } from 'src/app/app.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { EvaluacionDocenteMenuRoutingModule } from './evaluacion-docente-menu-routing.module';
-import { EvaluacionesDocenteMenuComponent } from './evaluaciones-docente-menu/evaluaciones-docente-menu.component';
-import { RegEvaluacionDocenteComponent } from './dialog/reg-evaluacion-docente/reg-evaluacion-docente.component';
-import { BandejaPreguntasDocenteComponent } from './bandeja-preguntas-docente/bandeja-preguntas-docente.component';
-import { RegPreguntasDocenteComponent } from './dialog/reg-preguntas-docente/reg-preguntas-docente.component';
-import { CheckboxModule } from 'primeng/checkbox';
+import { AvanceCurricularRoutingModule } from './avance-curricular-routing.module';
+import { BandejaAvanceCurricularComponent } from './bandeja-avance-curricular/bandeja-avance-curricular.component';
+import { EditorModule } from 'primeng/editor';
 
 
 @NgModule({
   declarations: [
     
-  
-    RegEvaluacionDocenteComponent,
-            RegPreguntasDocenteComponent,
-            
+    BandejaAvanceCurricularComponent,
+   
   ],
   imports: [
     CommonModule,
-    EvaluacionDocenteMenuRoutingModule,
-    FormsModule,     
+    AvanceCurricularRoutingModule,
     CalendarModule,
     TableModule,
     RatingModule,
@@ -66,17 +57,16 @@ import { CheckboxModule } from 'primeng/checkbox';
     ConfirmPopupModule,
     FileUploadModule,
     TooltipModule,
-    ToastModule,
-    PanelModule,
-    TableModule,
+    ToastModule,     
     ConfirmPopupModule,
     ConfirmDialogModule,
     FileUploadModule,
-    EditorModule,
     DialogModule,    
     DynamicDialogModule,      
     TranslateModule,
-    CheckboxModule
+    RippleModule,
+    MultiSelectModule,
+    EditorModule
   ]
 })
-export class EvaluacionDocenteMenuModule { }
+export class AvanceCurricularModule { }

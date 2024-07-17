@@ -29,26 +29,15 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { EvaluacionDocenteMenuRoutingModule } from './evaluacion-docente-menu-routing.module';
-import { EvaluacionesDocenteMenuComponent } from './evaluaciones-docente-menu/evaluaciones-docente-menu.component';
-import { RegEvaluacionDocenteComponent } from './dialog/reg-evaluacion-docente/reg-evaluacion-docente.component';
-import { BandejaPreguntasDocenteComponent } from './bandeja-preguntas-docente/bandeja-preguntas-docente.component';
-import { RegPreguntasDocenteComponent } from './dialog/reg-preguntas-docente/reg-preguntas-docente.component';
-import { CheckboxModule } from 'primeng/checkbox';
+import { DocumentosGestionAlumnoRoutingModule } from './documentos-gestion-alumno-routing.module';
+import { DocumentoGestionAlumnoComponent } from './documento-gestion-alumno/documento-gestion-alumno.component';
 
 
 @NgModule({
-  declarations: [
-    
-  
-    RegEvaluacionDocenteComponent,
-            RegPreguntasDocenteComponent,
-            
-  ],
+  declarations: [DocumentoGestionAlumnoComponent],
   imports: [
     CommonModule,
-    EvaluacionDocenteMenuRoutingModule,
-    FormsModule,     
+    DocumentosGestionAlumnoRoutingModule,
     CalendarModule,
     TableModule,
     RatingModule,
@@ -67,16 +56,14 @@ import { CheckboxModule } from 'primeng/checkbox';
     FileUploadModule,
     TooltipModule,
     ToastModule,
-    PanelModule,
-    TableModule,
+    PanelModule,    
     ConfirmPopupModule,
     ConfirmDialogModule,
     FileUploadModule,
     EditorModule,
     DialogModule,    
     DynamicDialogModule,      
-    TranslateModule,
-    CheckboxModule
+    TranslateModule
   ]
 })
-export class EvaluacionDocenteMenuModule { }
+export class DocumentosGestionAlumnoModule { }

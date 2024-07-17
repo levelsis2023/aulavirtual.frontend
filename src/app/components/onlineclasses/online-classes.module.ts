@@ -11,7 +11,9 @@ import { LoadingInterceptorService } from 'src/app/layout/service/loading-interc
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { AppComponent } from 'src/app/app.component';
+import { CheckboxModule } from 'primeng/checkbox';
 import { TableSelectCursosComponent } from './utils/table-select-cursos/table-select-cursos.component';
+import { RegDocumentosAlumnoComponent } from './gestion-info-alumno/dialog/reg-documentos-alumno/reg-documentos-alumno.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
@@ -20,6 +22,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     
+  
+   
   ],
   providers: [DialogService,
     {
@@ -33,6 +37,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   imports: [
     CommonModule,
     OnlineClassesRoutingModule,
+    CheckboxModule,
     TranslateModule.forRoot({
       loader: {
           //defaultLanguage: 'es',

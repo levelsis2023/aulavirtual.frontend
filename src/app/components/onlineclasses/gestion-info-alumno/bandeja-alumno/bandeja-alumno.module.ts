@@ -30,13 +30,16 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { BandejaAlumnoComponent } from './bandeja-alumno.component';
 import { RegAlumnoComponent } from '../dialog/reg-alumno/reg-alumno.component';
+import { RegDocumentosAlumnoComponent } from '../dialog/reg-documentos-alumno/reg-documentos-alumno.component';
+import { EditorModule } from 'primeng/editor';
 
 
 
 @NgModule({
   declarations: [
    BandejaAlumnoComponent, 
-   RegAlumnoComponent
+   RegAlumnoComponent,
+   RegDocumentosAlumnoComponent
   ],
   imports: [
     CommonModule,
@@ -68,6 +71,7 @@ import { RegAlumnoComponent } from '../dialog/reg-alumno/reg-alumno.component';
       TranslateModule,
       RippleModule,
       MultiSelectModule,
+      EditorModule
       
       
   ],

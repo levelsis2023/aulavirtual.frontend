@@ -27,6 +27,9 @@ const routes: Routes = [];
     { path: 'bandeja-docente', data: { breadcrumb: 'Bandeja del docente' }, loadChildren: () => import('../onlineclasses/docentes/docentes.module').then(m => m.DocentesModule) },
     { path: 'cursos-docente', data: { breadcrumb: 'Cursos del Docente' }, loadChildren: () => import('../onlineclasses/docentes/cursos-docentes/cursos-docente.module').then(m => m.CursosDocenteModule) },
     { path: 'evaluacion-docente', data: { breadcrumb: 'Evaluación Docente' }, loadChildren: () => import('../onlineclasses/docentes/evaluaciones-docente-menu/evaluacion-docente-menu.module').then(m => m.EvaluacionDocenteMenuModule) },
+    { path: 'documentos-alumnos', data: { breadcrumb: 'Documentos de gestión' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/documentos-gestion-alumno/documentos-gestion-alumno.module').then(m => m.DocumentosGestionAlumnoModule) },
+    { path: 'documentos-alumnos', data: { breadcrumb: 'Documentos de gestión' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/documentos-gestion-alumno/documentos-gestion-alumno.module').then(m => m.DocumentosGestionAlumnoModule) },
+    { path: 'avance-curricular', data: { breadcrumb: 'Reporte de avance Curricular' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/avance-curricular/avance-curricular.module').then(m => m.AvanceCurricularModule) },
 
     
 
