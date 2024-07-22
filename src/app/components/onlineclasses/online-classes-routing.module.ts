@@ -30,11 +30,22 @@ const routes: Routes = [];
     { path: 'documentos-alumnos', data: { breadcrumb: 'Documentos de gestión' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/documentos-gestion-alumno/documentos-gestion-alumno.module').then(m => m.DocumentosGestionAlumnoModule) },
     { path: 'documentos-alumnos', data: { breadcrumb: 'Documentos de gestión' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/documentos-gestion-alumno/documentos-gestion-alumno.module').then(m => m.DocumentosGestionAlumnoModule) },
     { path: 'avance-curricular', data: { breadcrumb: 'Reporte de avance Curricular' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/avance-curricular/avance-curricular.module').then(m => m.AvanceCurricularModule) },
-
-    
-
-    
-
+    { path: 'lista-postulantes', data: { breadcrumb: 'Lista de postulantes' }, loadChildren: () => import('../onlineclasses/lista-postulantes/lista-postulantes.module').then(m => m.ListaPostulantesModule) },
+    { path: 'lista-instituciones', data: { breadcrumb: 'Instituciones' }, loadChildren: () => import('../onlineclasses/lista-instituciones/lista-instituciones.module').then(m => m.ListaInstitucionesModule) },
+    { path: 'mantenimiento-gestiones', data: { breadcrumb: 'Gestiones' }, loadChildren: () => import('../onlineclasses/mantenimiento-gestiones/mantenimiento-gestiones.module').then(m => m.MantenimientoGestionesModule) },
+    { path: 'afiliado-partido', data: { breadcrumb: 'Afiliado a partidos' }, loadChildren: () => import('../onlineclasses/afiliado-partido/afiliado-partido.module').then(m => m.AfiliadoPartidoModule) },
+    { path: 'grado-de-instruccion', data: { breadcrumb: 'Grado de instrucción' }, loadChildren: () => import('../onlineclasses/grado-instruccion/grado-instruccion.module').then(m => m.GradoInstruccionModule) },
+    { path: 'vinculos-laborales', data: { breadcrumb: 'Vinculos laborales' }, loadChildren: () => import('../onlineclasses/vinculos-laborales/vinculos-laborales.module').then(m => m.VinculosLaboralesModule) },
+    { path: 'documentos-de-identidad', data: { breadcrumb: 'Documentos de identidad' }, loadChildren: () => import('../onlineclasses/documentos-identidad/documentos-identidad.module').then(m => m.DocumentosIdentidadModule) },
+    { path: 'tipos-de-documentos-de-gestion', data: { breadcrumb: 'Tipos Documentos de gestión' }, loadChildren: () => import('../onlineclasses/documentos-gestion/documentos-gestion.module').then(m => m.DocumentosGestionModule) },
+    { path: 'estado-civil', data: { breadcrumb: 'Estado civil' }, loadChildren: () => import('../onlineclasses/estado-civil/estado-civil.module').then(m => m.EstadoCivilModule) },
+    { path: 'nivel-de-puesto', data: { breadcrumb: 'Niveles de puesto' }, loadChildren: () => import('../onlineclasses/nivel-puesto/nivel-puesto.module').then(m => m.NivelPuestoModule) },
+    { path: 'modalidad-de-puesto', data: { breadcrumb: 'Niveles de puesto' }, loadChildren: () => import('../onlineclasses/modalidad-puesto/modalidad-puesto.module').then(m => m.ModalidadPuestoModule) },
+    { path: 'editar-postulante', data: { breadcrumb: 'Editar postulante' }, loadChildren: () => import('../onlineclasses/editar-postulante/editar-postulante.module').then(m => m.EditarPostulanteModule) },
+    { path: 'profesiones', data: { breadcrumb: 'Profesiones' }, loadChildren: () => import('../onlineclasses/profesiones/profesiones.module').then(m => m.ProfesionesModule) },
+    { path: 'estado-de-avance', data: { breadcrumb: 'Estado de avance' }, loadChildren: () => import('../onlineclasses/estado-avance/estado-avance.module').then(m => m.EstadoAvanceModule) },
+    { path: 'escala', data: { breadcrumb: 'Escala' }, loadChildren: () => import('../onlineclasses/escala/escala.module').then(m => m.EscalaModule) },
+    { path: 'ocupacion-actual', data: { breadcrumb: 'Ocupación actual' }, loadChildren: () => import('../onlineclasses/ocupacion-actual/ocupacion-actual.module').then(m => m.OcupacionActualModule) },
 
   ])],
   exports: [RouterModule]
