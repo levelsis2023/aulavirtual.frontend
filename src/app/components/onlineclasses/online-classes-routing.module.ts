@@ -54,9 +54,9 @@ const routes: Routes = [];
     { path: 't-cursos', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/t-cursos/t-cursos.module').then(m => m.TCursosModule) },
     { path: 'modalidad', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/modalidad/modalidad.module').then(m => m.ModalidadModule) },
     { path: 'aula', data: { breadcrumb: 'Aula' }, loadChildren: () => import('../onlineclasses/aulas/aulas.module').then(m => m.AulasModule) },
-    { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) },
+    { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) }, 
 
   ])],
   exports: [RouterModule]
 })
-export class OnlineClassesRoutingModule { }
+export class OnlineClassesRoutingModule { } 
