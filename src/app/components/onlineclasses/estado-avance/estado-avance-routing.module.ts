@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EstadoAvanceComponent } from './estado-avance.component';
+// import { EstadoAvanceComponent } from './estado-avance.component';
 
 const routes: Routes = [];
 

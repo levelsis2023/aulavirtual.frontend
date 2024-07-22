@@ -341,47 +341,47 @@ export class AppMenuComponent implements OnInit {
                                 {
                                     label: 'Ciclos',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/ciclos']
                                 },
                                 {
                                     label: 'Areas de formación',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/areas-de-formacion']
                                 },
                                 {
                                     label: 'Unidades formativas',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/u-formativas']
                                 },
                                 {
                                     label: 'Unidades didácticas (cursos)',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/u-didacticas']
                                 },
                                 {
                                     label: 'Estado de cursos',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/e-cursos']
                                 },
                                 {
                                     label: 'Tipo de curso',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/t-cursos']
                                 },
                                 {
                                     label: 'Modalidad',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/modalidad']
                                 },
                                 {
                                     label: 'Aula',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/aula']
                                 },
                                 {
                                     label: 'Tipo de actividad',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/tipo-de-actividad']
                                 },
                             ]
                     }, 

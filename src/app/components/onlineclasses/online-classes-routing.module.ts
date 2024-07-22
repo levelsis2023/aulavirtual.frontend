@@ -46,6 +46,15 @@ const routes: Routes = [];
     { path: 'estado-de-avance', data: { breadcrumb: 'Estado de avance' }, loadChildren: () => import('../onlineclasses/estado-avance/estado-avance.module').then(m => m.EstadoAvanceModule) },
     { path: 'escala', data: { breadcrumb: 'Escala' }, loadChildren: () => import('../onlineclasses/escala/escala.module').then(m => m.EscalaModule) },
     { path: 'ocupacion-actual', data: { breadcrumb: 'Ocupación actual' }, loadChildren: () => import('../onlineclasses/ocupacion-actual/ocupacion-actual.module').then(m => m.OcupacionActualModule) },
+    { path: 'ciclos', data: { breadcrumb: 'Ciclos' }, loadChildren: () => import('../onlineclasses/ciclos/ciclos.module').then(m => m.CiclosModule) },
+    { path: 'areas-de-formacion', data: { breadcrumb: 'Areas de formación' }, loadChildren: () => import('../onlineclasses/areas-formacion/areas-formacion.module').then(m => m.AreasFormacionModule) },
+    { path: 'u-formativas', data: { breadcrumb: 'Unidades formativas' }, loadChildren: () => import('../onlineclasses/u-formativas/u-formativas.module').then(m => m.UFormativasModule) },
+    { path: 'u-didacticas', data: { breadcrumb: 'Unidades didacticas' }, loadChildren: () => import('../onlineclasses/u-didacticas/u-didacticas.module').then(m => m.UDidacticasModule) },
+    { path: 'e-cursos', data: { breadcrumb: 'Estado de cursos' }, loadChildren: () => import('../onlineclasses/e-cursos/e-cursos.module').then(m => m.ECursosModule) },
+    { path: 't-cursos', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/t-cursos/t-cursos.module').then(m => m.TCursosModule) },
+    { path: 'modalidad', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/modalidad/modalidad.module').then(m => m.ModalidadModule) },
+    { path: 'aula', data: { breadcrumb: 'Aula' }, loadChildren: () => import('../onlineclasses/aulas/aulas.module').then(m => m.AulasModule) },
+    { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) },
 
   ])],
   exports: [RouterModule]
