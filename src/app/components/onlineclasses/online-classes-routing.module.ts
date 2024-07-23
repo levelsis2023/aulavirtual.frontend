@@ -55,6 +55,8 @@ const routes: Routes = [];
     { path: 'modalidad', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/modalidad/modalidad.module').then(m => m.ModalidadModule) },
     { path: 'aula', data: { breadcrumb: 'Aula' }, loadChildren: () => import('../onlineclasses/aulas/aulas.module').then(m => m.AulasModule) },
     { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) }, 
+    { path: 'registro-de-cursos', data: { breadcrumb: 'Registro de cursos' }, loadChildren: () => import('../onlineclasses/registro-cursos/registro-cursos.module').then(m => m.RegistroCursosModule) }, 
+    { path: 'datos-personales', data: { breadcrumb: 'Datos personales' }, loadChildren: () => import('../onlineclasses/registro-alumnos/registro-alumnos.module').then(m => m.RegistroAlumnosModule) }, 
 
   ])],
   exports: [RouterModule]

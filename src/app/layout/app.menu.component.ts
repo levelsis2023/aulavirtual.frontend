@@ -28,7 +28,7 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Plataforma Virtual',
+                label: 'Multi-empresas',
                 icon: 'pi pi-building',
                 items: [
                     {
@@ -174,19 +174,21 @@ export class AppMenuComponent implements OnInit {
                                     {
                                         label: 'Datos personales',
                                         icon: 'pi pi-file-edit',
-                                        routerLink: ['/pl-virtual/bandeja-docente']
+                                        // routerLink: ['/pl-virtual/bandeja-docente']
+                                        routerLink: ['/pl-virtual/']
                                         
                                     },
                                     {
                                         label: 'Cursos',
                                         icon: 'pi pi-share-alt',
-                                        routerLink: ['/pl-virtual/cursos-docente']
-                                        
+                                        // routerLink: ['/pl-virtual/cursos-docente']
+                                        routerLink: ['/pl-virtual/']
                                     },  
                                     {
                                         label: 'Evaluaciones',
                                         icon: 'pi pi-fw pi-calendar',
-                                        routerLink: ['/pl-virtual/evaluacion-docente']
+                                        // routerLink: ['/pl-virtual/evaluacion-docente']
+                                        routerLink: ['/pl-virtual/']
                                         
                                     },   
                                     {
@@ -392,12 +394,12 @@ export class AppMenuComponent implements OnInit {
                                 {
                                     label: 'Datos personales',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/datos-personales']
                                 },
                                 {
                                     label: 'Documentos de gestión',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/documentos-alumnos']
                                 },
                                 {
                                     label: 'Avance curricular',
@@ -433,12 +435,12 @@ export class AppMenuComponent implements OnInit {
                                 {
                                     label: 'Datos personales',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/bandeja-docente']
                                 },
                                 {
                                     label: 'Cursos',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/cursos-docente']
                                 },
                                 {
                                     label: 'Horarios',
@@ -448,7 +450,7 @@ export class AppMenuComponent implements OnInit {
                                 {
                                     label: 'Evaluaciones',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/evaluacion-docente']
                                 },
                                 {
                                     label: 'Foros',
@@ -469,7 +471,7 @@ export class AppMenuComponent implements OnInit {
                                 {
                                     label: 'Cursos',
                                     icon: 'pi pi-users',
-                                    routerLink: ['/pl-virtual/lista-postulantes']
+                                    routerLink: ['/pl-virtual/registro-de-cursos']
                                 },
                                 ]
                     }, 
