@@ -4,6 +4,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 
+import { RegistroInstitucionesService } from '@services/instituciones/registro-instituciones.service';
+
 @Component({
   selector: 'app-bandeja-instituciones',
   templateUrl: './bandeja-instituciones.component.html',
@@ -20,32 +22,40 @@ export class BandejaInstitucionesComponent {
   constructor(
     private router: Router,
     private dialogService: DialogService,
- 
-  
+    private registroInstitucionesServic: RegistroInstitucionesService
   ) { }
 
   ngOnInit(): void {
-    
     console.log("Datos-extraidos-de-bandeja-colegiado-PARA MIEMBRO");
-    this.cargaInicial();
-   
-
-    
+    this.getInstituciones();
   }
 
-  cargaInicial(): void {
-   
+  getInstituciones(): void {
+    this.registroInstitucionesServic.listar().subscribe(data => {
+      this.instituciones = data;
+      this.loading = false;
+      console.log("data", this.instituciones);
+    });
+  }
+
+  editInstitucion(id: number): void {
+    this.router.navigate([`/pl-virtual/registro-instituciones/${id}`]); // Asegúrate de configurar esta ruta en tu aplicación
+  }
+
+  deleteInstitucion(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta institución?')) {
+      this.registroInstitucionesServic.delete(id).subscribe(() => {
+        this.getInstituciones(); // Recargar la lista de instituciones
+      });
+    }
   }
 
   navigateToNuevo(): void {
-   // this.router.navigate(['/pl-virtual/bandeja-instituciones']);
+    this.router.navigate(['/pl-virtual/registro-instituciones']);
   }
 
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal(
-      (event.target as HTMLInputElement).value,
-      'contains'
-    )
+  onGlobalFilter(table: any, event: Event): void {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
   onRowSelect(event: any) {

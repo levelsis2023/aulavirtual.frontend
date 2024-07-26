@@ -33,7 +33,7 @@ import { ConfiguracionesComponent } from './configuraciones/configuraciones.comp
 import { AsignaCursoDocenteComponent } from '../configuraciones/asigna-curso-docente/asigna-curso-docente.component';
 import { RegistroCursoDocenteComponent } from '../configuraciones/dialog/registro-curso-docente/registro-curso-docente.component';
 import { EditorModule } from 'primeng/editor';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -76,7 +76,7 @@ import { EditorModule } from 'primeng/editor';
       ConfirmDialogModule,
       FileUploadModule,
       EditorModule,
-       
+      ReactiveFormsModule
   ]
 })
 export class InstitucionesModule { }

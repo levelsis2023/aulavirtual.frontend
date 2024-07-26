@@ -8,7 +8,8 @@
                 <div class="field md:col-12">
                     <p-table #dt1 [value]="instituciones" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
-                        responsiveLayout="scroll" class="custom-search-input">
+                        responsiveLayout="scroll" class="custom-search-input"
+                        [globalFilterFields]="['id', 'nombre', 'director', 'created_at', 'siglas', 'logotipo', 'color_fondo', 'color_texto']">
                         <ng-template pTemplate="caption">
                             <div class="flex justify-content-between flex-wrap">
                                 <div class="flex-grow-1 mb-2 mr-2">
@@ -17,14 +18,19 @@
                                             placeholder="Buscar Institución" class="w-full" />
                                     </span>
                                 </div>
-                               <!-- <div class="mb-2">
+                                <div class="mb-2">
                                     <button pButton label="Nuevo" icon="pi pi-user-plus" id="btnNuevo" class="p-button-primary mr-2" (click)="navigateToNuevo()" style="border-radius: 30px;"></button>
-                                </div> -->
+                                </div>
                             </div>
                         </ng-template>
 
                         <ng-template pTemplate="header">
                             <tr>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Id
+                                    </div>
+                                </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
                                         Nombre de Institución
@@ -35,6 +41,27 @@
                                         Director
                                     </div>
                                 </th>
+                               
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Siglas
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Logotipo
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Color Fondo
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Color Texto
+                                    </div>
+                                </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
                                         Fecha de Registro
@@ -42,18 +69,29 @@
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Siglas
+                                        Acciones
                                     </div>
                                 </th>
                             </tr>
                         </ng-template>
 
-                        <ng-template pTemplate="body" let-miembro>
+
+                        <ng-template pTemplate="body" let-institucion>
                             <tr>
-                                <td>AAA</td>
-                                <td>BBBB</td>
-                                <td>CCCCCC</td>
-                                <td>DDDDDDDDDD</td>
+                                <td>{{ institucion.id }}</td>
+                                <td>{{ institucion.nombre }}</td>
+                                <td>{{ institucion.director }}</td>
+                                <td>{{ institucion.siglas }}</td>
+                                <td>{{ institucion.logotipo }}</td>
+                                <td>{{ institucion.color_fondo }}</td>
+                                <td>{{ institucion.color_texto }}</td>
+                                <td>{{ institucion.created_at | date }}</td>
+                                <td>
+                                    <div class="inline-buttons">
+                                        <button pButton icon="pi pi-pencil" class="p-button-warning p-button-sm mr-2" (click)="editInstitucion(institucion.id)"></button>
+                                        <button pButton icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="deleteInstitucion(institucion.id)"></button>
+                                    </div>
+                                </td>
                             </tr>
                         </ng-template>
 

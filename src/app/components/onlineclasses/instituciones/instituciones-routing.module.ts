@@ -6,7 +6,8 @@ const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild([
-    { path: '', component: RegitroInstitucionesComponent }
+    { path: '', component: RegitroInstitucionesComponent },
+    { path: ':id', component: RegitroInstitucionesComponent }
   ])],
   exports: [RouterModule]
 })

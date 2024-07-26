@@ -14,6 +14,7 @@ import { AppComponent } from 'src/app/app.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableSelectCursosComponent } from './utils/table-select-cursos/table-select-cursos.component';
 import { RegDocumentosAlumnoComponent } from './gestion-info-alumno/dialog/reg-documentos-alumno/reg-documentos-alumno.component';
+import { ReactiveFormsModule } from '@angular/forms';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   }),
     DialogModule,
     ButtonModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })

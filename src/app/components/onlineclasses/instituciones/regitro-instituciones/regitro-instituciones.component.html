@@ -1,74 +1,74 @@
 <p-panel>
     <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Registrar Institución</span>
+      <span class="text-primary font-semibold text-xl">{{ formTitle }}</span>
     </ng-template>
     <ng-template pTemplate="content">
+      <form [formGroup]="institucionForm" novalidate>
         <div class="row">
-            <div class="grid p-fluid ">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="nombreInstitucion" pInputText>
-                        <label for="nombreInstitucion">Nombre de Institución</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="director" pInputText>
-                        <label for="director">Director</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
+          <div class="grid p-fluid">
+            <div class="field md:col-6" [ngClass]="{'p-invalid': institucionForm.get('nombre')?.invalid && institucionForm.get('nombre')?.touched}">
+              <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-user-edit"></i>
+                <input type="text" id="nombre" pInputText formControlName="nombre">
+                <label for="nombre">Nombre de Institución</label>
+              </span>
+              <small style="color: brown;" *ngIf="institucionForm.get('nombre')?.invalid && institucionForm.get('nombre')?.touched">Campo obligatorio *</small>
             </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">Siglas</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="logotipo" pInputText>
-                        <label for="logotipo">Logotipo</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
+            <div class="field md:col-6" [ngClass]="{'p-invalid': institucionForm.get('director')?.invalid && institucionForm.get('director')?.touched}">
+              <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-user-edit"></i>
+                <input type="text" id="director" pInputText formControlName="director">
+                <label for="director">Director</label>
+              </span>
+              <small style="color: brown;" *ngIf="institucionForm.get('director')?.invalid && institucionForm.get('director')?.touched">Campo obligatorio *</small>
             </div>
+          </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="colorFondo" pInputText>
-                        <label for="colorFondo">Color de fondo</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="colorTexto" pInputText>
-                        <label for="colorTexto">Color de texto</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
+          <div class="grid p-fluid">
+            <div class="field md:col-6" [ngClass]="{'p-invalid': institucionForm.get('siglas')?.invalid && institucionForm.get('siglas')?.touched}">
+              <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-user-edit"></i>
+                <input type="text" id="siglas" pInputText formControlName="siglas">
+                <label for="siglas">Siglas</label>
+              </span>
+              <small style="color: brown;" *ngIf="institucionForm.get('siglas')?.invalid && institucionForm.get('siglas')?.touched">Campo obligatorio *</small>
             </div>
+            <div class="field md:col-6" [ngClass]="{'p-invalid': institucionForm.get('logotipo')?.invalid && institucionForm.get('logotipo')?.touched}">
+              <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-user-edit"></i>
+                <input type="text" id="logotipo" pInputText formControlName="logotipo">
+                <label for="logotipo">Logotipo</label>
+              </span>
+              <small style="color: brown;" *ngIf="institucionForm.get('logotipo')?.invalid && institucionForm.get('logotipo')?.touched">Campo obligatorio *</small>
+            </div>
+          </div>
         </div>
-        <div class="row mb-5 text-right">               
-                    <button pButton label="Guardar" (click)="guardar()" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
-                    <button pButton label="Cancelar" icon="pi pi-times" id="btnCancelar" class="p-button-danger mr-2"></button> 
-                    <button pButton label="Regresar" icon="pi pi-times" id="btnCancelar" class="p-button-primary" (click)="regresar()"></button>          
+        <div class="row">
+          <div class="grid p-fluid">
+            <div class="field md:col-6" [ngClass]="{'p-invalid': institucionForm.get('color_fondo')?.invalid && institucionForm.get('color_fondo')?.touched}">
+              <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-user-edit"></i>
+                <input type="text" id="color_fondo" pInputText formControlName="color_fondo">
+                <label for="color_fondo">Color de fondo</label>
+              </span>
+              <small style="color: brown;" *ngIf="institucionForm.get('color_fondo')?.invalid && institucionForm.get('color_fondo')?.touched">Campo obligatorio *</small>
+            </div>
+            <div class="field md:col-6" [ngClass]="{'p-invalid': institucionForm.get('color_texto')?.invalid && institucionForm.get('color_texto')?.touched}">
+              <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-user-edit"></i>
+                <input type="text" id="color_texto" pInputText formControlName="color_texto">
+                <label for="color_texto">Color de texto</label>
+              </span>
+              <small style="color: brown;" *ngIf="institucionForm.get('color_texto')?.invalid && institucionForm.get('color_texto')?.touched">Campo obligatorio *</small>
+            </div>
+          </div>
         </div>
-        
+        <div class="row mb-5 text-right">
+          <button pButton [label]="submitButtonLabel" (click)="guardar()" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
+          <!-- <button pButton label="Cancelar" icon="pi pi-times" id="btnCancelar" class="p-button-danger mr-2"></button> -->
+          <button pButton label="Regresar" icon="pi pi-times" id="btnCancelar" class="p-button-primary" (click)="regresar()"></button>
+        </div>
+      </form>
     </ng-template>
-    
-</p-panel>
+  </p-panel>

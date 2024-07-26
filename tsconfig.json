@@ -22,7 +22,17 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+        "@components/*": ["src/app/components/*"],
+        "@layout/*": ["src/app/layout/*"],
+        "@services/*": ["src/app/services/*"],
+        "@models/*": ["src/app/models/*"],
+        "@interceptors/*": ["src/app/interceptors/*"],
+        "@data/*": ["src/app/data/*"],
+        "@environments/*": ["src/environments/*"],
+    },
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "**/node_modules/*"],
   "angularCompilerOptions": {
