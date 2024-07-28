@@ -3,51 +3,32 @@
         <span class="text-primary font-semibold text-xl">Registrar Carreras Técnicas</span>
     </ng-template>
     
-    
     <ng-template pTemplate="content">
-        <div class="row">
-            <div class="grid p-fluid ">                
-                <div class="field col-12 md:col-6">
-                    <span class="p-float-label">
-                        <input type="text" pInputText >
-                        <label class="required">Código</label>
-                    </span>
-                </div>
-                <div class="field col-12 md:col-6">
-                    <span class="p-float-label">
-                        <input type="text" pInputText >
-                        <label class="required">Nombre de Carrera</label>
-                    </span>
-                </div>
-    
-            </div>
-    
-        </div>
-       <!-- <div class="row">
-            <div class="grid p-fluid">
-                <div class="field col-12 md:col-3">
-                    <button pButton label="Registrar Cursos" icon="pi pi-book" iconPos="right" (click)="verCursos()"></button>
+        <form [formGroup]="parametroForm" (ngSubmit)="guardarParametro()">
+            <div class="row">
+                <div class="grid p-fluid ">                
+                    <div class="field col-12 md:col-6">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="codigo">
+                            <label class="required">Código</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="nombres">
+                            <label class="required">Nombre de Carrera</label>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>  
-            
-         
-       
-        <div *ngIf="mostrarCursos">
-            <app-table-select-cursos (cursosSeleccionados)="capturarCursosSeleccionados($event)"></app-table-select-cursos>
-          </div>  -->
-
-          <div class="row">
-            <div class="flex justify-content-end flex-column sm:flex-row">
-                <div class="flex flex-wrap gap-2">
-                    <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm"
-                            (click)="guardarParametro()"></button>                   
-                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean"
-                            (click)="closeModal()"></button>
+            <div class="row">
+                <div class="flex justify-content-end flex-column sm:flex-row">
+                    <div class="flex flex-wrap gap-2">
+                        <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" type="submit"></button>                   
+                        <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal($event)"></button>
+                    </div>
                 </div>
             </div>
-         </div>
-    
-       </ng-template>
-           
-    </p-panel>
+        </form>
+    </ng-template>
+</p-panel>

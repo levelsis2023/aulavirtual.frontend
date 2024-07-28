@@ -14,108 +14,98 @@ import { RegCursosComponent } from '../../cursos/dialog/reg-cursos/reg-cursos.co
 })
 export class BandejaCarreratecnicaComponent {
 
-  
   loading: boolean = false;
-
 
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt1') tabledt1: Table | undefined;
   @Input() miembro: Miembro[] = [];
   @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
-  
-  carrerastecnicasList = [
-    { codigo: '140014Q', nombre: 'Enfermería', cursosAsignados: 'Ninguno' },
-    { codigo: '001001478CD', nombre: 'Enfermería', cursosAsignados: 'Ninguno' },
-    // Agrega más carreras técnicas según sea necesario
-  ];
+
+  carrerastecnicasList: any[] = []; // Cambia el tipo a any[] para recibir los datos del backend
+  originalCarrerastecnicasList: any[] = []; // Add this line to store the original list
+
   ref: DynamicDialogRef | undefined;
-  
+
   constructor(
     private dialogService: DialogService,
-    private maestroService: GeneralService,
+    private carrerasTecnicasService: GeneralService,
     private router: Router,
-    
-  
-   
   ) { }
 
-
   ngOnInit(): void {
-  //  this.listarmiembros();
-
+    this.listarCarrerasTecnicas();
   }
 
- /* listarmiembros() {
-    this.maestroService.listarmiembros().subscribe((response: any) => {
-      console.log("Lista de Miembros creados", response);
-      this.miembrosList = response;
-    })
+  listarCarrerasTecnicas() {
+    this.carrerasTecnicasService.getCarrerasTecnicas().subscribe((response: any) => {
+      console.log("Lista de Carreras Técnicas", response);
+      this.carrerastecnicasList = response;
+      this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
+    });
+  }
 
-  }*/
-  navigateToNuevo(){
-    this.ref = this.dialogService.open(RegCarrerastecnicasComponent, {  
+  navigateToNuevo() {
+    console.log("nuevo");
+
+    this.ref = this.dialogService.open(RegCarrerastecnicasComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header'
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-    }); 
-
+      console.log("Cerrando dialogo");
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+    });
   }
 
-  navigateTocurso(){
-    this.ref = this.dialogService.open(RegCursosComponent, {  
+  navigateTocurso(id: number,total_creditos:number) {
+    this.ref = this.dialogService.open(RegCursosComponent, {
       width: '60%',
-      styleClass: 'custom-dialog-header'
+      styleClass: 'custom-dialog-header',
+      data: { id: id ,total_creditos:total_creditos}
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
     });
+  }
+
+  navigateToDetalle() {
+    // Implementar la navegación al detalle
+  }
+
+  onGlobalFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    console.log("Filtro Global", filterValue);
+    if (!filterValue) {
+      this.carrerastecnicasList = [...this.originalCarrerastecnicasList];
+      return;
     }
 
- 
-  navigateToDetalle(){
-
+    this.carrerastecnicasList = this.originalCarrerastecnicasList.filter(carrera =>
+      (carrera.codigo && carrera.codigo.toLowerCase().includes(filterValue)) ||
+      (carrera.nombres && carrera.nombres.toLowerCase().includes(filterValue)) ||
+      (carrera.cursos && carrera.cursos.toLowerCase().includes(filterValue))
+    );
   }
 
- 
-
-
-
-
-
-
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal(
-      (event.target as HTMLInputElement).value,
-      'contains'
-    )
+  editarMiembro() {
+    // Implementar la edición de miembro
   }
 
-
-  editarMiembro(){
-
+  eliminarMiembro() {
+    // Implementar la eliminación de miembro
   }
 
-  eliminarMiembro(){
-
+  agregarcurso() {
+    // Implementar la adición de curso
   }
 
-  agregarcurso(){
-
-  }
   onRowSelect(event: any) {
-    
     console.log("Organo-colegaido-sect");
   }
 
   onRowUnselect(event: any) {
-    
-    
+    // Implementar la acción al deseleccionar una fila
   }
-
 }

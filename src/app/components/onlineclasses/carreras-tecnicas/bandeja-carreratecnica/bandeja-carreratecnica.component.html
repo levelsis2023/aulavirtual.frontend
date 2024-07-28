@@ -13,7 +13,7 @@
                             <div class="flex justify-content-between flex-wrap">
                                 <div class="flex-grow-1 mb-2 mr-2">
                                     <span class="p-input-icon-left w-full">
-                                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+                                        <input pInputText type="text" #filter (input)="onGlobalFilter($event)"
                                             placeholder="Buscar carreras técnicas" class="w-full" />
                                     </span>
                                 </div>
@@ -48,13 +48,13 @@
                             </tr>
                         </ng-template>
 
-                        <ng-template pTemplate="body" let-miembro>
+                        <ng-template pTemplate="body" let-carrera>
                             <tr>
-                                <td>140014Q</td>
-                                <td>Enfermería</td>
-                                <td>Ninguno</td>
+                                <td>{{ carrera.codigo }}</td>
+                                <td>{{ carrera.nombres }}</td>
+                                <td> {{ carrera.cursos }}</td>
                                 <td >
-                                    <button pButton icon="pi pi-briefcase" title="Agregar Curso"  class="p-button-rounded p-button-text p-button-success" style="width: 70px;" (click)="navigateTocurso()" style="border-radius: 30px;">
+                                    <button pButton icon="pi pi-briefcase" title="Agregar Curso"  class="p-button-rounded p-button-text p-button-success" style="width: 70px;" (click)="navigateTocurso(carrera.id,carrera.total_creditos)" style="border-radius: 30px;">
                                    </button>
                                    <button pButton icon="pi pi-eye" style="width: 70px;" title="Detalle"  class="p-button-rounded p-button-text p-button-success" (click)="navigateToDetalle()" style="border-radius: 30px;">
                                 </button>
