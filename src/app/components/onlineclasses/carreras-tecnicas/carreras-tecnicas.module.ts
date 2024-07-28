@@ -34,6 +34,7 @@ import { CarrerasTecnicasRoutingModule } from './carreras-tecnicas-routing.modul
 import { BandejaCarreratecnicaComponent } from './bandeja-carreratecnica/bandeja-carreratecnica.component';
 import { RegCarrerastecnicasComponent } from './dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
 import { TableSelectCursosComponent } from '../utils/table-select-cursos/table-select-cursos.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -72,8 +73,8 @@ import { TableSelectCursosComponent } from '../utils/table-select-cursos/table-s
     EditorModule,
     DialogModule,    
     DynamicDialogModule,      
-    TranslateModule
-    
+    TranslateModule,
+    ReactiveFormsModule
   ]
 })
 export class CarrerasTecnicasModule { }

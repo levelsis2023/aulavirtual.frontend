@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient,HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
-import { map } from 'rxjs/operators';
+import { tap,map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiResponse, Base } from '../interface/general';
 @Injectable({
@@ -47,5 +47,114 @@ export class GeneralService {
                 })
             );
     }
+
+    getCarrerasTecnicas() {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}carreras`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body ) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+
+    guardarCarreraTecnica(parametro: any): Observable<ApiResponse> {
+        return this.http
+          .post<ApiResponse>(`${this.baseUrl}carreras`, parametro, { observe: 'response' })
+          .pipe(
+            tap((response: HttpResponse<ApiResponse>) => {
+              console.log('HTTP Status Code:', response.status);
+            }),
+            map((response: HttpResponse<ApiResponse>) => {
+              console.log('Response body:', response.body);
+              if (response.status === 201 && response.body) {
+                return response.body;
+              } else {
+                throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+              }
+            })
+          );
+      }
+
+      guardarCurso(parametro: any): Observable<ApiResponse> {
+        return this.http
+          .post<ApiResponse>(`${this.baseUrl}cursos`, parametro, { observe: 'response' })
+          .pipe(
+            tap((response: HttpResponse<ApiResponse>) => {
+              console.log('HTTP Status Code:', response.status);
+            }),
+            map((response: HttpResponse<ApiResponse>) => {
+              console.log('Response body:', response.body);
+              if (response.status === 201 && response.body) {
+                return response.body;
+              } else {
+                throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+              }
+            })
+          );
+      }
+ 
+      getAreaDeFormacion() {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=area_de_formacion`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body ) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+      }
+
+      getCiclo() {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=ciclo`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body ) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+      }
+
+      getModuloFormativo() {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=modulo_formativo`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body ) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+      }
+
 
 }
