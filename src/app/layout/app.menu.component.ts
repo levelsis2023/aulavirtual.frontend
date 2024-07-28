@@ -40,6 +40,20 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Empresas',
                                 icon: 'pi pi-fw pi-building',
+                            },
+                            {
+                                label: 'Seguridad',
+                            },
+                            {
+                                label: 'Configuración',
+                                items: [
+                                    {
+                                        label: 'Roles (Perfiles y Permisos)',
+                                    },
+                                    {
+                                        label: 'Usuarios'
+                                    }
+                                ]
                             }
                         ]
                     }
