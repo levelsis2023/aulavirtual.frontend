@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { GeneralService } from '../../../service/general.service';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-reg-cursos',
   templateUrl: './reg-cursos.component.html',
@@ -29,9 +29,10 @@ export class RegCursosComponent implements OnInit {
   syllabus: string = '';
   asignacionDocentes: any = null;
   asignacionesDocentes: any[] = [];
+  estados: any[] = [];
+  estado: any = null;
 
   constructor(
-
     private layoutService: LayoutService,
     private router: Router,
     private primengConfig: PrimeNGConfig,
@@ -40,20 +41,18 @@ export class RegCursosComponent implements OnInit {
     private translateService: TranslateService,
     private parametroService: GeneralService,
     public config: DynamicDialogConfig
-  ) {
-   
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.id = this.config.data.id;  // Acceder al id pasado
-    this.cantidadTotalCreditos = this.config.data.total_creditos;  // Acceder al total_creditos pasado
+    this.id = this.config.data.id;
+    this.cantidadTotalCreditos = this.config.data.total_creditos;
     this.listarModulosFormativos();
     this.listarAreasFormacion();
     this.listarCiclos();
+    this.listarEstados();
   }
 
   GuardarCurso(): void {
-    // Logic to save the course
     const curso = {
       codigo: this.codigo,
       nombreCurso: this.nombreCurso,
@@ -65,11 +64,12 @@ export class RegCursosComponent implements OnInit {
       cantidadHoras: this.cantidadHoras,
       syllabus: this.syllabus,
       asignacionDocentesId: this.asignacionDocentes?.code,
-      carreraId: this.id
+      carreraId: this.id,
+      estadoId: this.estado?.nu_id_parametro
     };
 
     console.log('Curso a guardar', curso);
-   
+
     if (curso) {
       this.parametroService.guardarCurso(curso).subscribe(
         (response: any) => {
@@ -79,9 +79,7 @@ export class RegCursosComponent implements OnInit {
             text: 'Los Datos se registraron correctamente',
             icon: 'success',
             confirmButtonText: 'Aceptar'
-          }).then(() => {
-            
-          });
+          }).then(() => {});
         },
         (error: any) => {
           console.error('Error al guardar el parametro', error);
@@ -89,25 +87,24 @@ export class RegCursosComponent implements OnInit {
       );
     } else {
       console.error('Formulario inválido');
-      // Aquí puedes manejar el caso de formulario inválido, como mostrar un mensaje de error
     }
   }
 
   onCantidadCreditosChange(newValue: number) {
     if (this.cantidadTotalCreditos === 0 || this.cantidadTotalCreditos == null) {
       this.porcentajeCreditos = 100;
-  }else{
-    console.log('Cantidad de créditos ha cambiado:', newValue);
-    console.log('Cantidad total de créditos:', this.cantidadTotalCreditos);
-    const resultado = (newValue / this.cantidadTotalCreditos) * 100;
-    this.porcentajeCreditos = resultado;
-    console.log('Resultado del cálculo:', resultado);
-    // Aquí puedes realizar la acción que desees con el resultado
+    } else {
+      console.log('Cantidad de créditos ha cambiado:', newValue);
+      console.log('Cantidad total de créditos:', this.cantidadTotalCreditos);
+      const resultado = (newValue / this.cantidadTotalCreditos) * 100;
+      this.porcentajeCreditos = resultado;
+      console.log('Resultado del cálculo:', resultado);
+    }
   }
-  }
+
   listarModulosFormativos(): void {
     this.parametroService.getModuloFormativo().subscribe((response: any) => {
-      console.log("Lista de listarAreasFormacion", response);
+      console.log("Lista de listarModulosFormativos", response);
       this.modulosFormativos = response;
     });
   }
@@ -125,7 +122,15 @@ export class RegCursosComponent implements OnInit {
       this.ciclos = response;
     });
   }
-  closeModal(){
-    this.ref.close({register: false});
+
+  listarEstados(): void {
+    this.parametroService.getEstados().subscribe((response: any) => {
+      console.log("Lista de listarEstados", response);
+      this.estados = response;
+    });
+  }
+
+  closeModal() {
+    this.ref.close({ register: false });
   }
 }

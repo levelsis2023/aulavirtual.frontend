@@ -1,0 +1,18 @@
+.button-custom {
+    width: 1rem;
+    height: 3rem;
+    background-color: aliceblue;
+    background: #2c5f8b;
+    color: antiquewhite;
+    border: none;
+    border-radius: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+}
