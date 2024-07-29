@@ -136,7 +136,40 @@ export class GeneralService {
             })
           );
       }
- 
+     actualizarCurso(parametro: any): Observable<ApiResponse> {
+        return this.http
+          .put<ApiResponse>(`${this.baseUrl}cursos/${parametro.cursoId}`, parametro, { observe: 'response' })
+          .pipe(
+            tap((response: HttpResponse<ApiResponse>) => {
+              console.log('HTTP Status Code:', response.status);
+            }),
+            map((response: HttpResponse<ApiResponse>) => {
+              console.log('Response body:', response.body);
+              if (response.status === 200 && response.body) {
+                return response.body;
+              } else {
+                throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+              }
+            })
+          );
+      }
+      eliminarCurso(id: number): Observable<ApiResponse> {
+        return this.http
+          .delete<ApiResponse>(`${this.baseUrl}cursos/${id}`, { observe: 'response' })
+          .pipe(
+            tap((response: HttpResponse<ApiResponse>) => {
+              console.log('HTTP Status Code:', response.status);
+            }),
+            map((response: HttpResponse<ApiResponse>) => {
+              console.log('Response body:', response.body);
+              if (response.status === 200 && response.body) {
+                return response.body;
+              } else {
+                throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+              }
+            })
+          );
+      }
       getCursos(id: number) {
         return this.http
             .get<ApiResponse>(`${this.baseUrl}cursos/carrera/${id}`, { observe: 'response' })
