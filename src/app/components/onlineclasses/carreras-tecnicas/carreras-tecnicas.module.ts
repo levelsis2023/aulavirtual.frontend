@@ -34,12 +34,16 @@ import { CarrerasTecnicasRoutingModule } from './carreras-tecnicas-routing.modul
 import { BandejaCarreratecnicaComponent } from './bandeja-carreratecnica/bandeja-carreratecnica.component';
 import { RegCarrerastecnicasComponent } from './dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
 import { TableSelectCursosComponent } from '../utils/table-select-cursos/table-select-cursos.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditarCarreraTecnicaComponent } from './dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
+import { VerCarreraTecnicaComponent } from './dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
+import { VerCursoDeCarreraComponent } from './dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
 
 
 
 @NgModule({
   declarations: [
-    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent
+    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent
     
   ],
   imports: [
@@ -72,8 +76,8 @@ import { TableSelectCursosComponent } from '../utils/table-select-cursos/table-s
     EditorModule,
     DialogModule,    
     DynamicDialogModule,      
-    TranslateModule
-    
+    TranslateModule,
+    ReactiveFormsModule
   ]
 })
 export class CarrerasTecnicasModule { }
