@@ -3,33 +3,29 @@
         <span class="text-primary font-semibold text-xl">Bandeja de Maestro</span>
     </ng-template>
     <ng-template pTemplate="content">
-        
         <div class="row">
-            <div class="grid p-fluid ">
+            <div class="grid p-fluid">
                 <div class="field md:col-12">
-                    <p-table #dt1 [value]="miembrosList" dataKey="nuIdMiembro" [rows]="10" [loading]="loading"
+                    <p-table #dt1 [value]="parametrosList" dataKey="nu_item" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
-                        [globalFilterFields]="['nuIdMiembro','txnombre','txitemdescription','nu_item','dominio','created_at']"
+                        [globalFilterFields]="['nu_item','nombre','tx_abreviatura','tx_nombre','dominio']"
                         responsiveLayout="scroll" class="w-full custom-search-input">
                         <ng-template pTemplate="caption">
-                            <div class="flex justify-content-between flex-wrap flex-wrap"> 
+                            <div class="flex justify-content-between flex-wrap flex-wrap">
                                 <div class="flex-grow-1 mb-2 mr-2">
                                     <span class="p-input-icon-left w-full">
-                                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
-                                            placeholder="Buscar miembro" class="w-full" />
+                                        <input pInputText type="text" #filter (input)="onGlobalFilter($event)"
+                                            placeholder="Buscar parámetro" class="w-full" />
                                     </span>
-
-                                </div>                               
+                                </div>
                                 <div class="mb-2">
                                     <button pButton label="Nuevo" icon="pi pi-user-plus" id="btnNuevo" class="p-button-primary mr-2" (click)="navigateToNuevo()" style="border-radius: 30px;"></button>
                                 </div>
                             </div>
-                            
                         </ng-template>
 
                         <ng-template pTemplate="header">
                             <tr>
-
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
                                         Item
@@ -50,60 +46,46 @@
                                         Grupo
                                     </div>
                                 </th>
-                                <th style="min-width: 10rem" scope="col3">
+                                <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
                                         Dominio
                                     </div>
                                 </th>
-                                <th style="min-width: 10rem" scope="col3">
+                                <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
                                         Acciones
                                     </div>
                                 </th>
                             </tr>
-
                         </ng-template>
-                        <ng-template pTemplate="body" let-miembro>
-                            <tr>
-                                <td>
-                                    {{ miembro.txNumeroDoc }}
-                                </td>
-                                <td>
-                                    {{ miembro.tx_abreviatura }}
-                                </td>
-                                <td>
-                                    {{ miembro.nu_item }}
-                                </td>
-                                <td>
-                                    {{ miembro.tx_item_description }}
-                                </td>
-                                <td>
-                                    {{ miembro.dominio }}
-                                </td>
-                               <td class="text-center">
 
-                                    <button pButton class="p-button-rounded p-button-text custom-edit-button" (click)="editarMiembro(miembro)" title="Editar miembro">
+                        <ng-template pTemplate="body" let-parametro>
+                            <tr>
+                                <td>{{ parametro.nu_item }}</td>
+                                <td>{{ parametro.tx_item_description }}</td>
+                                <td>{{ parametro.tx_abreviatura }}</td>
+                                <td>{{ parametro.tx_nombre }}</td>
+                                <td>{{ parametro.nombre }}</td>
+                                <td class="text-center">
+                                    <button pButton class="p-button-rounded p-button-text custom-edit-button" (click)="editarParametro(parametro)" title="Editar parámetro">
                                         <i class="pi pi-user-edit" aria-hidden="true" [style]="{'color': 'var(--primary-color)', 'font-size': '1.5rem'}"></i>
                                     </button>
-                                    <button pButton class="p-button-danger p-button-rounded" (click)="eliminarMiembro($event, miembro)" title="Eliminar miembro">
-                                        <i class="pi pi-trash" aria-hidden="true" [ngStyle]="{'color': 'var(--error-color)', 'font-size': '1.5rem'}" ></i>
+                                    <button pButton class="p-button-danger p-button-rounded" (click)="eliminarParametro(parametro.nu_id_parametro)" title="Eliminar parámetro">
+                                        <i class="pi pi-trash" aria-hidden="true" [ngStyle]="{'color': 'var(--error-color)', 'font-size': '1.5rem'}"></i>
                                     </button>
-                                    <button *ngIf="miembro.historico" pButton class="p-button-rounded p-button-text"
-                                        (click)="eliminarMiembro($event,miembro)" title="Eliminar">
-                                        <span class="pi pi-circle-fill" [style.color]="'red'"></span>
-                                    </button>
-
                                 </td>
                             </tr>
                         </ng-template>
+
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="8">No se encontraron registros</td>
+                                <td colspan="6">No se encontraron registros</td>
                             </tr>
                         </ng-template>
+
                         <ng-template pTemplate="loadingbody">
                             <tr>
-                                <td colspan="8">Cargando registros. Por favor espere.</td>
+                                <td colspan="6">Cargando registros. Por favor espere.</td>
                             </tr>
                         </ng-template>
                     </p-table>

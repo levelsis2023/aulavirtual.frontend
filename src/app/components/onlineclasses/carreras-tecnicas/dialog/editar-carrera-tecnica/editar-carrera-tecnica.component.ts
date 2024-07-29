@@ -1,17 +1,16 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../../service/general.service';
 import { Parametro } from '../../../interface/general';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';	
-
 @Component({
-  selector: 'app-reg-carrerastecnicas',
-  templateUrl: './reg-carrerastecnicas.component.html',
-  styleUrls: ['./reg-carrerastecnicas.component.scss']
+  selector: 'app-editar-carrera-tecnica',
+  templateUrl: './editar-carrera-tecnica.component.html',
+  styleUrls: ['./editar-carrera-tecnica.component.scss']
 })
-export class RegCarrerastecnicasComponent {
+export class EditarCarreraTecnicaComponent {
 
   loading: boolean = false;
   parametroDatos: Parametro = new Parametro();
@@ -22,22 +21,23 @@ export class RegCarrerastecnicasComponent {
   constructor(
     private fb: FormBuilder,
     private ref: DynamicDialogRef,
-    private cdr: ChangeDetectorRef,
     public config: DynamicDialogConfig,   
     private parametroService: GeneralService,
-    private router: Router,
   ) {
     this.parametroForm = this.fb.group({
-      codigo: ['', Validators.required],
-      nombres: ['', Validators.required],
+      codigo: [this.config.data.data.codigo, Validators.required],
+      nombres: [this.config.data.data.nombres, Validators.required],
       domain_id: 1,
+      id: this.config.data.data.id
     });
+  
+
   }
 
-  guardarParametro() {
+  editarParametro() {
     if (this.parametroForm.valid) {
       console.log('Formulario válido', this.parametroForm.value);
-      this.parametroService.guardarCarreraTecnica(this.parametroForm.value).subscribe(
+      this.parametroService.editarCarreraTecnica(this.parametroForm.value).subscribe(
         (response: any) => {
           this.ref?.close();
           Swal.fire({
@@ -50,7 +50,7 @@ export class RegCarrerastecnicasComponent {
           });
         },
         (error: any) => {
-          console.error('Error al guardar el parametro', error);
+          console.error('Error al editar el parametro', error);
           // Aquí puedes manejar el error, como mostrar un mensaje de error
         }
       );

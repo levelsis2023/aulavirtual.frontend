@@ -3,42 +3,36 @@
         <span class="text-primary font-semibold text-xl">Registrar Cursos</span>
     </ng-template>
     
-    
     <ng-template pTemplate="content">
         <div class="row">
             <div class="grid p-fluid ">                
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText >
+                        <input type="text" pInputText [(ngModel)]="codigo">
                         <label class="required">Código</label>
                     </span>
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText >
+                        <input type="text" pInputText [(ngModel)]="nombreCurso">
                         <label class="required">Nombre de curso</label>
                     </span>
                 </div>
-    
             </div>
-    
         </div>
         <div class="row">
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
-                            optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Ciclo </label>
+                        <p-dropdown inputId="dropdownCiclo" [options]="ciclos" optionLabel="tx_abreviatura" [(ngModel)]="ciclo"></p-dropdown>
+                        <label for="dropdownCiclo">Ciclo </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
-                  
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
-                            optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Áreas de formación </label>
+                        <p-dropdown inputId="dropdownAreaFormacion" [options]="areasFormacion" optionLabel="tx_abreviatura" [(ngModel)]="areaFormacion"></p-dropdown>
+                        <label for="dropdownAreaFormacion">Áreas de formación </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
                 </div>    
@@ -48,32 +42,30 @@
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
-                            optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Módulo formativo </label>
+                        <p-dropdown inputId="dropdownModuloFormativo" [options]="modulosFormativos" optionLabel="tx_abreviatura" [(ngModel)]="moduloFormativo"></p-dropdown>
+                        <label for="dropdownModuloFormativo">Módulo formativo </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
-                  
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText >
+                        <input type="text" pInputText [(ngModel)]="cantidadCreditos" (ngModelChange)="onCantidadCreditosChange($event)">
                         <label class="required">Cantidad de créditos</label>
                     </span>
-                </div>  
+                </div>
             </div>    
         </div>
         <div class="row">
             <div class="grid p-fluid ">                
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText >
+                        <input type="text" pInputText [(ngModel)]="porcentajeCreditos">
                         <label class="required">% de créditos</label>
                     </span>
                 </div>  
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText >
+                        <input type="text" pInputText [(ngModel)]="cantidadHoras">
                         <label class="required">Cantidad de horas</label>
                     </span>
                 </div>  
@@ -82,13 +74,8 @@
         <div class="row mt-2">
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-12">
-                    <label for="">Digite el  syllabus</label>
-                    <p-editor                      
-                    [style]="{ height: '90px' }"  
-                   
-                        placeholder="">
-                    </p-editor>
-                   
+                    <label for="">Digite el syllabus</label>
+                    <p-editor [style]="{ height: '90px' }" [(ngModel)]="syllabus"></p-editor>
                 </div>
             </div>
         </div>
@@ -96,42 +83,27 @@
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false"
-                            optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Asignación de docentes </label>
+                        <p-dropdown inputId="dropdownAsignacionDocentes" [options]="asignacionesDocentes" optionLabel="name" [(ngModel)]="asignacionDocentes"></p-dropdown>
+                        <label for="dropdownAsignacionDocentes">Asignación de docentes </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
-                  
                 </div>
-               
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdownEstado" [options]="estados" optionLabel="tx_abreviatura" [(ngModel)]="estado"></p-dropdown>
+                        <label for="dropdownEstado">Estado</label>
+                        <small style="color: brown;">Campo obligatorio * </small>
+                    </span>
+                </div>
             </div>    
         </div>
-       <!-- <div class="row">
-            <div class="grid p-fluid">
-                <div class="field col-12 md:col-3">
-                    <button pButton label="Registrar Cursos" icon="pi pi-book" iconPos="right" (click)="verCursos()"></button>
-                </div>
-            </div>
-        </div>  
-            
-         
-       
-        <div *ngIf="mostrarCursos">
-            <app-table-select-cursos (cursosSeleccionados)="capturarCursosSeleccionados($event)"></app-table-select-cursos>
-          </div>  -->
-
-          <div class="row">
+        <div class="row">
             <div class="flex justify-content-end flex-column sm:flex-row">
                 <div class="flex flex-wrap gap-2">
-                    <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm"
-                            (click)="GuardarCurso()"></button>                   
-                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean"
-                            (click)="closeModal()"></button>
+                    <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" (click)="GuardarCurso()"></button>                   
+                    <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal()"></button>
                 </div>
             </div>
-         </div>
-    
-       </ng-template>
-           
-    </p-panel>
-
+        </div>
+    </ng-template>
+</p-panel>

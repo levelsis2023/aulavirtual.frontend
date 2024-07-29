@@ -1,23 +1,23 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Miembro, Parametro } from '../../interface/general';
+import { Miembro, Parametro } from '../../../interface/general';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { GeneralService } from '../../service/general.service';
+import { GeneralService } from '../../../service/general.service';
 import { Router } from '@angular/router';
-import { RegCarrerastecnicasComponent } from '../dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
-import { RegCursosComponent } from '../../cursos/dialog/reg-cursos/reg-cursos.component';
-import { EditarCarreraTecnicaComponent } from '../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
-import { VerCarreraTecnicaComponent } from '../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
-import { VerCursoDeCarreraComponent } from '../dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
-
+import { RegCarrerastecnicasComponent } from '../../dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
+import { RegCursosComponent } from '../../../cursos/dialog/reg-cursos/reg-cursos.component';
+import { EditarCarreraTecnicaComponent } from '../../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
+import { VerCarreraTecnicaComponent } from '../../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import Swal from 'sweetalert2';	
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'app-bandeja-carreratecnica',
-  templateUrl: './bandeja-carreratecnica.component.html',
-  styleUrls: ['./bandeja-carreratecnica.component.scss']
+  selector: 'app-ver-curso-de-carrera',
+  templateUrl: './ver-curso-de-carrera.component.html',
+  styleUrls: ['./ver-curso-de-carrera.component.scss']
 })
-export class BandejaCarreratecnicaComponent {
+export class VerCursoDeCarreraComponent {
+
 
   loading: boolean = false;
 
@@ -33,16 +33,18 @@ export class BandejaCarreratecnicaComponent {
 
   constructor(
     private dialogService: DialogService,
-    private carrerasTecnicasService: GeneralService,
+    private cursosService: GeneralService,
     private router: Router,
+    public config: DynamicDialogConfig,   
+
   ) { }
 
   ngOnInit(): void {
-    this.listarCarrerasTecnicas();
+    this.listarCursos();
   }
 
-  listarCarrerasTecnicas() {
-    this.carrerasTecnicasService.getCarrerasTecnicas().subscribe((response: any) => {
+  listarCursos() {
+    this.cursosService.getCursos(this.config.data.data.id).subscribe((response: any) => {
       console.log("Lista de Carreras Técnicas", response);
       this.carrerastecnicasList = response;
       this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
@@ -59,44 +61,31 @@ export class BandejaCarreratecnicaComponent {
 
     this.ref.onClose.subscribe((data: any) => {
       console.log("Cerrando dialogo");
-      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+      this.listarCursos(); // Recargar los datos de la tabla
     });
   }
 
-  navigateAddCurso(id: number,total_creditos:number) {
+  navigateAddCurso() {
     this.ref = this.dialogService.open(RegCursosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { id: id ,total_creditos:total_creditos}
+      data: { id: this.config.data.data.id ,total_creditos:this.config.data.data.total_creditos}
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
-    });
-  }
-
-
-  navigateTocurso(data: any) {
-    this.ref = this.dialogService.open(VerCursoDeCarreraComponent, {
-      width: '80%',
-      styleClass: 'custom-dialog-header',
-      data: { data: data}
-    });
-
-    this.ref.onClose.subscribe((data: any) => {
-      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+      this.listarCursos(); // Recargar los datos de la tabla
     });
   }
 
   navigateToDetalle(data: any) {
     this.ref = this.dialogService.open(VerCarreraTecnicaComponent, {
-      width: '60%',
+      width: '80%',
       styleClass: 'custom-dialog-header',
       data: { data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+      this.listarCursos(); // Recargar los datos de la tabla
     });
   }
 
@@ -109,7 +98,7 @@ export class BandejaCarreratecnicaComponent {
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+      this.listarCursos(); // Recargar los datos de la tabla
     });
   }
 
@@ -124,7 +113,7 @@ export class BandejaCarreratecnicaComponent {
       confirmButtonText: 'Sí, eliminarlo'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.carrerasTecnicasService.eliminarCarreraTecnica(id).subscribe(
+        this.cursosService.eliminarCarreraTecnica(id).subscribe(
           response => {
             Swal.fire(
               'Eliminado',
@@ -141,7 +130,7 @@ export class BandejaCarreratecnicaComponent {
             );
           }
         );
-        this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+        this.listarCursos(); // Recargar los datos de la tabla
 
       }
     });
@@ -162,23 +151,33 @@ export class BandejaCarreratecnicaComponent {
     );
   }
 
-  editarMiembro() {
-    // Implementar la edición de miembro
+  verSyllabus(syllabus: string) {
+    console.log(syllabus);
   }
 
-  eliminarMiembro() {
-    // Implementar la eliminación de miembro
+  verAlumnos(alumnos: string) {
+    console.log(alumnos);
   }
 
-  agregarcurso() {
-    // Implementar la adición de curso
+  verHorarios(horarios: string) {
+    console.log(horarios);
   }
 
-  onRowSelect(event: any) {
-    console.log("Organo-colegaido-sect");
+  verAsistencia(asistencia: string) {
+    console.log(asistencia);
   }
 
-  onRowUnselect(event: any) {
-    // Implementar la acción al deseleccionar una fila
+  verTemas(temas: string) {
+    console.log(temas);
   }
+
+  verEvaluaciones(evaluaciones: string) {
+    console.log(evaluaciones);
+  }
+
+  verForos(foros: string) {
+    console.log(foros);
+  }
+
+ 
 }
