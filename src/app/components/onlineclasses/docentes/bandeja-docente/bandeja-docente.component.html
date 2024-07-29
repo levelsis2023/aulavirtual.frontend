@@ -6,14 +6,14 @@
         <div class="row mb-4">
             <div class="grid p-fluid">
                 <div class="field md:col-12">
-                    <p-table #dt1 [value]="instituciones" [rows]="10" [loading]="loading"
+                    <p-table #dt1 [value]="docentes" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
                         responsiveLayout="scroll" class="custom-search-input">
                         <ng-template pTemplate="caption">
                             <div class="flex justify-content-between flex-wrap">
                                 <div class="flex-grow-1 mb-2 mr-2">
                                     <span class="p-input-icon-left w-full">
-                                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+                                        <input pInputText type="text" #filter (keyup)="buscarDocente()" [(ngModel)]="idDocente"
                                             placeholder="Buscar Docente" class="w-full" />
                                     </span>
                                 </div>
@@ -27,12 +27,22 @@
                             <tr>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                       Nro de Documento
+                                       Acciones
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Nombres
+                                        Código
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Nomres y Apellidos
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Celular
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
@@ -42,18 +52,76 @@
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Grado academico
+                                        Vínculo
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Doc. Identidad
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Fecha de Nacimiento
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Edad
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Foto
                                     </div>
                                 </th>
                             </tr>
                         </ng-template>
 
-                        <ng-template pTemplate="body" let-miembro>
+                        <ng-template pTemplate="body" let-docente>
                             <tr>
-                                <td>AAA</td>
-                                <td>BBBB</td>
-                                <td>CCCCCC</td>
-                                <td>DDDDDDDDDD</td>
+                                <td class="text-center flex gap-2">
+                                    <button (click)="actualizarDocente(docente)"
+                                        style="width: fit-content"
+                                        pButton
+                                        class="p-button-rounded p-button-text custom-edit-button"
+                                        title="Editar miembro"
+                                    >
+                                        <i
+                                            class="pi pi-user-edit"
+                                            aria-hidden="true"
+                                            [style]="{
+                                                color: 'var(--primary-color)',
+                                                'font-size': '1.5rem'
+                                            }"
+                                        ></i>
+                                    </button>
+                                    <button (click)="eliminarDocente(docente.id)"
+                                        style="width: fit-content"
+                                        pButton
+                                        class="p-button-danger p-button-rounded"
+                                        title="Eliminar miembro"
+                                    >
+                                        <i
+                                            class="pi pi-trash"
+                                            aria-hidden="true"
+                                            [ngStyle]="{
+                                                color: 'var(--error-color)',
+                                                'font-size': '1.5rem'
+                                            }"
+                                        ></i>
+                                    </button>
+                                </td>
+                                <td>{{docente.codigo}}</td>
+                                <td>{{docente.nombres}}</td>
+                                <td>{{docente.celular}}</td>
+                                <td>{{docente.profesion}}</td>
+                                <td>{{docente.vinculo_laboral}}</td>
+                                <td>{{docente.doc_identidad}}</td>
+                                <td>{{docente.fecha_nacimiento}}</td>
+                                <td>{{docente.edad}}</td>
+                                <td><img [src]="docente.foto" alt="" width="50" height="50"></td>
+
                             </tr>
                         </ng-template>
 
