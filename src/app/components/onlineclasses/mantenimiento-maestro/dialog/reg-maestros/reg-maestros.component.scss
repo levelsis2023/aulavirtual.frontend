@@ -1,0 +1,26 @@
+/* Aumenta el z-index de SweetAlert2 */
+.swal2-custom-class {
+    z-index: 9999 !important;
+  }
+
+  /* Modificar swal2-container */
+.swal2-container {
+    /* Tus estilos personalizados */
+    z-index: 9999 !important;
+  }
+  
+  /* Modificar swal2-center */
+  .swal2-center {
+    z-index: 9999 !important;
+
+  }
+  
+  /* Modificar swal2-backdrop-show */
+  .swal2-backdrop-show {
+    z-index: 9999 !important;
+
+  }
+  .swal2-popup {
+    z-index: 9999 !important;
+
+  }
