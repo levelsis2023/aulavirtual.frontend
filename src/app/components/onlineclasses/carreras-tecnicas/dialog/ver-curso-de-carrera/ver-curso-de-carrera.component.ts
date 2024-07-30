@@ -6,11 +6,9 @@ import { GeneralService } from '../../../service/general.service';
 import { Router } from '@angular/router';
 import { RegCarrerastecnicasComponent } from '../../dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
 import { RegCursosComponent } from '../../../cursos/dialog/reg-cursos/reg-cursos.component';
-import { EditarCarreraTecnicaComponent } from '../../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
-import { VerCarreraTecnicaComponent } from '../../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import Swal from 'sweetalert2';	
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-
+import { VerGrupoEvaluacionesComponent } from './opciones/ver-grupo-evaluaciones/ver-grupo-evaluaciones.component';
 @Component({
   selector: 'app-ver-curso-de-carrera',
   templateUrl: './ver-curso-de-carrera.component.html',
@@ -69,7 +67,7 @@ export class VerCursoDeCarreraComponent {
     this.ref = this.dialogService.open(RegCursosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { id: this.config.data.data.id ,total_creditos:this.config.data.data.total_creditos}
+      data: { id: this.config.data.data.id ,total_creditos:this.config.data.data.total_creditos, acciones: 'add' }
     });
 
     this.ref.onClose.subscribe((data: any) => {
@@ -78,23 +76,23 @@ export class VerCursoDeCarreraComponent {
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(VerCarreraTecnicaComponent, {
+    this.ref = this.dialogService.open(RegCursosComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
-      data: { data: data }
+      data: { id: this.config.data.data.id ,total_creditos:this.config.data.data.total_creditos , acciones: 'ver', data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCursos(); // Recargar los datos de la tabla
+      this.listarCursos(); 
     });
   }
 
   navigateToEdit(data: any) {
     console.log("Editar", data);
-    this.ref = this.dialogService.open(EditarCarreraTecnicaComponent, {
+    this.ref = this.dialogService.open(RegCursosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { data: data }
+      data: { id: this.config.data.data.id ,total_creditos:this.config.data.data.total_creditos, acciones: 'editar', data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
@@ -110,16 +108,38 @@ export class VerCursoDeCarreraComponent {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminarlo'
+      confirmButtonText: 'Sí, eliminarlo',
+      customClass: {
+        popup: 'custom-swal-popup'
+      },
+      didOpen: () => {
+        const container = document.querySelector('.swal2-container');
+        if (container) {
+          container.setAttribute('style', 'z-index: 2147483647 !important');
+        }
+      }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cursosService.eliminarCarreraTecnica(id).subscribe(
+        this.cursosService.eliminarCurso(id).subscribe(
           response => {
-            Swal.fire(
-              'Eliminado',
-              'La carrera técnica ha sido eliminada.',
-              'success'
-            );
+            Swal.fire({
+              title: 'Eliminado',
+              text: 'La carrera técnica ha sido eliminada.',
+              icon: 'success',
+              showClass: {
+                popup: `
+                  background-color: #78CBF2;
+                  color: white;
+                  z-index: 10000!important;
+                `
+              },
+              didOpen: () => {
+                const container = document.querySelector('.swal2-container');
+                if (container) {
+                  container.setAttribute('style', 'z-index: 2147483647 !important');
+                }
+              }
+            });
             // Aquí puedes actualizar la vista, por ejemplo, recargar la lista de carreras técnicas
           },
           error => {
@@ -171,8 +191,17 @@ export class VerCursoDeCarreraComponent {
     console.log(temas);
   }
 
-  verEvaluaciones(evaluaciones: string) {
-    console.log(evaluaciones);
+  verEvaluaciones(evaluaciones: any) {
+    console.log("evaluaciones", evaluaciones);
+    this.ref = this.dialogService.open(VerGrupoEvaluacionesComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { data: evaluaciones }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarCursos(); // Recargar los datos de la tabla
+    });
   }
 
   verForos(foros: string) {

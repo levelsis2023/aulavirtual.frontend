@@ -16,3 +16,16 @@
     display: flex;
     gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
 }
+
+.custom-swal-popup {
+    z-index: 2147483647 !important; /* Valor máximo para z-index */
+  }
+
+  .swal2-popup {
+    z-index: 2147483647 !important; /* Valor máximo para z-index */
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    z-index: 2147483647 !important; /* Valor máximo para z-index */
+
+}

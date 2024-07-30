@@ -1,6 +1,10 @@
 <p-panel> 
     <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Registrar Cursos</span>
+        <span class="text-primary font-semibold text-xl">
+            <span *ngIf="acciones === 'add'">Registrar Cursos</span>
+            <span *ngIf="acciones === 'ver'">Visualizar Curso</span>
+            <span *ngIf="acciones === 'editar'">Editar Curso</span>
+        </span>
     </ng-template>
     
     <ng-template pTemplate="content">
@@ -8,13 +12,13 @@
             <div class="grid p-fluid ">                
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText [(ngModel)]="codigo">
+                        <input type="text" pInputText [(ngModel)]="codigo" [disabled]="acciones === 'ver'">
                         <label class="required">Código</label>
                     </span>
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText [(ngModel)]="nombreCurso">
+                        <input type="text" pInputText [(ngModel)]="nombreCurso" [disabled]="acciones === 'ver'">
                         <label class="required">Nombre de curso</label>
                     </span>
                 </div>
@@ -24,14 +28,16 @@
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownCiclo" [options]="ciclos" optionLabel="tx_abreviatura" [(ngModel)]="ciclo"></p-dropdown>
+                        <p-dropdown inputId="dropdownCiclo" [options]="ciclos" optionLabel="tx_item_description" [(ngModel)]="ciclo"
+                        optionValue="nu_id_parametro" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownCiclo">Ciclo </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownAreaFormacion" [options]="areasFormacion" optionLabel="tx_abreviatura" [(ngModel)]="areaFormacion"></p-dropdown>
+                        <p-dropdown inputId="dropdownAreaFormacion" [options]="areasFormacion" optionLabel="tx_item_description" [(ngModel)]="areaFormacion"
+                        optionValue="nu_id_parametro" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownAreaFormacion">Áreas de formación </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
@@ -42,14 +48,15 @@
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownModuloFormativo" [options]="modulosFormativos" optionLabel="tx_abreviatura" [(ngModel)]="moduloFormativo"></p-dropdown>
+                        <p-dropdown inputId="dropdownModuloFormativo" [options]="modulosFormativos" optionLabel="tx_item_description" [(ngModel)]="moduloFormativo" 
+                        optionValue="nu_id_parametro" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownModuloFormativo">Módulo formativo </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText [(ngModel)]="cantidadCreditos" (ngModelChange)="onCantidadCreditosChange($event)">
+                        <input type="text" pInputText [(ngModel)]="cantidadCreditos" [disabled]="acciones === 'ver'">
                         <label class="required">Cantidad de créditos</label>
                     </span>
                 </div>
@@ -59,13 +66,13 @@
             <div class="grid p-fluid ">                
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText [(ngModel)]="porcentajeCreditos">
+                        <input type="text" pInputText [(ngModel)]="porcentajeCreditos" [disabled]="acciones === 'ver'">
                         <label class="required">% de créditos</label>
                     </span>
                 </div>  
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <input type="text" pInputText [(ngModel)]="cantidadHoras">
+                        <input type="text" pInputText [(ngModel)]="cantidadHoras" [disabled]="acciones === 'ver'">
                         <label class="required">Cantidad de horas</label>
                     </span>
                 </div>  
@@ -75,7 +82,7 @@
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-12">
                     <label for="">Digite el syllabus</label>
-                    <p-editor [style]="{ height: '90px' }" [(ngModel)]="syllabus"></p-editor>
+                    <p-editor [style]="{ height: '90px' }" [(ngModel)]="syllabus" [disabled]="acciones === 'ver'"></p-editor>
                 </div>
             </div>
         </div>
@@ -83,14 +90,16 @@
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownAsignacionDocentes" [options]="asignacionesDocentes" optionLabel="name" [(ngModel)]="asignacionDocentes"></p-dropdown>
+                        <p-dropdown inputId="dropdownAsignacionDocentes" [options]="asignacionesDocentes" optionLabel="name" [(ngModel)]="asignacionDocentes"
+                        optionValue="nu_id_parametro" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownAsignacionDocentes">Asignación de docentes </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownEstado" [options]="estados" optionLabel="tx_abreviatura" [(ngModel)]="estado"></p-dropdown>
+                        <p-dropdown inputId="dropdownEstado" [options]="estados" optionLabel="tx_item_description" [(ngModel)]="estado"
+                        optionValue="nu_id_parametro" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownEstado">Estado</label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
@@ -100,7 +109,8 @@
         <div class="row">
             <div class="flex justify-content-end flex-column sm:flex-row">
                 <div class="flex flex-wrap gap-2">
-                    <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" (click)="GuardarCurso()"></button>                   
+                    <button *ngIf="acciones === 'add'" pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" (click)="GuardarCurso()"></button>
+                    <button *ngIf="acciones === 'editar'" pButton icon="pi pi-pencil" label="Editar Curso" iconPos="right" class="p-button-warning p-button-sm" (click)="editarCurso()"></button>
                     <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal()"></button>
                 </div>
             </div>
