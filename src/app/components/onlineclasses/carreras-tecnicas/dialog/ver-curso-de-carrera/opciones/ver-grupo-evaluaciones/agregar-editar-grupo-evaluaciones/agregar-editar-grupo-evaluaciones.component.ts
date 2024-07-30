@@ -1,24 +1,23 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { GeneralService } from '../../../service/general.service';
-import { Parametro } from '../../../interface/general';
+import { GeneralService } from '../../../../../../service/general.service';
+import { Parametro } from '../../../../../../interface/general';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';	
-
 @Component({
-  selector: 'app-reg-carrerastecnicas',
-  templateUrl: './reg-carrerastecnicas.component.html',
-  styleUrls: ['./reg-carrerastecnicas.component.scss']
+  selector: 'app-agregar-editar-grupo-evaluaciones',
+  templateUrl: './agregar-editar-grupo-evaluaciones.component.html',
+  styleUrls: ['./agregar-editar-grupo-evaluaciones.component.scss']
 })
-export class RegCarrerastecnicasComponent {
+export class AgregarEditarGrupoEvaluacionesComponent {
 
   loading: boolean = false;
   parametroDatos: Parametro = new Parametro();
   parametro: Parametro = new Parametro();
   mostrarCursos = false;
   parametroForm: FormGroup;
-  
+  idCurso: any;
 
   constructor(
     private fb: FormBuilder,
@@ -28,18 +27,21 @@ export class RegCarrerastecnicasComponent {
     private parametroService: GeneralService,
     private router: Router,
   ) {
+    this.idCurso = this.config.data.id;
     this.parametroForm = this.fb.group({
-      codigo: ['', Validators.required],
-      nombres: ['', Validators.required],
-      domain_id: 1,
+      nombreGrupo: ['', Validators.required],
     });
 
   }
 
-  guardarParametro() {
+  guardarGrupoEvaluaciones() {
     if (this.parametroForm.valid) {
       console.log('Formulario válido', this.parametroForm.value);
-      this.parametroService.guardarCarreraTecnica(this.parametroForm.value).subscribe(
+      const parametros ={
+        nombre_del_grupo: this.parametroForm.value.nombreGrupo,
+        curso_id: this.idCurso
+      }
+      this.parametroService.guardarGrupoEvaluaciones(parametros).subscribe(
         (response: any) => {
           this.ref?.close();
           Swal.fire({

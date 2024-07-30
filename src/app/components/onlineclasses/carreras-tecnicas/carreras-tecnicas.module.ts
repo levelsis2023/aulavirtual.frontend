@@ -38,12 +38,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditarCarreraTecnicaComponent } from './dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
 import { VerCarreraTecnicaComponent } from './dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import { VerCursoDeCarreraComponent } from './dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
+import { VerGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-grupo-evaluaciones/ver-grupo-evaluaciones.component';
+import { AgregarEditarGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-grupo-evaluaciones/agregar-editar-grupo-evaluaciones/agregar-editar-grupo-evaluaciones.component';
 
 
 
 @NgModule({
   declarations: [
-    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent
+    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent
     
   ],
   imports: [
