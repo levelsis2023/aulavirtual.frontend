@@ -312,6 +312,9 @@ export class GeneralService {
           );
       }
 
+
+      
+
       guardarParametro(parametro: any): Observable<ApiResponse> {
         return this.http
           .post<ApiResponse>(`${this.baseUrl}parametros`, parametro, { observe: 'response' })
@@ -352,7 +355,23 @@ export class GeneralService {
 
 
 
-
+      getGrupoEvaluaciones(parametro: any): Observable<ApiResponse> {
+        return this.http
+        .get<ApiResponse>(`${this.baseUrl}grupo-de-evaluaciones/${parametro.id}`, { observe: 'response' })
+        .pipe(
+            tap((response: HttpResponse<ApiResponse>) => {
+                console.log('HTTP Status Code:', response.status);
+            }),
+            map((response: HttpResponse<ApiResponse>) => {
+                console.log('Response body:', response.body);
+                if (response.status === 200 && response.body ) {
+                    return response.body;
+                } else {
+                    throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                }
+            })
+        );
+      }
       guardarGrupoEvaluaciones(parametro: any): Observable<ApiResponse> {
         return this.http
           .post<ApiResponse>(`${this.baseUrl}grupo-de-evaluaciones`, parametro, { observe: 'response' })

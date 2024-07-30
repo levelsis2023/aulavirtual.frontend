@@ -27,11 +27,14 @@ export class AgregarEditarGrupoEvaluacionesComponent {
     private parametroService: GeneralService,
     private router: Router,
   ) {
-    this.idCurso = this.config.data.id;
+  
     this.parametroForm = this.fb.group({
       nombreGrupo: ['', Validators.required],
     });
 
+  }
+  ngOnInit(): void {
+    this.idCurso = this.config.data.idCurso;
   }
 
   guardarGrupoEvaluaciones() {

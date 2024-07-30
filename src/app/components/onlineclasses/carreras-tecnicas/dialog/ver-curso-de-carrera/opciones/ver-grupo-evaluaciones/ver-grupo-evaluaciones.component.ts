@@ -37,18 +37,15 @@ export class VerGrupoEvaluacionesComponent {
   ) { }
 
   ngOnInit(): void {
-    console.log("grupoEvaluaciones", this.config.data.data);
     this.grupoEvaluaciones = this.config.data.data;
-    console.log("Grupo Evaluaciones", this.grupoEvaluaciones);
+    console.log(this.grupoEvaluaciones,'car');
     this.listarGrupoEvaluaciones();
   }
 
   listarGrupoEvaluaciones() {
-    this.grupoEvaluacionesService.getCursos(this.grupoEvaluaciones.id).subscribe((response: any) => {
-      console.log("Lista de Carreras Técnicas", response);
+    this.grupoEvaluacionesService.getGrupoEvaluaciones({id:this.grupoEvaluaciones.id}).subscribe((response: any) => {
       this.grupoEvaluacionesList = response;
       this.originalgrupoEvaluacionesList = [...response];
-      this.calcularTotales();
     });
   }
 
