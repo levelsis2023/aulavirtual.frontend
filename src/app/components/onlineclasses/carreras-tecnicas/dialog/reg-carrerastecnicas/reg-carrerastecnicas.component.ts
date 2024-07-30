@@ -18,6 +18,7 @@ export class RegCarrerastecnicasComponent {
   parametro: Parametro = new Parametro();
   mostrarCursos = false;
   parametroForm: FormGroup;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +33,7 @@ export class RegCarrerastecnicasComponent {
       nombres: ['', Validators.required],
       domain_id: 1,
     });
+
   }
 
   guardarParametro() {
@@ -63,13 +65,5 @@ export class RegCarrerastecnicasComponent {
   closeModal(event: Event) {
     event.preventDefault(); // Prevenir el comportamiento predeterminado del botón
     this.ref?.close();
-  }
-  verCursos() {
-    this.mostrarCursos = !this.mostrarCursos;
-    // this.router.navigate(['/pl-virtual/registro-instituciones']);
-  }
-
-  capturarCursosSeleccionados(cursos: any[]) {
-    console.log('Cursos seleccionados:', cursos);
   }
 }

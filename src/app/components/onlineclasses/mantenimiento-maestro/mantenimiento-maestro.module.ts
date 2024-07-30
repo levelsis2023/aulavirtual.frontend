@@ -32,11 +32,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MantenimientoMaestroRoutingModule } from './mantenimiento-maestro-routing.module';
 import { MantenimientoMaestroComponent } from './mantenimiento-maestro/mantenimiento-maestro.component';
 import { RegMaestrosComponent } from './dialog/reg-maestros/reg-maestros.component';
-
+import { AutoCompleteModule } from 'primeng/autocomplete'; // Importa AutoCompleteModule
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 @NgModule({
   declarations: [MantenimientoMaestroComponent, RegMaestrosComponent],
   imports: [
+    AutoCompleteModule, // Añade AutoCompleteModule aquí
+
     CommonModule,
     MantenimientoMaestroRoutingModule,
     FormsModule,     
@@ -66,8 +69,9 @@ import { RegMaestrosComponent } from './dialog/reg-maestros/reg-maestros.compone
       EditorModule,
       DialogModule,    
       DynamicDialogModule,      
-      TranslateModule
-
+      TranslateModule,
+      DropdownModule,
+      ColorPickerModule,
   ]
 })
 export class MantenimientoMaestroModule { }

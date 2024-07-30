@@ -35,12 +35,17 @@ import { BandejaCarreratecnicaComponent } from './bandeja-carreratecnica/bandeja
 import { RegCarrerastecnicasComponent } from './dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
 import { TableSelectCursosComponent } from '../utils/table-select-cursos/table-select-cursos.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditarCarreraTecnicaComponent } from './dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
+import { VerCarreraTecnicaComponent } from './dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
+import { VerCursoDeCarreraComponent } from './dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
+import { VerGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-grupo-evaluaciones/ver-grupo-evaluaciones.component';
+import { AgregarEditarGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-grupo-evaluaciones/agregar-editar-grupo-evaluaciones/agregar-editar-grupo-evaluaciones.component';
 
 
 
 @NgModule({
   declarations: [
-    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent
+    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent
     
   ],
   imports: [

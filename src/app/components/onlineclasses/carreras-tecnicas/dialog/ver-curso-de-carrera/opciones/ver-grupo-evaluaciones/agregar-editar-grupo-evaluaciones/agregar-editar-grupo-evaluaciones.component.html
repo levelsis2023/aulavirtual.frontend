@@ -1,0 +1,28 @@
+<p-panel> 
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Añadir Grupo de Evaluaciones</span>
+    </ng-template>
+    
+    <ng-template pTemplate="content">
+        <form [formGroup]="parametroForm" (ngSubmit)="guardarGrupoEvaluaciones()">
+            <div class="row">
+                <div class="grid p-fluid ">                
+                    <div class="field col-12">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="nombreGrupo">
+                            <label class="required">Nombre de Grupo</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="flex justify-content-end flex-column sm:flex-row">
+                    <div class="flex flex-wrap gap-2">
+                        <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" type="submit"></button>                   
+                        <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal($event)"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+</p-panel>

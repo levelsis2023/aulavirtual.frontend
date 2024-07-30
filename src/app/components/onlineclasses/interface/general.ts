@@ -1,11 +1,11 @@
 export class Miembro {
     public nuIdMiembro: number | null = null
-    public txnombre: string = '' 
-    public txSituacion: string = ''  
-    public txabreviatura: string = '' 
+    public txnombre: string = ''
+    public txSituacion: string = ''
+    public txabreviatura: string = ''
     public tx_item_description: string =''
-    public nu_item: number | null = null  
-    public created_at: Date | null = null    
+    public nu_item: number | null = null
+    public created_at: Date | null = null
     public dominio: string = ''
 
 }
@@ -28,6 +28,19 @@ export class Parametro {
     public nuItemNro: number | null = null
     public txItemDescripcion: string | null = null
     public isSelected: string | null = null
+    public txUseCreado: string | null = null
+    public txUseModificado: string | null = null
+}
+
+
+export class DocumentoGestion {
+    public id: number | null = null
+    public codigo: string | null = ''
+    public nombre: string | null = ''
+    public descripcion: string|null = ''
+    public costo: number | null = null
+    public recursos: string | null = null
+    public estado: boolean | null = null
     public txUseCreado: string | null = null
     public txUseModificado: string | null = null
 }

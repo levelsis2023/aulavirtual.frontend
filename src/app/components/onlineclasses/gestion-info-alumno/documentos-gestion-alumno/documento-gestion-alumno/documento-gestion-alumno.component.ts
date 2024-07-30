@@ -1,17 +1,20 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { GeneralService } from '../../../service/general.service';
 import { Router } from '@angular/router';
-import { Miembro } from '../../../interface/general';
+import {DocumentoGestion, Miembro} from '../../../interface/general';
 import { RegDocumentosAlumnoComponent } from '../../dialog/reg-documentos-alumno/reg-documentos-alumno.component';
+import {DocumentoGestionService} from "../../../service/documento-gestion.service";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-documento-gestion-alumno',
   templateUrl: './documento-gestion-alumno.component.html',
-  styleUrls: ['./documento-gestion-alumno.component.scss']
+  styleUrls: ['./documento-gestion-alumno.component.scss'],
+    providers:[ConfirmationService, MessageService]
 })
-export class DocumentoGestionAlumnoComponent {
+export class DocumentoGestionAlumnoComponent implements OnInit{
 
   loading: boolean = false;
 
@@ -20,62 +23,94 @@ export class DocumentoGestionAlumnoComponent {
   @ViewChild('dt1') tabledt1: Table | undefined;
   @Input() miembro: Miembro[] = [];
   @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
-  
-  carrerastecnicasList = [
-    { codigo: '140014Q', nombre: 'Enfermería', cursosAsignados: 'Ninguno' },
-    { codigo: '001001478CD', nombre: 'Enfermería', cursosAsignados: 'Ninguno' },
-    // Agrega más carreras técnicas según sea necesario
-  ];
+
   ref: DynamicDialogRef | undefined;
-  
+
+  DocumnetoGestionList: DocumentoGestion[]=[];
+
   constructor(
     private dialogService: DialogService,
-    private maestroService: GeneralService,
+    private documentoGestionService: DocumentoGestionService,
     private router: Router,
-    
-  
-   
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+
   ) { }
 
 
   ngOnInit(): void {
-  //  this.listarmiembros();
+      this.listarDocumentoGestion();
 
   }
 
- /* listarmiembros() {
-    this.maestroService.listarmiembros().subscribe((response: any) => {
+  listarDocumentoGestion() {
+    this.documentoGestionService.listarDocumentosGestion().subscribe((response: any) => {
       console.log("Lista de Miembros creados", response);
-      this.miembrosList = response;
+      this.DocumnetoGestionList = response;
     })
 
-  }*/
+  }
+
   navigateToNuevo(){
-    this.ref = this.dialogService.open(RegDocumentosAlumnoComponent, {   
+    this.ref = this.dialogService.open(RegDocumentosAlumnoComponent, {
       width: '60%',
-      styleClass: 'custom-dialog-header'
+      styleClass: 'custom-dialog-header',
+        data: {action: 'register'}
     });
 
     this.ref.onClose.subscribe((data: any) => {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-    }); 
+
+        if (data) {
+            if (data.register==true) {
+                this.listarDocumentoGestion();
+                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Se registro con éxito.', life: 3000 });
+            }
+        }
+    });
 
   }
 
-  navigateTocurso(){
-    
-   
-    } 
 
- 
-  navigateToDetalle(){
+    openFormEditar(parametro: DocumentoGestion) {
+        let parametroSeleccionado = Object.assign({}, parametro);
+        const ref = this.dialogService.open(RegDocumentosAlumnoComponent, {
+            header: 'Parámetros',
+            contentStyle: { 'min-height': '10rem' },
+            width: '60%',
+            data: {action: 'edit', dato: parametroSeleccionado}
+        });
+        ref.onClose.subscribe((data: any) => {
+            if (data) {
+                if (data.register==true) {
+                    this.listarDocumentoGestion();
+                    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Se modifico con éxito.', life: 3000 });
+                }
+            }
+        });
+    }
 
-  }
-
- 
-
-
+    deleteDocumentoGestion(id: number){
+        this.confirmationService.confirm({
+            header: '¿Está seguro de eliminar el registro?',
+            message: 'Una vez guardado los cambios se eliminará los datos de manera permanente.',
+            acceptLabel: 'Guardar Cambios',
+            rejectLabel: 'Cancelar',
+            accept: () => {
+                this.documentoGestionService.deleteDocumentoGestion(id).subscribe((res: any) => {
+                    console.log('UPDATE', res)
+                    if (res){
+                        this.listarDocumentoGestion();
+                        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Se elimino con éxito.', life: 3000 });
+                    } else {
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar. ', life: 3000 });
+                    }
+                });
+            },
+            reject: () => {}
+        });
+    }
 
 
 
@@ -100,13 +135,13 @@ export class DocumentoGestionAlumnoComponent {
 
   }
   onRowSelect(event: any) {
-    
+
     console.log("Organo-colegaido-sect");
   }
 
   onRowUnselect(event: any) {
-    
-    
+
+
   }
 
 }

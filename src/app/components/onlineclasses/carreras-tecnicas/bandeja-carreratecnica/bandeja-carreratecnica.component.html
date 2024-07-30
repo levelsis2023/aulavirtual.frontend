@@ -35,11 +35,7 @@
                                         Nombre de Carrera técnica
                                     </div>
                                 </th>
-                                <th style="min-width: 10rem" scope="col">
-                                    <div class="flex justify-content-between align-items-center">
-                                        Cursos Asignados
-                                    </div>
-                                </th>
+                
                                 <th style="min-width: 10rem" scope="col">
                                     <div >
                                         Configuraciones
@@ -52,12 +48,15 @@
                             <tr>
                                 <td>{{ carrera.codigo }}</td>
                                 <td>{{ carrera.nombres }}</td>
-                                <td> {{ carrera.cursos }}</td>
                                 <td >
-                                    <button pButton icon="pi pi-briefcase" title="Agregar Curso"  class="p-button-rounded p-button-text p-button-success" style="width: 70px;" (click)="navigateTocurso(carrera.id,carrera.total_creditos)" style="border-radius: 30px;">
-                                   </button>
-                                   <button pButton icon="pi pi-eye" style="width: 70px;" title="Detalle"  class="p-button-rounded p-button-text p-button-success" (click)="navigateToDetalle()" style="border-radius: 30px;">
-                                </button>
+                                    <button pButton icon="pi pi-briefcase" title="Agregar Curso" class="p-button-rounded p-button-text p-button-success" style="width: 70px; border-radius: 30px;" (click)="navigateTocurso(carrera)">
+                                    </button>
+                                    <button pButton icon="pi pi-eye" style="width: 70px; border-radius: 30px;" title="Detalle" class="p-button-rounded p-button-text p-button-success" (click)="navigateToDetalle(carrera)">
+                                    </button>
+                                    <button pButton icon="pi pi-pencil" style="width: 70px; border-radius: 30px;" title="Editar" class="p-button-rounded p-button-text p-button-warning" (click)="navigateToEdit(carrera)">
+                                    </button>
+                                    <button pButton icon="pi pi-trash" style="width: 70px; border-radius: 30px;" title="Eliminar" class="p-button-rounded p-button-text p-button-danger" (click)="navigateToDelete(carrera.id)">
+                                    </button>
                                  
                                 </td>
                             </tr>

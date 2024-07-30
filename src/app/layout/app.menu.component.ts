@@ -388,8 +388,8 @@ export class AppMenuComponent implements OnInit {
                                     {
                                         label: 'Datos personales',
                                         icon: 'pi pi-file-edit',
-                                        // routerLink: ['/pl-virtual/bandeja-docente']
-                                        routerLink: ['/pl-virtual/']
+                                        routerLink: ['/pl-virtual/bandeja-docente']
+                                        // routerLink: ['/pl-virtual/']
 
                                     },
                                     {
