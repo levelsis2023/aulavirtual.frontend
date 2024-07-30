@@ -248,6 +248,7 @@ export class RegAlumnoComponent {
                 'direccion',
                 this.alumnoForm.get('direccion')?.value
             );
+            formData.append('domain_id', this.alumno.domain_id??1);
 
             const fechaNacimiento =
                 this.alumnoForm.get('fechaNacimiento')?.value;
@@ -276,7 +277,6 @@ export class RegAlumnoComponent {
             }
             if (this.alumno) {
                 formData.append('id', this.alumno.id);
-                formData.append('domain_id', this.alumno.domain_id);
             }
             this.alumnoService.saveAlumno(formData).subscribe(
                 (response) => {
@@ -287,7 +287,6 @@ export class RegAlumnoComponent {
                         icon: 'success',
                         confirmButtonText: 'Aceptar',
                     }).then(() => {});
-                    // Aquí puedes agregar lógica adicional, como cerrar el modal o mostrar una notificación
                 },
                 (error) => {
                     console.error('Error guardando alumno', error);
