@@ -4,12 +4,12 @@ import {environment} from 'src/environments/environment.development';
 
 import {map, retry, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {ApiResponse, Base, DocumentoGestion} from '../interface/general';
+import {ApiResponse, Base, Capacitaciones, DocumentoGestion} from '../interface/general';
 
 @Injectable({
     providedIn: 'root',
 })
-export class DocumentoGestionService {
+export class CapacitacionesService {
 
     private baseUrl = `${environment.API_BASE}`;
     private urlparametro = `${environment.API_BASE}`;
@@ -24,7 +24,7 @@ export class DocumentoGestionService {
 
     getCode() {
         return this.http
-            .get<string>(`${this.urlparametro}documento-gestion-codigo`)
+            .get<string>(`${this.urlparametro}capacitaciones-codigo`)
             .pipe(
                 map((response: any) => {
                         return response;
@@ -33,9 +33,9 @@ export class DocumentoGestionService {
     }
 
 
-    listarDocumentosGestion() {
+    listarCapacitaciones() {
         return this.http
-            .get<Base>(`${this.baseUrl}documento-gestion`)
+            .get<Base>(`${this.baseUrl}capacitaciones`)
             .pipe(
                 map((response: Base) => {
                     if (response.responseCode === 0) {
@@ -48,11 +48,26 @@ export class DocumentoGestionService {
     }
 
 
-    guardarDocumentoGestion(parametro: any): Observable<Response> {
+    listarDocentes() {
+        return this.http
+            .get<Base>(`${this.baseUrl}capacitaciones-docentes`)
+            .pipe(
+                map((response: Base) => {
+                    if (response.responseCode === 0) {
+                        return response.response;
+                    } else {
+                        throw new Error(response.msgResultado);
+                    }
+                })
+            );
+    }
+
+
+    guardarCapacitacion(parametro: any): Observable<Response> {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
         });
-        return this.http.post<Response>(`${this.baseUrl}documento-gestion`, parametro, {headers})
+        return this.http.post<Response>(`${this.baseUrl}capacitaciones`, parametro, {headers})
             .pipe(
                 retry(1),
                 //catchError(this.handleError),
@@ -63,7 +78,7 @@ export class DocumentoGestionService {
 
     obtenerDocumetoGestion(id: number) {
         return this.http
-            .get<Base>(`${this.baseUrl}documento-gestion/`+id)
+            .get<Base>(`${this.baseUrl}capacitaciones/`+id)
             .pipe(
                 map((response: Base) => {
                         return response;
@@ -71,9 +86,9 @@ export class DocumentoGestionService {
             );
     }
 
-    updateDocumentoGestion(documento: DocumentoGestion): Observable<Base> {
+    updateCapacitacion(documento: Capacitaciones): Observable<Base> {
         return this.http
-            .put<Base>(`${this.baseUrl}documento-gestion/`+documento.id, documento)
+            .put<Base>(`${this.baseUrl}capacitaciones/`+documento.id, documento)
             .pipe(
                 map((response: Base) => {
                     return response;
@@ -81,9 +96,9 @@ export class DocumentoGestionService {
             );
     }
 
-    deleteDocumentoGestion(id: number): Observable<Base> {
+    deleteCapacitacion(id: number): Observable<Base> {
         return this.http
-            .put<Base>(`${this.baseUrl}documento-gestion-eliminar/`+id, {})
+            .put<Base>(`${this.baseUrl}capacitaciones-eliminar/`+id, {})
             .pipe(
                 map((response: Base) => {
                     return response;

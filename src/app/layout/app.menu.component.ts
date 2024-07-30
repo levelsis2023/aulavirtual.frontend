@@ -356,11 +356,15 @@ export class AppMenuComponent implements OnInit {
                                     },
 
                                 ]
-                               }
+                               },
+
+                            {
+                                label: 'CAPACITACIONES',
+                                icon: 'pi pi-users',
+                                routerLink: ['/pl-virtual/capacitaciones']
+                            },
                                 ]
-                    },
-
-
+                    }
 
 
                 ]
@@ -410,7 +414,9 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-fw pi-building',
                             }
                         ]
-                    }
+                    },
+
+
                 ]
             }
         ];

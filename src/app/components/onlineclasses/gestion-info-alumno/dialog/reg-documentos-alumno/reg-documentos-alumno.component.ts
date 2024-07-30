@@ -36,7 +36,6 @@ export class RegDocumentosAlumnoComponent implements OnInit{
         this.acciones = config.data.action;
         if (this.acciones == 'edit'){
             this.parametroDatos = config.data.dato;
-            console.log(this.parametroDatos)
         }
     }
 
@@ -56,7 +55,6 @@ export class RegDocumentosAlumnoComponent implements OnInit{
 
     guardarDocumentoGestion(){
         this.parametroDatos.recursos = 'recursos';
-        console.log('PRUEBAAAAAAAAAAAAAAAAA', this.parametroDatos);
 
         this.confirmationService.confirm({
             header: '¿Está seguro de agregar un nuevo registro?',
@@ -91,7 +89,6 @@ export class RegDocumentosAlumnoComponent implements OnInit{
         this.documentoGestionService.obtenerDocumetoGestion(this.parametroDatos.id)
             .subscribe((resp: any) => {
                 this.parametroDatos = resp;
-                console.log('LOG', this.parametroDatos)
             });
     }
 
@@ -104,7 +101,6 @@ export class RegDocumentosAlumnoComponent implements OnInit{
             rejectLabel: 'Cancelar',
             accept: () => {
                 this.documentoGestionService.updateDocumentoGestion(this.parametroDatos).subscribe((res: any) => {
-                    console.log('UPDATE', res)
                     if (res){
                         this.limpiar();
                         this.ref.close({register: true});
