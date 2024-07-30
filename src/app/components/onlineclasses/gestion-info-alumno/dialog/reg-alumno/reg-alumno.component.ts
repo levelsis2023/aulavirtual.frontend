@@ -31,21 +31,6 @@ interface Ciclos {
     name: string;
     value: number;
 }
-// interface Alumno {
-//   codigoEstudiante: string;
-//   tipoDocumento: string;
-//   numeroDocumento: string;
-//   nombres: string;
-//   apellidos: string;
-//   nroCelular: string;
-//   carreraProfesional: string;
-//   ciclosAcademicos: string;
-//   genero: string;
-//   edad: number;
-//   fechaNacimiento: Date;
-//   fotoPerfil?: File;
-//   fotoCarnet?: File;
-// }
 
 @Component({
     selector: 'app-reg-alumno',
@@ -248,7 +233,6 @@ export class RegAlumnoComponent {
                 'direccion',
                 this.alumnoForm.get('direccion')?.value
             );
-            formData.append('domain_id', this.alumno.domain_id??1);
 
             const fechaNacimiento =
                 this.alumnoForm.get('fechaNacimiento')?.value;
@@ -277,6 +261,9 @@ export class RegAlumnoComponent {
             }
             if (this.alumno) {
                 formData.append('id', this.alumno.id);
+                formData.append('domain_id', this.alumno.domain_id??"1");
+            }else{
+                formData.append('id', "1");
             }
             this.alumnoService.saveAlumno(formData).subscribe(
                 (response) => {
