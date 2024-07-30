@@ -127,7 +127,6 @@ export class BandejaAlumnoComponent {
         this.ref.onClose.subscribe((data: any) => {
           if (data) {
             if (data.register) {
-              console.log('Organo-colegaido-sect');
                 this.cargaInicial();
             }
         }

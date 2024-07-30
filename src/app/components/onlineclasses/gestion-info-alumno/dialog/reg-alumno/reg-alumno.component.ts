@@ -11,8 +11,9 @@ import { ToastModule } from 'primeng/toast';
 import { AlumnoService } from '../../../service/alumno.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../service/common.service';
-import { Table } from 'primeng/table'; 
+import { Table } from 'primeng/table';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface tipodoc {
     name: string;
@@ -49,14 +50,13 @@ export class RegAlumnoComponent {
     ciclosSeleccionado: Ciclos | undefined;
     carrerasList: Carreras[] = [];
     ciclosList: Ciclos[] = [];
-
     fechanacimiento: Date | null = new Date();
     calendarOptions: CalendarOptions = {
         initialView: 'dayGridMonth',
         locale: esLocale,
     };
     translateService: any;
-
+    loading: boolean = false;
     constructor(
         private router: Router,
         private ref: DynamicDialogRef,
@@ -67,7 +67,9 @@ export class RegAlumnoComponent {
         private messageService: MessageService,
         private alumnoService: AlumnoService,
         private commonService: CommonService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private spinner: NgxSpinnerService,
+
     ) {
         this.alumnoForm = this.fb.group({
             codigo: ['', Validators.required],
@@ -90,7 +92,7 @@ export class RegAlumnoComponent {
         });
     }
     onGlobalFilter(table: Table, event: any) {
-      table.filterGlobal(event.target.value, 'contains');
+        table.filterGlobal(event.target.value, 'contains');
     }
 
     ngOnInit() {
@@ -201,7 +203,6 @@ export class RegAlumnoComponent {
         });
     }
     saveAlumno() {
-        console.log('Formulario', this.alumnoForm.value);
         if (this.alumnoForm.valid) {
             const formData = new FormData();
             formData.append('codigo', this.alumnoForm.get('codigo')?.value);
@@ -234,19 +235,6 @@ export class RegAlumnoComponent {
                 this.alumnoForm.get('direccion')?.value
             );
 
-            const fechaNacimiento =
-                this.alumnoForm.get('fechaNacimiento')?.value;
-            if (fechaNacimiento instanceof Date) {
-                const formattedDate = fechaNacimiento
-                    .toISOString()
-                    .split('T')[0];
-                console.log('Fecha de nacimiento', formattedDate);
-                formData.append('fechaNacimiento', formattedDate);
-            } else {
-                console.error(
-                    'Fecha de nacimiento no es una instancia de Date'
-                );
-            }
             if (this.alumnoForm.get('fotoCarnet')?.value) {
                 formData.append(
                     'fotoCarnet',
@@ -261,19 +249,38 @@ export class RegAlumnoComponent {
             }
             if (this.alumno) {
                 formData.append('id', this.alumno.id);
-                formData.append('domain_id', this.alumno.domain_id??"1");
-            }else{
-                formData.append('domain_id', "1");
+                formData.append('domain_id', this.alumno.domain_id ?? '1');
+                const fechaNacimiento =
+                    this.alumnoForm.get('fechaNacimiento')?.value;
+                if (fechaNacimiento instanceof Date) {
+                    const formattedDate = fechaNacimiento
+                        .toISOString()
+                        .split('T')[0];
+                    formData.append('fechaNacimiento', formattedDate);
+                } else {
+                    console.error(
+                        'Fecha de nacimiento no es una instancia de Date'
+                    );
+                }
+            } else {
+                formData.append('domain_id', '1');
+              
             }
+            this.loading = true;
+            this.spinner.show();
             this.alumnoService.saveAlumno(formData).subscribe(
                 (response) => {
+                    this.loading = false;
+                    this.spinner.hide();
                     this.ref.close({ register: true });
                     Swal.fire({
                         title: '¡Éxito!',
                         text: 'Los Datos se registraron correctamente',
                         icon: 'success',
                         confirmButtonText: 'Aceptar',
-                    }).then(() => {});
+                    }).then(() => {
+
+                    });
                 },
                 (error) => {
                     console.error('Error guardando alumno', error);
@@ -282,6 +289,19 @@ export class RegAlumnoComponent {
         } else {
             console.error('Formulario inválido');
         }
+    }
+    capturarFecha(event: any) {
+        console.log('Fecha', event);
+        let fecha: Date = new Date(event);
+        let fechaString = '';
+        if (fecha instanceof Date) {
+            fechaString = fecha.toISOString().split('T')[0];
+        }
+        console.log('Fecha', fechaString);
+
+        this.alumnoForm.patchValue({
+            fechaNacimiento: fecha,
+        });
     }
     closeModal() {
         this.ref.close({ register: false });
