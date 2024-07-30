@@ -8,7 +8,7 @@ import { RegCarrerastecnicasComponent } from '../../dialog/reg-carrerastecnicas/
 import { RegCursosComponent } from '../../../cursos/dialog/reg-cursos/reg-cursos.component';
 import Swal from 'sweetalert2';	
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { VerGrupoEvaluacionesComponent } from './opciones/ver-grupo-evaluaciones/ver-grupo-evaluaciones.component';
+import { VerGrupoEvaluacionesComponent } from './opciones/ver-g-ev/ver-g-ev.component';
 @Component({
   selector: 'app-ver-curso-de-carrera',
   templateUrl: './ver-curso-de-carrera.component.html',
