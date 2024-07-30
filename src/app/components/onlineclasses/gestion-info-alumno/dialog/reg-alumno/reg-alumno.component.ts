@@ -84,7 +84,7 @@ export class RegAlumnoComponent {
             ],
             carreraId: ['', Validators.required],
             cicloId: ['', Validators.required],
-            edad: ['', [Validators.required, Validators.min(1)]],
+            // edad: ['', [Validators.required, Validators.min(1)]],
             direccion: [''],
             fechaNacimiento: [this.fechanacimiento, Validators.required],
             fotoPerfil: [null],
@@ -119,7 +119,7 @@ export class RegAlumnoComponent {
                     nroCelular: this.alumno.celular,
                     carreraId: this.alumno.carrera_id,
                     cicloId: this.alumno.ciclo_id,
-                    edad: this.getAge(this.alumno.fecha_nacimiento),
+                    // edad: this.getAge(this.alumno.fecha_nacimiento),
                     direccion: this.alumno.direccion,
                     fechaNacimiento: new Date(this.alumno.fecha_nacimiento),
                     fotoPerfil: this.alumno.foto_perfil,
@@ -228,7 +228,7 @@ export class RegAlumnoComponent {
                 this.alumnoForm.get('carreraId')?.value
             );
             formData.append('cicloId', this.alumnoForm.get('cicloId')?.value);
-            formData.append('edad', this.alumnoForm.get('edad')?.value);
+            // formData.append('edad', this.alumnoForm.get('edad')?.value);
             formData.append('email', this.alumnoForm.get('email')?.value);
             formData.append(
                 'direccion',
