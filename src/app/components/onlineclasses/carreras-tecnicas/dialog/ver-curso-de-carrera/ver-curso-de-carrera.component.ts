@@ -8,8 +8,12 @@ import { RegCarrerastecnicasComponent } from '../../dialog/reg-carrerastecnicas/
 import { RegCursosComponent } from '../../../cursos/dialog/reg-cursos/reg-cursos.component';
 import { EditarCarreraTecnicaComponent } from '../../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
 import { VerCarreraTecnicaComponent } from '../../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
+import { SeleccionarHorarioCarreraTecnicaComponent } from '../../dialog/horario-carrera-tecnica/seleccionar-horario-carrera-tecnica.component';
 import Swal from 'sweetalert2';	
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { SeleccionarAlumnosCursoComponent } from '../seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
+import { an } from '@fullcalendar/core/internal-common';
+import { MarcarAsistenciaCursoComponent } from '../marcar-asistencia-curso/marcar-asistencia-curso.component';
 
 @Component({
   selector: 'app-ver-curso-de-carrera',
@@ -155,16 +159,36 @@ export class VerCursoDeCarreraComponent {
     console.log(syllabus);
   }
 
-  verAlumnos(alumnos: string) {
-    console.log(alumnos);
+  verAlumnos(curso:any) {
+    this.ref = this.dialogService.open(SeleccionarAlumnosCursoComponent, {
+      width: '80%',
+      styleClass: 'custom-dialog-header',
+      data: { cursoId: curso.id, domainId: curso.domain_id,
+        cursoNombre: curso.nombre
+       }
+    });
   }
 
-  verHorarios(horarios: string) {
-    console.log(horarios);
+  verHorarios(curso: any) {
+    this.ref = this.dialogService.open(SeleccionarHorarioCarreraTecnicaComponent, {
+      width: '80%',
+      styleClass: 'custom-dialog-header',
+      data: { data: curso }
+    });
+    this.ref.onClose.subscribe((data: any) => {
+      // Puedes manejar cualquier acción después de cerrar el modal aquí si es necesario
+      console.log('Dialog cerrado', data);
+    });
   }
 
-  verAsistencia(asistencia: string) {
-    console.log(asistencia);
+  verAsistencia(curso:any) {
+    this.ref = this.dialogService.open(MarcarAsistenciaCursoComponent, {
+      width: '80%',
+      styleClass: 'custom-dialog-header',
+      data: { cursoId: curso.id, domainId: curso.domain_id,fecha:null,
+        cursoNombre: curso.nombre
+       }
+    });
   }
 
   verTemas(temas: string) {
