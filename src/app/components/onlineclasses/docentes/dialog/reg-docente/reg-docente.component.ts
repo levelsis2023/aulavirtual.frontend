@@ -103,8 +103,6 @@ export class RegDocenteComponent {
 
 
 registrarDocente(){
-
-  console.log(this.config.data.foto)
   this.DocenteForm.patchValue(
     {
       // foto: this.config.data.foto,
