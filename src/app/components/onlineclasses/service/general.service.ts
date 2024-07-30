@@ -811,6 +811,42 @@ export class GeneralService {
               }
             })
           );
+            
+      }
+      getAlumnosCurso(domainId: number,cursoId: number) {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}participantes/${domainId}/${cursoId}`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body ) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+          );
+      }
+      updateAlumnoCurso(data: any): Observable<ApiResponse> {
+       
+        return this.http
+            .post<ApiResponse>(`${this.baseUrl}participantes`, data, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body ) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+          );
       }
 
 

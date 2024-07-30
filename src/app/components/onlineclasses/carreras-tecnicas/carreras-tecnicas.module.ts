@@ -44,13 +44,17 @@ import { VerListadoDeEvaluacionesPorGrupoComponent } from './dialog/ver-curso-de
 import { AgregarEditarListaDeEvaluacionesPorGrupoComponent } from './dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ae-lista-de-evaluaciones-por-grupo/agregar-editar-lista-de-evaluaciones-por-grupo.component';
 import { VerListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ver-listado-de-preguntas.component';
 import { AgregarEditarListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
-
-
+import {SeleccionarHorarioCarreraTecnicaComponent} from './dialog/horario-carrera-tecnica/seleccionar-horario-carrera-tecnica.component';
+import { SeleccionarAlumnosCursoComponent } from './dialog/seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
+import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso/marcar-asistencia-curso.component'
 
 @NgModule({
   declarations: [
-    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent, VerListadoDeEvaluacionesPorGrupoComponent, AgregarEditarListaDeEvaluacionesPorGrupoComponent, VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent
-    
+    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent,
+    SeleccionarHorarioCarreraTecnicaComponent,
+    SeleccionarAlumnosCursoComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent, VerListadoDeEvaluacionesPorGrupoComponent,
+     AgregarEditarListaDeEvaluacionesPorGrupoComponent, VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent,
+    MarcarAsistenciaCursoComponent
   ],
   imports: [
     CommonModule,
