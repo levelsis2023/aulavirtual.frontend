@@ -1,0 +1,93 @@
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Buscar rol</span>
+    </ng-template>
+    <!-- <div class="card flex justify-content-center">
+        <div>
+            <input pInputText  id="username" placeholder="Buscar"/>
+        </div>
+        
+    </div> -->
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="grid p-fluid">
+                <div class="field md:col-12">
+                    <p-table class="w-full custom-search-input" [value]="roles">
+                        <ng-template pTemplate="caption">
+                            <div class="flex justify-content-between flex-wrap flex-wrap">
+                                <div class="flex-grow-1 mb-2 mr-2">
+                                    <span class="p-input-icon-left w-full">
+                                        <input pInputText type="text" placeholder="Buscar miembro" class="w-full" />
+                                    </span>
+
+                                </div>
+                                <div class="mb-2" *ngIf="tienePermiso('roles_crearRol')">
+                                    <button pButton label="Nuevo" icon="pi pi-user-plus" class="p-button-primary mr-2"
+                                        style="border-radius: 30px;" (click)="navigateToNuevo(0)"></button>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="min-width: 10rem">Acciones</th>
+                                <th style="min-width: 10rem">ID</th>
+                                <th style="min-width: 10rem">Nombre</th>
+                                <th style="min-width: 10rem">Fecha</th>
+                                <th style="min-width: 10rem">Asignar permisos</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rol>
+                            <tr>
+                                <td class="text-center flex gap-2">
+                                    <button  *ngIf="tienePermiso('roles_editarRol')" (click)="navigateToNuevo(rol.id)"
+                                        style="width: fit-content" pButton
+                                        class="p-button-rounded p-button-text custom-edit-button"
+                                        title="Editar rol">
+                                        <i class="pi pi-user-edit" aria-hidden="true" [style]="{
+                                                color: 'var(--primary-color)',
+                                                'font-size': '1.5rem'
+                                            }"></i>
+                                    </button>
+                                    <button  *ngIf="tienePermiso('roles_eliminarRol')"  (click)="eliminar(rol.id)"
+                                    style="width: fit-content" pButton
+                                    class="p-button-rounded p-button-text custom-edit-button"
+                                    title="Eliminar rol">X
+                                </button>
+                                </td>
+                                <td>{{ rol.id }}</td>
+                                <td>{{ rol.nombre }}</td>
+                                <td>{{ rol.fecha }}</td>
+                                <td> <button *ngIf="tienePermiso('roles_asignarPermiso')" (click)="listaPermisos(rol.id)" style="width: fit-content" pButton
+                                    class="p-button-rounded p-button-text custom-edit-button" title="Editar rol">
+                                    <i class="pi pi-user-edit" aria-hidden="true" [style]="{
+                                            color: 'var(--primary-color)',
+                                            'font-size': '1.5rem'
+                                        }"></i>
+                                </button></td>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6">No se encontraron registros</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="loadingbody">
+                            <tr>
+                                <td colspan="6">
+                                    Cargando registros. Por favor espere.
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-panel>
+<div>
+    
+</div>
