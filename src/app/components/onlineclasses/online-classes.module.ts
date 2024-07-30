@@ -22,8 +22,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     
-  
-   
   ],
   providers: [DialogService,
     {

@@ -1,0 +1,54 @@
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">
+            {{ acciones === 'ver' ? 'Ver Pregunta' : (acciones === 'actualizar' ? 'Actualizar Pregunta' : 'Añadir Pregunta') }}
+        </span>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <form [formGroup]="preguntaForm" (ngSubmit)="guardarPregunta()">
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field col-12">
+                        <span class="p-float-label">
+                            <p-dropdown inputId="dropdownTipoPregunta" [options]="tiposPregunta" optionLabel="tx_item_description" formControlName="tipoPregunta"
+                            optionValue="nu_id_parametro" [disabled]="acciones === 'ver'" (onChange)="onTipoPreguntaChange($event.value)"></p-dropdown>
+                            <label for="dropdownTipoPregunta" class="required">Tipo de Pregunta</label>
+                        </span>
+                    </div>
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 46">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="formulacionPregunta" [readonly]="acciones === 'ver'">
+                            <label class="required">Formulación de Pregunta por Docente</label>
+                        </span>
+                    </div>
+                    <div *ngIf="preguntaForm?.get('tipoPregunta')?.value === 46" class="col-12">
+                        <div *ngFor="let alternativa of alternativas; let i = index" class="col-12">
+                            <div class="p-float-label p-d-flex p-ai-center">
+                                <input type="text" pInputText [(ngModel)]="alternativas[i].texto" [readonly]="acciones === 'ver'">
+                                <label>Alternativa {{i + 1}}</label>
+                                <input type="radio" name="correcta" [value]="i" [(ngModel)]="preguntaForm.value.correcta">
+                            </div>
+                        </div>
+                        <button type="button" pButton icon="pi pi-plus" label="Añadir Alternativa" (click)="agregarAlternativa()"></button>
+                    </div>
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 47">
+                        <span class="p-float-label">
+                           
+                            <label class="required">Pregunta Mágica</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="flex justify-content-end flex-column sm:flex-row">
+                    <div class="flex flex-wrap gap-2">
+                        <button *ngIf="acciones === 'add'" pButton icon="pi pi-plus" label="Añadir" iconPos="right" class="p-button-success p-button-sm" type="submit"></button>
+                        <button *ngIf="acciones === 'actualizar'" pButton icon="pi pi-refresh" label="Actualizar" iconPos="right" class="p-button-warning p-button-sm" type="submit"></button>
+                        <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal($event)"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+</p-panel>

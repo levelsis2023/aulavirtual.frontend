@@ -104,7 +104,8 @@ export class EditDocenteComponent {
       this.tipoGeneroSeleccionado = {name: tipoGenero.name, value: tipoGenero.value}
     }
 
-    console.log(this.config.data)
+    // console.log(this.config.data.foto)
+    this.base64 = this.config.data.foto;
     this.DocenteForm.patchValue({
       id: this.config.data.id,
       codigo: this.config.data.codigo,
@@ -119,7 +120,7 @@ export class EditDocenteComponent {
       fecha_nacimiento: this.config.data.fecha_nacimiento,
       edad: this.config.data.edad,
       genero: this.config.data.genero,
-      foto: this.config.data.foto,
+      // foto: this.config.data.foto,
       roles: this.config.data.roles
     })
     console.log(this.DocenteForm.get('nombres')?.value);

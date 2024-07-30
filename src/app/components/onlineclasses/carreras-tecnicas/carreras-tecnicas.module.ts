@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'
 import { ToastModule } from 'primeng/toast'
@@ -38,6 +38,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditarCarreraTecnicaComponent } from './dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
 import { VerCarreraTecnicaComponent } from './dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import { VerCursoDeCarreraComponent } from './dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
+import { VerGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-g-ev/ver-g-ev.component';
+import { AgregarEditarGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-g-ev/agregar-editar-grupo-evaluaciones/agregar-editar-grupo-evaluaciones.component';
+import { VerListadoDeEvaluacionesPorGrupoComponent } from './dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ver-lis-eval-grupo.component';
+import { AgregarEditarListaDeEvaluacionesPorGrupoComponent } from './dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ae-lista-de-evaluaciones-por-grupo/agregar-editar-lista-de-evaluaciones-por-grupo.component';
+import { VerListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ver-listado-de-preguntas.component';
+import { AgregarEditarListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
 import {SeleccionarHorarioCarreraTecnicaComponent} from './dialog/horario-carrera-tecnica/seleccionar-horario-carrera-tecnica.component';
 import { SeleccionarAlumnosCursoComponent } from './dialog/seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
 import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso/marcar-asistencia-curso.component'
@@ -46,7 +52,8 @@ import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso
   declarations: [
     BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent,
     SeleccionarHorarioCarreraTecnicaComponent,
-    SeleccionarAlumnosCursoComponent,
+    SeleccionarAlumnosCursoComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent, VerListadoDeEvaluacionesPorGrupoComponent,
+     AgregarEditarListaDeEvaluacionesPorGrupoComponent, VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent,
     MarcarAsistenciaCursoComponent
   ],
   imports: [
@@ -80,7 +87,9 @@ import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso
     DialogModule,    
     DynamicDialogModule,      
     TranslateModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+
 })
 export class CarrerasTecnicasModule { }
