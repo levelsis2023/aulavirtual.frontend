@@ -18,6 +18,7 @@ export class RegCarrerastecnicasComponent {
   parametro: Parametro = new Parametro();
   mostrarCursos = false;
   parametroForm: FormGroup;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +33,7 @@ export class RegCarrerastecnicasComponent {
       nombres: ['', Validators.required],
       domain_id: 1,
     });
+
   }
 
   guardarParametro() {

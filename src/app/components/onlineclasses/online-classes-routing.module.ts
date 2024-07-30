@@ -54,10 +54,16 @@ const routes: Routes = [];
     { path: 't-cursos', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/t-cursos/t-cursos.module').then(m => m.TCursosModule) },
     { path: 'modalidad', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/modalidad/modalidad.module').then(m => m.ModalidadModule) },
     { path: 'aula', data: { breadcrumb: 'Aula' }, loadChildren: () => import('../onlineclasses/aulas/aulas.module').then(m => m.AulasModule) },
-    { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) },
-    { path: 'registro-de-cursos', data: { breadcrumb: 'Registro de cursos' }, loadChildren: () => import('../onlineclasses/registro-cursos/registro-cursos.module').then(m => m.RegistroCursosModule) },
-    { path: 'datos-personales', data: { breadcrumb: 'Datos personales' }, loadChildren: () => import('../onlineclasses/registro-alumnos/registro-alumnos.module').then(m => m.RegistroAlumnosModule) },
-      { path: 'capacitaciones', data: { breadcrumb: 'Lista de capacitaciones' }, loadChildren: () => import('../onlineclasses/capacitaciones/capacitacion/capacitaciones.module').then(m => m.CapacitacionesModule) },
+
+    { path: 'capacitaciones', data: { breadcrumb: 'Lista de capacitaciones' }, loadChildren: () => import('../onlineclasses/capacitaciones/capacitacion/capacitaciones.module').then(m => m.CapacitacionesModule) },
+
+    { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) }, 
+    { path: 'registro-de-cursos', data: { breadcrumb: 'Registro de cursos' }, loadChildren: () => import('../onlineclasses/registro-cursos/registro-cursos.module').then(m => m.RegistroCursosModule) }, 
+    { path: 'datos-personales', data: { breadcrumb: 'Datos personales' }, loadChildren: () => import('../onlineclasses/registro-alumnos/registro-alumnos.module').then(m => m.RegistroAlumnosModule) }, 
+    { path: 'lista-roles', data: { breadcrumb: 'Lista de roles' }, loadChildren: () => import('../onlineclasses/lista-roles/lista-roles.module').then(m => m.ListaRolesModule) }, 
+    { path: 'lista-empresas', data: { breadcrumb: 'Lista de empresas' }, loadChildren: () => import('../onlineclasses/lista-empresas/lista-empresas.module').then(m => m.ListaEmpresasModule) }, 
+
+
 
   ])],
   exports: [RouterModule]

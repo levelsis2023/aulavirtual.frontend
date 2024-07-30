@@ -17,28 +17,24 @@ export class RegCursosComponent implements OnInit {
   cantidadTotalCreditos: number = 0;
   codigo: string = '';
   nombreCurso: string = '';
-  ciclo: any = null;
+  ciclo: any = {};
   ciclos: any[] = [];
-  areaFormacion: any = null;
+  areaFormacion: any = {};
   areasFormacion: any[] = [];
-  moduloFormativo: any = null;
+  moduloFormativo: any = {};
   modulosFormativos: any[] = [];
   cantidadCreditos: number = 0;
   porcentajeCreditos: number = 0;
   cantidadHoras: number = 0;
   syllabus: string = '';
-  asignacionDocentes: any = null;
+  asignacionDocentes: any = {};
   asignacionesDocentes: any[] = [];
   estados: any[] = [];
-  estado: any = null;
+  estado: any = {};
+  acciones: string = '';
 
   constructor(
-    private layoutService: LayoutService,
-    private router: Router,
-    private primengConfig: PrimeNGConfig,
-    private translate: TranslateService,
     public ref: DynamicDialogRef,
-    private translateService: TranslateService,
     private parametroService: GeneralService,
     public config: DynamicDialogConfig
   ) {}
@@ -46,26 +42,44 @@ export class RegCursosComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.config.data.id;
     this.cantidadTotalCreditos = this.config.data.total_creditos;
-    this.listarModulosFormativos();
-    this.listarAreasFormacion();
-    this.listarCiclos();
-    this.listarEstados();
+    this.acciones = this.config.data.acciones;
+    Promise.all([
+      this.listarModulosFormativos(),
+      this.listarAreasFormacion(),
+      this.listarCiclos(),
+      this.listarEstados()
+    ]).then(() => {
+      if (this.config.data.acciones === 'editar' || this.config.data.acciones === 'ver') {
+        console.log("Editar Curso", this.config.data.data);
+        this.codigo = this.config.data.data.codigo;
+        this.nombreCurso = this.config.data.data.nombre;
+        this.ciclo = this.config.data.data.ciclo_id;
+        this.areaFormacion = this.config.data.data.area_de_formacion_id;
+        this.moduloFormativo = this.config.data.data.modulo_formativo_id;
+        this.cantidadCreditos = this.config.data.data.cantidad_de_creditos;
+        this.porcentajeCreditos = this.config.data.data.porcentaje_de_creditos;
+        this.cantidadHoras = this.config.data.data.cantidad_de_horas;
+        this.syllabus = this.config.data.data.syllabus;
+        this.asignacionDocentes.code = this.config.data.data.codigo;
+        this.estado = this.config.data.data.estado_id;
+      }
+    });
   }
 
   GuardarCurso(): void {
     const curso = {
       codigo: this.codigo,
       nombreCurso: this.nombreCurso,
-      cicloId: this.ciclo?.nu_id_parametro,
-      areaFormacionId: this.areaFormacion?.nu_id_parametro,
-      moduloFormativoId: this.moduloFormativo?.nu_id_parametro,
+      cicloId: this.ciclo,
+      areaFormacionId: this.areaFormacion,
+      moduloFormativoId: this.moduloFormativo,
       cantidadCreditos: this.cantidadCreditos,
       porcentajeCreditos: this.porcentajeCreditos,
       cantidadHoras: this.cantidadHoras,
       syllabus: this.syllabus,
       asignacionDocentesId: this.asignacionDocentes?.code,
       carreraId: this.id,
-      estadoId: this.estado?.nu_id_parametro
+      estadoId: this.estado
     };
 
     console.log('Curso a guardar', curso);
@@ -89,7 +103,44 @@ export class RegCursosComponent implements OnInit {
       console.error('Formulario inválido');
     }
   }
+  editarCurso(): void {
+    const curso = {
+      codigo: this.codigo,
+      nombreCurso: this.nombreCurso,
+      cicloId: this.ciclo,
+      areaFormacionId: this.areaFormacion,
+      moduloFormativoId: this.moduloFormativo,
+      cantidadCreditos: this.cantidadCreditos,
+      porcentajeCreditos: this.porcentajeCreditos,
+      cantidadHoras: this.cantidadHoras,
+      syllabus: this.syllabus,
+      asignacionDocentesId: this.asignacionDocentes?.code,
+      carreraId: this.id,
+      estadoId: this.estado,
+      cursoId: this.config.data.data.id
+    };
 
+    console.log('Curso a guardar', curso);
+
+    if (curso) {
+      this.parametroService.actualizarCurso(curso).subscribe(
+        (response: any) => {
+          this.closeModal();
+          Swal.fire({
+            title: '¡Éxito!',
+            text: 'Los Datos se registraron correctamente',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }).then(() => {});
+        },
+        (error: any) => {
+          console.error('Error al guardar el parametro', error);
+        }
+      );
+    } else {
+      console.error('Formulario inválido');
+    }
+  }
   onCantidadCreditosChange(newValue: number) {
     if (this.cantidadTotalCreditos === 0 || this.cantidadTotalCreditos == null) {
       this.porcentajeCreditos = 100;
@@ -102,31 +153,55 @@ export class RegCursosComponent implements OnInit {
     }
   }
 
-  listarModulosFormativos(): void {
-    this.parametroService.getModuloFormativo().subscribe((response: any) => {
-      console.log("Lista de listarModulosFormativos", response);
-      this.modulosFormativos = response;
+  listarModulosFormativos(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.parametroService.getModuloFormativo().subscribe(
+        (response: any) => {
+          console.log("Lista de listarModulosFormativos", response);
+          this.modulosFormativos = response;
+          resolve();
+        },
+        (error: any) => reject(error)
+      );
     });
   }
 
-  listarAreasFormacion(): void {
-    this.parametroService.getAreaDeFormacion().subscribe((response: any) => {
-      console.log("Lista de listarAreasFormacion", response);
-      this.areasFormacion = response;
+  listarAreasFormacion(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.parametroService.getAreaDeFormacion().subscribe(
+        (response: any) => {
+          console.log("Lista de listarAreasFormacion", response);
+          this.areasFormacion = response;
+          resolve();
+        },
+        (error: any) => reject(error)
+      );
     });
   }
 
-  listarCiclos(): void {
-    this.parametroService.getCiclo().subscribe((response: any) => {
-      console.log("Lista de listarCiclos", response);
-      this.ciclos = response;
+  listarCiclos(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.parametroService.getCiclo().subscribe(
+        (response: any) => {
+          console.log("Lista de listarCiclos", response);
+          this.ciclos = response;
+          resolve();
+        },
+        (error: any) => reject(error)
+      );
     });
   }
 
-  listarEstados(): void {
-    this.parametroService.getEstados().subscribe((response: any) => {
-      console.log("Lista de listarEstados", response);
-      this.estados = response;
+  listarEstados(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.parametroService.getEstados().subscribe(
+        (response: any) => {
+          console.log("Lista de listarEstados", response);
+          this.estados = response;
+          resolve();
+        },
+        (error: any) => reject(error)
+      );
     });
   }
 
