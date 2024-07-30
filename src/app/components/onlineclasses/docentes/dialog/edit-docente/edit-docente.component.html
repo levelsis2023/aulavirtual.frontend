@@ -1,7 +1,7 @@
 
 <p-panel>
     <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Registrar Docente</span>
+        <span class="text-primary font-semibold text-xl">Actualizar Docente</span>
     </ng-template>
     <ng-template pTemplate="content">
         <form [formGroup]="DocenteForm">
@@ -129,7 +129,7 @@
             </div>         
             <div class="row mb-4">
                 <div class="grid p-fluid">
-                        <!-- <div class="field md:col-6">                
+                        <div class="field md:col-6">                
                              <p-toast />
                               <p-fileUpload 
                             mode="basic" 
@@ -138,30 +138,17 @@
                             name="demo[]" 
                             url="https://www.primefaces.org/cdn/api/upload.php" 
                             accept="image/*"                        
-                            (onUpload)="onUpload($event)" />                
+                            (onSelect)="onFileChange($event)" />                
                  
-                        </div> -->
-
-                        <div class="field md:col-6">                
-                            <p-toast />
-                             <p-fileUpload 
-                           mode="basic" 
-                           chooseLabel="Subir foto" 
-                           chooseIcon="pi pi-upload"
-                           name="demo[]" 
-                           url="https://www.primefaces.org/cdn/api/upload.php" 
-                           accept="image/*" 
-                           (onSelect)="onFileChange($event)" />                
-                
-                       </div>
+                        </div>
                 </div>            
             </div>
         </form>
         
         <div class="row mb-5 text-right">               
-                    <button pButton label="Guardar" (click)="registrarDocente()" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
+                    <button pButton label="Guardar" (click)="actualizarDocente()" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
                     <button pButton label="Cancelar" (click)="closeModal()" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
-                </div>
+        </div>
         
     </ng-template>
     
