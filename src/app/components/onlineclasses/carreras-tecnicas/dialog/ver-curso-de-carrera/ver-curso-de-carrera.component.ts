@@ -6,11 +6,9 @@ import { GeneralService } from '../../../service/general.service';
 import { Router } from '@angular/router';
 import { RegCarrerastecnicasComponent } from '../../dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
 import { RegCursosComponent } from '../../../cursos/dialog/reg-cursos/reg-cursos.component';
-import { EditarCarreraTecnicaComponent } from '../../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
-import { VerCarreraTecnicaComponent } from '../../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import Swal from 'sweetalert2';	
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-
+import { VerGrupoEvaluacionesComponent } from './opciones/ver-grupo-evaluaciones/ver-grupo-evaluaciones.component';
 @Component({
   selector: 'app-ver-curso-de-carrera',
   templateUrl: './ver-curso-de-carrera.component.html',
@@ -193,8 +191,17 @@ export class VerCursoDeCarreraComponent {
     console.log(temas);
   }
 
-  verEvaluaciones(evaluaciones: string) {
-    console.log(evaluaciones);
+  verEvaluaciones(evaluaciones: any) {
+    console.log("evaluaciones", evaluaciones);
+    this.ref = this.dialogService.open(VerGrupoEvaluacionesComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { data: evaluaciones }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarCursos(); // Recargar los datos de la tabla
+    });
   }
 
   verForos(foros: string) {
