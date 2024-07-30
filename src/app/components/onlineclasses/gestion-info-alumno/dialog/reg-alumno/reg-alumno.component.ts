@@ -263,7 +263,7 @@ export class RegAlumnoComponent {
                 formData.append('id', this.alumno.id);
                 formData.append('domain_id', this.alumno.domain_id??"1");
             }else{
-                formData.append('id', "1");
+                formData.append('domain_id', "1");
             }
             this.alumnoService.saveAlumno(formData).subscribe(
                 (response) => {
