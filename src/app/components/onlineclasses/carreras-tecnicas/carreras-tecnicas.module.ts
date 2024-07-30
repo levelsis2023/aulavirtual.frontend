@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'
 import { ToastModule } from 'primeng/toast'
@@ -38,14 +38,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditarCarreraTecnicaComponent } from './dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
 import { VerCarreraTecnicaComponent } from './dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import { VerCursoDeCarreraComponent } from './dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
-import { VerGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-grupo-evaluaciones/ver-grupo-evaluaciones.component';
-import { AgregarEditarGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-grupo-evaluaciones/agregar-editar-grupo-evaluaciones/agregar-editar-grupo-evaluaciones.component';
+import { VerGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-g-ev/ver-g-ev.component';
+import { AgregarEditarGrupoEvaluacionesComponent } from './dialog/ver-curso-de-carrera/opciones/ver-g-ev/agregar-editar-grupo-evaluaciones/agregar-editar-grupo-evaluaciones.component';
+import { VerListadoDeEvaluacionesPorGrupoComponent } from './dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ver-lis-eval-grupo.component';
+import { AgregarEditarListaDeEvaluacionesPorGrupoComponent } from './dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ae-lista-de-evaluaciones-por-grupo/agregar-editar-lista-de-evaluaciones-por-grupo.component';
+import { VerListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ver-listado-de-preguntas.component';
+import { AgregarEditarListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
 
 
 
 @NgModule({
   declarations: [
-    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent
+    BandejaCarreratecnicaComponent, RegCarrerastecnicasComponent, TableSelectCursosComponent, EditarCarreraTecnicaComponent, VerCarreraTecnicaComponent, VerCursoDeCarreraComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent, VerListadoDeEvaluacionesPorGrupoComponent, AgregarEditarListaDeEvaluacionesPorGrupoComponent, VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent
     
   ],
   imports: [
@@ -79,7 +83,9 @@ import { AgregarEditarGrupoEvaluacionesComponent } from './dialog/ver-curso-de-c
     DialogModule,    
     DynamicDialogModule,      
     TranslateModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+
 })
 export class CarrerasTecnicasModule { }

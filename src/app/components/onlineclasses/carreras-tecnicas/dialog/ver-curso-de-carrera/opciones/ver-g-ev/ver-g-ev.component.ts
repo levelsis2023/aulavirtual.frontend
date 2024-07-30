@@ -3,14 +3,13 @@ import { Miembro } from '../../../../../interface/general';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../../../../service/general.service';
-import { Router } from '@angular/router';
-import { RegCursosComponent } from '../../../../../cursos/dialog/reg-cursos/reg-cursos.component';
 import Swal from 'sweetalert2';
 import { AgregarEditarGrupoEvaluacionesComponent } from './agregar-editar-grupo-evaluaciones/agregar-editar-grupo-evaluaciones.component';
+import { VerListadoDeEvaluacionesPorGrupoComponent } from '../ver-lis-eval-grupo/ver-lis-eval-grupo.component';
 @Component({
-  selector: 'app-ver-grupo-evaluaciones',
-  templateUrl: './ver-grupo-evaluaciones.component.html',
-  styleUrls: ['./ver-grupo-evaluaciones.component.scss']
+  selector: 'app-ver-g-ev',
+  templateUrl: './ver-g-ev.component.html',
+  styleUrls: ['./ver-g-ev.component.scss']
 })
 export class VerGrupoEvaluacionesComponent {
 
@@ -73,10 +72,10 @@ export class VerGrupoEvaluacionesComponent {
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(RegCursosComponent, {
+    this.ref = this.dialogService.open(AgregarEditarGrupoEvaluacionesComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
-      data: { id: this.config.data.data.id, total_creditos: this.config.data.data.total_creditos, acciones: 'ver', data: data }
+      data: { acciones: 'ver', idCurso: this.grupoEvaluaciones.id ,data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
@@ -85,11 +84,11 @@ export class VerGrupoEvaluacionesComponent {
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(RegCursosComponent, {
+    this.ref = this.dialogService.open(AgregarEditarGrupoEvaluacionesComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { id: this.config.data.data.id, total_creditos: this.config.data.data.total_creditos, acciones: 'editar', data: data }
-    });
+      data: { acciones: 'actualizar', idCurso: this.grupoEvaluaciones.id ,data: data } 
+     });
 
     this.ref.onClose.subscribe((data: any) => {
       this.listarGrupoEvaluaciones();
@@ -116,7 +115,7 @@ export class VerGrupoEvaluacionesComponent {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.grupoEvaluacionesService.eliminarCurso(id).subscribe(
+        this.grupoEvaluacionesService.eliminarGrupoEvaluaciones(id).subscribe(
           response => {
             Swal.fire({
               title: 'Eliminado',
@@ -164,7 +163,15 @@ export class VerGrupoEvaluacionesComponent {
     );
   }
 
-  verEvaluaciones(evaluaciones: any) {
-    console.log(evaluaciones);
+  agregarEvaluaciones(evaluaciones: any) {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { idCurso: this.grupoEvaluaciones.id ,data: evaluaciones } 
+     });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarGrupoEvaluaciones();
+    });
   }
 }

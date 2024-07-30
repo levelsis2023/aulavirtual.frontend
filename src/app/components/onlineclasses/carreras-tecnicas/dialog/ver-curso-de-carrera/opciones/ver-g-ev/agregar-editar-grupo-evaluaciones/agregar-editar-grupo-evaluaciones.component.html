@@ -1,6 +1,8 @@
 <p-panel> 
     <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Añadir Grupo de Evaluaciones</span>
+        <span class="text-primary font-semibold text-xl">
+            {{ acciones === 'ver' ? 'Ver Grupo de Evaluaciones' : (acciones === 'actualizar' ? 'Actualizar Grupo de Evaluaciones' : 'Añadir Grupo de Evaluaciones') }}
+        </span>
     </ng-template>
     
     <ng-template pTemplate="content">
@@ -9,7 +11,7 @@
                 <div class="grid p-fluid ">                
                     <div class="field col-12">
                         <span class="p-float-label">
-                            <input type="text" pInputText formControlName="nombreGrupo">
+                            <input type="text" pInputText formControlName="nombreGrupo" [readonly]="acciones === 'ver'">
                             <label class="required">Nombre de Grupo</label>
                         </span>
                     </div>
@@ -18,7 +20,8 @@
             <div class="row">
                 <div class="flex justify-content-end flex-column sm:flex-row">
                     <div class="flex flex-wrap gap-2">
-                        <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" type="submit"></button>                   
+                        <button *ngIf="acciones === 'add'" pButton icon="pi pi-plus" label="Añadir" iconPos="right" class="p-button-success p-button-sm" type="submit"></button>
+                        <button *ngIf="acciones === 'actualizar'" pButton icon="pi pi-refresh" label="Actualizar" iconPos="right" class="p-button-warning p-button-sm" type="submit"></button>
                         <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal($event)"></button>
                     </div>
                 </div>
