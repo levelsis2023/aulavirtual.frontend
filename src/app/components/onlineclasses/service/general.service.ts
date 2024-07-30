@@ -29,7 +29,7 @@ export class GeneralService {
 
 
     fetchPermisos(rolId: number): void {
-        this.http.get<any[]>(`${this.urlLocal}rol/get-rol-permiso/${rolId}`).subscribe(permisos => {
+        this.http.get<any[]>(`${this.urlparametro}rol/get-rol-permiso/${rolId}`).subscribe(permisos => {
           this.permisosSubject.next(permisos);
         });
       }
@@ -180,7 +180,7 @@ export class GeneralService {
 
     getRoles() {
         return this.http
-            .get<ApiResponse>(`${this.urlLocal}roles`, { observe: 'response' })
+            .get<ApiResponse>(`${this.urlparametro}roles`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -198,7 +198,7 @@ export class GeneralService {
 
     getRol(id: number) {
         return this.http
-            .get<ApiResponse>(`${this.urlLocal}rol/${id}`, { observe: 'response' })
+            .get<ApiResponse>(`${this.urlparametro}rol/${id}`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -216,7 +216,7 @@ export class GeneralService {
 
     guardarRol(parametro: any): Observable<ApiResponse> {
         return this.http
-            .post<ApiResponse>(`${this.urlLocal}rol/guardar`, parametro, { observe: 'response' })
+            .post<ApiResponse>(`${this.urlparametro}rol/guardar`, parametro, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -234,7 +234,7 @@ export class GeneralService {
 
     guardarRolPermisos(parametro: any): Observable<ApiResponse> {
         return this.http
-            .post<ApiResponse>(`${this.urlLocal}rol/guardar-permiso`, parametro, { observe: 'response' })
+            .post<ApiResponse>(`${this.urlparametro}rol/guardar-permiso`, parametro, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -253,7 +253,7 @@ export class GeneralService {
 
     actualizarRol(parametro: any, id: number): Observable<ApiResponse> {
         return this.http
-            .put<ApiResponse>(`${this.urlLocal}rol/guardar/${id}`, parametro, { observe: 'response' })
+            .put<ApiResponse>(`${this.urlparametro}rol/guardar/${id}`, parametro, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -272,7 +272,7 @@ export class GeneralService {
 
     eliminarRol(id: number): Observable<ApiResponse> {
         return this.http
-            .delete<ApiResponse>(`${this.urlLocal}rol/eliminar/${id}`, { observe: 'response' })
+            .delete<ApiResponse>(`${this.urlparametro}rol/eliminar/${id}`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -298,7 +298,7 @@ export class GeneralService {
 
     getEmpresas() {
         return this.http
-            .get<ApiResponse>(`${this.urlLocal}empresas`, { observe: 'response' })
+            .get<ApiResponse>(`${this.urlparametro}empresas`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -316,7 +316,7 @@ export class GeneralService {
 
     getEmpresa(id: number) {
         return this.http
-            .get<ApiResponse>(`${this.urlLocal}empresa/${id}`, { observe: 'response' })
+            .get<ApiResponse>(`${this.urlparametro}empresa/${id}`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -334,7 +334,7 @@ export class GeneralService {
 
     guardarEmpresa(parametro: any): Observable<ApiResponse> {
         return this.http
-            .post<ApiResponse>(`${this.urlLocal}empresa/guardar`, parametro, { observe: 'response' })
+            .post<ApiResponse>(`${this.urlparametro}empresa/guardar`, parametro, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -353,7 +353,7 @@ export class GeneralService {
 
     actualizarEmpresa(parametro: any, id: number): Observable<ApiResponse> {
         return this.http
-            .put<ApiResponse>(`${this.urlLocal}empresa/guardar/${id}`, parametro, { observe: 'response' })
+            .put<ApiResponse>(`${this.urlparametro}empresa/guardar/${id}`, parametro, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -371,7 +371,7 @@ export class GeneralService {
 
     eliminarEmpresa(id: number): Observable<ApiResponse> {
         return this.http
-            .delete<ApiResponse>(`${this.urlLocal}empresa/eliminar/${id}`, { observe: 'response' })
+            .delete<ApiResponse>(`${this.urlparametro}empresa/eliminar/${id}`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -394,7 +394,7 @@ export class GeneralService {
 
     getPermisos() {
         return this.http
-            .get<ApiResponse>(`${this.urlLocal}permisos`, { observe: 'response' })
+            .get<ApiResponse>(`${this.urlparametro}permisos`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<ApiResponse>) => {
                     console.log('HTTP Status Code:', response.status);
@@ -412,7 +412,7 @@ export class GeneralService {
 
     getRolPermisos(rolId: number): Observable<any[]> {
         return this.http
-            .get<any>(`${this.urlLocal}rol/get-rol-permiso/${rolId}`, { observe: 'response' })
+            .get<any>(`${this.urlparametro}rol/get-rol-permiso/${rolId}`, { observe: 'response' })
             .pipe(
                 tap((response: HttpResponse<any>) => {
                     console.log('HTTP Status Code:', response.status);
