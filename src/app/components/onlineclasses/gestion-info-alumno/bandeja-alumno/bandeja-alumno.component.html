@@ -8,7 +8,9 @@
                 <div class="field md:col-12">
                     <p-table #dt1 [value]="instituciones" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
-                        responsiveLayout="scroll" class="custom-search-input">
+                        responsiveLayout="scroll" class="custom-search-input"
+                        [globalFilterFields]="['nombres', 'institucion', 'carrera_nombre', 'ciclo_nombre']"
+                        >
                         <ng-template pTemplate="caption">
                             <div class="flex justify-content-between flex-wrap">
                                 <div class="flex-grow-1 mb-2 mr-2">
@@ -45,15 +47,27 @@
                                         Siglo
                                     </div>
                                 </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Acciones
+                                    </div>
+                                </th>
                             </tr>
                         </ng-template>
 
                         <ng-template pTemplate="body" let-miembro>
                             <tr>
-                                <td>AAA</td>
-                                <td>BBBB</td>
-                                <td>CCCCCC</td>
-                                <td>DDDDDDDDDD</td>
+                                <td>{{miembro.nombres}} {{miembro.apellidos}}</td>
+                                <td>{{miembro.institucion}}</td>
+                                <td>{{miembro.carrera_nombre}}</td>
+                                <td>{{miembro.ciclo_nombre}}</td>
+                                <td>
+                                    <div class="flex justify-content-between align-items-center">
+                                        <button pButton icon="pi pi-pencil" class="p-button-info p-button-sm" (click)="navigateToEditar(miembro)"></button>
+                                        <button pButton icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="eliminarAlumno(miembro)"></button>
+                                    </div>
+                                </td>
+                                
                             </tr>
                         </ng-template>
 
