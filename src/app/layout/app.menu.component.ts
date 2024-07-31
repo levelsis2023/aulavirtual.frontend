@@ -323,7 +323,7 @@ export class AppMenuComponent implements OnInit {
                                         label: 'Bandeja',
                                         icon: 'pi pi-bars',
                                         routerLink: ['/pl-virtual/bandeja-alumno']
-        
+
                                     },*/
                                     {
                                         label: 'Datos Personales',
@@ -377,6 +377,7 @@ export class AppMenuComponent implements OnInit {
                                         icon: 'pi pi-sun',
                                         routerLink: ['']
                                     },
+
 
 
                                 ]
