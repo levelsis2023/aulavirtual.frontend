@@ -1,0 +1,115 @@
+<p-panel>
+    <p-toast position="top-right"></p-toast>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Documento</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="row mb-4">
+            <div class="grid p-fluid ">
+                <div class="field md:col-4">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" name="codigo" [(ngModel)]="parametroDatos.codigo" pInputText>
+                        <label>Código</label>
+                    </span>
+                </div>
+                <div class="field md:col-8">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="text" name="nombre" [(ngModel)]="parametroDatos.nombre" pInputText>
+                        <label>Nombre</label>
+                    </span>
+                </div>
+                <div class="field md:col-3">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <input type="number" name="horas" [(ngModel)]="parametroDatos.horas" pInputText>
+                        <label>Horas</label>
+                    </span>
+                </div>
+                <div class="field md:col-3">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user-edit"></i>
+                        <p-calendar inputId="calendar-12h" [(ngModel)]="dateValue" [showTime]="true" [hourFormat]=hourFormat />
+                        <label>Horas</label>
+                    </span>
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="responsable" [autoDisplayFirst]="false" [options]="docenteGroupItemList" [showClear]="true"
+                                    [(ngModel)]="itemSeleccionadoEstado" optionLabel="codigo" (ngModelChange)="selecionarParametroItem()"></p-dropdown>
+                        <label class="required">Estado</label>
+                    </span>
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="responsable" [autoDisplayFirst]="false" [options]="docenteGroupItemList" [showClear]="true"
+                                    [(ngModel)]="itemSeleccionado" optionLabel="nombres" (ngModelChange)="selecionarParametroItem()"></p-dropdown>
+                        <label class="required">Docente</label>
+                    </span>
+                </div>
+
+                <div class="md:col-12">
+                    <label for="">Sylabus</label>
+                    <!--<p-editor  [(ngModel)]="parametroDatos.sylabus" [style]="{ height: '80px' }">
+                    </p-editor>-->
+                    <ckeditor #ckeditor [(ngModel)]="parametroDatos.sylabus" [editor]="Editor"></ckeditor>
+                    <!--<ckeditor #ckeditor [(ngModel)]="parametroDatos.sylabus" [editor]="Editor" (focus)="resizeEditor()"></ckeditor>-->
+                </div>
+
+                <div class="md:col-12">
+                    <label for="">Temas</label>
+                    <!--<p-editor  [(ngModel)]="parametroDatos.temas" [style]="{ height: '80px' }">
+                    </p-editor>-->
+                    <ckeditor #ckeditor1 [(ngModel)]="parametroDatos.temas" [editor]="Editor"></ckeditor>
+                    <!--<ckeditor #ckeditor1 [(ngModel)]="parametroDatos.temas" [editor]="Editor" (focus)="resizeEditor()"></ckeditor>-->
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mb-5 text-right">
+            <button pButton label="Guardar Documento" (click)="guardarCapacitaciones()" icon="pi pi-plus"
+                    class="p-button-success mr-2" *ngIf="acciones=='register'"></button>
+            <button pButton label="Guardar Cambios" (click)="updateParametros()" icon="pi pi-plus" id="btnGuardar"
+                    class="p-button-success mr-2" *ngIf="acciones=='edit'"></button>
+            <button pButton label="Cancelar" (click)="closeModal()" icon="pi pi-times" id="btnCancelar"
+                    class="p-button-danger"></button>
+        </div>
+
+
+
+
+        <p-confirmDialog #cd [style]="{width: '28vw'}">
+            <ng-template pTemplate="headless" let-message>
+                <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                    <div
+                        class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+                        <i class="pi pi-question text-5xl"></i>
+                    </div>
+                    <span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}</span>
+                    <p class="mb-0">{{ message.message }}</p>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button type="button" pButton icon="pi pi-times" label="Cancelar" class="p-button-close-clean"
+                        (click)="cd.reject()"></button>
+                <button *ngIf="acciones=='edit' || acciones=='register'" type="button" pButton icon="pi pi-check"
+                        label="{{acciones== 'register'? 'Guardar': 'Guardar Cambios'}}" class="p-button-success"
+                        (click)="cd.accept()"></button>
+                <button *ngIf="acciones =='nuevo'" type="button" pButton icon="pi pi-check" label="Si"
+                        class="p-button-success" (click)="cd.accept()"></button>
+            </ng-template>
+        </p-confirmDialog>
+
+    </ng-template>
+
+
+</p-panel>
+
+
+

@@ -38,7 +38,6 @@ export class DocumentoGestionService {
             .get<Base>(`${this.baseUrl}documento-gestion`)
             .pipe(
                 map((response: Base) => {
-                    console.log('RESPUESTA::::::::::::::::', response)
                     if (response.responseCode === 0) {
                         return response.response;
                     } else {
@@ -67,7 +66,6 @@ export class DocumentoGestionService {
             .get<Base>(`${this.baseUrl}documento-gestion/`+id)
             .pipe(
                 map((response: Base) => {
-                    console.log('RESPUESTA GET BY ID::::::::::::::::', response)
                         return response;
                 })
             );

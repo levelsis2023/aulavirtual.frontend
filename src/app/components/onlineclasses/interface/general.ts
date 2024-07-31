@@ -44,3 +44,28 @@ export class DocumentoGestion {
     public txUseCreado: string | null = null
     public txUseModificado: string | null = null
 }
+
+export class Capacitaciones {
+    public id: number | null = null
+    public codigo: string | null = ''
+    public nombre: string | null = ''
+    public horas: number|null = 0
+    public sylabus: string | null = null
+    public temas: string | null = null
+    public estado: boolean | null = null
+    public fecha: any | null = null
+
+    public idDocente: number|null = 0
+    public docente: number | undefined | null = null
+
+    public idEstado: number|null = null
+    public etapa: string | null = null
+    public txUseCreado: string | null = null
+    public txUseModificado: string | null = null
+}
+
+export class SelectDocente {
+    public id: number | null = null
+    public nombres: string | null = ''
+    public isSelected: string | null = null
+}
