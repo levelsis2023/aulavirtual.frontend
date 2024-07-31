@@ -16,13 +16,13 @@
                             <label for="dropdownTipoPregunta" class="required">Tipo de Pregunta</label>
                         </span>
                     </div>
-                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 46">
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 66">
                         <span class="p-float-label">
                             <input type="text" pInputText formControlName="formulacionPregunta" [readonly]="acciones === 'ver'">
                             <label class="required">Formulación de Pregunta por Docente</label>
                         </span>
                     </div>
-                    <div *ngIf="preguntaForm?.get('tipoPregunta')?.value === 46" class="col-12">
+                    <div *ngIf="preguntaForm?.get('tipoPregunta')?.value === 66" class="col-12">
                         <div *ngFor="let alternativa of alternativas; let i = index" class="col-12">
                             <div class="p-float-label p-d-flex p-ai-center">
                                 <input type="text" pInputText [(ngModel)]="alternativas[i].texto" [readonly]="acciones === 'ver'">
@@ -32,10 +32,15 @@
                         </div>
                         <button type="button" pButton icon="pi pi-plus" label="Añadir Alternativa" (click)="agregarAlternativa()"></button>
                     </div>
-                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 47">
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 67">
                         <span class="p-float-label">
                            
-                            <label class="required">Pregunta Mágica</label>
+                            <div class="grid p-fluid">
+                                <div class="field col-12 md:col-12">
+                                    <label for="">Digite el syllabus</label>
+                                    <p-editor [style]="{ height: '90px' }" [disabled]="acciones === 'ver'"></p-editor>
+                                </div>
+                            </div>
                         </span>
                     </div>
                 </div>

@@ -44,7 +44,7 @@ export class VerListadoDePreguntasComponent {
 
   listarGrupoEvaluaciones() {
     this.grupoEvaluacionesService.getGrupoEvaluaciones({id:this.grupoEvaluaciones.id}).subscribe((response: any) => {
-      this.grupoEvaluacionesList = response;
+      this.grupoEvaluacionesList = [];
       this.originalgrupoEvaluacionesList = [...response];
     });
   }
