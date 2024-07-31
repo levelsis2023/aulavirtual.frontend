@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { EventService } from 'src/app/demo/service/event.service';
-// @fullcalendar plugins
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  templateUrl: './calendar.app.component.html',
-  styleUrls: ['./calendar.app.component.scss']
+  selector: 'app-horario',
+  templateUrl: './horario.component.html',
+  styleUrls: ['./horario.component.scss']
 })
-export class CalendarAppComponent implements OnInit {
+export class HorarioComponent {
   events: any[] = [];
   today: string = '';
   calendarOptions: any = {
     initialView: 'dayGridMonth'
   };
+  isLoading: boolean = false;
   showDialog: boolean = false;
   clickedEvent: any = null;
   dateClicked: boolean = false;
@@ -24,24 +26,45 @@ export class CalendarAppComponent implements OnInit {
   changedEvent: any;
   courseStyles: { [key: string]: { backgroundColor: string; borderColor: string; textColor: string } } = {};
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService,
+    private spinner: NgxSpinnerService,
+
+  ) { }
 
   ngOnInit(): void {
     this.today = new Date().toISOString().split('T')[0];
     const data = {
-      alumno_id: 1,
-      domain_id: 1
+      docente_id: 1
     };
-    this.eventService.getEventsAlumno(data).subscribe(events => {
-      this.events = this.getEventsAlumno(events);
-      this.calendarOptions = { ...this.calendarOptions, events: this.events };
-      this.tags = this.events.map(item =>{
-        //not repeated tags
-        if(!this.tags.includes(item.tag)){
-            return item.tag;
-        }});
+    this.isLoading = true;
+this.spinner.show();
 
-    });
+this.eventService.getEventsDocente(data).subscribe({
+  next: (events) => {
+    this.events = this.getEventsAlumno(events);
+    this.calendarOptions = { ...this.calendarOptions, events: this.events };
+
+    // Mapeo para obtener tags únicos
+    this.tags = this.events.map(item => {
+      // Not repeated tags
+      if (!this.tags.includes(item.tag)) {
+        return item.tag;
+      }
+    }).filter(tag => tag !== undefined); // Elimina cualquier valor undefined
+
+    // Oculta el spinner después de recibir la respuesta
+    this.spinner.hide();
+    this.isLoading = false;
+  },
+  error: (err) => {
+    console.error('Error al obtener eventos:', err);
+    
+    // Oculta el spinner en caso de error
+    this.spinner.hide();
+    this.isLoading = false;
+  }
+});
+
 
     this.calendarOptions = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -65,14 +88,14 @@ export class CalendarAppComponent implements OnInit {
   getEventsAlumno(data: any): any {
     const eventData = data.map((item: any) => {
       const horariosParsed = JSON.parse(item.horarios);
-      return this.generateEventDetails(horariosParsed,item.nombre);
+      return this.generateEventDetails(horariosParsed);
     });
     // Flatten the array of events if necessary
     console.log(eventData.flat());
     return eventData.flat();
   }
 
-  generateEventDetails(horarios: any,nombreCurso: string): any {
+  generateEventDetails(horarios: any): any {
     const horarioData: {
       day_name: string; date: string;
       start: any; end: any;
@@ -82,9 +105,10 @@ export class CalendarAppComponent implements OnInit {
         backgroundColor: string;
         textColor: string;
     }[] = [];
-    const styles = this.getCourseStyles(nombreCurso);
 
     horarios.forEach((horario: any) => {
+      const styles = this.getCourseStyles(horario.cursoNombre);
+
       const startDate = new Date(horario.fecha_inicio);
       const endDate = new Date(horario.fecha_fin);
       const dayId = horario.day_id;
@@ -98,11 +122,11 @@ export class CalendarAppComponent implements OnInit {
             date: date.toISOString().split('T')[0], // Format as YYYY-MM-DD
             end: endDateTime,
             start: startDateTime,
-            tag: { color: '#FFD700', name: nombreCurso+'-'+horario.docente_name },
-            title: nombreCurso,
+            tag: { color: '#FFD700', name: horario.cursoNombre },
+            title: horario.cursoNombre,
             borderColor: styles.borderColor,
             backgroundColor: styles.backgroundColor,
-            textColor: styles.textColor,
+            textColor: styles.textColor
           });
         }
       }

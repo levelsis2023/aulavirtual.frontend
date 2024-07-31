@@ -38,4 +38,5 @@ export class AlumnoService{
     showAlumno(data:any):Observable<any>{
         return this.http.get(`${this.baseUrl}alumnos/${data.id}/${data.domain_id}`);
     }
+    
 } 

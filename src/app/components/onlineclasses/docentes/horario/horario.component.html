@@ -1,5 +1,6 @@
 <div class="card">
     <full-calendar [options]="calendarOptions"></full-calendar>
+    <ngx-spinner *ngIf="isLoading" bdColor="rgba(0,0,0,0.5)" size="large" color="#fff" type="ball-spin"></ngx-spinner>
 
     <p-dialog #dd [(visible)]="showDialog" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [style]="{width: '36rem'}" [modal]="true" [closable]="true" (onHide)="view = ''">
         <ng-template pTemplate="header">
@@ -7,7 +8,7 @@
         </ng-template>
         <ng-template pTemplate="content">
             <div *ngIf="view === 'display'">
-
+              
 
                 <div class="grid">
                     <div class="col-6">
@@ -94,5 +95,7 @@
             <!-- <button pButton *ngIf="view === 'display'" label="Editar" icon="pi pi-pencil" (click)="onEditClick()"></button> -->
             <!-- <button pButton *ngIf="view === 'new' || view === 'edit'" label="Guardar" icon="pi pi-check" (click)="handleSave()" [disabled]="!changedEvent.start || !changedEvent.end"></button> -->
         </ng-template>
+
     </p-dialog>
+
 </div>
