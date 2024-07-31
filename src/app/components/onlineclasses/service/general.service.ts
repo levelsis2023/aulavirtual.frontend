@@ -109,7 +109,7 @@ export class GeneralService {
 
       getTipoEvaluacion(){
         return this.http
-        .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=tipo_evaluacion`, { observe: 'response' })
+        .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=TIPO EVALUACIÓN`, { observe: 'response' })
         .pipe(
             tap((response: HttpResponse<ApiResponse>) => {
                 console.log('HTTP Status Code:', response.status);
@@ -127,7 +127,7 @@ export class GeneralService {
 
       getTipoDePregunta(){
         return this.http
-        .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=tipo_pregunta`, { observe: 'response' })
+        .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=TIPO DE PREGUNTA`, { observe: 'response' })
         .pipe(
             tap((response: HttpResponse<ApiResponse>) => {
                 console.log('HTTP Status Code:', response.status);
@@ -234,7 +234,7 @@ export class GeneralService {
 
   getModuloFormativo() {
     return this.http
-      .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=modulo_formativo`, { observe: 'response' })
+      .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=MÓDULOS FORMATIVOS`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
@@ -251,7 +251,7 @@ export class GeneralService {
   }
   getEstados() {
     return this.http
-      .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=estado`, { observe: 'response' })
+      .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=ESTADO CURSO`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
@@ -487,7 +487,7 @@ export class GeneralService {
  
   getCiclo() {
     return this.http
-      .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=ciclo`, { observe: 'response' })
+      .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=ciclos`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
