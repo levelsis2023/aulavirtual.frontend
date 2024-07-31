@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 
 import { BandejaAlumnoRoutingModule } from './bandeja-alumno-routing.module';
 
@@ -32,7 +33,7 @@ import { BandejaAlumnoComponent } from './bandeja-alumno.component';
 import { RegAlumnoComponent } from '../dialog/reg-alumno/reg-alumno.component';
 import { RegDocumentosAlumnoComponent } from '../dialog/reg-documentos-alumno/reg-documentos-alumno.component';
 import { EditorModule } from 'primeng/editor';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -40,10 +41,12 @@ import { EditorModule } from 'primeng/editor';
    BandejaAlumnoComponent, 
    RegAlumnoComponent,
    RegDocumentosAlumnoComponent
+
   ],
   imports: [
     CommonModule,
     BandejaAlumnoRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
       CalendarModule,
       TableModule,
@@ -71,7 +74,8 @@ import { EditorModule } from 'primeng/editor';
       TranslateModule,
       RippleModule,
       MultiSelectModule,
-      EditorModule
+      EditorModule,
+      NgxSpinnerModule
       
       
   ],
