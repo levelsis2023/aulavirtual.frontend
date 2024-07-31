@@ -353,7 +353,7 @@ export class AppMenuComponent implements OnInit {
                                      },*/
                                     {
                                         label: 'Horarios',
-                                        icon: 'pi pi-share-alt',
+                                        icon: 'pi pi-fw pi-calendar',
                                         routerLink: ['/apps/calendar']
                                     },
 
@@ -392,6 +392,12 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/pl-virtual/bandeja-docente']
                                         // routerLink: ['/pl-virtual/']
 
+                                    },
+                                    {
+                                        label: 'Horario',
+                                        icon: 'pi pi-fw pi-calendar',
+                                        // routerLink: ['/pl-virtual/cursos-docente']
+                                        routerLink: ['/pl-virtual/horario-docente']
                                     },
                                     {
                                         label: 'Cursos',

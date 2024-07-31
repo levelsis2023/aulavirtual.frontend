@@ -45,4 +45,6 @@ export class DocenteService {
         // let response = JSON.stringify(data);
         return this.http.get<any>(`${this.baseUrl}docentes/eliminar/${id}`);
     }
+    
+
 }

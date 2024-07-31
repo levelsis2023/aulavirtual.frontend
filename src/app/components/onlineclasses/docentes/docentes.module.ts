@@ -39,7 +39,7 @@ import { TemasDocenteComponent } from './dialog/temas-docente/temas-docente.comp
 import { EvaluacionesDocenteMenuComponent } from './evaluaciones-docente-menu/evaluaciones-docente-menu/evaluaciones-docente-menu.component';
 import { BandejaPreguntasDocenteComponent } from './evaluaciones-docente-menu/bandeja-preguntas-docente/bandeja-preguntas-docente.component';
 import { EditDocenteComponent } from './dialog/edit-docente/edit-docente.component';
-
+import { HorarioComponent } from './horario/horario.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { EditDocenteComponent } from './dialog/edit-docente/edit-docente.compone
     TemasDocenteComponent,
     EvaluacionesDocenteMenuComponent,
     BandejaPreguntasDocenteComponent,
-    EditDocenteComponent
+    EditDocenteComponent,
   ],
   imports: [
     CommonModule,

@@ -6,111 +6,191 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
 @Component({
-    templateUrl: './calendar.app.component.html',
-    styleUrls: ['./calendar.app.component.scss']
+  templateUrl: './calendar.app.component.html',
+  styleUrls: ['./calendar.app.component.scss']
 })
 export class CalendarAppComponent implements OnInit {
+  events: any[] = [];
+  today: string = '';
+  calendarOptions: any = {
+    initialView: 'dayGridMonth'
+  };
+  showDialog: boolean = false;
+  clickedEvent: any = null;
+  dateClicked: boolean = false;
+  edit: boolean = false;
+  tags: any[] = [];
+  view: string = '';
+  changedEvent: any;
+  courseStyles: { [key: string]: { backgroundColor: string; borderColor: string; textColor: string } } = {};
 
-    events: any[] = [];
+  constructor(private eventService: EventService) { }
 
-    today: string = '';
-
-    calendarOptions: any = {
-        initialView: 'dayGridMonth'
+  ngOnInit(): void {
+    this.today = new Date().toISOString().split('T')[0];
+    const data = {
+      alumno_id: 1,
+      domain_id: 1
     };
+    this.eventService.getEventsAlumno(data).subscribe(events => {
+      this.events = this.getEventsAlumno(events);
+      this.calendarOptions = { ...this.calendarOptions, events: this.events };
+      this.tags = this.events.map(item =>{
+        //not repeated tags
+        if(!this.tags.includes(item.tag)){
+            return item.tag;
+        }});
 
-    showDialog: boolean = false;
+    });
 
-    clickedEvent: any = null;
+    this.calendarOptions = {
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      height: 720,
+      initialDate: this.today,
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      editable: true,
+      selectable: true,
+      selectMirror: true,
+      dayMaxEvents: true,
+      eventClick: (e: any) => this.onEventClick(e),
+      select: (e: any) => this.onDateSelect(e),
+      events: this.events // Set events here
+    };
+  }
 
-    dateClicked: boolean = false;
+  getEventsAlumno(data: any): any {
+    const eventData = data.map((item: any) => {
+      const horariosParsed = JSON.parse(item.horarios);
+      return this.generateEventDetails(horariosParsed,item.nombre);
+    });
+    // Flatten the array of events if necessary
+    console.log(eventData.flat());
+    return eventData.flat();
+  }
 
-    edit: boolean = false;
+  generateEventDetails(horarios: any,nombreCurso: string): any {
+    const horarioData: {
+      day_name: string; date: string;
+      start: any; end: any;
+        tag: { color: string; name: string };
+        title: string;
+        borderColor: string;
+        backgroundColor: string;
+        textColor: string;
+    }[] = [];
+    const styles = this.getCourseStyles(nombreCurso);
 
-    tags: any[] = [];
+    horarios.forEach((horario: any) => {
+      const startDate = new Date(horario.fecha_inicio);
+      const endDate = new Date(horario.fecha_fin);
+      const dayId = horario.day_id;
 
-    view: string = '';
-
-    changedEvent: any;
-
-    constructor(private eventService: EventService) { }
-
-    ngOnInit(): void {
-        this.today = '2022-05-11';
-
-        this.eventService.getEvents().then(events => {
-            this.events = events;
-            this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
-            this.tags = this.events.map(item => item.tag);
-        });
-
-        this.calendarOptions = {
-            plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-            height: 720,
-            initialDate: this.today,
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            editable: true,
-            selectable: true,
-            selectMirror: true,
-            dayMaxEvents: true,
-            eventClick: (e: MouseEvent) => this.onEventClick(e),
-            select: (e: MouseEvent) => this.onDateSelect(e)
-        };
-    }
-
-    onEventClick(e: any) {
-        this.clickedEvent = e.event;
-        let plainEvent = e.event.toPlainObject({ collapseExtendedProps: true, collapseColor: true });
-        this.view = 'display';
-        this.showDialog = true;
-
-        this.changedEvent = { ...plainEvent, ...this.clickedEvent };
-        this.changedEvent.start = this.clickedEvent.start;
-        this.changedEvent.end = this.clickedEvent.end ? this.clickedEvent.end : this.clickedEvent.start;
-    }
-
-    onDateSelect(e: any) {
-        this.view = 'new'
-        this.showDialog = true;
-        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: null, borderColor: null, textColor: null, tag: { color: null, name: null } };
-    }
-
-    handleSave() {
-        if (!this.validate()) {
-            return;
+      for (let date = new Date(startDate); date <= endDate; date = this.addDays(date, 1)) {
+        if (date.getDay() === dayId % 7) {
+            const startDateTime = `${date.toISOString().split('T')[0]}T${horario.hora_inicio}`;
+            const endDateTime = `${date.toISOString().split('T')[0]}T${horario.hora_fin}`;
+            horarioData.push({
+            day_name: this.getDayName(dayId),
+            date: date.toISOString().split('T')[0], // Format as YYYY-MM-DD
+            end: endDateTime,
+            start: startDateTime,
+            tag: { color: '#FFD700', name: nombreCurso+'-'+horario.docente_name },
+            title: nombreCurso,
+            borderColor: styles.borderColor,
+            backgroundColor: styles.backgroundColor,
+            textColor: styles.textColor,
+          });
         }
-        else {
-            this.showDialog = false;
-            this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
+      }
+    });
 
-            if (this.clickedEvent.hasOwnProperty('id')) {
-                this.events = this.events.map(i => i.id.toString() === this.clickedEvent.id.toString() ? i = this.clickedEvent : i);
-            } else {
-                this.events = [...this.events, { ...this.clickedEvent, id: Math.floor(Math.random() * 10000) }];
-            }
-            this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
-            this.clickedEvent = null;
-        }
-
+    return horarioData;
+  }
+  getCourseStyles(nombreCurso: string) {
+    // Si el curso ya tiene estilos, retorna esos estilos
+    if (this.courseStyles[nombreCurso]) {
+      return this.courseStyles[nombreCurso];
     }
 
-    onEditClick() {
-        this.view = 'edit';
-    }
+    // Si no, genera nuevos estilos, almacénalos y luego retorna
+    const newStyles = this.generateStyles();
+    this.courseStyles[nombreCurso] = newStyles;
+    return newStyles;
+  }
+  getDayName(dayId: number) {
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return days[dayId % 7];
+  }
 
-    delete() {
-        this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
-        this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
-        this.showDialog = false;
-    }
+  addDays(date: Date, days: number) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+  generateStyles() {
+    const backgroundColor = '#212121';
+    const borderColors = ['#f9e79f', '#a3e4d7', '#abebc6', '#f5b041', '#ec7063', '#cacfd2'];
+    const textColors = [ '#000000'];
 
-    validate() {
-        let { start, end } = this.changedEvent;
-        return start && end;
-    }
+    const randomBorderColor = borderColors[Math.floor(Math.random() * borderColors.length)];
+    const randomTextColor = textColors[Math.floor(Math.random() * textColors.length)];
 
+    return {
+      backgroundColor:randomBorderColor,
+      borderColor: randomBorderColor,
+      textColor: randomTextColor
+    };
+  }
+  onEventClick(e: any) {
+    this.clickedEvent = e.event;
+    let plainEvent = e.event.toPlainObject({ collapseExtendedProps: true, collapseColor: true });
+    this.view = 'display';
+    this.showDialog = true;
+
+    this.changedEvent = { ...plainEvent, ...this.clickedEvent };
+    this.changedEvent.start = this.clickedEvent.start;
+    this.changedEvent.end = this.clickedEvent.end ? this.clickedEvent.end : this.clickedEvent.start;
+  }
+
+  onDateSelect(e: any) {
+    // this.view = 'new';
+    // this.showDialog = true;
+    // this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: null, borderColor: null, textColor: null, tag: { color: null, name: null } };
+  }
+
+  handleSave() {
+    if (!this.validate()) {
+      return;
+    } else {
+      this.showDialog = false;
+      this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
+
+      if (this.clickedEvent.hasOwnProperty('id')) {
+        this.events = this.events.map(i => i.id.toString() === this.clickedEvent.id.toString() ? i = this.clickedEvent : i);
+      } else {
+        this.events = [...this.events, { ...this.clickedEvent, id: Math.floor(Math.random() * 10000) }];
+      }
+      this.calendarOptions = { ...this.calendarOptions, events: this.events };
+      this.clickedEvent = null;
+    }
+  }
+
+  onEditClick() {
+    this.view = 'edit';
+  }
+
+  delete() {
+    this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
+    this.calendarOptions = { ...this.calendarOptions, events: this.events };
+    this.showDialog = false;
+  }
+
+  validate() {
+    let { start, end } = this.changedEvent;
+    return start && end;
+  }
 }

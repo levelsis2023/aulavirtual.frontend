@@ -7,8 +7,7 @@
         </ng-template>
         <ng-template pTemplate="content">
             <div *ngIf="view === 'display'">
-                <span class="text-900 font-semibold block mb-2">Descripción</span>
-                <span class="block mb-3">{{changedEvent.description}}</span>
+
 
                 <div class="grid">
                     <div class="col-6">
@@ -25,13 +24,13 @@
                             <span>{{changedEvent.end.toISOString().slice(0,10)}}</span>
                         </p>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="text-900 font-semibold mb-2">Ubicación</div>
                         <p class="flex align-items-center m-0">
                             <i class="pi pi-fw pi-map-marker text-700 mr-2"></i>
                             <span>{{changedEvent.location}}</span>
                         </p>
-                    </div>
+                    </div> -->
                     <div class="col-12">
                         <div class="text-900 font-semibold mb-2">Color</div>
                         <p class="flex align-items-center m-0">
@@ -92,8 +91,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <button pButton *ngIf="view === 'display'" label="Editar" icon="pi pi-pencil" (click)="onEditClick()"></button>
-            <button pButton *ngIf="view === 'new' || view === 'edit'" label="Guardar" icon="pi pi-check" (click)="handleSave()" [disabled]="!changedEvent.start || !changedEvent.end"></button>
+            <!-- <button pButton *ngIf="view === 'display'" label="Editar" icon="pi pi-pencil" (click)="onEditClick()"></button> -->
+            <!-- <button pButton *ngIf="view === 'new' || view === 'edit'" label="Guardar" icon="pi pi-check" (click)="handleSave()" [disabled]="!changedEvent.start || !changedEvent.end"></button> -->
         </ng-template>
     </p-dialog>
 </div>
