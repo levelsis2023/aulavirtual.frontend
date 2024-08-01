@@ -264,7 +264,7 @@ export class RegAlumnoComponent {
                 }
             } else {
                 formData.append('domain_id', '1');
-              
+
             }
             this.loading = true;
             this.spinner.show();

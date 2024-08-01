@@ -60,7 +60,6 @@ export class RegistraEmpresaComponent {
       domain_id: this.domain_id
     }
 
-    console.log(empresa)
     if (this.id > 0) {
       this.empresaService.actualizarEmpresa(empresa,this.id).subscribe(
         (response: any) => {

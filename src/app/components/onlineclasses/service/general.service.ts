@@ -447,9 +447,9 @@ export class GeneralService {
 
 
 
-  getCarrerasTecnicas() {
+  getCarrerasTecnicas(domain_id:number) {
     return this.http
-      .get<ApiResponse>(`${this.baseUrl}carreras`, { observe: 'response' })
+      .get<ApiResponse>(`${this.baseUrl}carreras-list/${domain_id}`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);

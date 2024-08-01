@@ -26,7 +26,6 @@ import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegistraUsuarioComponent } from './dialog/registra-usuario/registra-usuario.component';
-
 @NgModule({
   declarations: [
     ListaInstitucionesComponent,

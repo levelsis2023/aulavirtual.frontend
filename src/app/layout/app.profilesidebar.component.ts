@@ -12,7 +12,12 @@ export class AppProfileSidebarComponent {
 
     constructor(public layoutService: LayoutService,
         private router: Router,
-    ) { }
+    ) { 
+        if(localStorage.getItem('user')){
+            this.nombreUser = JSON.parse(localStorage.getItem('user') || '{}').name
+        }
+        
+    }
 
     get visible(): boolean {
         return this.layoutService.state.profileSidebarVisible;
@@ -24,7 +29,9 @@ export class AppProfileSidebarComponent {
 
 
     cerrarSesion(){
-        console.log('Cerrando sesión...');
-        this.router.navigate(['/auth/login']);
+        if(localStorage.getItem('user')){
+            localStorage.removeItem('user');
+            this.router.navigate(['/auth/login']);
+        }
     }
 }

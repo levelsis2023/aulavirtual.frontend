@@ -28,4 +28,7 @@ export class CommonService{
     getCiclosDropdown():Observable<any>{
         return this.http.get(`${this.baseUrl}ciclos-dropdown`);
     }
+    getRolesDropdown():Observable<any>{
+        return this.http.get(`${this.baseUrl}roles-dropdown`);
+    }
 }

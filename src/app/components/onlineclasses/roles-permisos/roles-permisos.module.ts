@@ -31,6 +31,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -73,8 +74,9 @@ import { TranslateModule } from '@ngx-translate/core';
       EditorModule,
       DialogModule,    
       DynamicDialogModule,      
-      TranslateModule
-      
+      TranslateModule,
+      ReactiveFormsModule,  
+      RegistraUsuarioComponent
       
       
   ],
