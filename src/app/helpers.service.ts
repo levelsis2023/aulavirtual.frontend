@@ -39,4 +39,27 @@ export class HelpersService {
     }
     return 1
   }
+  getAlumnoId() {
+    if (localStorage.getItem('user')) {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        return user.alumno_id;
+      }
+      return 1
+    }
+    return 1
+  }
+  getRolId() {
+    if (localStorage.getItem('user')) {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        return user.rol_id;
+      }
+      return 1
+    }
+    return 1
+  }
+
 }

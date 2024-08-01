@@ -48,7 +48,6 @@ export class VerCursoDeCarreraComponent {
 
   listarCursos() {
     this.cursosService.getCursos(this.config.data.data.id).subscribe((response: any) => {
-      console.log("Lista de Carreras Técnicas", response);
       this.carrerastecnicasList = response;
       this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
     });

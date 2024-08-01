@@ -7,6 +7,7 @@ import { GeneralService } from '../../service/general.service';
 import { RegMaestrosComponent } from '../dialog/reg-maestros/reg-maestros.component';
 import Swal from 'sweetalert2';
 import { ChangeDetectorRef } from '@angular/core';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-mantenimiento-maestro',
@@ -17,7 +18,7 @@ export class MantenimientoMaestroComponent  implements OnInit {
   loading: boolean = false;
   parametrosList: any[] = [];
   originalParametrosList: any[] = [];
-
+  domain_id: number = 1;
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt1') tabledt1: Table | undefined;
   @Input() miembro: Miembro[] = [];
@@ -28,18 +29,19 @@ export class MantenimientoMaestroComponent  implements OnInit {
     private dialogService: DialogService,
     private maestroService: GeneralService,
     private router: Router,  
-    private cdr: ChangeDetectorRef
-
+    private cdr: ChangeDetectorRef,
+    private helpersService: HelpersService,
   ) { }
 
 
   ngOnInit(): void {
-    this.listarmiembros();
+    this.domain_id = this.helpersService.getDominioId();
 
+    this.listarmiembros();
   }
 
   listarmiembros() {
-    this.maestroService.getMaestrosRecursive().subscribe((response: any) => {
+    this.maestroService.getMaestrosRecursive(this.domain_id).subscribe((response: any) => {
       console.log("Lista de Miembros creados", response);
       this.parametrosList = response;
       this.originalParametrosList = [...this.parametrosList];

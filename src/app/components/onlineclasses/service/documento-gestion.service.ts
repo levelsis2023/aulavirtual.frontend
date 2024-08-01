@@ -33,9 +33,9 @@ export class DocumentoGestionService {
     }
 
 
-    listarDocumentosGestion() {
+    listarDocumentosGestion(dominio_id: number): Observable<Base> {
         return this.http
-            .get<Base>(`${this.baseUrl}documento-gestion`)
+            .get<Base>(`${this.baseUrl}documento-gestion/${dominio_id}`)
             .pipe(
                 map((response: Base) => {
                     if (response.responseCode === 0) {
@@ -61,9 +61,9 @@ export class DocumentoGestionService {
             );
     }
 
-    obtenerDocumetoGestion(id: number) {
+    obtenerDocumetoGestion(id: number, dominio_id: number): Observable<Base> {
         return this.http
-            .get<Base>(`${this.baseUrl}documento-gestion/`+id)
+            .get<Base>(`${this.baseUrl}documento-gestion/${dominio_id}/${id}`)
             .pipe(
                 map((response: Base) => {
                         return response;

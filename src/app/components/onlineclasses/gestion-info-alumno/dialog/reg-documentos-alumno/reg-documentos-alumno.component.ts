@@ -6,6 +6,7 @@ import {GeneralService} from '../../../service/general.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {DocumentoGestion, Parametro} from "../../../interface/general";
 import {DocumentoGestionService} from "../../../service/documento-gestion.service";
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
     selector: 'app-reg-documentos-alumno',
@@ -21,7 +22,7 @@ export class RegDocumentosAlumnoComponent implements OnInit{
     parametroGroupItemList: Parametro[] = [];
     itemSeleccionado?: Parametro | null;*/
     acciones: string = 'register';
-
+    domain_id=1;
 
     constructor(
         private router: Router,
@@ -32,6 +33,7 @@ export class RegDocumentosAlumnoComponent implements OnInit{
         private translate: TranslateService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
+        private helperService: HelpersService,
     ) {
         this.acciones = config.data.action;
         if (this.acciones == 'edit'){
@@ -40,6 +42,7 @@ export class RegDocumentosAlumnoComponent implements OnInit{
     }
 
     ngOnInit(): void {
+        this.domain_id = this.helperService.getDominioId();
         if (this.acciones == 'edit'){
             this.obtenerDocumetoGestion();
         } else {
@@ -86,7 +89,7 @@ export class RegDocumentosAlumnoComponent implements OnInit{
 
     obtenerDocumetoGestion() {
         if (this.parametroDatos.id)
-        this.documentoGestionService.obtenerDocumetoGestion(this.parametroDatos.id)
+        this.documentoGestionService.obtenerDocumetoGestion(this.parametroDatos.id, this.domain_id)
             .subscribe((resp: any) => {
                 this.parametroDatos = resp;
             });

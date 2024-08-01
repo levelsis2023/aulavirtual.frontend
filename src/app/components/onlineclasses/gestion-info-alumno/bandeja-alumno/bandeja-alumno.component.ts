@@ -6,6 +6,7 @@ import { GeneralService } from '../../service/general.service';
 import { RegAlumnoComponent } from '../dialog/reg-alumno/reg-alumno.component';
 import { AlumnoService } from '../../service/alumno.service';
 import Swal from 'sweetalert2';
+import { HelpersService } from 'src/app/helpers.service';
 @Component({
     selector: 'app-bandeja-alumno',
     templateUrl: './bandeja-alumno.component.html',
@@ -17,22 +18,26 @@ export class BandejaAlumnoComponent {
     instituciones: any[] = [];
     loading: boolean = false;
     ref: DynamicDialogRef | undefined;
+    domain_id: number = 1;
     constructor(
         private dialogService: DialogService,
         private maestroService: GeneralService,
         private alumnoService: AlumnoService,
+        private helpersService: HelpersService,
         private router: Router
     ) {}
 
     ngOnInit() {
-        console.log('Datos-extraidos-de-bandeja-colegiado-PARA MIEMBRO');
+        this.domain_id = this.helpersService.getDominioId();
+
         this.cargaInicial();
     }
 
     cargaInicial(): void {
         //get all alumnos
         this.loading = true;
-        this.alumnoService.getAlumnos().subscribe(
+
+        this.alumnoService.getAlumnos(this.domain_id).subscribe(
             (data: any) => {
                 this.instituciones = data;
                 this.loading = false;

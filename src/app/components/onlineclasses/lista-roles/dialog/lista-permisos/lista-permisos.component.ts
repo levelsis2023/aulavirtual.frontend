@@ -36,7 +36,7 @@ export class ListaPermisosComponent {
     private translate: TranslateService,
     public ref: DynamicDialogRef,
     private permisoService: GeneralService,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
   ) {
     this.permisoService.getPermisos().subscribe((response: any) => {
       console.log("Lista de permisos", response);

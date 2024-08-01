@@ -14,6 +14,7 @@ import { CommonService } from '../../../service/common.service';
 import { Table } from 'primeng/table';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { HelpersService } from 'src/app/helpers.service';
 
 interface tipodoc {
     name: string;
@@ -57,6 +58,7 @@ export class RegAlumnoComponent {
     };
     translateService: any;
     loading: boolean = false;
+    domain_id: number = 1;
     constructor(
         private router: Router,
         private ref: DynamicDialogRef,
@@ -69,6 +71,7 @@ export class RegAlumnoComponent {
         private commonService: CommonService,
         private fb: FormBuilder,
         private spinner: NgxSpinnerService,
+        private helpersService: HelpersService
 
     ) {
         this.alumnoForm = this.fb.group({
@@ -90,6 +93,7 @@ export class RegAlumnoComponent {
             fotoPerfil: [null],
             fotoCarnet: [null],
         });
+        this.domain_id = this.helpersService.getDominioId();
     }
     onGlobalFilter(table: Table, event: any) {
         table.filterGlobal(event.target.value, 'contains');
@@ -153,7 +157,7 @@ export class RegAlumnoComponent {
         });
     }
     getCarrerasDropdown() {
-        this.commonService.getCarrerasDropdown().subscribe(
+        this.commonService.getCarrerasDropdown(this.domain_id).subscribe(
             (response) => {
                 console.log('Carreras', response);
                 this.carrerasList = response.map((carrera: any) => {
@@ -169,7 +173,7 @@ export class RegAlumnoComponent {
         );
     }
     getCiclosDropdown() {
-        this.commonService.getCiclosDropdown().subscribe(
+        this.commonService.getCiclosDropdown(this.domain_id).subscribe(
             (response) => {
                 this.ciclosList = response.map((ciclo: any) => {
                     return {
@@ -249,7 +253,7 @@ export class RegAlumnoComponent {
             }
             if (this.alumno) {
                 formData.append('id', this.alumno.id);
-                formData.append('domain_id', this.alumno.domain_id ?? '1');
+                formData.append('domain_id', this.domain_id.toString());
                 const fechaNacimiento =
                     this.alumnoForm.get('fechaNacimiento')?.value;
                 if (fechaNacimiento instanceof Date) {
@@ -263,7 +267,7 @@ export class RegAlumnoComponent {
                     );
                 }
             } else {
-                formData.append('domain_id', '1');
+                formData.append('domain_id', this.domain_id.toString());
 
             }
             this.loading = true;

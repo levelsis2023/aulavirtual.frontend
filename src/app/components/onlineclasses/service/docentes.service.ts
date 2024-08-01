@@ -23,8 +23,8 @@ export class DocenteService {
         this.httpClientFormData = new HttpClient(this.handler);
     }
 
-    listarDocentes():Observable<any>{
-        return this.http.get(`${this.baseUrl}docentes/listar`);
+    listarDocentes(domain_id:any):Observable<any>{
+        return this.http.get(`${this.baseUrl}docentes/listar/${domain_id}`);
     }
 
     buscarDocentes(id:number):Observable<any>{

@@ -144,9 +144,9 @@ export class GeneralService {
       }
 
 
-      getMaestros(){
+      getMaestros(domain_id:number) {
         return this.http
-        .get<ApiResponse>(`${this.baseUrl}parametrosAll`, { observe: 'response' })
+        .get<ApiResponse>(`${this.baseUrl}parametrosAll/${domain_id}`, { observe: 'response' })
         .pipe(
             tap((response: HttpResponse<ApiResponse>) => {
                 console.log('HTTP Status Code:', response.status);
@@ -265,6 +265,7 @@ export class GeneralService {
           }
         })
       );
+    
   }
 
 
@@ -272,9 +273,9 @@ export class GeneralService {
 
 
 
-  getMaestrosRecursive() {
+  getMaestrosRecursive(domain_id: number): Observable<ApiResponse> {
     return this.http
-      .get<ApiResponse>(`${this.baseUrl}parametrosRecursive`, { observe: 'response' })
+      .get<ApiResponse>(`${this.baseUrl}parametrosRecursive/${domain_id}`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
