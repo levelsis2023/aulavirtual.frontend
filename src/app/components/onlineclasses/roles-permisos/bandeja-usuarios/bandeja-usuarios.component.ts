@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { RegistraUsuarioComponent } from '../dialog/registra-usuario/registra-usuario.component';
+import { UsuarioService } from '../../service/usuario.service';
 
 @Component({
   selector: 'app-bandeja-usuarios',
@@ -14,9 +15,9 @@ export class BandejaUsuariosComponent {
 
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt1') tabledt1: Table | undefined;
-  instituciones = [
-    { nombre: 'Harold Jams Carrillo G', email: 'jamscg.developer@gmail.com', rol: 'Admin' },
-    { nombre: 'Ceiber abel contreras T', email: 'ceiber123@gmail.com', rol: 'Docente' }
+  usuarios = [
+    // { nombre: 'Harold Jams Carrillo G', email: 'jamscg.developer@gmail.com', rol: 'Admin' },
+    // { nombre: 'Ceiber abel contreras T', email: 'ceiber123@gmail.com', rol: 'Docente' }
   ];
   loading: boolean = false;
   ref: DynamicDialogRef | undefined;
@@ -25,13 +26,12 @@ export class BandejaUsuariosComponent {
   constructor(
     private router: Router,
     private dialogService: DialogService,
-    
+    private userServicio: UsuarioService
   
   ) { }
 
   ngOnInit(): void {
     
-    console.log("Datos-extraidos-de-bandeja-colegiado-PARA MIEMBRO");
     this.cargaInicial();
    
 
@@ -39,9 +39,19 @@ export class BandejaUsuariosComponent {
   }
 
   cargaInicial(): void {
-   
+    //call getUsuarios
+    this.loading = true;
+    this.userServicio.getUsuarios().subscribe(
+      (response:any) => {
+        this.usuarios = response
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+        this.loading = false;
+      }
+    );
   }
-
 
     navigateToNuevo() {
       this.ref = this.dialogService.open(RegistraUsuarioComponent, {  

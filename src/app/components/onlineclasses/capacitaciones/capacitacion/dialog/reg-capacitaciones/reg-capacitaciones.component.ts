@@ -6,6 +6,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {Capacitaciones, SelectDocente} from "../../../../interface/general";
 import {CapacitacionesService} from "../../../../service/capacitaciones.service";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
     selector: 'app-reg-capacitaciones',
@@ -20,7 +21,7 @@ export class RegCapacitacionesComponent implements OnInit {
     hourFormat: string = '24';
     docenteGroupItemList: SelectDocente[] = [];
     itemSeleccionado?: SelectDocente | null;
-
+    domain_id=1;
     estadoGroupItemList: SelectDocente[] = [];
     itemSeleccionadoEstado?: SelectDocente | null;
     dateValue: Date | undefined;
@@ -39,6 +40,7 @@ export class RegCapacitacionesComponent implements OnInit {
         private translate: TranslateService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
+        private helperService: HelpersService,
     ) {
         this.acciones = config.data.action;
         if (this.acciones == 'edit'){
@@ -47,7 +49,8 @@ export class RegCapacitacionesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.listarDocentes();
+        this.domain_id = this.helperService.getDominioId();
+        this.listarDocentes(this.domain_id);
         if (this.acciones == 'edit'){
             setTimeout(()=>{
                 this.itemSeleccionado = this.docenteGroupItemList.find((parametro:SelectDocente) => parametro.id === this.parametroDatos.docente) ?? ({} as SelectDocente);
@@ -94,8 +97,8 @@ export class RegCapacitacionesComponent implements OnInit {
             });
     }
 
-    listarDocentes() {
-        this.capacitacionesService.listarDocentes().subscribe((response: any) => {
+    listarDocentes(domain_id:any) {
+        this.capacitacionesService.listarDocentes(domain_id).subscribe((response: any) => {
             this.docenteGroupItemList = response;
             this.estadoGroupItemList = response;
         })

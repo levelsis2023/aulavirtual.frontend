@@ -48,9 +48,9 @@ export class CapacitacionesService {
     }
 
 
-    listarDocentes() {
+    listarDocentes(domain_id:any):Observable<any>{ 
         return this.http
-            .get<Base>(`${this.baseUrl}capacitaciones-docentes`)
+            .get<Base>(`${this.baseUrl}capacitaciones-docentes/${domain_id}`)
             .pipe(
                 map((response: Base) => {
                     if (response.responseCode === 0) {

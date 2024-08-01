@@ -9,6 +9,7 @@ import esLocale from '@fullcalendar/core/locales/es'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocenteService } from '../../../service/docentes.service';
 import Swal from 'sweetalert2';
+import { HelpersService } from 'src/app/helpers.service';
 
 interface tipodoc {
   name: string;
@@ -38,7 +39,7 @@ export class RegDocenteComponent {
   tipoDoc: tipodoc | undefined;
   tipoGenero!: tipoGenero[];
   tipoGeneroSeleccionado: tipoGenero | undefined;
-
+  domain_id: number = 1;
   fechanacimiento!: Date | null;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -58,9 +59,11 @@ export class RegDocenteComponent {
     private translate: TranslateService,
     private messageService: MessageService,
     private formBuilder: FormBuilder,
-    private docenteService: DocenteService
+    private docenteService: DocenteService,
+    private helpersService: HelpersService,
     
 	) {
+    this.domain_id = this.helpersService.getDominioId();
     this.DocenteForm = this.formBuilder.group({
       codigo: ['',Validators.required],
       nombres: ['',Validators.required],
@@ -74,6 +77,7 @@ export class RegDocenteComponent {
       doc_identidad: ['', Validators.required],
       vinculo_laboral: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
+      email: ['', Validators.required],
       // foto: ['', Validators.required]
     });
   }
@@ -128,7 +132,10 @@ registrarDocente(){
     edad: this.DocenteForm.get('edad')?.value,
     genero: this.DocenteForm.get('genero')?.value,
     foto: this.base64,
-    roles: 'seguridad,aula_virtual' //this.DocenteForm.get('roles')?.value
+    roles: 'seguridad,aula_virtual',
+    email: this.DocenteForm.get('email')?.value,
+    domain_id: this.domain_id
+    //this.DocenteForm.get('roles')?.value
     // foto: this.DocenteForm.get('foto')?.value
   }).subscribe(
     (res:any)=>{

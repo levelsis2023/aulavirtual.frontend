@@ -7,6 +7,8 @@ import {DocumentoGestion, Miembro} from '../../../interface/general';
 import { RegDocumentosAlumnoComponent } from '../../dialog/reg-documentos-alumno/reg-documentos-alumno.component';
 import {DocumentoGestionService} from "../../../service/documento-gestion.service";
 import {ConfirmationService, MessageService} from "primeng/api";
+import { H } from '@fullcalendar/core/internal-common';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-documento-gestion-alumno',
@@ -25,7 +27,7 @@ export class DocumentoGestionAlumnoComponent implements OnInit{
   @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
 
   ref: DynamicDialogRef | undefined;
-
+  dominio_id: number = 1;
   DocumnetoGestionList: DocumentoGestion[]=[];
 
   constructor(
@@ -34,17 +36,18 @@ export class DocumentoGestionAlumnoComponent implements OnInit{
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-
+    private helpersService : HelpersService
   ) { }
 
 
   ngOnInit(): void {
+      this.dominio_id = this.helpersService.getDominioId();
       this.listarDocumentoGestion();
 
   }
 
   listarDocumentoGestion() {
-    this.documentoGestionService.listarDocumentosGestion().subscribe((response: any) => {
+    this.documentoGestionService.listarDocumentosGestion(this.dominio_id).subscribe((response: any) => {
       console.log("Lista de Miembros creados", response);
       this.DocumnetoGestionList = response;
     })

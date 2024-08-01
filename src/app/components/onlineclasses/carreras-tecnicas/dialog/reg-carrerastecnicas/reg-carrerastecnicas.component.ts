@@ -5,6 +5,7 @@ import { Parametro } from '../../../interface/general';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';	
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-reg-carrerastecnicas',
@@ -27,11 +28,12 @@ export class RegCarrerastecnicasComponent {
     public config: DynamicDialogConfig,   
     private parametroService: GeneralService,
     private router: Router,
+    private helpersService: HelpersService,
   ) {
     this.parametroForm = this.fb.group({
       codigo: ['', Validators.required],
       nombres: ['', Validators.required],
-      domain_id: 1,
+      domain_id: [this.helpersService.getDominioId()],
     });
 
   }

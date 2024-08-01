@@ -7,6 +7,7 @@ import { PL_TOKEN, VAR_URL } from '../components/onlineclasses/utils/Utils';
 import { style } from '@angular/animations';
 import { GeneralService } from '../components/onlineclasses/service/general.service';
 import { tap } from 'rxjs';
+import { HelpersService } from '../helpers.service';
 
 @Component({
     selector: 'app-menu',
@@ -32,16 +33,22 @@ export class AppMenuComponent implements OnInit {
     constructor(
         public seguridadService: SeguridadService,
         private router: Router,
-        private permisoService: GeneralService
-
+        private permisoService: GeneralService,
+        private helpersService: HelpersService
     ) { }
     ngOnInit() {
-
-        const rolId = 8;//Lo sacas del usuario o alumno logeado
+        const isUserLogged = this.helpersService.checkIsUserLogged();
+        console.log('isUserLogged', isUserLogged);
+        if(!isUserLogged){
+            this.router.navigate(['/auth/login']);
+            return;
+        }
+            
+        const rolId = this.helpersService.getRolId();
         this.permisoService.fetchPermisos(rolId);
         this.permisoService.permisos$.pipe(
             tap(permisos => {
-                this.permisos = permisos;
+                this.permisos = permisos;   
                 this.actualizarMenu();
             })
         ).subscribe();
@@ -77,12 +84,12 @@ export class AppMenuComponent implements OnInit {
                         label: 'SEGURIDAD',
                         icon: 'pi pi-play',
                         items: [
-                            ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
-                                label: 'Configuración',
-                                icon: 'pi pi-fw pi-building',
-                                routerLink: ['/pl-virtual/lista-postulantes'],
-                            }
-                            ] : [],
+                            // ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
+                            //     label: 'Configuración',
+                            //     icon: 'pi pi-fw pi-building',
+                            //     routerLink: ['/pl-virtual/lista-postulantes'],
+                            // }
+                            // ] : [],
 
                             ...(this.tienePermiso('ver_seguridad_roles')) ? [{
 
@@ -95,7 +102,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Usuarios',
                                 icon: 'pi pi-fw pi-building',
-                                routerLink: ['/pl-virtual/lista-postulantes'],
+                                routerLink: ['/pl-virtual/bandeja-usuarios'],
                                 permisos: 'ver_modulo_seguridad'
 
                             }
@@ -248,74 +255,74 @@ export class AppMenuComponent implements OnInit {
                         label: 'AULA VIRTUAL',
                         icon: 'pi pi-play',
                         items: [
-                            {
-                                label: 'Configuración',
-                                icon: 'pi pi-cog',
-                                items: [
-                                    {
-                                        label: 'Instituciones',
-                                        icon: 'pi pi-building',
-                                        routerLink: ['/pl-virtual/registro-instituciones']
-                                    }
-                                ]
-                                // routerLink: ['/pl-virtual/bandeja-instituciones']
-                            },
-                            {
-                                label: 'Roles',
-                                icon: 'pi pi-users',
-                                routerLink: ['/pl-virtual/bandeja-usuarios']
-                            },
-                            {
-                                label: 'Mantenimientos',
-                                icon: 'pi pi-wrench',
-                                items: [
+                            // {
+                            //     label: 'Configuración',
+                            //     icon: 'pi pi-cog',
+                            //     items: [
+                            //         {
+                            //             label: 'Instituciones',
+                            //             icon: 'pi pi-building',
+                            //             routerLink: ['/pl-virtual/registro-instituciones']
+                            //         }
+                            //     ]
+                            //     // routerLink: ['/pl-virtual/bandeja-instituciones']
+                            // },
+                            // {
+                            //     label: 'Roles',
+                            //     icon: 'pi pi-users',
+                            //     routerLink: ['/pl-virtual/bandeja-usuarios']
+                            // },
+                            // {
+                            //     label: 'Mantenimientos',
+                            //     icon: 'pi pi-wrench',
+                            //     items: [
 
 
-                                    {
-                                        label: 'Maestros',
-                                        icon: 'pi pi-send',
-                                        routerLink: ['/pl-virtual/parametro-maestro']
-                                    },
+                            //         {
+                            //             label: 'Maestros',
+                            //             icon: 'pi pi-send',
+                            //             routerLink: ['/pl-virtual/parametro-maestro']
+                            //         },
 
-                                    /* {
-                                         label: 'Áreas de Formación',
-                                         icon: 'pi pi-briefcase',
-                                         routerLink: ['/pl-virtual/area-formacion']
-                                     },
-                                     {
-                                         label: 'Unidades Formativas',
-                                         icon: 'pi pi-credit-card',
-                                         routerLink: ['/pl-virtual/unidades-formativas']
-                                     },
-                                     {
-                                         label: 'Unidades Didácticas',
-                                         icon: 'pi pi-envelope',
-                                         routerLink: ['/pl-virtual/unidades-didacticas']
-                                     },
-                                     {
-                                         label: 'Estado de Cursos',
-                                         icon: 'pi pi-id-card',
-                                         routerLink: ['/pl-virtual/estado-cursos']
-                                     },
-                                     {
-                                         label: 'Tipo de Curso',
-                                         icon: 'pi pi-inbox',
-                                         routerLink: ['/pl-virtual/tipo-curso']
-                                     }, */
-                                    /* {
-                                         label: 'Configuraciones',
-                                         icon: 'pi pi-wrench',
-                                         routerLink: ['/pl-virtual/configuraciones']
-                                     },*/
+                            //         /* {
+                            //              label: 'Áreas de Formación',
+                            //              icon: 'pi pi-briefcase',
+                            //              routerLink: ['/pl-virtual/area-formacion']
+                            //          },
+                            //          {
+                            //              label: 'Unidades Formativas',
+                            //              icon: 'pi pi-credit-card',
+                            //              routerLink: ['/pl-virtual/unidades-formativas']
+                            //          },
+                            //          {
+                            //              label: 'Unidades Didácticas',
+                            //              icon: 'pi pi-envelope',
+                            //              routerLink: ['/pl-virtual/unidades-didacticas']
+                            //          },
+                            //          {
+                            //              label: 'Estado de Cursos',
+                            //              icon: 'pi pi-id-card',
+                            //              routerLink: ['/pl-virtual/estado-cursos']
+                            //          },
+                            //          {
+                            //              label: 'Tipo de Curso',
+                            //              icon: 'pi pi-inbox',
+                            //              routerLink: ['/pl-virtual/tipo-curso']
+                            //          }, */
+                            //         /* {
+                            //              label: 'Configuraciones',
+                            //              icon: 'pi pi-wrench',
+                            //              routerLink: ['/pl-virtual/configuraciones']
+                            //          },*/
 
-                                ]
-                            },
-                            {
+                            //     ]
+                            // },
+                            this.tienePermiso('aula_virtual_carreras')?{
                                 label: 'Carreras técnicas',
                                 icon: 'pi pi-book',
                                 routerLink: ['/pl-virtual/bandeja-carrtecnicas']
-                            },
-                            {
+                            }:null,
+                            this.tienePermiso('aula_virtual_alumno')?{
                                 label: 'Alumno',
                                 icon: 'pi pi-users',
                                 items: [
@@ -325,26 +332,26 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/pl-virtual/bandeja-alumno']
 
                                     },*/
-                                    {
+                                    this.tienePermiso('aula_virtual_alumno_datos_personales')?{
                                         label: 'Datos Personales',
                                         icon: 'pi pi-user-edit',
                                         routerLink: ['/pl-virtual/bandeja-alumno']
-                                    },
+                                    }:null,
                                     {
                                         label: 'Documentos de Gestión',
                                         icon: 'pi pi-file',
                                         routerLink: ['/pl-virtual/documentos-alumnos']
                                     },
-                                    {
-                                        label: 'Avance Curricular',
-                                        icon: 'pi pi-sitemap',
-                                        routerLink: ['/pl-virtual/avance-curricular']
-                                    },
-                                    {
-                                        label: 'Cursos',
-                                        icon: 'pi pi-fw pi-calendar',
-                                        routerLink: ['/pl-virtual/bandeja-curso']
-                                    },
+                                    // {
+                                    //     label: 'Avance Curricular',
+                                    //     icon: 'pi pi-sitemap',
+                                    //     routerLink: ['/pl-virtual/avance-curricular']
+                                    // },
+                                    // {
+                                    //     label: 'Cursos',
+                                    //     icon: 'pi pi-fw pi-calendar',
+                                    //     routerLink: ['/pl-virtual/bandeja-curso']
+                                    // },
 
                                     /* {
                                          label: 'Practicas',
@@ -357,42 +364,40 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/apps/calendar']
                                     },
 
-                                    {
-                                        label: 'Foros',
-                                        icon: 'pi pi-comment',
-                                        routerLink: ['/apps/tasklist']
-                                    },
+                                    // {
+                                    //     label: 'Foros',
+                                    //     icon: 'pi pi-comment',
+                                    //     routerLink: ['/apps/tasklist']
+                                    // },
                                     {
                                         label: 'Record de pago',
                                         icon: 'pi pi-money-bill',
                                         routerLink: ['']
                                     },
-                                    {
-                                        label: 'Otros cursos',
-                                        icon: 'pi pi-shopping-bag',
-                                        routerLink: ['']
-                                    },
-                                    {
-                                        label: 'Capacitaciones',
-                                        icon: 'pi pi-sun',
-                                        routerLink: ['']
-                                    },
+                                    // {
+                                    //     label: 'Otros cursos',
+                                    //     icon: 'pi pi-shopping-bag',
+                                    //     routerLink: ['']
+                                    // },
+                                    // {
+                                    //     label: 'Capacitaciones',
+                                    //     icon: 'pi pi-sun',
+                                    //     routerLink: ['']
+                                    // },
+                                ].filter(item => item !== null)
+                            }:null,
 
-
-
-                                ]
-                            },
-                            {
+                            this.tienePermiso('aula_virtual_docente')?{
                                 label: 'Docente',
                                 icon: 'pi pi-fw pi-briefcase',
                                 items: [
-                                    {
+                                    this.tienePermiso('aula_virtual_docente_datos_personales')?{
                                         label: 'Datos personales',
                                         icon: 'pi pi-file-edit',
                                         routerLink: ['/pl-virtual/bandeja-docente']
                                         // routerLink: ['/pl-virtual/']
 
-                                    },
+                                    }:null,
                                     {
                                         label: 'Horario',
                                         icon: 'pi pi-fw pi-calendar',
@@ -425,9 +430,9 @@ export class AppMenuComponent implements OnInit {
 
                                     },
 
-                                ]
+                                ].filter(item => item !== null)
 
-                               },
+                               }:null,
 
 
                             {
@@ -435,11 +440,11 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-users',
                                 routerLink: ['/pl-virtual/capacitaciones']
                             },
-                                ]
+                                ].filter(item => item !== null)
                     }
 
 
-                ]
+                ].filter(item => item !== null)
             }
         ];
         this.model5 = [

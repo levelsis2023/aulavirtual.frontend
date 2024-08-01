@@ -22,10 +22,16 @@ export class CommonService{
     ) {
         this.httpClientFormData = new HttpClient(this.handler);
     }
-    getCarrerasDropdown():Observable<any>{
-        return this.http.get(`${this.baseUrl}carreras-dropdown`);
+    getCarrerasDropdown(domain_id:number):Observable<any>{
+        return this.http.get(`${this.baseUrl}carreras-dropdown/${domain_id}`);
     }
-    getCiclosDropdown():Observable<any>{
-        return this.http.get(`${this.baseUrl}ciclos-dropdown`);
+    getCiclosDropdown(domain_id:number):Observable<any>{
+        return this.http.get(`${this.baseUrl}ciclos-dropdown/${domain_id}`);
+    }
+    getRolesDropdown():Observable<any>{
+        return this.http.get(`${this.baseUrl}roles-dropdown`);
+    }
+    getDocentesDropdown(domain_id:number):Observable<any>{
+        return this.http.get(`${this.baseUrl}docentes-dropdown/${domain_id}`);
     }
 }

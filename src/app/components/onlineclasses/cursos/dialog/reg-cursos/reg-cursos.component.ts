@@ -6,6 +6,8 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { GeneralService } from '../../../service/general.service';
 import Swal from 'sweetalert2';
+import { HelpersService } from 'src/app/helpers.service';
+import { CommonService } from '../../../service/common.service';
 
 @Component({
   selector: 'app-reg-cursos',
@@ -32,25 +34,30 @@ export class RegCursosComponent implements OnInit {
   estados: any[] = [];
   estado: any = {};
   acciones: string = '';
-
+  domain_id=1;
   constructor(
     public ref: DynamicDialogRef,
     private parametroService: GeneralService,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    public helperService: HelpersService,
+    private commonService:CommonService
   ) {}
 
   ngOnInit(): void {
     this.id = this.config.data.id;
     this.cantidadTotalCreditos = this.config.data.total_creditos;
     this.acciones = this.config.data.acciones;
+    this.domain_id = this.helperService.getDominioId();
+
     Promise.all([
       this.listarModulosFormativos(),
       this.listarAreasFormacion(),
       this.listarCiclos(),
-      this.listarEstados()
+      this.listarEstados(),
+      this.listarDocentes(this.domain_id )
     ]).then(() => {
       if (this.config.data.acciones === 'editar' || this.config.data.acciones === 'ver') {
-        console.log("Editar Curso", this.config.data.data);
+        console.log(this.config.data.data);
         this.codigo = this.config.data.data.codigo;
         this.nombreCurso = this.config.data.data.nombre;
         this.ciclo = this.config.data.data.ciclo_id;
@@ -60,13 +67,14 @@ export class RegCursosComponent implements OnInit {
         this.porcentajeCreditos = this.config.data.data.porcentaje_de_creditos;
         this.cantidadHoras = this.config.data.data.cantidad_de_horas;
         this.syllabus = this.config.data.data.syllabus;
-        this.asignacionDocentes.code = this.config.data.data.codigo;
+        this.asignacionDocentes =this.config.data.data.docente_id;
         this.estado = this.config.data.data.estado_id;
       }
     });
   }
 
   GuardarCurso(): void {
+    console.log(this.asignacionDocentes)
     const curso = {
       codigo: this.codigo,
       nombreCurso: this.nombreCurso,
@@ -77,12 +85,12 @@ export class RegCursosComponent implements OnInit {
       porcentajeCreditos: this.porcentajeCreditos,
       cantidadHoras: this.cantidadHoras,
       syllabus: this.syllabus,
-      asignacionDocentesId: this.asignacionDocentes?.code,
+      asignacionDocentesId: this.asignacionDocentes,
       carreraId: this.id,
-      estadoId: this.estado
+      estadoId: this.estado,
+      domain_id: this.domain_id
     };
 
-    console.log('Curso a guardar', curso);
 
     if (curso) {
       this.parametroService.guardarCurso(curso).subscribe(
@@ -117,7 +125,9 @@ export class RegCursosComponent implements OnInit {
       asignacionDocentesId: this.asignacionDocentes?.code,
       carreraId: this.id,
       estadoId: this.estado,
-      cursoId: this.config.data.data.id
+      cursoId: this.config.data.data.id,
+      domain_id: this.domain_id
+
     };
 
     console.log('Curso a guardar', curso);
@@ -198,6 +208,23 @@ export class RegCursosComponent implements OnInit {
         (response: any) => {
           console.log("Lista de listarEstados", response);
           this.estados = response;
+          resolve();
+        },
+        (error: any) => reject(error)
+      );
+    });
+  }
+  listarDocentes(domain_id:any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.commonService.getDocentesDropdown(this.domain_id).subscribe(
+        (response: any) => {
+          console.log("Lista de listarDocentes", response);
+          this.asignacionesDocentes= response.map((item: any) => {
+            return {
+              label: item.nombres,
+              value: item.id
+            }
+          });
           resolve();
         },
         (error: any) => reject(error)

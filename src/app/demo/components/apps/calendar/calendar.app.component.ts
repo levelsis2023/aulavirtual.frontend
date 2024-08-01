@@ -4,6 +4,7 @@ import { EventService } from 'src/app/demo/service/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   templateUrl: './calendar.app.component.html',
@@ -24,13 +25,15 @@ export class CalendarAppComponent implements OnInit {
   changedEvent: any;
   courseStyles: { [key: string]: { backgroundColor: string; borderColor: string; textColor: string } } = {};
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService,
+    private helpersService: HelpersService,
+  ) { }
 
   ngOnInit(): void {
     this.today = new Date().toISOString().split('T')[0];
     const data = {
-      alumno_id: 1,
-      domain_id: 1
+      alumno_id: this.helpersService.getAlumnoId()??1,
+      domain_id: this.helpersService.getDominioId()
     };
     this.eventService.getEventsAlumno(data).subscribe(events => {
       this.events = this.getEventsAlumno(events);

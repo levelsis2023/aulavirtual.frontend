@@ -5,6 +5,7 @@ import { an } from '@fullcalendar/core/internal-common';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
+import { HelpersService } from 'src/app/helpers.service';
 @Component({
   selector: 'app-reg-maestros',
   templateUrl: './reg-maestros.component.html',
@@ -17,21 +18,23 @@ export class RegMaestrosComponent {
   descripcionParametro: string = ''; // Add this if not already defined
   esNuevo: boolean = true; // Add this if not already defined
   acciones: string = 'register'; // Add this line to define the acciones property
-
+  domain_id = 1; // Add this line to define the domain_id property
   constructor(
     private parametroService: GeneralService,
     public config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
+    private helpersService: HelpersService,
   ) { }
 
   ngOnInit(): void {
+    this.domain_id = this.helpersService.getDominioId();
     if (this.config.data.acciones === 'update') {
 
       const parametro = {
         tx_nombre: this.config.data.data.tx_nombre,
         txAbreviatura: this.config.data.data.tx_abreviatura,
         txNombre: this.config.data.data.tx_item_description,
-        domain_id: 1,
+        domain_id: this.domain_id,
         nuItemNro: this.config.data.data.nu_item,
         color: this.config.data.data.color,
       };
@@ -42,7 +45,7 @@ export class RegMaestrosComponent {
     this.listarEstados()
   }
   listarEstados(): void {
-    this.parametroService.getMaestros().subscribe((response: any) => {
+    this.parametroService.getMaestros(this.domain_id).subscribe((response: any) => {
       this.parametroGroupItemList = response;
     });
     console.log('listarEstados:', this.parametroGroupItemList);
@@ -88,7 +91,7 @@ export class RegMaestrosComponent {
       tx_nombre: txNombre,
       tx_abreviatura: this.parametroDatos.txAbreviatura,
       tx_item_description: this.parametroDatos.txNombre,
-      domain_id: 1,
+      domain_id: this.domain_id,
       nu_item: this.parametroDatos.nuItemNro,
       color: this.parametroDatos.color,
     };
@@ -133,7 +136,7 @@ export class RegMaestrosComponent {
       tx_nombre: txNombre,
       tx_abreviatura: this.parametroDatos.txAbreviatura,
       tx_item_description: this.parametroDatos.txNombre,
-      domain_id: 1,
+      domain_id: this.domain_id,
       nu_item: this.parametroDatos.nuItemNro,
       id: this.config.data.data.nu_id_parametro,
       color: this.parametroDatos.color,

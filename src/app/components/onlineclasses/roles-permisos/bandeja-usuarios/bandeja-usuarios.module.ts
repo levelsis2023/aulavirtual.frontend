@@ -24,7 +24,7 @@ import { BandejaUsuariosComponent } from './bandeja-usuarios.component';
 import { RegistraUsuarioComponent } from '../dialog/registra-usuario/registra-usuario.component';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
-
+import {ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [BandejaUsuariosComponent, RegistraUsuarioComponent],
   imports: [
@@ -50,7 +50,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TooltipModule,
     ConfirmDialogModule,
     DynamicDialogModule,
-    TranslateModule // Import TranslateModule here
+    TranslateModule,
+    ReactiveFormsModule
   ],
   providers: [
     DialogService,

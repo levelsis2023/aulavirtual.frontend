@@ -90,8 +90,8 @@
             <div class="grid p-fluid ">                
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownAsignacionDocentes" [options]="asignacionesDocentes" optionLabel="name" [(ngModel)]="asignacionDocentes"
-                        optionValue="nu_id_parametro" [disabled]="acciones === 'ver'"></p-dropdown>
+                        <p-dropdown inputId="dropdownAsignacionDocentes" [options]="asignacionesDocentes" optionLabel="label" [(ngModel)]="asignacionDocentes"
+                        optionValue="value" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownAsignacionDocentes">Asignación de docentes </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>

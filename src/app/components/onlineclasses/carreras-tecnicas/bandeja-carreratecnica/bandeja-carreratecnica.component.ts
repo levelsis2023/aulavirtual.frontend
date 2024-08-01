@@ -11,6 +11,7 @@ import { VerCarreraTecnicaComponent } from '../dialog/ver-carrera-tecnica/ver-ca
 import { VerCursoDeCarreraComponent } from '../dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
 
 import Swal from 'sweetalert2';	
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-bandeja-carreratecnica',
@@ -35,6 +36,7 @@ export class BandejaCarreratecnicaComponent {
     private dialogService: DialogService,
     private carrerasTecnicasService: GeneralService,
     private router: Router,
+    private helpersService: HelpersService,
   ) { }
 
   ngOnInit(): void {
@@ -42,8 +44,8 @@ export class BandejaCarreratecnicaComponent {
   }
 
   listarCarrerasTecnicas() {
-    this.carrerasTecnicasService.getCarrerasTecnicas().subscribe((response: any) => {
-      console.log("Lista de Carreras Técnicas", response);
+    const domain_id= this.helpersService.getDominioId();
+    this.carrerasTecnicasService.getCarrerasTecnicas(domain_id).subscribe((response: any) => {
       this.carrerastecnicasList = response;
       this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
     });

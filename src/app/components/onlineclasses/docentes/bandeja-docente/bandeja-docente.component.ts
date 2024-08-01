@@ -7,6 +7,7 @@ import { RegDocenteComponent } from '../dialog/reg-docente/reg-docente.component
 import { DocenteService } from '../../service/docentes.service';
 import { EditDocenteComponent } from '../dialog/edit-docente/edit-docente.component';
 import Swal from 'sweetalert2';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-bandeja-docente',
@@ -22,23 +23,25 @@ export class BandejaDocenteComponent {
   loading: boolean = false;
   public idDocente:number = 0;
   ref: DynamicDialogRef | undefined;
+  domain_id: number = 1;
   constructor(
     private dialogService: DialogService,
     private maestroService: GeneralService,
     private router: Router,
-    private docenteService: DocenteService
-  
+    private docenteService: DocenteService,
+    private helpersService: HelpersService,
   ) { }
 
   ngOnInit() {
     // console.log("Datos-extraidos-de-bandeja-colegiado-PARA MIEMBRO");
     // this.cargaInicial();
+    this.domain_id = this.helpersService.getDominioId();
     this.listarDocente();
   }
 
   listarDocente() {
-
-    this.docenteService.listarDocentes().subscribe(
+    console.log("Listar docente", this.domain_id);
+    this.docenteService.listarDocentes(this.domain_id).subscribe(
       (res:any) => {
         this.docentes = res.Datos;
         console.log(res);
