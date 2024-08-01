@@ -37,12 +37,17 @@
                            
                             <div class="grid p-fluid">
                                 <div class="field col-12 md:col-12">
-                                    <label for="">Digite el syllabus</label>
-                                    <p-editor [style]="{ height: '90px' }" [disabled]="acciones === 'ver'"></p-editor>
+                                    <label for="">Ingrese la pregunta</label>
+                                    <p-editor formControlName="pregunta_docente" [style]="{ height: '90px' }" [disabled]="acciones === 'ver'"></p-editor>
                                 </div>
                             </div>
                         </span>
                     </div>
+                    <div class="p-float-label p-d-flex p-ai-center">
+                        <input type="number" pInputText formControlName="valor_pregunta" [readonly]="acciones === 'ver'">
+                        <label>Valor de la Pregunta</label>
+                    </div>
+                    
                 </div>
             </div>
             <div class="row">
