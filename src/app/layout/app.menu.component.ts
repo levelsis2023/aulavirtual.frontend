@@ -152,7 +152,12 @@ export class AppMenuComponent implements OnInit {
                                     //    // routerLink: ['/pl-virtual/bandeja-instituciones']
                                     //     },
                                     {
-                                        label: 'Lista de postulantes',
+                                        label: 'Postulantes 1',
+                                        icon: 'pi pi-users',
+                                        routerLink: ['/pl-virtual/lista-postulantes']
+                                    },
+                                    {
+                                        label: 'Postulantes 2',
                                         icon: 'pi pi-users',
                                         routerLink: ['/pl-virtual/lista-postulantes']
                                     },
@@ -347,11 +352,11 @@ export class AppMenuComponent implements OnInit {
                                     //     icon: 'pi pi-sitemap',
                                     //     routerLink: ['/pl-virtual/avance-curricular']
                                     // },
-                                    // {
-                                    //     label: 'Cursos',
-                                    //     icon: 'pi pi-fw pi-calendar',
-                                    //     routerLink: ['/pl-virtual/bandeja-curso']
-                                    // },
+                                    {
+                                        label: 'Cursos',
+                                        icon: 'pi pi-fw pi-calendar',
+                                        routerLink: ['/pl-virtual/bandeja-curso']
+                                    },
 
                                     /* {
                                          label: 'Practicas',
@@ -417,12 +422,12 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/pl-virtual/']
 
                                     },
-                                    {
-                                        label: 'Foros',
-                                        icon: 'pi pi-comment',
-                                        routerLink: ['/']
+                                    // {
+                                    //     label: 'Foros',
+                                    //     icon: 'pi pi-comment',
+                                    //     routerLink: ['/']
 
-                                    },
+                                    // },
                                     {
                                         label: 'Asistencia',
                                         icon: 'pi pi-users',
