@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
-
+import { HelpersService } from 'src/app/helpers.service';
 @Component({
   selector: 'app-agregar-editar-listado-de-preguntas',
   templateUrl: './agregar-editar-listado-de-preguntas.component.html',
@@ -18,7 +18,7 @@ export class AgregarEditarListadoDePreguntasComponent {
   parametroDatos: Parametro = new Parametro();
   parametro: Parametro = new Parametro();
   mostrarCursos = false;
-  idCurso: any;
+  idEvaluacion: any;
   acciones: any;
   tiposEvaluacion: any;
   estados: any;
@@ -30,19 +30,23 @@ export class AgregarEditarListadoDePreguntasComponent {
     private ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private parametroService: GeneralService,
+    private helpersService: HelpersService
   ) {
 
 
     this.preguntaForm = this.fb.group({
-      tipoPregunta: ['', Validators.required],
-      formulacionPregunta: ['', Validators.required],
+      tipoPregunta: [''],
+      formulacionPregunta: [''],
       descripcion: [''],
-      correcta: [null]
+      correcta: [null],
+      valor_pregunta : [null],
+      pregunta_docente: [null],
         });
+     
   }
 
   ngOnInit(): void {
-    this.idCurso = this.config.data.idCurso;
+    this.idEvaluacion = this.config.data.idEvaluacion;
     this.acciones = this.config.data.acciones;
     Promise.all([
       this.listarDePregunta(),
@@ -79,21 +83,20 @@ export class AgregarEditarListadoDePreguntasComponent {
   }
 
   guardarPregunta() {
-    console.log(this.preguntaForm?.get('descripcion')?.value );
     if (this.preguntaForm.valid) {
       const parametros = {
-        observaciones: this.preguntaForm.value.observaciones,
-        nombre: this.preguntaForm.value.nombreEvaluacion,
-        tipo_evaluacion_id: this.preguntaForm.value.tipoEvaluacion,
-        porcentaje_evaluacion: this.preguntaForm.value.porcentajeEvaluacion,
-        fecha_y_hora_programo: this.preguntaForm.value.fechaHoraEvaluacion,
-        estado_id: this.preguntaForm.value.estado,
-        grupo_de_evaluaciones_id: this.config.data.idGrupoEvaluaciones,
-        domain_id: 1
+        evaluacion_id: this.idEvaluacion ,
+        tipo_de_evaluacion_id: this.preguntaForm.value.tipoPregunta,
+        pregunta_docente: this.preguntaForm.value.pregunta_docente,
+        descripcion: this.preguntaForm.value.descripcion,
+        respuesta_correcta: this.preguntaForm.value.correcta,
+        domain_id: this.helpersService.getDominioId(),
+        valor_pregunta: this.preguntaForm.value.valor_pregunta,
+     
       };
       console.log(parametros);
       if (this.acciones === 'add') {
-        this.parametroService.guardarEvaluacion(parametros).subscribe(
+        this.parametroService.guardarPreguntas(parametros).subscribe(
           (response: any) => {
             this.ref?.close();
             Swal.fire({

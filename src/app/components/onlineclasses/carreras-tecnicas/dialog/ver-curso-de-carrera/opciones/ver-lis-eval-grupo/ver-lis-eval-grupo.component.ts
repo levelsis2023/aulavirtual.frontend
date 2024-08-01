@@ -171,7 +171,7 @@ export class VerListadoDeEvaluacionesPorGrupoComponent {
     this.ref = this.dialogService.open(VerListadoDePreguntasComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { acciones: 'actualizar', idCurso: this.grupoEvaluaciones.id ,data: evaluaciones } 
+      data: { acciones: 'add', grupoEvaluacionesId: this.grupoEvaluaciones.id ,data: evaluaciones } 
      });
   
     this.ref.onClose.subscribe((data: any) => {

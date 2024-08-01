@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment.development';
 import { tap, map, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ApiResponse, Base } from '../interface/general';
+import { HelpersService } from 'src/app/helpers.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -19,6 +21,8 @@ export class GeneralService {
     private http: HttpClient,
     private httpClientFormData: HttpClient,
     public handler: HttpBackend,
+    private helpersService: HelpersService // Inyección del servicio
+
   ) {
     this.httpClientFormData = new HttpClient(this.handler);
   }
@@ -868,5 +872,86 @@ export class GeneralService {
             })
           );
       }
+
+
+
+
+
+
+      getPreguntas(parametro: any): Observable<ApiResponse> {
+        return this.http
+        .get<ApiResponse>(`${this.baseUrl}preguntas/${this.helpersService.getDominioId()}/${parametro.id}`, { observe: 'response' })
+        .pipe(
+            tap((response: HttpResponse<ApiResponse>) => {
+                console.log('HTTP Status Code:', response.status);
+            }),
+            map((response: HttpResponse<ApiResponse>) => {
+                console.log('Response body:', response.body);
+                if (response.status === 200 && response.body ) {
+                    return response.body;
+                } else {
+                    throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                }
+            })
+        );
+      }
+
+
+  guardarPreguntas(parametro: any): Observable<ApiResponse> {
+    return this.http
+      .post<ApiResponse>(`${this.baseUrl}preguntas`, parametro, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 201 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
+
+  actualizarPreguntas(parametro: any): Observable<ApiResponse> {
+    return this.http
+      .put<ApiResponse>(`${this.baseUrl}preguntas/${parametro.id}`, parametro, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 200 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
+
+
+  eliminarPreguntas(id: number): Observable<ApiResponse> {
+    return this.http
+      .delete<ApiResponse>(`${this.baseUrl}preguntas/${id}`, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 201 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
+
+
 
 }
