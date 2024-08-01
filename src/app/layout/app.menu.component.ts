@@ -347,11 +347,11 @@ export class AppMenuComponent implements OnInit {
                                         icon: 'pi pi-file',
                                         routerLink: ['/pl-virtual/documentos-alumnos']
                                     },
-                                    // {
-                                    //     label: 'Avance Curricular',
-                                    //     icon: 'pi pi-sitemap',
-                                    //     routerLink: ['/pl-virtual/avance-curricular']
-                                    // },
+                                    {
+                                        label: 'Avance Curricular',
+                                        icon: 'pi pi-sitemap',
+                                        routerLink: ['/pl-virtual/avance-curricular']
+                                    },
                                     {
                                         label: 'Cursos',
                                         icon: 'pi pi-fw pi-calendar',
@@ -374,11 +374,11 @@ export class AppMenuComponent implements OnInit {
                                     //     icon: 'pi pi-comment',
                                     //     routerLink: ['/apps/tasklist']
                                     // },
-                                    {
-                                        label: 'Record de pago',
-                                        icon: 'pi pi-money-bill',
-                                        routerLink: ['']
-                                    },
+                                    // {
+                                    //     label: 'Record de pago',
+                                    //     icon: 'pi pi-money-bill',
+                                    //     routerLink: ['']
+                                    // },
                                     // {
                                     //     label: 'Otros cursos',
                                     //     icon: 'pi pi-shopping-bag',
