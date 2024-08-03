@@ -14,6 +14,7 @@ const routes: Routes = [];
    /* { path: 'registro-alumno', data: { breadcrumb: 'Registrar Alumno' }, loadChildren: () => import('./gestion-info-alumno/registrar-alumno/registrar-alumno.module').then(m => m.RegistrarAlumnoModule) }, */
     { path: 'ciclos-academicos', data: { breadcrumb: 'Ciclos Academicos' }, loadChildren: () => import('../onlineclasses/instituciones/ciclos/ciclos.module').then(m => m.CiclosModule) },
     { path: 'area-formacion', data: { breadcrumb: 'Área de Formación' }, loadChildren: () => import('../onlineclasses/instituciones/area-formacion/area-formacion.module').then(m => m.AreaFormacionModule) },
+
     { path: 'unidades-formativas', data: { breadcrumb: 'Unidades Formativas' }, loadChildren: () => import('../onlineclasses/instituciones/unidades-formativas/unidades-formativas.module').then(m => m.UnidadesFormativasModule) },
     { path: 'unidades-didacticas', data: { breadcrumb: 'Unidades Didacticas' }, loadChildren: () => import('../onlineclasses/instituciones/unidades-didacticas/unidades-didacticas.module').then(m => m.UnidadesDidacticasModule) },
     { path: 'estado-cursos', data: { breadcrumb: 'Estado de Cursos' }, loadChildren: () => import('../onlineclasses/instituciones/estado-cursos/estado-cursos.module').then(m => m.EstadoCursosModule) },

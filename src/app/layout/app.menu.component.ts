@@ -84,12 +84,12 @@ export class AppMenuComponent implements OnInit {
                         label: 'SEGURIDAD',
                         icon: 'pi pi-play',
                         items: [
-                            // ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
-                            //     label: 'Configuración',
-                            //     icon: 'pi pi-fw pi-building',
-                            //     routerLink: ['/pl-virtual/lista-postulantes'],
-                            // }
-                            // ] : [],
+                           ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
+                                label: 'Configuración',
+                               icon: 'pi pi-fw pi-building',
+                                 routerLink: ['/pl-virtual/lista-postulantes'],
+                             }
+                            ] : [],
 
                             ...(this.tienePermiso('ver_seguridad_roles')) ? [{
 

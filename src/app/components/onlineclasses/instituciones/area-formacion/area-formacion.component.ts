@@ -1,21 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { PrimeNGConfig } from 'primeng/api';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { GeneralService } from '../../service/general.service';
+import Swal from 'sweetalert2';	
+import { AeAreaFormacionComponent } from './ae-area-formacion/ae-area-formacion.component';
 
-
-interface listcarreras {
-  name: string;
-  value: number;
-  code: string;
-}
-
-interface Cantciclos {
-  name: string;
-  value: number;
-  code: string;
-}
 
 @Component({
   selector: 'app-area-formacion',
@@ -24,46 +13,133 @@ interface Cantciclos {
 })
 export class AreaFormacionComponent {
 
-  listcarreras!: listcarreras[];
-  tipoDocumentoSeleccionado: listcarreras | undefined;
-  tipoDoc: listcarreras | undefined;
-  listciclos!: Cantciclos[];
-  cantciclos!: Cantciclos[];
-  valuecantciclos: Cantciclos | undefined;
 
-  tipoTemaSeleccionado: Cantciclos | null = null
+  loading: boolean = false;
+  areaFormacionList: any[] = [];
+  originalareaFormacionList: any[] = [];
+  ref: DynamicDialogRef | undefined;
 
-  txtdescripcion!: string;
-  constructor(private layoutService: LayoutService,
-		private router: Router,
-    private primengConfig: PrimeNGConfig,
-    private translate: TranslateService
-	) {}
+  constructor(
+    private dialogService: DialogService,
+    private areasDeFormacionService: GeneralService,
+  ) { }
 
+  ngOnInit(): void {
 
+    this.listarAreasDeFormacion();
 
-	get dark(): boolean {
-		return this.layoutService.config.colorScheme !== 'light';
-	}
+  }
 
-ngOnInit(){
-
-	this.listcarreras = [
-    { name: 'Administración', value:1, code: 'NY' },
-		{ name: 'Computación e Informatica', value:2, code: 'RM' },
-    { name: 'Marqueting', value:3, code: 'NY' },
-		{ name: 'Enfermeria', value:4, code: 'RM' },
-		{ name: 'Agropecuario', value:5, code: 'NY' }	
-	];
-  this.cantciclos = [
-		{ name: 'I', value:1, code: 'NY' },
-		{ name: 'II', value:2, code: 'RM' },
-    { name: 'III', value:3, code: 'NY' },
-		{ name: 'IV', value:4, code: 'RM' },
-		{ name: 'V', value:5, code: 'NY' },
-		{ name: 'VI', value:6, code: 'RM' }
-		
-	]
+  listarAreasDeFormacion() {
+    this.areasDeFormacionService.getAreasDeFormacion().subscribe((response: any) => {
+      
+        this.areaFormacionList = response;
+        this.originalareaFormacionList = [...response];
+    });
 }
+
+
+  navigateAddCurso() {
+    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { acciones: 'add' }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarAreasDeFormacion();
+    });
+  }
+
+  navigateToDetalle(data: any) {
+    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+      width: '80%',
+      styleClass: 'custom-dialog-header',
+      data: { acciones: 'ver', data: data }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarAreasDeFormacion();
+    });
+  }
+
+  navigateToEdit(data: any) {
+    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { acciones: 'actualizar', data: data }
+     });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarAreasDeFormacion();
+    });
+  }
+
+  navigateToDelete(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+      customClass: {
+        popup: 'custom-swal-popup'
+      },
+      didOpen: () => {
+        const container = document.querySelector('.swal2-container');
+        if (container) {
+          container.setAttribute('style', 'z-index: 2147483647 !important');
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.areasDeFormacionService.eliminarAreasDeFormacion(id).subscribe(
+          response => {
+            Swal.fire({
+              title: 'Eliminado',
+              text: 'La carrera técnica ha sido eliminada.',
+              icon: 'success',
+              showClass: {
+                popup: `
+                  background-color: #78CBF2;
+                  color: white;
+                  z-index: 10000!important;
+                `
+              },
+              didOpen: () => {
+                const container = document.querySelector('.swal2-container');
+                if (container) {
+                  container.setAttribute('style', 'z-index: 2147483647 !important');
+                }
+              }
+            });
+            this.listarAreasDeFormacion();
+          },
+          error => {
+            Swal.fire(
+              'Error',
+              'Hubo un problema al eliminar la carrera técnica.',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
+
+  onGlobalFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    if (!filterValue) {
+      this.areaFormacionList = [...this.originalareaFormacionList];
+      return;
+    }
+
+    this.areaFormacionList = this.originalareaFormacionList.filter(area =>
+      (area.nombre.toLowerCase().includes(filterValue)) 
+    );
+  }
+
 
 }
