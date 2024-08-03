@@ -6,11 +6,11 @@ import Swal from 'sweetalert2';
 import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
-  selector: 'app-ae-estados',
-  templateUrl: './ae-estados.component.html',
-  styleUrls: ['./ae-estados.component.scss']
+  selector: 'app-ae-modulos-formativos',
+  templateUrl: './ae-modulos-formativos.component.html',
+  styleUrls: ['./ae-modulos-formativos.component.scss']
 })
-export class AeEstadosComponent {
+export class AeModulosFormativosComponent {
 
 
   loading: boolean = false;
@@ -42,7 +42,7 @@ export class AeEstadosComponent {
     }
   }
 
-  guardarEstado() {
+  guardarModuloFormativo() {
     if (this.parametroForm.valid) {
         const areaFormacion = this.parametroForm.value;
         if (this.acciones === 'actualizar') {
@@ -51,7 +51,7 @@ export class AeEstadosComponent {
               ...areaFormacion,
               id:this.config.data.data.id
             }
-            this.parametroService.actualizarEstados(params).subscribe(
+            this.parametroService.actualizarModulosFormativos(params).subscribe(
                 (response: any) => {
                     this.ref?.close();
                     Swal.fire({
@@ -70,7 +70,7 @@ export class AeEstadosComponent {
             );
         } else {
             // Modo creación
-            this.parametroService.guardarEstados(areaFormacion).subscribe(
+            this.parametroService.guardarModulosFormativos(areaFormacion).subscribe(
                 (response: any) => {
                     this.ref?.close();
                     Swal.fire({

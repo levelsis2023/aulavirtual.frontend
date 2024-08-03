@@ -3,21 +3,22 @@ import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../service/general.service';
 import Swal from 'sweetalert2';	
-import { AeCiclosComponent } from './ae-ciclos/ae-ciclos.component';
+import { AeModulosFormativosComponent } from './ae-modulos-formativos/ae-modulos-formativos.component';
+
 
 
 
 @Component({
-  selector: 'app-ciclos',
-  templateUrl: './ciclos.component.html',
-  styleUrls: ['./ciclos.component.scss']
+  selector: 'app-modulos-formativos',
+  templateUrl: './modulos-formativos.component.html',
+  styleUrls: ['./modulos-formativos.component.scss']
 })
-export class CiclosComponent {
+export class ModulosFormativosComponent {
 
 
   loading: boolean = false;
-  ciclosList: any[] = [];
-  originalciclosList: any[] = [];
+  moduloFormativoList: any[] = [];
+  originalmoduloFormativoList: any[] = [];
   ref: DynamicDialogRef | undefined;
 
   constructor(
@@ -27,52 +28,52 @@ export class CiclosComponent {
 
   ngOnInit(): void {
 
-    this.listarCiclos();
+    this.listarModulosFormativos();
 
   }
 
-  listarCiclos() {
-    this.areasDeFormacionService.getCiclos().subscribe((response: any) => {
+  listarModulosFormativos() {
+    this.areasDeFormacionService.getModulosFormativos().subscribe((response: any) => {
       
-        this.ciclosList = response;
-        this.originalciclosList = [...response];
+        this.moduloFormativoList = response;
+        this.originalmoduloFormativoList = [...response];
     });
 }
 
 
   navigateAddCurso() {
-    this.ref = this.dialogService.open(AeCiclosComponent, {
+    this.ref = this.dialogService.open(AeModulosFormativosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'add' }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCiclos();
+      this.listarModulosFormativos();
     });
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AeCiclosComponent, {
+    this.ref = this.dialogService.open(AeModulosFormativosComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'ver', data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCiclos();
+      this.listarModulosFormativos();
     });
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AeCiclosComponent, {
+    this.ref = this.dialogService.open(AeModulosFormativosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', data: data }
      });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCiclos();
+      this.listarModulosFormativos();
     });
   }
 
@@ -96,7 +97,7 @@ export class CiclosComponent {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.areasDeFormacionService.eliminarCiclos(id).subscribe(
+        this.areasDeFormacionService.eliminarModulosFormativos(id).subscribe(
           response => {
             Swal.fire({
               title: 'Eliminado',
@@ -116,7 +117,7 @@ export class CiclosComponent {
                 }
               }
             });
-            this.listarCiclos();
+            this.listarModulosFormativos();
           },
           error => {
             Swal.fire(
@@ -133,11 +134,11 @@ export class CiclosComponent {
   onGlobalFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
     if (!filterValue) {
-      this.ciclosList = [...this.originalciclosList];
+      this.moduloFormativoList = [...this.originalmoduloFormativoList];
       return;
     }
 
-    this.ciclosList = this.originalciclosList.filter(area =>
+    this.moduloFormativoList = this.originalmoduloFormativoList.filter(area =>
       (area.nombre.toLowerCase().includes(filterValue)) 
     );
   }

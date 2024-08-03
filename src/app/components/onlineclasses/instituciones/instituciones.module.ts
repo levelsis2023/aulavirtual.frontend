@@ -33,14 +33,6 @@ import { ConfiguracionesComponent } from './configuraciones/configuraciones.comp
 import { AsignaCursoDocenteComponent } from '../configuraciones/asigna-curso-docente/asigna-curso-docente.component';
 import { RegistroCursoDocenteComponent } from '../configuraciones/dialog/registro-curso-docente/registro-curso-docente.component';
 import { EditorModule } from 'primeng/editor';
-import { ModuloFormativoComponent } from './modulo-formativo/modulo-formativo.component';
-import { AeAreaFormacionComponent } from './modulo-formativo/ae-area-formacion/ae-area-formacion.component';
-import { CicloComponent } from './ciclo/ciclo.component';
-import { AeCiclosComponent } from './ciclo/ae-ciclos/ae-ciclos.component';
-import { EstadosComponent } from './estados/estados.component';
-import { AeEstadosComponent } from './estados/ae-estados/ae-estados.component';
-import { EstadosDeCursoComponent } from './estados-de-curso/estados-de-curso.component';
-import { AeEstadoDeCursoComponent } from './estados-de-curso/ae-estado-de-curso/ae-estado-de-curso.component';
 
 
 
@@ -53,15 +45,6 @@ import { AeEstadoDeCursoComponent } from './estados-de-curso/ae-estado-de-curso/
     ConfiguracionesComponent,    
     AsignaCursoDocenteComponent,
     RegistroCursoDocenteComponent,
-    ModuloFormativoComponent,
-    AeAreaFormacionComponent,
-    CicloComponent,
-    AeCiclosComponent,
-    EstadosComponent,
-    AeEstadosComponent,
-    EstadosDeCursoComponent,
-    AeEstadoDeCursoComponent,
-    
     
   ],
   imports: [

@@ -253,7 +253,7 @@ export class GeneralService {
         })
       );
   }
-  getEstados() {
+  getEstadoss() {
     return this.http
       .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=ESTADO CURSO`, { observe: 'response' })
       .pipe(
@@ -957,9 +957,9 @@ export class GeneralService {
 
 
 
-  getCiclos(parametro: any): Observable<ApiResponse> {
+  getCiclos(): Observable<ApiResponse> {
     return this.http
-    .get<ApiResponse>(`${this.baseUrl}preguntas/${this.helpersService.getDominioId()}`, { observe: 'response' })
+    .get<ApiResponse>(`${this.baseUrl}ciclos/${this.helpersService.getDominioId()}`, { observe: 'response' })
     .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
             console.log('HTTP Status Code:', response.status);
@@ -978,7 +978,7 @@ export class GeneralService {
 
 guardarCiclos(parametro: any): Observable<ApiResponse> {
 return this.http
-  .post<ApiResponse>(`${this.baseUrl}preguntas`, parametro, { observe: 'response' })
+  .post<ApiResponse>(`${this.baseUrl}ciclos/${this.helpersService.getDominioId()}`, parametro, { observe: 'response' })
   .pipe(
     tap((response: HttpResponse<ApiResponse>) => {
       console.log('HTTP Status Code:', response.status);
@@ -996,7 +996,7 @@ return this.http
 
 actualizarCiclos(parametro: any): Observable<ApiResponse> {
 return this.http
-  .put<ApiResponse>(`${this.baseUrl}preguntas/${parametro.id}`, parametro, { observe: 'response' })
+  .put<ApiResponse>(`${this.baseUrl}ciclos/${this.helpersService.getDominioId()}/${parametro.id}`, parametro, { observe: 'response' })
   .pipe(
     tap((response: HttpResponse<ApiResponse>) => {
       console.log('HTTP Status Code:', response.status);
@@ -1013,9 +1013,9 @@ return this.http
 }
 
 
-eliminarCiclos(id: number): Observable<ApiResponse> {
+eliminarCiclos(parametro: number): Observable<ApiResponse> {
 return this.http
-  .delete<ApiResponse>(`${this.baseUrl}preguntas/${id}`, { observe: 'response' })
+  .delete<ApiResponse>(`${this.baseUrl}ciclos/${this.helpersService.getDominioId()}/${parametro}`, { observe: 'response' })
   .pipe(
     tap((response: HttpResponse<ApiResponse>) => {
       console.log('HTTP Status Code:', response.status);
@@ -1034,9 +1034,10 @@ return this.http
 
 
 
-getEstadoDeCurso(parametro: any): Observable<ApiResponse> {
+getEstadoDeCurso(): Observable<ApiResponse> {
   return this.http
-  .get<ApiResponse>(`${this.baseUrl}preguntas/${this.helpersService.getDominioId()}`, { observe: 'response' })
+  .get<ApiResponse>(`${this.baseUrl}estados-curso/${this.helpersService.getDominioId()}`, { observe: 'response' })
+
   .pipe(
       tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
@@ -1055,7 +1056,7 @@ getEstadoDeCurso(parametro: any): Observable<ApiResponse> {
 
 guardarEstadoDeCurso(parametro: any): Observable<ApiResponse> {
 return this.http
-.post<ApiResponse>(`${this.baseUrl}preguntas`, parametro, { observe: 'response' })
+.post<ApiResponse>(`${this.baseUrl}estados-curso/${this.helpersService.getDominioId()}`, parametro, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1073,8 +1074,7 @@ return this.http
 
 actualizarEstadoDeCurso(parametro: any): Observable<ApiResponse> {
 return this.http
-.put<ApiResponse>(`${this.baseUrl}preguntas/${parametro.id}`, parametro, { observe: 'response' })
-.pipe(
+.put<ApiResponse>(`${this.baseUrl}estados-curso/${this.helpersService.getDominioId()}/${parametro.id}`, parametro, { observe: 'response' }).pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
   }),
@@ -1090,9 +1090,9 @@ return this.http
 }
 
 
-eliminarEstadoDeCurso(id: number): Observable<ApiResponse> {
+eliminarEstadoDeCurso(parametro: number): Observable<ApiResponse> {
 return this.http
-.delete<ApiResponse>(`${this.baseUrl}preguntas/${id}`, { observe: 'response' })
+.delete<ApiResponse>(`${this.baseUrl}estados-curso/${this.helpersService.getDominioId()}/${parametro}`, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1110,9 +1110,9 @@ return this.http
 
 
 
-getEstadoss(parametro: any): Observable<ApiResponse> {
+getEstados(): Observable<ApiResponse> {
   return this.http
-  .get<ApiResponse>(`${this.baseUrl}preguntas/${this.helpersService.getDominioId()}/${parametro.id}`, { observe: 'response' })
+  .get<ApiResponse>(`${this.baseUrl}estados/${this.helpersService.getDominioId()}`, { observe: 'response' })
   .pipe(
       tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
@@ -1131,7 +1131,7 @@ getEstadoss(parametro: any): Observable<ApiResponse> {
 
 guardarEstados(parametro: any): Observable<ApiResponse> {
 return this.http
-.post<ApiResponse>(`${this.baseUrl}preguntas`, parametro, { observe: 'response' })
+.post<ApiResponse>(`${this.baseUrl}estados/${this.helpersService.getDominioId()}`, parametro, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1149,7 +1149,7 @@ return this.http
 
 actualizarEstados(parametro: any): Observable<ApiResponse> {
 return this.http
-.put<ApiResponse>(`${this.baseUrl}preguntas/${parametro.id}`, parametro, { observe: 'response' })
+.put<ApiResponse>(`${this.baseUrl}estados/${this.helpersService.getDominioId()}/${parametro.id}`, parametro, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1166,9 +1166,9 @@ return this.http
 }
 
 
-eliminarEstados(id: number): Observable<ApiResponse> {
+eliminarEstados(parametro: number): Observable<ApiResponse> {
 return this.http
-.delete<ApiResponse>(`${this.baseUrl}preguntas/${id}`, { observe: 'response' })
+.delete<ApiResponse>(`${this.baseUrl}estados/${this.helpersService.getDominioId()}/${parametro}`, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1186,7 +1186,7 @@ return this.http
 
 
 
-getModulosFormativos(parametro: any): Observable<ApiResponse> {
+getModulosFormativos(): Observable<ApiResponse> {
   return this.http
   .get<ApiResponse>(`${this.baseUrl}modulos-formativos/${this.helpersService.getDominioId()}`, { observe: 'response' })
   .pipe(
@@ -1207,7 +1207,7 @@ getModulosFormativos(parametro: any): Observable<ApiResponse> {
 
 guardarModulosFormativos(parametro: any): Observable<ApiResponse> {
 return this.http
-.post<ApiResponse>(`${this.baseUrl}modulos-formativos`, parametro, { observe: 'response' })
+.post<ApiResponse>(`${this.baseUrl}modulos-formativos/${this.helpersService.getDominioId()}`, parametro, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1225,7 +1225,7 @@ return this.http
 
 actualizarModulosFormativos(parametro: any): Observable<ApiResponse> {
 return this.http
-.put<ApiResponse>(`${this.baseUrl}modulos-formativos/${parametro.id}`, parametro, { observe: 'response' })
+.put<ApiResponse>(`${this.baseUrl}modulos-formativos/${this.helpersService.getDominioId()}/${parametro.id}`, parametro, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);
@@ -1242,9 +1242,9 @@ return this.http
 }
 
 
-eliminarModulosFormativos(id: number): Observable<ApiResponse> {
+eliminarModulosFormativos(parametro: number): Observable<ApiResponse> {
 return this.http
-.delete<ApiResponse>(`${this.baseUrl}modulos-formativos/${id}`, { observe: 'response' })
+.delete<ApiResponse>(`${this.baseUrl}modulos-formativos/${this.helpersService.getDominioId()}/${parametro}`, { observe: 'response' })
 .pipe(
   tap((response: HttpResponse<ApiResponse>) => {
     console.log('HTTP Status Code:', response.status);

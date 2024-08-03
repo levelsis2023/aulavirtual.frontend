@@ -6,11 +6,11 @@ import Swal from 'sweetalert2';
 import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
-  selector: 'app-ae-estados',
-  templateUrl: './ae-estados.component.html',
-  styleUrls: ['./ae-estados.component.scss']
+  selector: 'app-ae-estado-curso',
+  templateUrl: './ae-estado-curso.component.html',
+  styleUrls: ['./ae-estado-curso.component.scss']
 })
-export class AeEstadosComponent {
+export class AeEstadoCursoComponent {
 
 
   loading: boolean = false;
@@ -42,7 +42,7 @@ export class AeEstadosComponent {
     }
   }
 
-  guardarEstado() {
+  guardarEstadoCurso() {
     if (this.parametroForm.valid) {
         const areaFormacion = this.parametroForm.value;
         if (this.acciones === 'actualizar') {
@@ -51,7 +51,7 @@ export class AeEstadosComponent {
               ...areaFormacion,
               id:this.config.data.data.id
             }
-            this.parametroService.actualizarEstados(params).subscribe(
+            this.parametroService.actualizarEstadoDeCurso(params).subscribe(
                 (response: any) => {
                     this.ref?.close();
                     Swal.fire({
@@ -70,7 +70,7 @@ export class AeEstadosComponent {
             );
         } else {
             // Modo creación
-            this.parametroService.guardarEstados(areaFormacion).subscribe(
+            this.parametroService.guardarEstadoDeCurso(areaFormacion).subscribe(
                 (response: any) => {
                     this.ref?.close();
                     Swal.fire({
