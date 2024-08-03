@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { GeneralService } from '../../../service/general.service';
 import { an } from '@fullcalendar/core/internal-common';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -69,13 +68,8 @@ export class RegMaestrosComponent {
       }
     }
   }
-
-
-
-
-
   onItemSelect(event: any) {
-    const selectedItem = event; // Assuming event contains the selected item
+    const selectedItem = event; 
 
     this.parametroDatos.txAbreviatura = selectedItem.value.tx_abreviatura;
   }

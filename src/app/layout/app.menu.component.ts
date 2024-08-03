@@ -277,51 +277,53 @@ export class AppMenuComponent implements OnInit {
                             //     icon: 'pi pi-users',
                             //     routerLink: ['/pl-virtual/bandeja-usuarios']
                             // },
-                            // {
-                            //     label: 'Mantenimientos',
-                            //     icon: 'pi pi-wrench',
-                            //     items: [
-
-
-                            //         {
-                            //             label: 'Maestros',
-                            //             icon: 'pi pi-send',
-                            //             routerLink: ['/pl-virtual/parametro-maestro']
-                            //         },
-
-                            //         /* {
-                            //              label: 'Áreas de Formación',
-                            //              icon: 'pi pi-briefcase',
-                            //              routerLink: ['/pl-virtual/area-formacion']
-                            //          },
-                            //          {
-                            //              label: 'Unidades Formativas',
-                            //              icon: 'pi pi-credit-card',
-                            //              routerLink: ['/pl-virtual/unidades-formativas']
-                            //          },
-                            //          {
-                            //              label: 'Unidades Didácticas',
-                            //              icon: 'pi pi-envelope',
-                            //              routerLink: ['/pl-virtual/unidades-didacticas']
-                            //          },
-                            //          {
-                            //              label: 'Estado de Cursos',
-                            //              icon: 'pi pi-id-card',
-                            //              routerLink: ['/pl-virtual/estado-cursos']
-                            //          },
-                            //          {
-                            //              label: 'Tipo de Curso',
-                            //              icon: 'pi pi-inbox',
-                            //              routerLink: ['/pl-virtual/tipo-curso']
-                            //          }, */
-                            //         /* {
-                            //              label: 'Configuraciones',
-                            //              icon: 'pi pi-wrench',
-                            //              routerLink: ['/pl-virtual/configuraciones']
-                            //          },*/
+                            {
+                                label: 'Mantenimientos',
+                                icon: 'pi pi-wrench',
+                                items: [
+                                    {
+                                        label: 'Maestros',
+                                        icon: 'pi pi-send',
+                                        routerLink: ['/pl-virtual/parametro-maestro']
+                                    },
+                                    {
+                                        label: 'Áreas de Formación',
+                                        icon: 'pi pi-briefcase',
+                                        routerLink: ['/pl-virtual/area-formacion']
+                                    },
+                                    {
+                                        label: 'Unidades Formativas',
+                                        icon: 'pi pi-credit-card',
+                                        routerLink: ['/pl-virtual/unidades-formativas']
+                                    },
+                                    {
+                                        label: 'Unidades Didácticas',
+                                        icon: 'pi pi-envelope',
+                                        routerLink: ['/pl-virtual/unidades-didacticas']
+                                    },
+                                    {
+                                        label: 'Estado de Cursos',
+                                        icon: 'pi pi-id-card',
+                                        routerLink: ['/pl-virtual/estado-cursos']
+                                    },
+                                    {
+                                        label: 'Tipo de Curso',
+                                        icon: 'pi pi-inbox',
+                                        routerLink: ['/pl-virtual/tipo-curso']
+                                    },
+                                    {
+                                         label: 'Configuraciones',
+                                         icon: 'pi pi-wrench',
+                                         routerLink: ['/pl-virtual/configuraciones']
+                                     },
+                                ]
+                            }
+                                    
+                                    
 
                             //     ]
                             // },
+                            ,
                             this.tienePermiso('aula_virtual_carreras')?{
                                 label: 'Carreras técnicas',
                                 icon: 'pi pi-book',
