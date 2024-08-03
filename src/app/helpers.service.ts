@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
 export class HelpersService {
+  formatDate(value: any) {
+    const date = new Date(value);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}-${month}-${day}`;
+  }
 
   constructor(
     private router: Router
@@ -61,5 +68,24 @@ export class HelpersService {
     }
     return 1
   }
+  showSuccessMessage(message: string) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Correcto',
+      text: message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+  showErrorMessage(message: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
 
 }

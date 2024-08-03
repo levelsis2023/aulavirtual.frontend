@@ -14,6 +14,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { SeleccionarAlumnosCursoComponent } from '../seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
 import { MarcarAsistenciaCursoComponent } from '../marcar-asistencia-curso/marcar-asistencia-curso.component';
 import { VerGrupoEvaluacionesComponent } from './opciones/ver-g-ev/ver-g-ev.component';
+import { CrearForoCursoComponent } from '../crear-foro-curso/crear-foro-curso.component';
 @Component({
   selector: 'app-ver-curso-de-carrera',
   templateUrl: './ver-curso-de-carrera.component.html',
@@ -228,8 +229,15 @@ export class VerCursoDeCarreraComponent {
     });
   }
 
-  verForos(foros: string) {
-    console.log(foros);
+  verForos(curso: any) {
+    this.ref = this.dialogService.open(CrearForoCursoComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { data: curso }
+    });
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarCursos(); // Recargar los datos de la tabla
+    })
   }
 
  

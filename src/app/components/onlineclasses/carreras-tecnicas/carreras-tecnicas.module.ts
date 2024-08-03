@@ -46,7 +46,8 @@ import { VerListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/op
 import { AgregarEditarListadoDePreguntasComponent } from './dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
 import {SeleccionarHorarioCarreraTecnicaComponent} from './dialog/horario-carrera-tecnica/seleccionar-horario-carrera-tecnica.component';
 import { SeleccionarAlumnosCursoComponent } from './dialog/seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
-import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso/marcar-asistencia-curso.component'
+import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso/marcar-asistencia-curso.component';
+import { CrearForoCursoComponent } from './dialog/crear-foro-curso/crear-foro-curso.component'
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso
     SeleccionarHorarioCarreraTecnicaComponent,
     SeleccionarAlumnosCursoComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent, VerListadoDeEvaluacionesPorGrupoComponent,
      AgregarEditarListaDeEvaluacionesPorGrupoComponent, VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent,
-    MarcarAsistenciaCursoComponent
+    MarcarAsistenciaCursoComponent,
+    CrearForoCursoComponent
   ],
   imports: [
     CommonModule,

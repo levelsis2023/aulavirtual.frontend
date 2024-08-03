@@ -49,7 +49,6 @@ export class RegDocenteComponent {
 
   public DocenteForm: FormGroup;
   public selectedFile: File | null = null;
-  public base64: string | null = null;
   constructor(
 		private router: Router,
     private ref: DynamicDialogRef,
@@ -67,18 +66,15 @@ export class RegDocenteComponent {
     this.DocenteForm = this.formBuilder.group({
       codigo: ['',Validators.required],
       nombres: ['',Validators.required],
-      usuario: ['', Validators.required],
-      clave: ['', Validators.required],
+      contraseña: ['', Validators.required],
       celular: ['', Validators.required],
       profesion: ['', Validators.required],
-      edad: [0, Validators.required],
       genero: ['', Validators.required],
       tipo_documento: ['', Validators.required],
       doc_identidad: ['', Validators.required],
-      vinculo_laboral: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
       email: ['', Validators.required],
-      // foto: ['', Validators.required]
+      foto: ['']
     });
   }
 
@@ -93,11 +89,10 @@ export class RegDocenteComponent {
       { name: 'Masculino', value:1 },
       { name: 'Femenino', value:2}
     ]
-    console.log(this.DocenteForm.get('nombres')?.value);
 
   
     if (this.translate) {
-      this.translateChange('es'); // Cambia a español como ejemplo
+      this.translateChange('es'); 
     } else {
       console.error('TranslateService is not initialized.');
     }
@@ -118,39 +113,47 @@ registrarDocente(){
     return;
   }
 
-  this.docenteService.registrarDocentes({
-    codigo: this.DocenteForm.get('codigo')?.value,
-    nombres: this.DocenteForm.get('nombres')?.value,
-    usuario: this.DocenteForm.get('usuario')?.value,
-    clave: this.DocenteForm.get('clave')?.value,
-    celular: this.DocenteForm.get('celular')?.value,
-    profesion: this.DocenteForm.get('profesion')?.value,
-    vinculo_laboral: this.DocenteForm.get('vinculo_laboral')?.value,
-    tipo_documento: this.DocenteForm.get('tipo_documento')?.value,
-    doc_identidad: this.DocenteForm.get('doc_identidad')?.value,
-    fecha_nacimiento: this.DocenteForm.get('fecha_nacimiento')?.value,
-    edad: this.DocenteForm.get('edad')?.value,
-    genero: this.DocenteForm.get('genero')?.value,
-    foto: this.base64,
-    roles: 'seguridad,aula_virtual',
-    email: this.DocenteForm.get('email')?.value,
-    domain_id: this.domain_id
-    //this.DocenteForm.get('roles')?.value
-    // foto: this.DocenteForm.get('foto')?.value
-  }).subscribe(
+  const formData = new FormData();
+  formData.append('codigo', this.DocenteForm.get('codigo')?.value);
+  formData.append('nombres', this.DocenteForm.get('nombres')?.value);
+  formData.append('usuario', this.DocenteForm.get('usuario')?.value);
+  formData.append('contraseña', this.DocenteForm.get('contraseña')?.value);
+  formData.append('celular', this.DocenteForm.get('celular')?.value);
+  formData.append('profesion', this.DocenteForm.get('profesion')?.value);
+  formData.append('tipo_documento', this.DocenteForm.get('tipo_documento')?.value);
+  formData.append('doc_identidad', this.DocenteForm.get('doc_identidad')?.value);
+  formData.append('fecha_nacimiento', this.DocenteForm.get('fecha_nacimiento')?.value);
+  formData.append('genero', this.DocenteForm.get('genero')?.value);
+  formData.append('foto', this.DocenteForm.get('foto')?.value);
+  formData.append('roles', 'seguridad,aula_virtual');
+  formData.append('email', this.DocenteForm.get('email')?.value);
+  formData.append('domain_id', this.domain_id.toString());
+
+
+  this.docenteService.registrarDocentes(formData).subscribe(
     (res:any)=>{
-      if(res.Exito){
-        Swal.fire({
-          title: "Registrado correctamente!",
-          // text: ".",
-          icon: "success"
-        });         
+      
         console.log(res);
-        this.closeModal();
-      }
+        if(res.status == 200){
+          this.helpersService.showErrorMessage(res.message);
+          this.closeModal();
+        }
+      
+
+      // if(res.Exito){
+      //   Swal.fire({
+      //     title: "Registrado correctamente!",
+      //     // text: ".",
+      //     icon: "success"
+      //   });         
+      //   console.log(res);
+      //   this.closeModal();
+      // }
    
     },(error:any)=>{
       console.log(error);
+      this.helpersService.showErrorMessage('Error al registrar');
+
     })
   console.log(this.DocenteForm.value);
   
@@ -159,16 +162,11 @@ registrarDocente(){
 onFileChange(event: any) {
   console.log(event)
   const file = event.files[0];
-    if (file) {
-      console.log('entro')
-      this.selectedFile = file;
-      const reader = new FileReader();
-      console.log(this.selectedFile)
-      reader.onload = () => {
-        this.base64 = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
+  //save file in variable
+  this.DocenteForm.patchValue({
+    foto: file
+  });
+
 }
 
 cambiarIdioma() {

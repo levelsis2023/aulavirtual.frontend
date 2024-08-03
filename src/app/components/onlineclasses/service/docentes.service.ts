@@ -32,8 +32,7 @@ export class DocenteService {
     }
 
     registrarDocentes(data:any):Observable<any>{
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post<any>(`${this.baseUrl}docentes/registrar`,data, {headers: headers});
+        return this.http.post<any>(`${this.baseUrl}docentes/registrar`,data);
     }
 
     actualizarDocentes(data:any):Observable<any>{
