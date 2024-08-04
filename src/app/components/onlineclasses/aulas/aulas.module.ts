@@ -26,13 +26,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RegistraUsuarioComponent } from './dialog/registra-usuario/registra-usuario.component';
 import { AulasComponent } from './aulas.component';
 import { AulasRoutingModule } from './aulas-routing-module';
-
+import { CrearAulaComponentComponent } from './crear-aula-component/crear-aula-component.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { CrearAulaDisponibilidadComponent } from './crear-aula-disponibilidad/crear-aula-disponibilidad.component';
 @NgModule({
   declarations: [
     AulasComponent,
-    RegistraUsuarioComponent
+    RegistraUsuarioComponent,
+    CrearAulaComponentComponent,
+    CrearAulaDisponibilidadComponent
   ],
   imports: [
+    NgxSpinnerModule,
     CommonModule,
     PanelModule,
     AulasRoutingModule,

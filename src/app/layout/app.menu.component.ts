@@ -307,9 +307,9 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/pl-virtual/ciclos']
                                     },
                                     {
-                                         label: 'Configuraciones',
+                                         label: 'Aulas',
                                          icon: 'pi pi-wrench',
-                                         routerLink: ['/pl-virtual/configuraciones']
+                                         routerLink: ['/pl-virtual/aulas']
                                      },
                                 ]
                             }

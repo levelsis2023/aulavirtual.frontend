@@ -1,0 +1,37 @@
+<p-panel>
+    <!-- if is loading add preloader-->
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Alumno</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <form [formGroup]="aulaForm" (ngSubmit)="saveForm()">
+            <div class="row mb-4">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="nombre" pInputText formControlName="nombre">
+                            <label for="nombre">Nombre del Aula</label>
+                        </span>
+                        <small style="color: brown;"
+                            *ngIf="aulaForm.get('nombre')?.invalid && aulaForm.get('nombre')?.touched">Campo
+                            obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="direccion" pInputText formControlName="direccion">
+                            <label for="direccion">Ubicacion</label>
+                        </span>
+                        <small style="color: brown;"
+                            *ngIf="aulaForm.get('direccion')?.invalid && aulaForm.get('direccion')?.touched">Campo
+                            obligatorio *</small>
+                    </div> 
+                </div>
+            </div>
+            <button type="submit" pButton pRipple label="Guardar" [disabled]="!aulaForm.valid" class="p-button-success"></button>
+        </form>
+        <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="#fff" type="ball-spin"></ngx-spinner>
+
+    </ng-template>
+</p-panel>
