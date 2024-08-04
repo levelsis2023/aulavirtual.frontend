@@ -49,6 +49,7 @@ import { SeleccionarAlumnosCursoComponent } from './dialog/seleccionar-alumnos-c
 import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso/marcar-asistencia-curso.component';
 import { CrearForoCursoComponent } from './dialog/crear-foro-curso/crear-foro-curso.component'
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     TranslateModule,
     ReactiveFormsModule,
     FullCalendarModule,
+    CheckboxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 

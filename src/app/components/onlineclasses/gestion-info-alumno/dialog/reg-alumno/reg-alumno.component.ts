@@ -81,6 +81,7 @@ export class RegAlumnoComponent {
             nombres: ['', Validators.required],
             apellidos: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
+            contraseña: ['', Validators.required],
             nroCelular: [
                 '',
                 [Validators.required, Validators.pattern(/^[0-9]{9}$/)],
@@ -123,6 +124,7 @@ export class RegAlumnoComponent {
                     nroCelular: this.alumno.celular,
                     carreraId: this.alumno.carrera_id,
                     cicloId: this.alumno.ciclo_id,
+                    contraseña: this.alumno.contraseña,
                     // edad: this.getAge(this.alumno.fecha_nacimiento),
                     direccion: this.alumno.direccion,
                     fechaNacimiento: new Date(this.alumno.fecha_nacimiento),
