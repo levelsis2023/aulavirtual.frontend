@@ -371,11 +371,11 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/apps/calendar']
                                     },
 
-                                    // {
-                                    //     label: 'Foros',
-                                    //     icon: 'pi pi-comment',
-                                    //     routerLink: ['/apps/tasklist']
-                                    // },
+                                    {
+                                        label: 'Foros',
+                                        icon: 'pi pi-comment',
+                                        routerLink: ['/pl-virtual/foro-alumnos']
+                                    },
                                     // {
                                     //     label: 'Record de pago',
                                     //     icon: 'pi pi-money-bill',

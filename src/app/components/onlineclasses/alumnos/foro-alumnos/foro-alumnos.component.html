@@ -1,0 +1,40 @@
+<p-panel header="">
+    <ng-template pTemplate="header">
+      <span class="text-primary font-semibold text-xl">Foros</span>
+    </ng-template>
+  
+    <div *ngFor="let foro of foros">
+      <div class="forum-header">
+        <h2>Curso:{{ foro.curso_name }}</h2>
+        <h3>Docente:{{ foro.docente_name }}</h3>
+      </div>
+      <div *ngFor="let foroDetail of foro.foros" class="forum-detail">
+        <div class="forum-dates">
+          <i class="pi pi-calendar"></i>
+          <span>Inicio: {{ foroDetail.fecha_inicio }} | Fin: {{ foroDetail.fecha_fin }}</span>
+          <span [ngClass]="getDaysRemainingClass(foroDetail.fecha_fin)">
+            ({{ getDaysRemaining(foroDetail.fecha_fin) }} días restantes)
+          </span>
+        </div>
+        <ul>
+          <li *ngFor="let respuesta of foroDetail.respuestas">
+            <strong>Alumno:</strong> {{ respuesta.alumno }} <br>
+            <strong>Respuesta:</strong> {{ respuesta.respuesta }} <br>
+            <strong>Fecha:</strong> {{ respuesta.fecha }}
+          </li>
+        </ul>
+        <button (click)="selectForo(foroDetail)" [disabled]="isExpired(foroDetail.fecha_fin)" [ngClass]="{'disabled': isExpired(foroDetail.fecha_fin)}">
+            Responder
+          </button>
+        </div>
+    </div>
+  </p-panel>
+  
+  <p-dialog header="Dejar una respuesta" [(visible)]="selectedForo" [modal]="true">
+    <p-editor [(ngModel)]="newResponse" styleClass="rich-text-editor"></p-editor>
+    <p-footer>
+      <button pButton type="button" (click)="submitResponse()" label="Enviar"></button>
+      <button pButton type="button" (click)="selectedForo = null" label="Cancelar"></button>
+    </p-footer>
+  </p-dialog>
+  

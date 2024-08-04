@@ -10,10 +10,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingInterceptorService } from 'src/app/layout/service/loading-interceptor.service';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableSelectCursosComponent } from './utils/table-select-cursos/table-select-cursos.component';
 import { RegDocumentosAlumnoComponent } from './gestion-info-alumno/dialog/reg-documentos-alumno/reg-documentos-alumno.component';
+import { ForoAlumnosComponent } from './alumnos/foro-alumnos/foro-alumnos.component';
+import { PanelModule } from 'primeng/panel';
+import { EditorModule } from 'primeng/editor'; 
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
@@ -22,6 +27,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     
+  
+    ForoAlumnosComponent
   ],
   providers: [DialogService,
     {
@@ -36,6 +43,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CommonModule,
     OnlineClassesRoutingModule,
     CheckboxModule,
+    PanelModule,
+    FormsModule,
+    EditorModule, 
     TranslateModule.forRoot({
       loader: {
           //defaultLanguage: 'es',

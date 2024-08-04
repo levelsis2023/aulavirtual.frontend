@@ -56,7 +56,9 @@ const routes: Routes = [];
     { path: 'aula', data: { breadcrumb: 'Aula' }, loadChildren: () => import('../onlineclasses/aulas/aulas.module').then(m => m.AulasModule) },
 
     { path: 'capacitaciones', data: { breadcrumb: 'Lista de capacitaciones' }, loadChildren: () => import('../onlineclasses/capacitaciones/capacitacion/capacitaciones.module').then(m => m.CapacitacionesModule) },
-
+    {
+      path:'foro-alumnos',data:{breadcrumb:'Foro de alumnos'},loadChildren:()=>import('../onlineclasses/alumnos/foro-alumnos/foro-alumnos.module').then(m=>m.ForoAlumnosRoutingModule)
+    },
     { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) }, 
     { path: 'registro-de-cursos', data: { breadcrumb: 'Registro de cursos' }, loadChildren: () => import('../onlineclasses/registro-cursos/registro-cursos.module').then(m => m.RegistroCursosModule) }, 
     { path: 'datos-personales', data: { breadcrumb: 'Datos personales' }, loadChildren: () => import('../onlineclasses/registro-alumnos/registro-alumnos.module').then(m => m.RegistroAlumnosModule) }, 

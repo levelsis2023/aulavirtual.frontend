@@ -1,0 +1,110 @@
+/* General panel styles */
+p-panel {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    background-color: #f5f5f5;
+  }
+  
+  p-panel .text-primary {
+    color: #007bff;
+  }
+  
+  /* Header styles */
+  p-panel .ui-panel-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .forum-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .forum-header h2, .forum-header h3 {
+    margin: 0;
+  }
+  
+  .forum-detail {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Forum dates styles */
+  .forum-dates {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .forum-dates i.pi-calendar {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+  
+  .forum-dates span {
+    margin-right: 1rem;
+  }
+  
+  /* Days remaining styles */
+  .days-remaining {
+    font-weight: bold;
+  }
+  
+  .days-remaining.due-soon {
+    color: #ff5722; /* Red for urgent */
+  }
+  
+  .days-remaining.on-time {
+    color: #4caf50; /* Green for on-time */
+  }
+  
+  .days-remaining.overdue {
+    color: #f44336; /* Darker red for overdue */
+  }
+  
+  /* Button styles */
+  button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, opacity 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button.disabled {
+    background-color: #6c757d; /* Grey background for disabled */
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  button:disabled {
+    background-color: #6c757d; /* Same grey background */
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  /* Dialog styles */
+  p-dialog {
+    max-width: 600px;
+    border-radius: 8px;
+  }
+  
+  .p-editor {
+    margin-bottom: 1rem;
+  }
+  

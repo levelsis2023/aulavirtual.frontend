@@ -34,7 +34,8 @@ export class CrearForoCursoComponent {
         descripcion: this.foroForm.get('descripcion')?.value,
         fecha_inicio: this.helperService.formatDate(this.foroForm.get('fechaInicio')?.value),
         fecha_fin: this.helperService.formatDate(this.foroForm.get('fechaFin')?.value),
-        id_curso: this.config.data.data.id
+        id_curso: this.config.data.data.id,
+        domain_id: this.helperService.getDominioId(),
       }
       this.foroService.saveForo(data).subscribe((response: any) => {
         console.log(response);
