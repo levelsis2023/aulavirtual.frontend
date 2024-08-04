@@ -29,5 +29,11 @@ export class AulaService{
         return this.http.get(`${this.baseUrl}aulas/${domain_id}`);
     }deleteAula(id:number):Observable<any>{
         return this.http.delete(`${this.baseUrl}aulas/${id}`);
+    }saveDisponibilidad(data:any):Observable<any>{
+        return this.http.post(`${this.baseUrl}aulas/disponibilidad`,data);
+    }getDisponibilidad(aula_id:number):Observable<any>{
+        return this.http.get(`${this.baseUrl}aulas/disponibilidad/${aula_id}`);
+    }deleteDisponibilidad(id:number):Observable<any>{
+        return this.http.delete(`${this.baseUrl}aulas/disponibilidad/${id}`);
     }
 }

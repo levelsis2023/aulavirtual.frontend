@@ -29,6 +29,10 @@ import { AulasRoutingModule } from './aulas-routing-module';
 import { CrearAulaComponentComponent } from './crear-aula-component/crear-aula-component.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { CrearAulaDisponibilidadComponent } from './crear-aula-disponibilidad/crear-aula-disponibilidad.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CheckboxModule } from 'primeng/checkbox';
+
+//import checkbox 
 @NgModule({
   declarations: [
     AulasComponent,
@@ -38,11 +42,13 @@ import { CrearAulaDisponibilidadComponent } from './crear-aula-disponibilidad/cr
   ],
   imports: [
     NgxSpinnerModule,
+    FullCalendarModule,
     CommonModule,
     PanelModule,
     AulasRoutingModule,
     FormsModule,
     CalendarModule,
+    CheckboxModule,
     TableModule,
     RatingModule,
     ButtonModule,

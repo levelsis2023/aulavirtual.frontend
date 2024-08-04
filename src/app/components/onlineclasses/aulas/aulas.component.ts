@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CrearAulaComponentComponent } from './crear-aula-component/crear-aula-component.component';
 import { HelpersService } from 'src/app/helpers.service';
 import { AulaService } from '../service/aula.service';
+import { CrearAulaDisponibilidadComponent } from './crear-aula-disponibilidad/crear-aula-disponibilidad.component';
 
 @Component({
   selector: 'app-aulas',
@@ -49,7 +50,11 @@ export class AulasComponent {
     });
   }
   navigateToDisponibilidad(aula: any) {
-    this.router.navigate(['/aulas/disponibilidad', aula.id]);
+    this.ref = this.dialogService.open(CrearAulaDisponibilidadComponent, {  
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: aula
+    });
   }
   navigateToNuevo() {
     this.ref = this.dialogService.open(CrearAulaComponentComponent, {  
