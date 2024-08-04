@@ -46,7 +46,6 @@ import { EditorModule } from 'primeng/editor';
     AsignaCursoDocenteComponent,
     RegistroCursoDocenteComponent,
     
-    
   ],
   imports: [
       CommonModule,

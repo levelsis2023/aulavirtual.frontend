@@ -84,12 +84,12 @@ export class AppMenuComponent implements OnInit {
                         label: 'SEGURIDAD',
                         icon: 'pi pi-play',
                         items: [
-                            // ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
-                            //     label: 'Configuración',
-                            //     icon: 'pi pi-fw pi-building',
-                            //     routerLink: ['/pl-virtual/lista-postulantes'],
-                            // }
-                            // ] : [],
+                           ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
+                                label: 'Configuración',
+                               icon: 'pi pi-fw pi-building',
+                                 routerLink: ['/pl-virtual/lista-postulantes'],
+                             }
+                            ] : [],
 
                             ...(this.tienePermiso('ver_seguridad_roles')) ? [{
 
@@ -282,24 +282,19 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-wrench',
                                 items: [
                                     {
-                                        label: 'Maestros',
-                                        icon: 'pi pi-send',
-                                        routerLink: ['/pl-virtual/parametro-maestro']
-                                    },
-                                    {
                                         label: 'Áreas de Formación',
                                         icon: 'pi pi-briefcase',
                                         routerLink: ['/pl-virtual/area-formacion']
                                     },
                                     {
-                                        label: 'Unidades Formativas',
+                                        label: 'Modulos Formativos',
                                         icon: 'pi pi-credit-card',
-                                        routerLink: ['/pl-virtual/unidades-formativas']
+                                        routerLink: ['/pl-virtual/modulos-formativos']
                                     },
                                     {
-                                        label: 'Unidades Didácticas',
+                                        label: 'Estados',
                                         icon: 'pi pi-envelope',
-                                        routerLink: ['/pl-virtual/unidades-didacticas']
+                                        routerLink: ['/pl-virtual/estados']
                                     },
                                     {
                                         label: 'Estado de Cursos',
@@ -307,9 +302,9 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['/pl-virtual/estado-cursos']
                                     },
                                     {
-                                        label: 'Tipo de Curso',
+                                        label: 'Ciclos',
                                         icon: 'pi pi-inbox',
-                                        routerLink: ['/pl-virtual/tipo-curso']
+                                        routerLink: ['/pl-virtual/ciclos']
                                     },
                                     {
                                          label: 'Configuraciones',

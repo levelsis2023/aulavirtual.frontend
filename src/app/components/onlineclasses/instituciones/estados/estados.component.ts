@@ -3,20 +3,22 @@ import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../service/general.service';
 import Swal from 'sweetalert2';	
-import { AeAreaFormacionComponent } from './ae-area-formacion/ae-area-formacion.component';
+import { AeEstadosComponent } from './ae-estados/ae-estados.component';
+
+
+
 
 
 @Component({
-  selector: 'app-area-formacion',
-  templateUrl: './area-formacion.component.html',
-  styleUrls: ['./area-formacion.component.scss']
+  selector: 'app-estados',
+  templateUrl: './estados.component.html',
+  styleUrls: ['./estados.component.scss']
 })
-export class AreaFormacionComponent {
-
+export class EstadosComponent {
 
   loading: boolean = false;
-  areaFormacionList: any[] = [];
-  originalareaFormacionList: any[] = [];
+  estadoList: any[] = [];
+  originalestadoList: any[] = [];
   ref: DynamicDialogRef | undefined;
 
   constructor(
@@ -26,52 +28,52 @@ export class AreaFormacionComponent {
 
   ngOnInit(): void {
 
-    this.listarAreasDeFormacion();
+    this.listarEstados();
 
   }
 
-  listarAreasDeFormacion() {
-    this.areasDeFormacionService.getAreasDeFormacion().subscribe((response: any) => {
+  listarEstados() {
+    this.areasDeFormacionService.getEstados().subscribe((response: any) => {
       
-        this.areaFormacionList = response;
-        this.originalareaFormacionList = [...response];
+        this.estadoList = response;
+        this.originalestadoList = [...response];
     });
 }
 
 
   navigateAddCurso() {
-    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+    this.ref = this.dialogService.open(AeEstadosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'add' }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarAreasDeFormacion();
+      this.listarEstados();
     });
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+    this.ref = this.dialogService.open(AeEstadosComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'ver', data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarAreasDeFormacion();
+      this.listarEstados();
     });
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+    this.ref = this.dialogService.open(AeEstadosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', data: data }
      });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarAreasDeFormacion();
+      this.listarEstados();
     });
   }
 
@@ -95,7 +97,7 @@ export class AreaFormacionComponent {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.areasDeFormacionService.eliminarAreasDeFormacion(id).subscribe(
+        this.areasDeFormacionService.eliminarEstados(id).subscribe(
           response => {
             Swal.fire({
               title: 'Eliminado',
@@ -115,7 +117,7 @@ export class AreaFormacionComponent {
                 }
               }
             });
-            this.listarAreasDeFormacion();
+            this.listarEstados();
           },
           error => {
             Swal.fire(
@@ -132,11 +134,11 @@ export class AreaFormacionComponent {
   onGlobalFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
     if (!filterValue) {
-      this.areaFormacionList = [...this.originalareaFormacionList];
+      this.estadoList = [...this.originalestadoList];
       return;
     }
 
-    this.areaFormacionList = this.originalareaFormacionList.filter(area =>
+    this.estadoList = this.originalestadoList.filter(area =>
       (area.nombre.toLowerCase().includes(filterValue)) 
     );
   }

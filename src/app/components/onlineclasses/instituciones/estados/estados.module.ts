@@ -23,17 +23,20 @@ import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
-import { UnidadesDidacticasRoutingModule } from './unidades-didacticas-routing.module';
-import { UnidadesDidacticasComponent } from './unidades-didacticas.component';
+import { EstadosRoutingModule } from './estados-routing.module';
+import { EstadosComponent } from './estados.component';
+import { AeEstadosComponent } from './ae-estados/ae-estados.component';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 
 
 @NgModule({
   declarations: [
-    UnidadesDidacticasComponent
+    EstadosComponent,
+    AeEstadosComponent
   ],
   imports: [
     CommonModule,
-    UnidadesDidacticasRoutingModule,
+    EstadosRoutingModule,
     FormsModule,
     CalendarModule,   
     RatingModule,
@@ -52,7 +55,9 @@ import { UnidadesDidacticasComponent } from './unidades-didacticas.component';
     ToastModule,   
     TableModule,
     ConfirmPopupModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule // Add ReactiveFormsModule to imports
+
   ]
 })
-export class UnidadesDidacticasModule { }
+export class EstadosModule { }

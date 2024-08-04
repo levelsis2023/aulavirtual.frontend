@@ -3,20 +3,22 @@ import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../service/general.service';
 import Swal from 'sweetalert2';	
-import { AeAreaFormacionComponent } from './ae-area-formacion/ae-area-formacion.component';
+import { AeModulosFormativosComponent } from './ae-modulos-formativos/ae-modulos-formativos.component';
+
+
 
 
 @Component({
-  selector: 'app-area-formacion',
-  templateUrl: './area-formacion.component.html',
-  styleUrls: ['./area-formacion.component.scss']
+  selector: 'app-modulos-formativos',
+  templateUrl: './modulos-formativos.component.html',
+  styleUrls: ['./modulos-formativos.component.scss']
 })
-export class AreaFormacionComponent {
+export class ModulosFormativosComponent {
 
 
   loading: boolean = false;
-  areaFormacionList: any[] = [];
-  originalareaFormacionList: any[] = [];
+  moduloFormativoList: any[] = [];
+  originalmoduloFormativoList: any[] = [];
   ref: DynamicDialogRef | undefined;
 
   constructor(
@@ -26,52 +28,52 @@ export class AreaFormacionComponent {
 
   ngOnInit(): void {
 
-    this.listarAreasDeFormacion();
+    this.listarModulosFormativos();
 
   }
 
-  listarAreasDeFormacion() {
-    this.areasDeFormacionService.getAreasDeFormacion().subscribe((response: any) => {
+  listarModulosFormativos() {
+    this.areasDeFormacionService.getModulosFormativos().subscribe((response: any) => {
       
-        this.areaFormacionList = response;
-        this.originalareaFormacionList = [...response];
+        this.moduloFormativoList = response;
+        this.originalmoduloFormativoList = [...response];
     });
 }
 
 
   navigateAddCurso() {
-    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+    this.ref = this.dialogService.open(AeModulosFormativosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'add' }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarAreasDeFormacion();
+      this.listarModulosFormativos();
     });
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+    this.ref = this.dialogService.open(AeModulosFormativosComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'ver', data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarAreasDeFormacion();
+      this.listarModulosFormativos();
     });
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AeAreaFormacionComponent, {
+    this.ref = this.dialogService.open(AeModulosFormativosComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', data: data }
      });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarAreasDeFormacion();
+      this.listarModulosFormativos();
     });
   }
 
@@ -95,7 +97,7 @@ export class AreaFormacionComponent {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.areasDeFormacionService.eliminarAreasDeFormacion(id).subscribe(
+        this.areasDeFormacionService.eliminarModulosFormativos(id).subscribe(
           response => {
             Swal.fire({
               title: 'Eliminado',
@@ -115,7 +117,7 @@ export class AreaFormacionComponent {
                 }
               }
             });
-            this.listarAreasDeFormacion();
+            this.listarModulosFormativos();
           },
           error => {
             Swal.fire(
@@ -132,11 +134,11 @@ export class AreaFormacionComponent {
   onGlobalFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
     if (!filterValue) {
-      this.areaFormacionList = [...this.originalareaFormacionList];
+      this.moduloFormativoList = [...this.originalmoduloFormativoList];
       return;
     }
 
-    this.areaFormacionList = this.originalareaFormacionList.filter(area =>
+    this.moduloFormativoList = this.originalmoduloFormativoList.filter(area =>
       (area.nombre.toLowerCase().includes(filterValue)) 
     );
   }

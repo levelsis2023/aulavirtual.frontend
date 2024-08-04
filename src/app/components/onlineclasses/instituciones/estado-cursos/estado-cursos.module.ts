@@ -25,10 +25,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { EstadoCursosRoutingModule } from './estado-cursos-routing.module';
 import { EstadoCursosComponent } from './estado-cursos.component';
+import { AeEstadoCursoComponent } from './ae-estado-curso/ae-estado-curso.component';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 
 
 @NgModule({
-  declarations: [EstadoCursosComponent],
+  declarations: [EstadoCursosComponent, AeEstadoCursoComponent],
   imports: [
     CommonModule,
     EstadoCursosRoutingModule,
@@ -50,7 +52,9 @@ import { EstadoCursosComponent } from './estado-cursos.component';
     ToastModule,   
     TableModule,
     ConfirmPopupModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule // Add ReactiveFormsModule to imports
+
   ]
 })
 export class EstadoCursosModule { }

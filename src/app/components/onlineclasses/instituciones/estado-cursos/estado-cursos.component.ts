@@ -1,20 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { PrimeNGConfig } from 'primeng/api';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { GeneralService } from '../../service/general.service';
+import Swal from 'sweetalert2';	
+import { AeEstadoCursoComponent } from './ae-estado-curso/ae-estado-curso.component';
 
 
-interface modellistareaformativa {
-  name: string;
-  value: number;
-  code: string;
-}
-interface Cantciclos {
-  name: string;
-  value: number;
-  code: string;
-}
+
 
 @Component({
   selector: 'app-estado-cursos',
@@ -23,64 +15,132 @@ interface Cantciclos {
 })
 export class EstadoCursosComponent {
 
-  listareaformativa!: modellistareaformativa[];
-  tipoDocumentoSeleccionado: modellistareaformativa | undefined;
-  tipoDoc: modellistareaformativa | undefined;
-  valuecantciclos: Cantciclos | undefined;
-  cantciclos!: Cantciclos[];
+  loading: boolean = false;
+  estadoCursoList: any[] = [];
+  originalestadoCursoList: any[] = [];
+  ref: DynamicDialogRef | undefined;
 
-  backgroundColor: string = '';
+  constructor(
+    private dialogService: DialogService,
+    private areasDeFormacionService: GeneralService,
+  ) { }
 
-   
+  ngOnInit(): void {
 
-  constructor(private layoutService: LayoutService,
-		private router: Router,
-    private primengConfig: PrimeNGConfig,
-    private translate: TranslateService
-	) {}
+    this.listarEstadoCurso();
 
-
-
-	get dark(): boolean {
-		return this.layoutService.config.colorScheme !== 'light';
-	}
-
-ngOnInit(){
-
-  this.listareaformativa = [
-		{ name: 'Área de formación 1', value:1, code: 'NY' },
-		{ name: 'Área de formación 2', value:2, code: 'RM' },
-    { name: 'Área de formación 3', value:2, code: 'RM' } 
-		
-	];
-  this.cantciclos = [
-		{ name: 'Pendiente', value:1, code: 'NY' },
-		{ name: 'En proceso', value:2, code: 'RM' },
-    { name: 'Culminado', value:3, code: 'NY' },
-		{ name: 'Desaprobado', value:4, code: 'RM' },
-		
-		
-	];
-}
-
-
-onDropdownChange(value: Cantciclos): void {
-  switch (value.value) {
-    case 1:
-      this.backgroundColor = '#FFA500'; // Naranja
-      break;
-    case 2:
-      this.backgroundColor = '#ffff00'; // Amarillo
-      break;
-    case 3:
-      this.backgroundColor = '#00ff00'; // Verde
-      break;
-    case 4:
-      this.backgroundColor = '#ff0000'; // Gris
-      break;
-    default:
-      this.backgroundColor = '';
   }
+
+  listarEstadoCurso() {
+    this.areasDeFormacionService.getEstadoDeCurso().subscribe((response: any) => {
+      
+        this.estadoCursoList = response;
+        this.originalestadoCursoList = [...response];
+    });
 }
+
+
+  navigateAddCurso() {
+    this.ref = this.dialogService.open(AeEstadoCursoComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { acciones: 'add' }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarEstadoCurso();
+    });
+  }
+
+  navigateToDetalle(data: any) {
+    this.ref = this.dialogService.open(AeEstadoCursoComponent, {
+      width: '80%',
+      styleClass: 'custom-dialog-header',
+      data: { acciones: 'ver', data: data }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarEstadoCurso();
+    });
+  }
+
+  navigateToEdit(data: any) {
+    this.ref = this.dialogService.open(AeEstadoCursoComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { acciones: 'actualizar', data: data }
+     });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarEstadoCurso();
+    });
+  }
+
+  navigateToDelete(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+      customClass: {
+        popup: 'custom-swal-popup'
+      },
+      didOpen: () => {
+        const container = document.querySelector('.swal2-container');
+        if (container) {
+          container.setAttribute('style', 'z-index: 2147483647 !important');
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.areasDeFormacionService.eliminarEstadoDeCurso(id).subscribe(
+          response => {
+            Swal.fire({
+              title: 'Eliminado',
+              text: 'La carrera técnica ha sido eliminada.',
+              icon: 'success',
+              showClass: {
+                popup: `
+                  background-color: #78CBF2;
+                  color: white;
+                  z-index: 10000!important;
+                `
+              },
+              didOpen: () => {
+                const container = document.querySelector('.swal2-container');
+                if (container) {
+                  container.setAttribute('style', 'z-index: 2147483647 !important');
+                }
+              }
+            });
+            this.listarEstadoCurso();
+          },
+          error => {
+            Swal.fire(
+              'Error',
+              'Hubo un problema al eliminar la carrera técnica.',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
+
+  onGlobalFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    if (!filterValue) {
+      this.estadoCursoList = [...this.originalestadoCursoList];
+      return;
+    }
+
+    this.estadoCursoList = this.originalestadoCursoList.filter(area =>
+      (area.nombre.toLowerCase().includes(filterValue)) 
+    );
+  }
+
 
 }
