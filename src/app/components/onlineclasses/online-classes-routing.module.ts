@@ -65,8 +65,10 @@ const routes: Routes = [];
     { path: 'datos-personales', data: { breadcrumb: 'Datos personales' }, loadChildren: () => import('../onlineclasses/registro-alumnos/registro-alumnos.module').then(m => m.RegistroAlumnosModule) }, 
     { path: 'lista-roles', data: { breadcrumb: 'Lista de roles' }, loadChildren: () => import('../onlineclasses/lista-roles/lista-roles.module').then(m => m.ListaRolesModule) }, 
     { path: 'lista-empresas', data: { breadcrumb: 'Lista de empresas' }, loadChildren: () => import('../onlineclasses/lista-empresas/lista-empresas.module').then(m => m.ListaEmpresasModule) }, 
-    {path:'horario-docente',data:{breadcrumb:'Horario docente'},loadChildren:()=>import('../onlineclasses/docentes/horario/horario.module').then(m=>m.HorarioModule)}
-    
+    {path:'horario-docente',data:{breadcrumb:'Horario docente'},loadChildren:()=>import('../onlineclasses/docentes/horario/horario.module').then(m=>m.HorarioModule)},
+    {
+      path:'aulas',data:{breadcrumb:'Aulas'},loadChildren:()=>import('../onlineclasses/aulas/aulas.module').then(m=>m.AulasModule)
+    }
   ])],
   
   exports: [RouterModule]

@@ -48,6 +48,8 @@ import {SeleccionarHorarioCarreraTecnicaComponent} from './dialog/horario-carrer
 import { SeleccionarAlumnosCursoComponent } from './dialog/seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
 import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso/marcar-asistencia-curso.component';
 import { CrearForoCursoComponent } from './dialog/crear-foro-curso/crear-foro-curso.component'
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { CrearForoCursoComponent } from './dialog/crear-foro-curso/crear-foro-cu
     DynamicDialogModule,      
     TranslateModule,
     ReactiveFormsModule,
+    FullCalendarModule,
+    CheckboxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 

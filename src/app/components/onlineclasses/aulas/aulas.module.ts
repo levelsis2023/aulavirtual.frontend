@@ -26,18 +26,29 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RegistraUsuarioComponent } from './dialog/registra-usuario/registra-usuario.component';
 import { AulasComponent } from './aulas.component';
 import { AulasRoutingModule } from './aulas-routing-module';
+import { CrearAulaComponentComponent } from './crear-aula-component/crear-aula-component.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { CrearAulaDisponibilidadComponent } from './crear-aula-disponibilidad/crear-aula-disponibilidad.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CheckboxModule } from 'primeng/checkbox';
 
+//import checkbox 
 @NgModule({
   declarations: [
     AulasComponent,
-    RegistraUsuarioComponent
+    RegistraUsuarioComponent,
+    CrearAulaComponentComponent,
+    CrearAulaDisponibilidadComponent
   ],
   imports: [
+    NgxSpinnerModule,
+    FullCalendarModule,
     CommonModule,
     PanelModule,
     AulasRoutingModule,
     FormsModule,
     CalendarModule,
+    CheckboxModule,
     TableModule,
     RatingModule,
     ButtonModule,
