@@ -1,9 +1,11 @@
-import { Component, ViewChild, ElementRef,  } from '@angular/core';
+import { Component, ViewChild, ElementRef, } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { RegistraUsuarioComponent } from '../dialog/registra-usuario/registra-usuario.component';
 import { UsuarioService } from '../../service/usuario.service';
+import { HelpersService } from 'src/app/helpers.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-bandeja-usuarios',
@@ -21,28 +23,49 @@ export class BandejaUsuariosComponent {
   ];
   loading: boolean = false;
   ref: DynamicDialogRef | undefined;
- 
+
 
   constructor(
     private router: Router,
     private dialogService: DialogService,
-    private userServicio: UsuarioService
-  
+    private userServicio: UsuarioService,
+    private helpersService: HelpersService,
+    private spinner: NgxSpinnerService
+
   ) { }
 
   ngOnInit(): void {
-    
-    this.cargaInicial();
-   
 
-    
+    this.cargaInicial();
+
+
+
+  } 
+  eliminar(id: any) {
+    this.spinner.show();
+    this.loading = true;
+    this.userServicio.deleteUsuario(id).subscribe(
+      (response: any) => {
+        this.helpersService.showSuccessMessage('Usuario eliminado correctamente');
+        this.loading = false;
+        this.spinner.hide();
+        this.cargaInicial();
+      },
+      (error) => {
+        this.helpersService.showErrorMessage('Error al eliminar el usuario');
+        this.loading = false;
+        this.spinner.hide();
+        console.log(error);
+      }
+    );
+
   }
 
   cargaInicial(): void {
     //call getUsuarios
     this.loading = true;
     this.userServicio.getUsuarios().subscribe(
-      (response:any) => {
+      (response: any) => {
         this.usuarios = response
         this.loading = false;
       },
@@ -53,17 +76,17 @@ export class BandejaUsuariosComponent {
     );
   }
 
-    navigateToNuevo() {
-      this.ref = this.dialogService.open(RegistraUsuarioComponent, {  
-        width: '60%',
-        styleClass: 'custom-dialog-header'
-      });
-  
-      this.ref.onClose.subscribe((dataFromDialog) => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-      });
-    }
+  navigateToNuevo() {
+    this.ref = this.dialogService.open(RegistraUsuarioComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header'
+    });
+
+    this.ref.onClose.subscribe((dataFromDialog) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+    });
+  }
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal(
@@ -73,13 +96,13 @@ export class BandejaUsuariosComponent {
   }
 
   onRowSelect(event: any) {
-    
+
     console.log("Organo-colegaido-sect");
   }
 
   onRowUnselect(event: any) {
-    
-    
+
+
   }
 
 }

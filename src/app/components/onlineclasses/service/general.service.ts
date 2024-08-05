@@ -1341,4 +1341,5 @@ export class GeneralService {
   saveCompany(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}company`, data);
   }
+  
 }

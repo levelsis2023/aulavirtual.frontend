@@ -62,8 +62,9 @@
                                       title="Editar">
                                   </button>
                                   <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-action"
-                                   title="Eliminar">
-                                </button>
+                                   title="Eliminar"
+                                      (click)="eliminar(miembro.id)"></button>
+
                                 </td>
                             </tr>
                         </ng-template>
@@ -83,6 +84,8 @@
                 </div>
             </div>
         </div>
+        <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="white" type="ball-spin"></ngx-spinner>
+
     </ng-template>
 </p-panel>
 
