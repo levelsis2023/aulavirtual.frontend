@@ -1,28 +1,26 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild,OnInit } from '@angular/core';
-import { Miembro } from '../../../../../interface/general';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { GeneralService } from '../../../../../service/general.service';
+import { GeneralService } from '../../../service/general.service';
 import Swal from 'sweetalert2';
-import { VerListadoDeEvaluacionesPorGrupoComponent } from '../ver-lis-eval-grupo/ver-lis-eval-grupo.component';
-import { AgregarEditarListadoDePreguntasComponent } from './ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
+import { AgregarEditarListadoDePreguntasComponent } from '../../../carreras-tecnicas/dialog/ver-curso-de-carrera/opciones/ver-listado-de-preguntas/ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ResponderPreguntaComponent } from '../responder-pregunta/responder-pregunta.component';
+
 
 
 @Component({
-  selector: 'app-ver-listado-de-preguntas',
-  templateUrl: './ver-listado-de-preguntas.component.html',
-  styleUrls: ['./ver-listado-de-preguntas.component.scss']
+  selector: 'app-ver-preguntas',
+  templateUrl: './ver-preguntas.component.html',
+  styleUrls: ['./ver-preguntas.component.scss']
 })
-export class VerListadoDePreguntasComponent implements OnInit {
+export class VerPreguntasComponent {
 
 
   loading: boolean = false;
 
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt1') tabledt1: Table | undefined;
-  @Input() miembro: Miembro[] = [];
-  @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
 
   grupoEvaluacionesList: any[] = [];
   originalgrupoEvaluacionesList: any[] = [];
@@ -93,20 +91,9 @@ export class VerListadoDePreguntasComponent implements OnInit {
     });
   }
 
-  navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListadoDePreguntasComponent, {
-      width: '80%',
-      styleClass: 'custom-dialog-header',
-      data: { acciones: 'ver', idCurso: this.evaluaciones.id ,data: data }
-    });
 
-    this.ref.onClose.subscribe((data: any) => {
-      this.listarPreguntas();
-    });
-  }
-
-  navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListadoDePreguntasComponent, {
+  responderPregunta(data: any) {
+    this.ref = this.dialogService.open(ResponderPreguntaComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', idCurso: this.evaluaciones.id ,data: data } 
@@ -185,17 +172,7 @@ export class VerListadoDePreguntasComponent implements OnInit {
     );
   }
 
-  agregarEvaluaciones(evaluaciones: any) {
-    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
-      width: '60%',
-      styleClass: 'custom-dialog-header',
-      data: { idCurso: this.evaluaciones.id ,data: evaluaciones } 
-     });
 
-    this.ref.onClose.subscribe((data: any) => {
-      this.listarPreguntas();
-    });
-  }
 
   corregirPregunta(data: any) {
   }

@@ -165,7 +165,7 @@ export class RegCursosComponent implements OnInit {
 
   listarModulosFormativos(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.parametroService.getModuloFormativo().subscribe(
+      this.parametroService.getModulosFormativos().subscribe(
         (response: any) => {
           console.log("Lista de listarModulosFormativos", response);
           this.modulosFormativos = response;
@@ -178,7 +178,7 @@ export class RegCursosComponent implements OnInit {
 
   listarAreasFormacion(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.parametroService.getAreaDeFormacion().subscribe(
+      this.parametroService.getAreasDeFormacion().subscribe(
         (response: any) => {
           console.log("Lista de listarAreasFormacion", response);
           this.areasFormacion = response;
@@ -191,7 +191,7 @@ export class RegCursosComponent implements OnInit {
 
   listarCiclos(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.parametroService.getCiclo().subscribe(
+      this.parametroService.getCiclos().subscribe(
         (response: any) => {
           console.log("Lista de listarCiclos", response);
           this.ciclos = response;
@@ -204,7 +204,7 @@ export class RegCursosComponent implements OnInit {
 
   listarEstados(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.parametroService.getEstados().subscribe(
+      this.parametroService.getEstadoDeCurso().subscribe(
         (response: any) => {
           console.log("Lista de listarEstados", response);
           this.estados = response;

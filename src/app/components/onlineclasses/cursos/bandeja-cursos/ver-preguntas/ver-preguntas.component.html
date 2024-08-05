@@ -17,41 +17,23 @@
                                             placeholder="Buscar listado de preguntas" class="w-full" />
                                     </span>
                                 </div>
-                                <div class="mb-2">
-                                    <button pButton label="Nuevo" icon="pi pi-user-plus" id="btnNuevo"
-                                        class="p-button-primary mr-2" (click)="navigateAddCurso()"
-                                        style="border-radius: 30px;"></button>
-                                </div>
+                           
                             </div>
                         </ng-template>
 
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="min-width: 10rem" scope="col">Acciones</th>
                                 <th style="min-width: 10rem" scope="col">Pregunta</th>
                                 <th style="min-width: 10rem" scope="col">Valor de la pregunta</th>
                                 <th style="min-width: 10rem" scope="col">Puntos de la pregunta</th>
                                 <th style="min-width: 10rem" scope="col">Porcentaje de la pregunta</th>
-                                <th style="min-width: 10rem" scope="col">Corregir Pregunta</th>
+                                <th style="min-width: 10rem" scope="col">Responder Pregunta</th>
                             </tr>
                         </ng-template>
 
                         <ng-template pTemplate="body" let-pregunta>
                             <tr>
-                                <td>
-                                    <button pButton icon="pi pi-eye" style="width: 70px; border-radius: 30px;"
-                                        title="Ver" class="p-button-rounded p-button-text p-button-success"
-                                        (click)="navigateToDetalle(pregunta)">
-                                    </button>
-                                    <button pButton icon="pi pi-pencil" style="width: 70px; border-radius: 30px;"
-                                        title="Editar" class="p-button-rounded p-button-text p-button-warning"
-                                        (click)="navigateToEdit(pregunta)">
-                                    </button>
-                                    <button pButton icon="pi pi-trash" style="width: 70px; border-radius: 30px;"
-                                        title="Eliminar" class="p-button-rounded p-button-text p-button-danger"
-                                        (click)="navigateToDelete(pregunta.id)">
-                                    </button>
-                                </td>
+
                                 <td>
                                     <span pTooltip="Responder pregunta" tooltipPosition="top" [innerHTML]="pregunta.pregunta_docente"></span>
                                 </td>
@@ -59,8 +41,8 @@
                                 <td>{{ pregunta.puntos }}</td>
                                 <td>{{ pregunta.porcentaje }}%</td>
                                 <td>
-                                    <button pButton label="Corregir" class="p-button-rounded p-button-info"
-                                        (click)="corregirPregunta(pregunta)">
+                                    <button pButton label="Responder" class="p-button-rounded p-button-info"
+                                        (click)="responderPregunta(pregunta)">
                                     </button>
                                 </td>
                             </tr>

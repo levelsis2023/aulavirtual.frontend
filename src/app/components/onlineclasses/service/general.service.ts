@@ -1342,4 +1342,42 @@ export class GeneralService {
     return this.http.post(`${this.baseUrl}company`, data);
   }
   
+
+
+  getCursosByDocente(id: number) {
+    return this.http
+      .get<ApiResponse>(`${this.baseUrl}cursos-docente/${id}`, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 200 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
+
+  
+  getCursosByAlumno(id: number) {
+    return this.http
+      .get<ApiResponse>(`${this.baseUrl}cursos-alumno/${id}`, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 200 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
 }

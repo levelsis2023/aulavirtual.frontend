@@ -1,20 +1,22 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { GeneralService } from '../../../../../../service/general.service';
-import { Parametro } from '../../../../../../interface/general';
+import { GeneralService } from '../../../service/general.service';
+import { Parametro } from '../../../interface/general';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { HelpersService } from 'src/app/helpers.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-agregar-editar-listado-de-preguntas',
-  templateUrl: './agregar-editar-listado-de-preguntas.component.html',
-  styleUrls: ['./agregar-editar-listado-de-preguntas.component.scss']
+  selector: 'app-responder-pregunta',
+  templateUrl: './responder-pregunta.component.html',
+  styleUrls: ['./responder-pregunta.component.scss']
 })
-export class AgregarEditarListadoDePreguntasComponent {
-  
+export class ResponderPreguntaComponent {
+
+
   loading: boolean = false;
   parametroDatos: Parametro = new Parametro();
   parametro: Parametro = new Parametro();
@@ -25,13 +27,16 @@ export class AgregarEditarListadoDePreguntasComponent {
   estados: any;
   preguntaForm: FormGroup;
   tiposPregunta = [];
-  
+  sanitizePregunta: SafeHtml = '';
+  preguntaDocenteValue :any
   constructor(
     private fb: FormBuilder,
     private ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private parametroService: GeneralService,
-    private helpersService: HelpersService
+    private helpersService: HelpersService,
+    private sanitizer: DomSanitizer
+
   ) {
     this.preguntaForm = this.fb.group({
       tipoPregunta: ['', Validators.required],
@@ -44,19 +49,20 @@ export class AgregarEditarListadoDePreguntasComponent {
   ngOnInit(): void {
     this.idEvaluacion = this.config.data.idEvaluacion;
     this.acciones = this.config.data.acciones;
+    this.sanitizePregunta = this.sanitizer.bypassSecurityTrustHtml(this.config.data.data.pregunta_docente);
+    this.preguntaDocenteValue = this.config.data.data.pregunta_docente; // Accede al valor real
+    console.log(this.preguntaDocenteValue['changingThisBreaksApplicationSecurity'],'as');
+    console.log(this.sanitizePregunta);
     Promise.all([
       this.listarDePregunta(),
     ]).then(() => {
-      if (this.acciones === 'ver' || this.acciones === 'actualizar') {
-        const formattedDate = format(new Date(this.config.data.data.fecha_y_hora_programo), 'yyyy-MM-dd\'T\'HH:mm:ss');
+      if (this.acciones === 'ver' || this.acciones === 'actualizar' || this.acciones === 'alumno') {
         this.preguntaForm.patchValue({
-          nombreEvaluacion: this.config.data.data.nombre,
-          tipoEvaluacion: this.config.data.data.tipo_evaluacion_id,
-          porcentajeEvaluacion: this.config.data.data.porcentaje_evaluacion,
-          fechaHoraEvaluacion: formattedDate,
-          estado: this.config.data.data.estado_id,
-          observaciones: this.config.data.data.observaciones,
-          preguntaMagica: this.config.data.data.pregunta_magica
+          tipoPregunta: this.config.data.data.tipo_de_evaluacion_id,
+          valor_pregunta: this.config.data.data.valor_pregunta,
+          pregunta_docente:   this.preguntaDocenteValue['changingThisBreaksApplicationSecurity'],
+          alternativas: this.config.data.data.alternativas
+     
         });
       }
     });

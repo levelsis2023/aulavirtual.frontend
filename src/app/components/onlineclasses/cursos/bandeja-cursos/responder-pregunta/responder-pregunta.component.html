@@ -9,21 +9,10 @@
         <form [formGroup]="preguntaForm" (ngSubmit)="guardarPregunta()">
             <div class="row">
                 <div class="grid p-fluid">
-                    <div class="field col-6">
-                        <label>Tipo de Pregunta</label>
-                        <div class="p-float-label">
-                            <label for="dropdownTipoPregunta" class="required">Tipo de Pregunta</label>
-                            <p-dropdown inputId="dropdownTipoPregunta" [options]="tiposPregunta" optionLabel="tx_item_description" formControlName="tipoPregunta"
-                            optionValue="nu_id_parametro" [disabled]="acciones === 'ver'" (onChange)="onTipoPreguntaChange($event.value)"></p-dropdown>
-                        </div>
-                    </div>
-                    <div class="field col-6">
-                        <label for="dropdownValorPregunta">Valor de la Pregunta</label>
-                        <input type="number" inputId="dropdownValorPregunta" pInputText formControlName="valor_pregunta" [readonly]="acciones === 'ver'">
-                    </div>
+
                     <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 66">
                         <span class="p-float-label">
-                            <input type="text" pInputText formControlName="pregunta_docente" [readonly]="acciones === 'ver'">
+                            <input type="text"  pInputText formControlName="pregunta_docente" [readonly]="acciones === 'ver'">
                             <label class="required">Formulación de Pregunta por Docente</label>
                         </span>
                     </div>

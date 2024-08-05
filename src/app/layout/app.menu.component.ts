@@ -412,7 +412,7 @@ export class AppMenuComponent implements OnInit {
                                         label: 'Cursos',
                                         icon: 'pi pi-share-alt',
                                         // routerLink: ['/pl-virtual/cursos-docente']
-                                        routerLink: ['/pl-virtual/']
+                                        routerLink: ['/pl-virtual/cursos-docente']
                                     },
                                     {
                                         label: 'Evaluaciones',

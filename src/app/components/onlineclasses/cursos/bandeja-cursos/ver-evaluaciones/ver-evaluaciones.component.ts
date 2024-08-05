@@ -1,28 +1,21 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild,OnInit } from '@angular/core';
-import { Miembro } from '../../../../../interface/general';
-import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { GeneralService } from '../../../../../service/general.service';
+import { GeneralService } from '../../../service/general.service';
 import Swal from 'sweetalert2';
-import { VerListadoDeEvaluacionesPorGrupoComponent } from '../ver-lis-eval-grupo/ver-lis-eval-grupo.component';
-import { AgregarEditarListadoDePreguntasComponent } from './ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
+import { AgregarEditarListaDeEvaluacionesPorGrupoComponent } from '../../../carreras-tecnicas/dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ae-lista-de-evaluaciones-por-grupo/agregar-editar-lista-de-evaluaciones-por-grupo.component';
+import { Component } from '@angular/core';
+import { VerPreguntasComponent } from '../ver-preguntas/ver-preguntas.component';
 
 @Component({
-  selector: 'app-ver-listado-de-preguntas',
-  templateUrl: './ver-listado-de-preguntas.component.html',
-  styleUrls: ['./ver-listado-de-preguntas.component.scss']
+  selector: 'app-ver-evaluaciones',
+  templateUrl: './ver-evaluaciones.component.html',
+  styleUrls: ['./ver-evaluaciones.component.scss']
 })
-export class VerListadoDePreguntasComponent implements OnInit {
 
+export class VerEvaluacionesComponent {
 
   loading: boolean = false;
 
-  @ViewChild('filter') filter!: ElementRef;
-  @ViewChild('dt1') tabledt1: Table | undefined;
-  @Input() miembro: Miembro[] = [];
-  @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
+
 
   grupoEvaluacionesList: any[] = [];
   originalgrupoEvaluacionesList: any[] = [];
@@ -31,43 +24,28 @@ export class VerListadoDePreguntasComponent implements OnInit {
 
   promedioTotal: number = 0;
   porcentajeTotal: number = 0;
-  evaluaciones: any;
+  grupoEvaluaciones: any;
+
 
   constructor(
     private dialogService: DialogService,
     private grupoEvaluacionesService: GeneralService,
-    public config: DynamicDialogConfig,
-    private sanitizer: DomSanitizer
-
+    public config: DynamicDialogConfig
   ) { }
 
   ngOnInit(): void {
-    this.evaluaciones = this.config.data.data;
-    console.log(this.evaluaciones,'car');
-
-    this.listarPreguntas();
-
+    this.grupoEvaluaciones = this.config.data.data;
+    console.log(this.grupoEvaluaciones,'car');
+    this.listarGrupoEvaluaciones();
   }
 
-  listarPreguntas(): void {
-    this.grupoEvaluacionesService.getPreguntas({ id: this.evaluaciones.id }).subscribe((response: any) => {
-        // Iterar sobre cada elemento de la respuesta y asignar valores a 'puntos' y 'porcentaje'
-        response.forEach((item: any) => {
-            item.puntos = Math.floor(Math.random() * 20) + 1;
-            item.porcentaje = (item.puntos * 20) / 100;
-        });
-
-        // Sanitizar el contenido HTML de 'pregunta_docente'
-        this.grupoEvaluacionesList = response.map((pregunta: any) => {
-          return {
-            ...pregunta,
-            pregunta_docente: this.sanitizer.bypassSecurityTrustHtml(pregunta.pregunta_docente)
-          };
-        });
-
-        // Asignar la lista modificada a 'originalgrupoEvaluacionesList'
-        this.originalgrupoEvaluacionesList = [...this.grupoEvaluacionesList];
+  listarGrupoEvaluaciones() {
+    this.grupoEvaluacionesService.getListadoDeEvaluacionesPorGrupo({id:this.grupoEvaluaciones.id}).subscribe((response: any) => {
+      this.grupoEvaluacionesList = response;
+      this.originalgrupoEvaluacionesList = [...response];
     });
+  }
+  navigateToResponder(data: any) {
   }
 
   calcularTotales() {
@@ -82,41 +60,41 @@ export class VerListadoDePreguntasComponent implements OnInit {
   }
 
   navigateAddCurso() {
-    this.ref = this.dialogService.open(AgregarEditarListadoDePreguntasComponent, {
+    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { acciones: 'add', idEvaluacion: this.evaluaciones.id }
+      data: { acciones: 'add', idGrupoEvaluaciones: this.grupoEvaluaciones.id }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarPreguntas();
+      this.listarGrupoEvaluaciones();
     });
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListadoDePreguntasComponent, {
+    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
-      data: { acciones: 'ver', idCurso: this.evaluaciones.id ,data: data }
+      data: { acciones: 'ver', idCurso: this.grupoEvaluaciones.id ,data: data }
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarPreguntas();
+      this.listarGrupoEvaluaciones();
     });
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListadoDePreguntasComponent, {
+    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { acciones: 'actualizar', idCurso: this.evaluaciones.id ,data: data } 
+      data: { acciones: 'actualizar', idCurso: this.grupoEvaluaciones.id ,data: data } 
      });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarPreguntas();
+      this.listarGrupoEvaluaciones();
     });
   }
-
+  
   navigateToDelete(id: number) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -137,7 +115,7 @@ export class VerListadoDePreguntasComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.grupoEvaluacionesService.eliminarGrupoEvaluaciones(id).subscribe(
+        this.grupoEvaluacionesService.eliminarListadoDeEvaluacionesPorGrupo(id).subscribe(
           response => {
             Swal.fire({
               title: 'Eliminado',
@@ -157,7 +135,7 @@ export class VerListadoDePreguntasComponent implements OnInit {
                 }
               }
             });
-            this.listarPreguntas();
+            this.listarGrupoEvaluaciones();
           },
           error => {
             Swal.fire(
@@ -185,18 +163,17 @@ export class VerListadoDePreguntasComponent implements OnInit {
     );
   }
 
-  agregarEvaluaciones(evaluaciones: any) {
-    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
+  agregarPreguntas(evaluaciones: any) {
+    this.ref = this.dialogService.open(VerPreguntasComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { idCurso: this.evaluaciones.id ,data: evaluaciones } 
+      data: { acciones: 'add', grupoEvaluacionesId: this.grupoEvaluaciones.id ,data: evaluaciones } 
      });
-
+  
     this.ref.onClose.subscribe((data: any) => {
-      this.listarPreguntas();
+      this.listarGrupoEvaluaciones();
     });
   }
 
-  corregirPregunta(data: any) {
-  }
+  
 }
