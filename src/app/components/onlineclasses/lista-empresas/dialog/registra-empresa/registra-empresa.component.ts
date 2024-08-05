@@ -36,9 +36,6 @@ export class RegistraEmpresaComponent {
       this.id = this.config.data.id;
       this.name = this.config.data.name;
       this.domain = this.config.data.domain;
-      this.database = this.config.data.database;
-      this.status = this.config.data.status;
-      this.rol_id = this.config.data.rol_id;
       this.domain_id = this.config.data.domain_id;
     } else {
       this.id = 0

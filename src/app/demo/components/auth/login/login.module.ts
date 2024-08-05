@@ -8,8 +8,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { AppConfigModule } from 'src/app/layout/config/app.config.module';
 import { DropdownModule } from 'primeng/dropdown';
-
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     imports: [
@@ -21,6 +20,7 @@ import { DropdownModule } from 'primeng/dropdown';
         FormsModule,
         AppConfigModule,
         DropdownModule,
+        NgxSpinnerModule
        
     ],
     declarations: [LoginComponent]

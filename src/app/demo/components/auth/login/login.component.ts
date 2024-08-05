@@ -4,7 +4,7 @@ import { environment } from 'src/app/environment/environment';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { LoginService } from 'src/app/components/onlineclasses/service/login.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 interface tiporol {
 	name: string;
 	value: number;
@@ -15,7 +15,7 @@ interface tiporol {
 	templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-
+	loading: boolean = false;
 	rememberMe: boolean = false;
 	tiporoles!: tiporol[];
 	rol: tiporol | undefined;
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 	constructor(private layoutService: LayoutService,
 		private router: Router,
 		private loginService: LoginService,
+		private spinner: NgxSpinnerService
 	) { }
 
 
@@ -59,9 +60,14 @@ export class LoginComponent implements OnInit {
 			const formData = new FormData();
 			formData.append('email', this.email);
 			formData.append('password', this.password);
+			this.spinner.show();
+			this.loading = true;
+
 			this.loginService.loginUser(formData).subscribe((response: any) => {
 				try {
 					if (response.status === 200) {
+						this.spinner.hide();
+						this.loading = false;
 						const user = response.user;
 						if (!localStorage.getItem('user')) {
 							localStorage.setItem('user', JSON.stringify(user));
@@ -79,6 +85,8 @@ export class LoginComponent implements OnInit {
 						this.router.navigate(['/pl-virtual']);
 
 					} else {
+						this.spinner.hide();
+						this.loading = false;
 						Swal.fire({
 							title: '¡Error!',
 							text: 'Revisa los datos ingresados',
@@ -87,6 +95,8 @@ export class LoginComponent implements OnInit {
 						});
 					}
 				} catch (e) {
+					this.spinner.hide();
+					this.loading = false;
 					Swal.fire({
 						title: '¡Error!',
 						text: 'Revisa los datos ingresados',

@@ -34,9 +34,7 @@
                                 <th style="min-width: 10rem">ID</th>
                                 <th style="min-width: 10rem">Nombre</th>
                                 <th style="min-width: 10rem">Dominio</th>
-                                <th style="min-width: 10rem">Base de datos</th>
-                                <th  class="text-center" style="min-width: 10rem">Estado</th>
-                                <th  class="text-center" style="min-width: 10rem">Rol</th>
+
 
                             </tr>
                         </ng-template>
@@ -57,9 +55,7 @@
                                 <td>{{ empresa.id }}</td>
                                 <td>{{ empresa.name }}</td>
                                 <td><a href="">{{ empresa.domain }}</a></td>
-                                <td>{{ empresa.database }}</td>
-                                <td class="text-center">{{ empresa.status }}</td>
-                                <td class="text-center">{{ empresa.rol_id }}</td>
+
                                 <!-- <td> <button (click)="listaRoles(empresa.id)" style="width: fit-content" pButton
                                         class="p-button-rounded p-button-text custom-edit-button" title="Editar rol">
                                         <i class="pi pi-user-edit" aria-hidden="true" [style]="{

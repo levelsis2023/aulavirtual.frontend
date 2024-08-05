@@ -32,8 +32,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -76,7 +75,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       DynamicDialogModule,      
       TranslateModule,
       ReactiveFormsModule,  
-      RegistraUsuarioComponent
+      RegistraUsuarioComponent,
+      NgxSpinnerModule,
       
       
   ],

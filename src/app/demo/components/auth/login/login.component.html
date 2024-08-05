@@ -36,6 +36,8 @@
             <a class="text-600 cursor-pointer hover:text-primary transition-colors transition-duration-300">Términos y condiciones</a>
         </div>
     </div>
+    <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="white" type="ball-spin"></ngx-spinner>
+
 </div>
 
 <app-config [minimal]="true"></app-config>

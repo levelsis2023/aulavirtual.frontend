@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-lista-permisos',
@@ -29,6 +30,7 @@ export class ListaPermisosComponent {
   permisosSeleccionados: Set<number> = new Set();
   idRol!: number;
   estado!: boolean;
+  domain_id: any;
 
   constructor(
     private router: Router,
@@ -37,6 +39,7 @@ export class ListaPermisosComponent {
     public ref: DynamicDialogRef,
     private permisoService: GeneralService,
     public config: DynamicDialogConfig,
+    private helpersService: HelpersService
   ) {
     this.permisoService.getPermisos().subscribe((response: any) => {
       console.log("Lista de permisos", response);
@@ -50,6 +53,7 @@ export class ListaPermisosComponent {
       console.log("this.permisosSeleccionados");
       console.log(this.permisosSeleccionados);
     });
+   
   }
 
 

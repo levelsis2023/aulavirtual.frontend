@@ -29,6 +29,7 @@ export class AppMenuComponent implements OnInit {
     elementosOcultos: any[] = [];
     lstOpciones: any[] = [];
     permisos: any[] = [];
+    domain_id: any;
 
     constructor(
         public seguridadService: SeguridadService,
@@ -52,6 +53,7 @@ export class AppMenuComponent implements OnInit {
                 this.actualizarMenu();
             })
         ).subscribe();
+       
 
 
 
@@ -87,7 +89,7 @@ export class AppMenuComponent implements OnInit {
                            ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
                                 label: 'Configuración',
                                icon: 'pi pi-fw pi-building',
-                                 routerLink: ['/pl-virtual/lista-postulantes'],
+                                 routerLink: ['/pl-virtual/configuracion-institucion'],
                              }
                             ] : [],
 
