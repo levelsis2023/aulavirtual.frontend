@@ -84,31 +84,32 @@ export class CalendarAppComponent implements OnInit {
         borderColor: string;
         backgroundColor: string;
         textColor: string;
+        extendedProps?: any;
     }[] = [];
     const styles = this.getCourseStyles(nombreCurso);
 
     horarios.forEach((horario: any) => {
-      const startDate = new Date(horario.fecha_inicio);
-      const endDate = new Date(horario.fecha_fin);
+      const start= new Date(`${horario.fecha_inicio}T${horario.hora_inicio}`);
+      const endDate = new Date(`${horario.fecha_fin}T${horario.hora_fin}`);
       const dayId = horario.day_id;
-
-      for (let date = new Date(startDate); date <= endDate; date = this.addDays(date, 1)) {
-        if (date.getDay() === dayId % 7) {
-            const startDateTime = `${date.toISOString().split('T')[0]}T${horario.hora_inicio}`;
-            const endDateTime = `${date.toISOString().split('T')[0]}T${horario.hora_fin}`;
-            horarioData.push({
-            day_name: this.getDayName(dayId),
-            date: date.toISOString().split('T')[0], // Format as YYYY-MM-DD
-            end: endDateTime,
-            start: startDateTime,
-            tag: { color: '#FFD700', name: nombreCurso+'-'+horario.docente_name },
-            title: nombreCurso,
-            borderColor: styles.borderColor,
-            backgroundColor: styles.backgroundColor,
-            textColor: styles.textColor,
-          });
+      horarioData.push({
+        day_name: this.getDayName(dayId),
+        date: this.addDays(start, dayId).toISOString().split('T')[0],
+        start: start,
+        end: endDate,
+        tag: { color: styles.backgroundColor, name: nombreCurso },
+        title: nombreCurso,
+        borderColor: styles.borderColor,
+        backgroundColor: styles.backgroundColor,
+        textColor: styles.textColor,
+        extendedProps: { 
+          docente: horario.docente_name,
+          aulaUbicacion: horario.aula_ubication,
+          aulaName: horario.aula_name
         }
-      }
+      });
+      
+  
     });
 
     return horarioData;
@@ -153,7 +154,7 @@ export class CalendarAppComponent implements OnInit {
     let plainEvent = e.event.toPlainObject({ collapseExtendedProps: true, collapseColor: true });
     this.view = 'display';
     this.showDialog = true;
-
+    console.log(plainEvent);
     this.changedEvent = { ...plainEvent, ...this.clickedEvent };
     this.changedEvent.start = this.clickedEvent.start;
     this.changedEvent.end = this.clickedEvent.end ? this.clickedEvent.end : this.clickedEvent.start;

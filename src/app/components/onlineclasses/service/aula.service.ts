@@ -9,12 +9,12 @@ import { ApiResponse, Base } from '../interface/general';
     providedIn: 'root',
 })
 
-export class AulaService{
-    private baseUrl = `${environment.API_BASE}`;    
+export class AulaService {
+    private baseUrl = `${environment.API_BASE}`;
     private urlparametro = `${environment.API_BASE}`;
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      }
+    }
     constructor(
         private http: HttpClient,
         private httpClientFormData: HttpClient,
@@ -22,18 +22,18 @@ export class AulaService{
     ) {
         this.httpClientFormData = new HttpClient(this.handler);
     }
-    saveAula(data:any):Observable<any>{
-        return this.http.post(`${this.baseUrl}aulas`,data);
+    saveAula(data: any): Observable<any> {
+        return this.http.post(`${this.baseUrl}aulas`, data);
     }
-    getAulas(domain_id:number):Observable<any>{
+    getAulas(domain_id: number): Observable<any> {
         return this.http.get(`${this.baseUrl}aulas/${domain_id}`);
-    }deleteAula(id:number):Observable<any>{
+    } deleteAula(id: number): Observable<any> {
         return this.http.delete(`${this.baseUrl}aulas/${id}`);
-    }saveDisponibilidad(data:any):Observable<any>{
-        return this.http.post(`${this.baseUrl}aulas/disponibilidad`,data);
-    }getDisponibilidad(aula_id:number):Observable<any>{
+    } saveDisponibilidad(data: any): Observable<any> {
+        return this.http.post(`${this.baseUrl}aulas/disponibilidad`, data);
+    } getDisponibilidad(aula_id: number): Observable<any> {
         return this.http.get(`${this.baseUrl}aulas/disponibilidad/${aula_id}`);
-    }deleteDisponibilidad(id:number):Observable<any>{
+    } deleteDisponibilidad(id: number): Observable<any> {
         return this.http.delete(`${this.baseUrl}aulas/disponibilidad/${id}`);
     }
 }

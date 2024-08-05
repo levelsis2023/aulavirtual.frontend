@@ -18,7 +18,6 @@ export class HelpersService {
   ) { 
     
   }
-
   getUserData() {
     if (localStorage.getItem('user')) {
       const userData = localStorage.getItem('user');
@@ -53,9 +52,20 @@ export class HelpersService {
         const user = JSON.parse(userData);
         return user.alumno_id;
       }
-      return 1
+      return null
     }
-    return 1
+    return null
+  }
+  getDocenteId() {
+    if (localStorage.getItem('user')) {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        return user.docente_id;
+      }
+      return null
+    }
+    return null
   }
   getRolId() {
     if (localStorage.getItem('user')) {
@@ -67,6 +77,17 @@ export class HelpersService {
       return 1
     }
     return 1
+  }
+  isSuperAdmin() {
+    if (localStorage.getItem('user')) {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        return user.rol_id === 1;
+      }
+      return false
+    }
+    return false
   }
   showSuccessMessage(message: string) {
     Swal.fire({

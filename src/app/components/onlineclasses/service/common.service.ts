@@ -34,4 +34,7 @@ export class CommonService{
     getDocentesDropdown(domain_id:number):Observable<any>{
         return this.http.get(`${this.baseUrl}docentes-dropdown/${domain_id}`);
     }
+    getInstitutionsDropdown():Observable<any>{
+        return this.http.get(`${this.baseUrl}institutions-dropdown`);
+    }
 }

@@ -25,6 +25,7 @@ import { RegistraUsuarioComponent } from '../dialog/registra-usuario/registra-us
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 import {ReactiveFormsModule} from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [BandejaUsuariosComponent, RegistraUsuarioComponent],
   imports: [
@@ -51,7 +52,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     ConfirmDialogModule,
     DynamicDialogModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     DialogService,

@@ -11,61 +11,94 @@ export class ForoAlumnosComponent {
   foros: any[] = [];
   selectedForo: any = null;
   newResponse: string = '';
+  domain_id: any;
+  selectedRespuesta: any = null;
+
   constructor(private foroService: ForoService,
     private helperService: HelpersService
   ) { }
 
   ngOnInit(): void {
-    const domain_id = this.helperService.getDominioId();
-    this.foroService.getForos(domain_id).subscribe(data => {
-      this.foros = data.map((curso: any) => {
-        // Asegúrate de parsear respuestas de cadena a array
-        curso.foros = curso.foros.map((foro: any) => {
-          return {
-            ...foro,
-            respuestas: JSON.parse(foro.respuestas) // Parsear el string JSON a un array
-          };
-        });
-        return curso;
-      });
-      console.log('Foros:', this.foros);
-    });
+    this.domain_id = this.helperService.getDominioId();
+    this.getForos();
   }
-  selectForo(foro: any) {
+  getForos() {
+    this.foroService.getForos(this.domain_id,
+      this.helperService.getAlumnoId(),
+      this.helperService.getDocenteId()
+    ).subscribe(
+      (data: any[]) => {
+        this.foros = data.map(foro => ({
+          ...foro,
+          foros: foro.foros.map((foroDetail: any) => ({
+            ...foroDetail,
+            respuestas: foroDetail.respuestas.map((respuesta: any) => ({
+              ...respuesta,
+              subrespuestas: respuesta.subrespuestas
+            }))
+          }))
+        }));
+        console.log('Foros cargados:', this.foros);
+      },
+      error => console.error('Error al cargar los foros', error)
+    );
+  }
+  selectForo(foro: any, respuesta?: any, subrespuesta?: any) {
     this.selectedForo = foro;
-    console.log('Foro seleccionado:', foro);  
-    this.newResponse = ''; // Limpiar la respuesta anterior
+    this.selectedRespuesta = subrespuesta || respuesta || null;
+    this.newResponse = '';
   }
   isExpired(endDate: string): boolean {
     const today = new Date();
     const end = new Date(endDate);
     return today > end;
   }
+  cancelResponse() {
+    this.selectedForo = null;
+    this.selectedRespuesta = null;
+    this.newResponse = '';
+  }
   submitResponse() {
-    if (this.selectedForo && this.newResponse) {      
+    if (this.selectedForo && this.newResponse) {
+      console.log(this.selectedRespuesta) 
       const data = {
         id_foro: this.selectedForo.id_foro,
         respuesta: this.newResponse,
-        domain_id: this.helperService.getDominioId()
+        domain_id: this.helperService.getDominioId(),
+        alumno_id: this.helperService.getAlumnoId(),
+        docente_id: this.helperService.getDocenteId(),
+        id_respuesta: this.selectedRespuesta ? this.selectedRespuesta.id : null
       };
-      console.log('Respuesta enviada:', data);
-      console.log('Respuesta enviada:', this.newResponse);
+      this.foroService.sendResponse(data).subscribe(response => {
+        console.log('Respuesta enviada:', response);
+        this.helperService.showSuccessMessage('Respuesta enviada correctamente');
+        //refrescar foros
+        this.getForos();
+
+      });
       this.newResponse = '';
       this.selectedForo = null; // Cerra
     }
   }
-  getDaysRemaining(endDate: string): number {
+  getDaysRemaining(endDate: string): string {
     const today = new Date();
     const end = new Date(endDate);
     const diffTime = end.getTime() - today.getTime();
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const remainingTime = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (remainingTime < 0) {
+      return 'Vencido';
+    }
+    return remainingTime.toString() + ' días';
   }
 
   getDaysRemainingClass(endDate: string): string {
-    const days = this.getDaysRemaining(endDate);
-    if (days < 0) {
+    const today = new Date();
+    const end = new Date(endDate);
+    const diffTime = end.getTime() - today.getTime();
+    const remainingTime = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (remainingTime < 0) {
       return 'days-remaining overdue';
-    } else if (days <= 7) {
+    } else if (remainingTime <= 7) {
       return 'days-remaining due-soon';
     } else {
       return 'days-remaining on-time';

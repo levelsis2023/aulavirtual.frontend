@@ -68,6 +68,9 @@ const routes: Routes = [];
     {path:'horario-docente',data:{breadcrumb:'Horario docente'},loadChildren:()=>import('../onlineclasses/docentes/horario/horario.module').then(m=>m.HorarioModule)},
     {
       path:'aulas',data:{breadcrumb:'Aulas'},loadChildren:()=>import('../onlineclasses/aulas/aulas.module').then(m=>m.AulasModule)
+    },
+    {
+      path:'configuracion-institucion',data:{breadcrumb:'Configuración de Institución'},loadChildren:()=>import('../onlineclasses/configuracion-empresa/configuracion-empresa.module').then(m=>m.ConfiguracionEmpresaModule)
     }
   ])],
   

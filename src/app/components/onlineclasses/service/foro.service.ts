@@ -25,10 +25,10 @@ export class ForoService{
         saveForo(data:any):Observable<any>{
             return this.http.post(`${this.baseUrl}foros`,data);
         }
-        getForos(domain_id:any):Observable<any>{
-            return this.http.get(`${this.baseUrl}foros/${domain_id}`);
+        getForos(domain_id:any,alumno_id:any,docente_id:any):Observable<any>{
+            return this.http.get(`${this.baseUrl}foros/${domain_id}/${alumno_id}/${docente_id}`);
         }
         sendResponse(data:any):Observable<any>{
-            return this.http.post(`${this.baseUrl}foros/response`,data);
+            return this.http.post(`${this.baseUrl}foros/message`,data);
         }
 }

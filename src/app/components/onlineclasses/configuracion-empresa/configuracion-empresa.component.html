@@ -1,0 +1,31 @@
+<p-panel>
+    <ng-template pTemplate="content">
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label p-input-icon-left w-full">
+                    <i class="pi pi-building"></i>
+                    <input type="text" id="institucion" pInputText [(ngModel)]="nombreInstitucion" class="w-full
+                    p-inputtext p-component p-element ng-pristine ">
+                    <label for="institucion" *ngIf="!nombreInstitucion">Nombre de la institución</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-6">
+                <div *ngIf="!logoActual" class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-image"></i>
+                    </span>
+                    <p-fileUpload mode="basic" chooseLabel="Seleccionar logo" name="logo" accept="image/*" [auto]="true" (onSelect)="onLogoSelect($event)" styleClass="p-button-secondary"></p-fileUpload>
+                </div>
+                <div *ngIf="logoActual" class="flex align-items-center">
+                    <img [src]="logoActual" alt="Logo actual" class="mr-3" style="max-width: 100px; max-height: 100px;">
+                    <button pButton type="button" icon="pi pi-refresh" label="Actualizar logo" (click)="actualizarLogo()" class="p-button-secondary"></button>
+                </div>
+            </div>
+
+        </div>
+        <!--button save-->
+        <div class="flex justify-center mt-4">
+            <button pButton type="button" label="Guardar" class="p-button-success mr-2" (click)="saveCompany()" [disabled]="!nombreInstitucion"></button>
+        </div>
+    </ng-template>
+</p-panel>

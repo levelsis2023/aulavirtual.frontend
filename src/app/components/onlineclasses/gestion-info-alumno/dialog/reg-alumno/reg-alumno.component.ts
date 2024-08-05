@@ -289,7 +289,9 @@ export class RegAlumnoComponent {
                     });
                 },
                 (error) => {
-                    console.error('Error guardando alumno', error);
+                    this.loading = false;
+                    this.spinner.hide();
+                    this.helpersService.showErrorMessage(error.error.message);
                 }
             );
         } else {

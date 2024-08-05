@@ -47,6 +47,14 @@
                     <div class="field md:col-6">
                         <span class="p-float-label p-input-icon-left">
                             <i class="pi pi-user-edit"></i>
+                            <input type="text" id="apellidos" pInputText formControlName="apellidos">
+                            <label for="apellidos">Apellidos</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('apellidos')?.invalid && alumnoForm.get('apellidos')?.touched">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
                             <input type="text" id="email" pInputText formControlName="email">
                             <label for="email">Correo</label>
                         </span>
@@ -60,14 +68,7 @@
                         </span>
                         <small style="color: brown;" *ngIf="alumnoForm.get('contraseña')?.invalid && alumnoForm.get('contraseña')?.touched">Campo obligatorio *</small>
                     </div>
-                    <div class="field md:col-6">
-                        <span class="p-float-label p-input-icon-left">
-                            <i class="pi pi-user-edit"></i>
-                            <input type="text" id="direccion" pInputText formControlName="direccion">
-                            <label for="direccion">Direccion</label>
-                        </span>
-                        <small style="color: brown;" *ngIf="alumnoForm.get('direccion')?.invalid && alumnoForm.get('direccion')?.touched">Campo obligatorio *</small>
-                    </div>
+                   
                 </div>
             </div>
             <div class="row">
@@ -75,10 +76,10 @@
                     <div class="field md:col-6">
                         <span class="p-float-label p-input-icon-left">
                             <i class="pi pi-user-edit"></i>
-                            <input type="text" id="apellidos" pInputText formControlName="apellidos">
-                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="direccion" pInputText formControlName="direccion">
+                            <label for="direccion">Direccion</label>
                         </span>
-                        <small style="color: brown;" *ngIf="alumnoForm.get('apellidos')?.invalid && alumnoForm.get('apellidos')?.touched">Campo obligatorio *</small>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('direccion')?.invalid && alumnoForm.get('direccion')?.touched">Campo obligatorio *</small>
                     </div>
                     <div class="field md:col-6">
                         <span class="p-float-label p-input-icon-left">
