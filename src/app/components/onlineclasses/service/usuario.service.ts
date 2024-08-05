@@ -20,4 +20,7 @@ export class UsuarioService{
     saveUsuario(data: any): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(`${this.baseUrl}usuarios`, data);
     }
+    deleteUsuario(id:number){
+        return this.http.delete(`${this.baseUrl}usuarios/${id}`);
+      }
 }
