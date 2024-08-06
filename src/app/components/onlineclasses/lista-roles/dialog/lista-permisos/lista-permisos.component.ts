@@ -10,7 +10,7 @@ import { PanelModule } from 'primeng/panel';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { HelpersService } from 'src/app/helpers.service';
-
+import { DropdownModule } from 'primeng/dropdown';
 @Component({
   selector: 'app-lista-permisos',
   templateUrl: './lista-permisos.component.html',
@@ -18,7 +18,7 @@ import { HelpersService } from 'src/app/helpers.service';
   standalone: true,
   imports: [CommonModule,
     PanelModule,
-
+    DropdownModule,
     FormsModule,
     TableModule],
 })
@@ -27,7 +27,9 @@ export class ListaPermisosComponent {
   visible: boolean = false;
   nombre: string = '';
   permisos!: any[];
+  instituciones: any[] = [];
   permisosSeleccionados: Set<number> = new Set();
+  selectedInstitucion: any;
   idRol!: number;
   estado!: boolean;
   domain_id: any;
@@ -41,21 +43,29 @@ export class ListaPermisosComponent {
     public config: DynamicDialogConfig,
     private helpersService: HelpersService
   ) {
-    this.permisoService.getPermisos().subscribe((response: any) => {
+    this.domain_id = this.helpersService.getDominioId();
+    this.permisoService.getPermisos(this.domain_id
+    ).subscribe((response: any) => {
       console.log("Lista de permisos", response);
       this.permisos = response;
     });
-
+    this.permisoService.getEmpresasDropdown().subscribe((response: any) => {
+      this.instituciones = response;
+    });
     this.idRol = config.data;
 
-    this.permisoService.getRolPermisos(this.idRol).subscribe((response: any[]) => {
+   
+
+
+  }
+  onInstitucionChange(event: any) {
+    this.selectedInstitucion = event.value;
+    this.permisoService.getRolPermisos(this.idRol,this.selectedInstitucion??1).subscribe((response: any[]) => {
       this.permisosSeleccionados = new Set(response.map(permission => permission.id));
       console.log("this.permisosSeleccionados");
       console.log(this.permisosSeleccionados);
     });
-   
   }
-
 
 
   onCheckboxChange(permisoId: number, event: Event) {
@@ -68,10 +78,11 @@ export class ListaPermisosComponent {
     }
   }
 
-  guardarPermisos() {
+  guardarPermisos() { 
     const data = {
       id: this.idRol,
-      idPermisos: Array.from(this.permisosSeleccionados)
+      idPermisos: Array.from(this.permisosSeleccionados),
+      domain_id: this.domain_id??this.selectedInstitucion
     }
     console.log(data);
     this.permisoService.guardarRolPermisos(data).subscribe(
@@ -83,7 +94,7 @@ export class ListaPermisosComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          
+
         });
       },
       (error: any) => {

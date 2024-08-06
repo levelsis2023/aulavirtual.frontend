@@ -20,6 +20,7 @@ import { PanelModule } from 'primeng/panel';
 import { EditorModule } from 'primeng/editor';
 import { ConfiguracionEmpresaComponent } from './configuracion-empresa/configuracion-empresa.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DropdownModule } from 'primeng/dropdown';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     { provide: DialogService, useClass: DialogService }
   ],
   imports: [
+    DropdownModule,
     FileUploadModule,
     CommonModule,
     OnlineClassesRoutingModule,
