@@ -17,11 +17,6 @@
                                             placeholder="Buscar por listado de evaluaciones" class="w-full" />
                                     </span>
                                 </div>
-                                <div class="mb-2">
-                                    <button pButton label="Nuevo" icon="pi pi-user-plus" id="btnNuevo"
-                                        class="p-button-primary mr-2" (click)="navigateAddCurso()"
-                                        style="border-radius: 30px;"></button>
-                                </div>
                             </div>
                         </ng-template>
 
@@ -35,7 +30,6 @@
                                 <th style="min-width: 10rem" scope="col">Valor %</th>
                                 <th style="min-width: 10rem" scope="col">Fecha y Hora 1</th>
                                 <th style="min-width: 10rem" scope="col">Fecha y Hora 2</th>
-                                <th style="min-width: 10rem" scope="col">Tipo de Evaluación</th>
                                 <th style="min-width: 10rem" scope="col">Observaciones</th>
                                 <th style="min-width: 10rem" scope="col">Estado</th>
                             </tr>
@@ -44,19 +38,19 @@
                         <ng-template pTemplate="body" let-carrera>
                             <tr>
                                 <td>
-                                    <button pButton icon="pi pi-pencil" style="width: 70px; border-radius: 30px;"
-                                    title="Responder Evaluación" class="p-button-rounded p-button-text p-button-info"
+                                    <button pButton style="border-radius: 30px; background-color: green; color: white;"
+                                    title="Responder Evaluación" class="p-button-rounded p-button-text"
                                     (click)="agregarPreguntas(carrera)">
-                                </button>
+                                Responder Evaluación
+                            </button>
                                 </td>
-                                <td>{{ carrera.id }}</td>
+                                <td>{{ carrera.nombre_del_grupo }}</td>
                                 <td>{{ carrera.nombre }}</td>
                                  <td>{{ carrera.nota }}</td>
                                 <td>{{ carrera.porcentaje_obtenido }}%</td>
                                 <td>{{ carrera.porcentaje_evaluacion }}%</td>
                                 <td>{{ carrera.fecha_y_hora_programo }}</td>
                                 <td>{{ carrera.fecha_hora_2 }}</td>
-                                <td>{{ carrera.tipo_evaluacion_nombre }}</td>
                                 <td>{{ carrera.observaciones }}</td>
                                 <td>{{ carrera.estado_nombre }}</td>
                             </tr>

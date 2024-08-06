@@ -1396,7 +1396,69 @@ export class GeneralService {
         })
       );
   }
+<<<<<<< HEAD
   updateOrdenCiclos(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}ciclos-orden`, data);
+=======
+
+
+
+  
+
+  guardarPreguntaAlumno(parametro: any): Observable<ApiResponse> {
+    return this.http
+      .post<ApiResponse>(`${this.baseUrl}alumno-preguntas/`, parametro, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 201 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
+
+
+  getListadoDeEvaluacionesPorCurso(parametro: any): Observable<ApiResponse> {
+    return this.http
+      .get<ApiResponse>(`${this.baseUrl}cursos/${parametro.id}/evaluaciones`, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 200 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
+
+
+  getListadoDePreguntasPorCorregir(parametro: any): Observable<ApiResponse> {
+    return this.http
+      .get<ApiResponse>(`${this.baseUrl}obtener-preguntas-corregidas/${parametro}`, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 200 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+>>>>>>> main
   }
 }

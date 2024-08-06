@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { VerListadoDeEvaluacionesPorGrupoComponent } from '../ver-lis-eval-grupo/ver-lis-eval-grupo.component';
 import { AgregarEditarListadoDePreguntasComponent } from './ae-listado-de-preguntas/agregar-editar-listado-de-preguntas.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CorregirPreguntasComponent } from 'src/app/components/onlineclasses/docentes/cursos-docentes/corregir-preguntas/corregir-preguntas.component';
 
 
 @Component({
@@ -197,6 +198,16 @@ export class VerListadoDePreguntasComponent implements OnInit {
     });
   }
 
-  corregirPregunta(data: any) {
+  corregirPregunta(evaluaciones: any) {
+
+    this.ref = this.dialogService.open(CorregirPreguntasComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { idCurso: this.evaluaciones.id ,data: evaluaciones } 
+     });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarPreguntas();
+    });
   }
 }
