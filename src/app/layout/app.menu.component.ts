@@ -44,9 +44,9 @@ export class AppMenuComponent implements OnInit {
             this.router.navigate(['/auth/login']);
             return;
         }
-            
+        this.domain_id = this.helpersService.getDominioId();
         const rolId = this.helpersService.getRolId();
-        this.permisoService.fetchPermisos(rolId);
+        this.permisoService.fetchPermisos(rolId,this.domain_id);
         this.permisoService.permisos$.pipe(
             tap(permisos => {
                 this.permisos = permisos;   

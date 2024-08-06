@@ -5,6 +5,7 @@ import { RegistraRolComponent } from './dialog/registra-rol/registra-rol.compone
 import { GeneralService } from '../service/general.service';
 import { ListaPermisosComponent } from './dialog/lista-permisos/lista-permisos.component';
 import Swal from 'sweetalert2';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-lista-postulantes',
@@ -18,17 +19,17 @@ export class ListaRolesComponent {
 
   roles: any[] = [];
   rol: any[] = [];
-
+  domain_id: any;
   constructor(
     private router: Router,
     private dialogService: DialogService,
     private rolService: GeneralService,
-    private permisoService: GeneralService
-
+    private permisoService: GeneralService,
+    private helpersService: HelpersService,
 
   ) {
-
-    this.rolService.getRoles().subscribe((response: any) => {
+    this.domain_id = this.helpersService.getDominioId();
+    this.rolService.getRoles(this.domain_id).subscribe((response: any) => {
       console.log("Lista de Roles", response);
       this.roles = response;
     });
@@ -84,7 +85,9 @@ export class ListaRolesComponent {
         this.rolService.eliminarRol(id).subscribe(
           (response: any) => {
             console.log('rol eliminado:', response);
-            this.rolService.getRoles().subscribe((response: any) => {
+            this.rolService.getRoles(
+              this.domain_id
+            ).subscribe((response: any) => {
               console.log("Lista de Roles", response);
               this.roles = response;
             });

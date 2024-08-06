@@ -14,8 +14,8 @@ export class UsuarioService{
     constructor(private http: HttpClient) { 
 
     }
-    getUsuarios(): Observable<ApiResponse> {
-        return this.http.get<ApiResponse>(`${this.baseUrl}usuarios`);
+    getUsuarios(domain_id:any): Observable<ApiResponse> {
+        return this.http.get<ApiResponse>(`${this.baseUrl}usuarios/${domain_id}`);
     }
     saveUsuario(data: any): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(`${this.baseUrl}usuarios`, data);

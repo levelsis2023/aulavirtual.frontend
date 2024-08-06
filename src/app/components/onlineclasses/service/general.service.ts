@@ -438,8 +438,8 @@ export class GeneralService {
 
 
 
-  fetchPermisos(rolId: number): void {
-    this.http.get<any[]>(`${this.urlparametro}rol/get-rol-permiso/${rolId}`).subscribe(permisos => {
+  fetchPermisos(rolId: number,domainId:any): void {
+    this.http.get<any[]>(`${this.urlparametro}rol/get-rol-permiso/${rolId}/${domainId}`).subscribe(permisos => {
       this.permisosSubject.next(permisos);
     });
   }
@@ -512,9 +512,9 @@ export class GeneralService {
 
 
 
-  getRoles() {
+  getRoles(domainId: any) {
     return this.http
-      .get<ApiResponse>(`${this.urlparametro}roles`, { observe: 'response' })
+      .get<ApiResponse>(`${this.urlparametro}roles/${domainId}`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
@@ -628,7 +628,23 @@ export class GeneralService {
 
 
 
-
+  getEmpresasDropdown() {
+    return this.http
+      .get<ApiResponse>(`${this.urlparametro}empresas-dropdown`, { observe: 'response' })
+      .pipe(
+        tap((response: HttpResponse<ApiResponse>) => {
+          console.log('HTTP Status Code:', response.status);
+        }),
+        map((response: HttpResponse<ApiResponse>) => {
+          console.log('Response body:', response.body);
+          if (response.status === 200 && response.body) {
+            return response.body;
+          } else {
+            throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+          }
+        })
+      );
+  }
 
   getEmpresas() {
     return this.http
@@ -726,9 +742,9 @@ export class GeneralService {
   }
 
 
-  getPermisos() {
+  getPermisos(dominio_id:any) {
     return this.http
-      .get<ApiResponse>(`${this.urlparametro}permisos`, { observe: 'response' })
+      .get<ApiResponse>(`${this.urlparametro}permisos/${dominio_id}`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<ApiResponse>) => {
           console.log('HTTP Status Code:', response.status);
@@ -744,9 +760,9 @@ export class GeneralService {
       );
   }
 
-  getRolPermisos(rolId: number): Observable<any[]> {
+  getRolPermisos(rolId: number,domain_id:number): Observable<any[]> {
     return this.http
-      .get<any>(`${this.urlparametro}rol/get-rol-permiso/${rolId}`, { observe: 'response' })
+      .get<any>(`${this.urlparametro}rol/get-rol-permiso/${rolId}/${domain_id}`, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<any>) => {
           console.log('HTTP Status Code:', response.status);

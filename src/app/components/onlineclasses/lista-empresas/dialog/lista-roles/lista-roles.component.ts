@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-lista-roles',
@@ -27,16 +28,18 @@ export class ListaRolesComponent {
   roles: any[] = [];
   estado!: boolean;
   rolSeleccionado: any; // Aquí se guardará el rol seleccionado
-
+  domain_id: any;
   constructor(
     private router: Router,
     private primengConfig: PrimeNGConfig,
     private translate: TranslateService,
     public ref: DynamicDialogRef,
     private rolService: GeneralService,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    public helpersService: HelpersService
   ) {
-    this.rolService.getRoles().subscribe((response: any) => {
+    this.domain_id = this.helpersService.getDominioId();
+    this.rolService.getRoles(this.domain_id).subscribe((response: any) => {
       console.log("Lista de Roles", response);
       this.roles = response;
     });

@@ -92,7 +92,7 @@ export class RegistraUsuarioComponent {
       password: ['', Validators.required],
       dni: ['', Validators.required],
       rolId: ['', Validators.required],
-      dominioId: ['', Validators.required],
+      dominioId: !['', Validators.required]?this.dominioId:null,
     });
   }
 
