@@ -9,5 +9,13 @@
   }
 
   .grid{
-    margin-top: 2rem;
+    margin-top: 1rem;
+  }
+
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Adjust as needed */
   }

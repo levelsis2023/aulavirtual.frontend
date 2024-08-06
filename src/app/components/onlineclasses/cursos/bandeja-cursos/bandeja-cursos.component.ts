@@ -46,7 +46,7 @@ export class BandejaCursosComponent {
     // Obtener el objeto 'user' del localStorage
     const user = localStorage.getItem('user');
 
-    let docenteId = null;
+    let alumnoId = null;
 
     // Verificar si el objeto existe en el localStorage
     if (user) {
@@ -54,7 +54,7 @@ export class BandejaCursosComponent {
         const userObj = JSON.parse(user);
 
         // Acceder a la propiedad docente_id
-        docenteId = userObj.alumno_id || 1;
+        alumnoId = userObj.alumno_id || 1;
     } else {
         console.error('No se encontró el objeto user en el localStorage');
     }
@@ -62,7 +62,7 @@ export class BandejaCursosComponent {
     this.config = {
         data: {
             data: {
-                id: docenteId,
+                id: alumnoId,
                 total_creditos: 30 // Replace with actual total credits
             }
         }

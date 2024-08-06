@@ -23,7 +23,6 @@
 
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="min-width: 10rem" scope="col">Pregunta</th>
                                 <th style="min-width: 10rem" scope="col">Valor de la pregunta</th>
                                 <th style="min-width: 10rem" scope="col">Puntos de la pregunta</th>
                                 <th style="min-width: 10rem" scope="col">Porcentaje de la pregunta</th>
@@ -34,9 +33,7 @@
                         <ng-template pTemplate="body" let-pregunta>
                             <tr>
 
-                                <td>
-                                    <span pTooltip="Responder pregunta" tooltipPosition="top" [innerHTML]="pregunta.pregunta_docente"></span>
-                                </td>
+ 
                                 <td>{{ pregunta.valor_pregunta }}</td>
                                 <td>{{ pregunta.puntos }}</td>
                                 <td>{{ pregunta.porcentaje }}%</td>

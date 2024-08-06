@@ -10,12 +10,14 @@ import { HelpersService } from 'src/app/helpers.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+
 @Component({
-  selector: 'app-responder-pregunta',
-  templateUrl: './responder-pregunta.component.html',
-  styleUrls: ['./responder-pregunta.component.scss']
+  selector: 'app-corregir-preguntas-unica',
+  templateUrl: './corregir-preguntas-unica.component.html',
+  styleUrls: ['./corregir-preguntas-unica.component.scss']
 })
-export class ResponderPreguntaComponent {
+export class CorregirPreguntasUnicaComponent {
+
 
 
   loading: boolean = false;
@@ -65,7 +67,9 @@ export class ResponderPreguntaComponent {
   }
 
   ngOnInit(): void {
-    
+
+
+
     this.idEvaluacion = this.config.data.idEvaluacion;
     this.acciones = this.config.data.acciones;
     this.sanitizePregunta = this.sanitizer.bypassSecurityTrustHtml(this.config.data.data.pregunta_docente);
@@ -73,7 +77,7 @@ export class ResponderPreguntaComponent {
     Promise.all([
       this.listarDePregunta(),
     ]).then(() => {
-      if (this.acciones === 'ver' || this.acciones === 'actualizar' || this.acciones === 'alumno') {
+      if (this.acciones === 'ver' || this.acciones === 'actualizar' || this.acciones === 'alumno' || this.acciones === 'docente') {
         this.preguntaForm.patchValue({
           tipoPregunta: this.config.data.data.tipo_de_evaluacion_id,
           valor_pregunta: this.config.data.data.valor_pregunta,

@@ -40,7 +40,7 @@ export class VerEvaluacionesComponent {
   }
 
   listarGrupoEvaluaciones() {
-    this.grupoEvaluacionesService.getListadoDeEvaluacionesPorGrupo({id:this.grupoEvaluaciones.id}).subscribe((response: any) => {
+    this.grupoEvaluacionesService.getListadoDeEvaluacionesPorCurso({id:this.grupoEvaluaciones.id}).subscribe((response: any) => {
       this.grupoEvaluacionesList = response;
       this.originalgrupoEvaluacionesList = [...response];
     });

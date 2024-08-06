@@ -96,7 +96,7 @@ export class VerPreguntasComponent {
     this.ref = this.dialogService.open(ResponderPreguntaComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { acciones: 'actualizar', idCurso: this.evaluaciones.id ,data: data } 
+      data: { data: data , idEvaluacion: this.evaluaciones.id, 'acciones': 'alumno' } 
      });
 
     this.ref.onClose.subscribe((data: any) => {

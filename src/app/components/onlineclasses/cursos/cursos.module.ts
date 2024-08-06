@@ -36,6 +36,7 @@ import { VerEvaluacionesComponent } from './bandeja-cursos/ver-evaluaciones/ver-
 import { VerPreguntasComponent } from './bandeja-cursos/ver-preguntas/ver-preguntas.component';
 import { ResponderPreguntaComponent } from './bandeja-cursos/responder-pregunta/responder-pregunta.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsMo
     DialogModule,    
     DynamicDialogModule,      
     TranslateModule,
-    ReactiveFormsModule // Agrega ReactiveFormsModule al array de imports
+    ReactiveFormsModule, // Agrega ReactiveFormsModule al array de imports
+    NgxSpinnerModule
   ]
 })
 export class CursosModule { }
