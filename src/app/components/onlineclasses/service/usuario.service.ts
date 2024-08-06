@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient,HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
-import { tap,map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ApiResponse, Base } from '../interface/general';
+import { ApiResponse } from '../interface/general';
+import {HttpClient} from "@angular/common/http";
 @Injectable({
     providedIn: 'root',
 })
 export class UsuarioService{
-    private baseUrl = `${environment.API_BASE}`;    
-    private urlparametro = `${environment.API_BASE}`;
-    constructor(private http: HttpClient) { 
+    private baseUrl = `${environment.API_BASE}`;
+    //private urlparametro = `${environment.API_BASE}`;
+    constructor(private http: HttpClient) {
 
     }
     getUsuarios(domain_id:any): Observable<ApiResponse> {
+        if (domain_id === null) {
+            return this.http.get<ApiResponse>(`${this.baseUrl}usuarios/0`);
+        }
         return this.http.get<ApiResponse>(`${this.baseUrl}usuarios/${domain_id}`);
     }
     saveUsuario(data: any): Observable<ApiResponse> {
