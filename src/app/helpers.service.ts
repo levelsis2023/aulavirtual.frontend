@@ -41,9 +41,9 @@ export class HelpersService {
         const user = JSON.parse(userData);
         return user.domain_id;
       }
-      return 1
+      return null
     }
-    return 1
+    return null
   }
   getAlumnoId() {
     if (localStorage.getItem('user')) {

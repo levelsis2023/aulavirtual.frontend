@@ -27,7 +27,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { ListaRolesComponent } from './lista-roles.component';
 import { RegistraRolComponent } from './dialog/registra-rol/registra-rol.component';
-
+//import pdrowpdown
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import { RegistraRolComponent } from './dialog/registra-rol/registra-rol.compone
   imports: [
     CommonModule,
     PanelModule,
+    DropdownModule,
     ListaRolesRoutingModule,
     FormsModule,     
     CalendarModule,

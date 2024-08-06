@@ -24,18 +24,19 @@ export class BandejaUsuariosComponent {
   loading: boolean = false;
   ref: DynamicDialogRef | undefined;
 
-
+  domain_id: any;
   constructor(
     private router: Router,
     private dialogService: DialogService,
     private userServicio: UsuarioService,
     private helpersService: HelpersService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+
 
   ) { }
 
   ngOnInit(): void {
-
+    this.domain_id = this.helpersService.getDominioId();
     this.cargaInicial();
 
 
@@ -64,7 +65,7 @@ export class BandejaUsuariosComponent {
   cargaInicial(): void {
     //call getUsuarios
     this.loading = true;
-    this.userServicio.getUsuarios().subscribe(
+    this.userServicio.getUsuarios(this.domain_id).subscribe(
       (response: any) => {
         this.usuarios = response
         this.loading = false;
