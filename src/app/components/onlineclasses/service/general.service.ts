@@ -1396,4 +1396,7 @@ export class GeneralService {
         })
       );
   }
+  updateOrdenCiclos(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}ciclos-orden`, data);
+  }
 }

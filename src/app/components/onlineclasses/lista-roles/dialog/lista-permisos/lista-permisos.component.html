@@ -1,10 +1,13 @@
 <p-panel>
     <ng-template pTemplate="header">
-        <div class="d-flex justify-content-between">
-            <span class="text-primary font-semibold text-xl">Asignar permiso</span>
+        <div class="d-flex justify-content-between"
+        >
+            <span class="text-primary font-semibold text-xl"
+           
+            >Asignar permiso</span>
 
             <!-- dropdown for instituciones-->
-             <p-dropdown [options]="instituciones" [(ngModel)]="selectedInstitucion" optionLabel="name"
+             <p-dropdown  *ngIf="!domain_id" [options]="instituciones" [(ngModel)]="selectedInstitucion" optionLabel="name"
              optionValue="domain_id"
              placeholder="Seleccione una institución" (onChange)="onInstitucionChange($event)"></p-dropdown>
         </div>

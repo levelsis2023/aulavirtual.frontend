@@ -54,13 +54,17 @@ export class ListaPermisosComponent {
     });
     this.idRol = config.data;
 
-   
-
-
+    if (this.domain_id) {
+      this.permisoService.getRolPermisos(this.idRol, this.domain_id).subscribe((response: any[]) => {
+        this.permisosSeleccionados = new Set(response.map(permission => permission.id));
+        console.log("this.permisosSeleccionados");
+        console.log(this.permisosSeleccionados);
+      });
+    }
   }
   onInstitucionChange(event: any) {
     this.selectedInstitucion = event.value;
-    this.permisoService.getRolPermisos(this.idRol,this.selectedInstitucion??1).subscribe((response: any[]) => {
+    this.permisoService.getRolPermisos(this.idRol, this.selectedInstitucion ?? 1).subscribe((response: any[]) => {
       this.permisosSeleccionados = new Set(response.map(permission => permission.id));
       console.log("this.permisosSeleccionados");
       console.log(this.permisosSeleccionados);
@@ -70,7 +74,6 @@ export class ListaPermisosComponent {
 
   onCheckboxChange(permisoId: number, event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
-
     if (isChecked) {
       this.permisosSeleccionados.add(permisoId);
     } else {
@@ -78,11 +81,11 @@ export class ListaPermisosComponent {
     }
   }
 
-  guardarPermisos() { 
+  guardarPermisos() {
     const data = {
       id: this.idRol,
       idPermisos: Array.from(this.permisosSeleccionados),
-      domain_id: this.domain_id??this.selectedInstitucion
+      domain_id: this.domain_id ?? this.selectedInstitucion
     }
     console.log(data);
     this.permisoService.guardarRolPermisos(data).subscribe(
