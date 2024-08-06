@@ -167,7 +167,7 @@ export class VerEvaluacionesComponent {
     this.ref = this.dialogService.open(VerPreguntasComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
-      data: { acciones: 'add', grupoEvaluacionesId: this.grupoEvaluaciones.id ,data: evaluaciones } 
+      data: { acciones: 'alumno', grupoEvaluacionesId: this.grupoEvaluaciones.id ,data: evaluaciones } 
      });
   
     this.ref.onClose.subscribe((data: any) => {

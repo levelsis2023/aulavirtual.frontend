@@ -61,16 +61,30 @@ export class ResponderPreguntaComponent {
           tipoPregunta: this.config.data.data.tipo_de_evaluacion_id,
           valor_pregunta: this.config.data.data.valor_pregunta,
           pregunta_docente:   this.preguntaDocenteValue['changingThisBreaksApplicationSecurity'],
-          alternativas: this.config.data.data.alternativas
      
         });
+
+        this.setAlternativasv2(this.config.data.data.alternativas);
+
       }
     });
   }
-  onRadioChange(selectedIndex: number) {
+
+  setAlternativasv2(alternativas: any[]): void {
+    const alternativasFormArray = this.preguntaForm.get('alternativas') as FormArray;
+    alternativas.forEach(alternativa => {
+      alternativasFormArray.push(this.fb.group({
+        texto: [alternativa.texto, Validators.required],
+        respuesta_correcta_seleccionada: [false, Validators.required]
+      }));
+    });
+  }
+  
+  // Method to handle radio button change
+  onRadioChange(selectedIndex: number): void {
     const alternativas = this.preguntaForm.get('alternativas') as FormArray;
     alternativas.controls.forEach((control, index) => {
-      const respuestaCorrectaControl = control.get('respuesta_correcta');
+      const respuestaCorrectaControl = control.get('respuesta_correcta_seleccionada');
       if (respuestaCorrectaControl) {
         respuestaCorrectaControl.setValue(index === selectedIndex);
       }
@@ -96,7 +110,7 @@ export class ResponderPreguntaComponent {
   }
   guardarRespuestaCorrecta() {
     const alternativas = this.preguntaForm.value.alternativas;
-    const index = alternativas.findIndex((alternativa: any) => alternativa.respuesta_correcta === true);
+    const index = alternativas.findIndex((alternativa: any) => alternativa.respuesta_correcta_seleccionada === true);
     if (index !== -1) {
 
     }
@@ -109,7 +123,7 @@ export class ResponderPreguntaComponent {
         tipo_de_evaluacion_id: this.preguntaForm.value.tipoPregunta,
         pregunta_docente: this.preguntaForm.value.pregunta_docente,
         descripcion: this.preguntaForm.value.descripcion,
-        respuesta_correcta: this.preguntaForm.value.alternativas.findIndex((alternativa: any) => alternativa.respuesta_correcta === true)+1,
+        respuesta_correcta_seleccionada: this.preguntaForm.value.alternativas.findIndex((alternativa: any) => alternativa.respuesta_correcta_seleccionada === true)+1,
         domain_id: this.helpersService.getDominioId(),
         valor_pregunta: this.preguntaForm.value.valor_pregunta,
         alternativas: this.preguntaForm.value.alternativas
@@ -173,7 +187,7 @@ export class ResponderPreguntaComponent {
     alternativas.push(this.fb.group({
       id: [newId],
       texto: ['', Validators.required],
-      respuesta_correcta: [false]
+      respuesta_correcta_seleccionada: [false]
     }));
   }
 
