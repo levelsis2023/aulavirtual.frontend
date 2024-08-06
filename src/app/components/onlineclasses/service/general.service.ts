@@ -1396,6 +1396,10 @@ export class GeneralService {
         })
       );
   }
+<<<<<<< HEAD
+  updateOrdenCiclos(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}ciclos-orden`, data);
+=======
 
 
 
@@ -1455,5 +1459,6 @@ export class GeneralService {
           }
         })
       );
+>>>>>>> main
   }
 }

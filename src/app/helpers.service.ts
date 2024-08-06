@@ -107,6 +107,18 @@ export class HelpersService {
       timer: 1500
     });
   }
-
-
+  showConfirmDialog(message: string, callback: any) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: message,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        callback();
+      }
+    });
+  }
 }
