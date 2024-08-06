@@ -1396,13 +1396,11 @@ export class GeneralService {
         })
       );
   }
-<<<<<<< HEAD
   updateOrdenCiclos(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}ciclos-orden`, data);
-=======
 
 
-
+  }
   
 
   guardarPreguntaAlumno(parametro: any): Observable<ApiResponse> {
@@ -1459,6 +1457,5 @@ export class GeneralService {
           }
         })
       );
->>>>>>> main
   }
 }
