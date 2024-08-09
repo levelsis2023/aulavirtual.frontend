@@ -21,6 +21,8 @@ import { EditorModule } from 'primeng/editor';
 import { ConfiguracionEmpresaComponent } from './configuracion-empresa/configuracion-empresa.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
+//import colorPicker from 'angular2-color-picker';
+import { ColorPickerModule } from 'primeng/colorpicker';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json')
 }
@@ -43,6 +45,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     { provide: DialogService, useClass: DialogService }
   ],
   imports: [
+    ColorPickerModule,
     DropdownModule,
     FileUploadModule,
     CommonModule,

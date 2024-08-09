@@ -88,7 +88,20 @@ export class BandejaUsuariosComponent {
       this.router.onSameUrlNavigation = 'reload';
     });
   }
+  navigateToEditar(id:number){
+    this.ref = this.dialogService.open(RegistraUsuarioComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: {
+        idUsuario: id
+      }
+    });
 
+    this.ref.onClose.subscribe((dataFromDialog) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+    });
+  }
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal(
       (event.target as HTMLInputElement).value,

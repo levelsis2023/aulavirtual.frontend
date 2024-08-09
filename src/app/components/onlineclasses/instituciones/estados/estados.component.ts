@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../service/general.service';
-import Swal from 'sweetalert2';	
+import Swal from 'sweetalert2';
 import { AeEstadosComponent } from './ae-estados/ae-estados.component';
 
 
@@ -34,11 +34,11 @@ export class EstadosComponent {
 
   listarEstados() {
     this.areasDeFormacionService.getEstados().subscribe((response: any) => {
-      
-        this.estadoList = response;
-        this.originalestadoList = [...response];
+
+      this.estadoList = response;
+      this.originalestadoList = [...response];
     });
-}
+  }
 
 
   navigateAddCurso() {
@@ -70,7 +70,7 @@ export class EstadosComponent {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', data: data }
-     });
+    });
 
     this.ref.onClose.subscribe((data: any) => {
       this.listarEstados();
@@ -98,10 +98,11 @@ export class EstadosComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.areasDeFormacionService.eliminarEstados(id).subscribe(
-          response => {
+          (response: any) => {
+            console.log(response);
             Swal.fire({
               title: 'Eliminado',
-              text: 'La carrera técnica ha sido eliminada.',
+              text: 'El estado ha sido eliminada.',
               icon: 'success',
               showClass: {
                 popup: `
@@ -118,11 +119,12 @@ export class EstadosComponent {
               }
             });
             this.listarEstados();
+            return;
           },
-          error => {
+          (error: any) => {
             Swal.fire(
               'Error',
-              'Hubo un problema al eliminar la carrera técnica.',
+              'Hubo un problema al eliminar el estado.',
               'error'
             );
           }
@@ -139,7 +141,7 @@ export class EstadosComponent {
     }
 
     this.estadoList = this.originalestadoList.filter(area =>
-      (area.nombre.toLowerCase().includes(filterValue)) 
+      (area.nombre.toLowerCase().includes(filterValue))
     );
   }
 

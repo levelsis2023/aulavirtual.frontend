@@ -19,6 +19,10 @@ export class UsuarioService{
         }
         return this.http.get<ApiResponse>(`${this.baseUrl}usuarios/${domain_id}`);
     }
+    getUsuario(idUsuario: any): Observable<ApiResponse> {
+        console.log(idUsuario);
+        return this.http.get<ApiResponse>(`${this.baseUrl}usuario/${idUsuario}`);
+    }
     saveUsuario(data: any): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(`${this.baseUrl}usuarios`, data);
     }

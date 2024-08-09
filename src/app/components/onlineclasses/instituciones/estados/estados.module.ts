@@ -18,11 +18,10 @@ import { RatingModule } from 'primeng/rating'
 import { FileUploadModule } from 'primeng/fileupload'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
-import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { EstadosRoutingModule } from './estados-routing.module';
 import { EstadosComponent } from './estados.component';
 import { AeEstadosComponent } from './ae-estados/ae-estados.component';
@@ -35,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsMod
     AeEstadosComponent
   ],
   imports: [
+    ColorPickerModule,
     CommonModule,
     EstadosRoutingModule,
     FormsModule,
