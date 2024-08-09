@@ -55,11 +55,11 @@
                                 <td>{{miembro.name}}</td>
                                 <td>{{miembro.email}}</td>
                                 <td>{{miembro.nombre}}
-                                <td> <button pButton icon="pi pi-user-plus" class="p-button-rounded p-button-text p-button-action"
-                                      title="Perfil">
-                                  </button>
+                                <td> 
                                   <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-text p-button-action"
-                                      title="Editar">
+                                      
+                                  (click)="navigateToEditar(miembro.id)"
+                                  title="Editar">
                                   </button>
                                   <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-action"
                                    title="Eliminar"

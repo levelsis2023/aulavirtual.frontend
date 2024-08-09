@@ -29,6 +29,7 @@ export class RegCursosComponent implements OnInit {
   porcentajeCreditos: number = 0;
   cantidadHoras: number = 0;
   syllabus: string = '';
+  tema: string = '';
   asignacionDocentes: any = {};
   asignacionesDocentes: any[] = [];
   estados: any[] = [];
@@ -67,6 +68,7 @@ export class RegCursosComponent implements OnInit {
         this.porcentajeCreditos = this.config.data.data.porcentaje_de_creditos;
         this.cantidadHoras = this.config.data.data.cantidad_de_horas;
         this.syllabus = this.config.data.data.syllabus;
+        this.tema = this.config.data.data.tema;
         this.asignacionDocentes =this.config.data.data.docente_id;
         this.estado = this.config.data.data.estado_id;
       }
@@ -85,6 +87,7 @@ export class RegCursosComponent implements OnInit {
       porcentajeCreditos: this.porcentajeCreditos,
       cantidadHoras: this.cantidadHoras,
       syllabus: this.syllabus,
+      tema: this.tema,
       asignacionDocentesId: this.asignacionDocentes,
       carreraId: this.id,
       estadoId: this.estado,

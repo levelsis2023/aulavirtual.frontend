@@ -6,7 +6,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import esLocale from '@fullcalendar/core/locales/es'
 import Swal from 'sweetalert2';
-import { DynamicDialogRef } from 'primeng/dynamicdialog'
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { CommonService } from '../../../service/common.service';
 import { UsuarioService } from '../../../service/usuario.service';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -78,6 +78,7 @@ export class RegistraUsuarioComponent {
     private primengConfig: PrimeNGConfig,
     private translate: TranslateService,
     public ref: DynamicDialogRef,
+    public config: DynamicDialogConfig,
     private translateService: TranslateService,
     private commonService: CommonService,
     private userServicio: UsuarioService,
@@ -92,12 +93,31 @@ export class RegistraUsuarioComponent {
       password: ['', Validators.required],
       dni: ['', Validators.required],
       rolId: ['', Validators.required],
-      dominioId: !['', Validators.required]?this.dominioId:null,
-    });
+      dominioId: !['', Validators.required] ? this.dominioId : null,
+      });
   }
 
   ngOnInit() {
-    this.isSuperAdmin=this.helpersService.isSuperAdmin();
+    if (this.config.data) {
+      this.userServicio.getUsuario(this.config.data.idUsuario).subscribe(
+        (response: any) => {
+          this.userForm.patchValue(
+            {
+              name: response.name,
+              lastname: response.lastname,
+              email: response.email,
+              dni: response.dni,
+              rolId: response.rol_id,
+              dominioId: response.domain_id,
+            }
+          );
+        },
+        (error) => {
+          console.error('Error obteniendo usuario', error);
+
+        })
+    }
+    this.isSuperAdmin = this.helpersService.isSuperAdmin();
     this.listciclos = [
 
 
@@ -121,14 +141,14 @@ export class RegistraUsuarioComponent {
       { name: 'Docente 3', value: 2, code: 'RM' }
 
     ];
-    
+
     if (this.translate) {
       this.translateChange('es'); // Cambia a español como ejemplo
     } else {
       console.error('TranslateService is not initialized.');
     }
     this.getRolesDropdown();
-    if(this.isSuperAdmin){
+    if (this.isSuperAdmin) {
       this.getInstitutionsDropdown();
     }
   }
@@ -188,10 +208,14 @@ export class RegistraUsuarioComponent {
       formData.append('dni', this.userForm.get('dni')?.value);
       formData.append('password', this.userForm.get('password')?.value);
       formData.append('rol_id', this.userForm.get('rolId')?.value);
-      if(this.isSuperAdmin){
+      formData.append('lastname', this.userForm.get('lastname')?.value);
+      if (this.isSuperAdmin) {
         formData.append('domain_id', this.userForm.get('dominioId')?.value);
-      }else{
+      } else {
         formData.append('domain_id', this.dominioId.toString());
+      }
+      if(this.config.data.idUsuario){
+        formData.append('id', this.config.data.idUsuario);
       }
       this.spinner.show();
       this.loading = true;

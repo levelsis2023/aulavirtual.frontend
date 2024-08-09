@@ -1191,7 +1191,7 @@ export class GeneralService {
         }),
         map((response: HttpResponse<ApiResponse>) => {
           console.log('Response body:', response.body);
-          if (response.status === 201 && response.body) {
+          if (response.status === 200 && response.body) {
             return response.body;
           } else {
             throw new Error(response.body ? response.body.responseMessage : 'Unknown error');

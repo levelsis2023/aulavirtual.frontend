@@ -22,7 +22,7 @@ import es from '@angular/common/locales/es'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { EstadoCursosRoutingModule } from './estado-cursos-routing.module';
 import { EstadoCursosComponent } from './estado-cursos.component';
 import { AeEstadoCursoComponent } from './ae-estado-curso/ae-estado-curso.component';
@@ -43,6 +43,7 @@ import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsMod
     InputTextareaModule,
     ToggleButtonModule,
     RippleModule,
+    ColorPickerModule,
     MultiSelectModule,
     DropdownModule,
     PanelModule,
