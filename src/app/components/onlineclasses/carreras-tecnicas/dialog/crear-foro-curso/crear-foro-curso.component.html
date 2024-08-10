@@ -1,0 +1,48 @@
+<p-panel>
+    <!-- if is loading add preloader-->
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Registrar Foro</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <form [formGroup]="foroForm" (ngSubmit)="saveForo()">
+            <!--titulo,descripcion,fechainicio,fecha fin-->
+            <div class="row">
+                <div class="grid p-fluid ">
+                    <div class="field col-12 md:col-6">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="titulo">
+                            <label class="required">Titulo</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="descripcion">
+                            <label class="required">Descripcion</label>
+                        </span>
+                        </div>  
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="grid p-fluid ">
+                    <div class="field col-12 md:6">
+                        <span class="p-float-label">
+                            <input type="date" pInputText formControlName="fechaInicio">
+                            <label class="required">Fecha Inicio</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:6">
+                        <span class="p-float-label">
+                            <input type="date" pInputText formControlName="fechaFin">
+                            <label class="required">Fecha Fin</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </ng-template>
+</p-panel>

@@ -1,30 +1,50 @@
 <ul class="layout-menu">
-    <ng-container *ngFor="let item of model1; let i = index;">
-        <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-        <li *ngIf="item.separator" class="menu-separator"></li>
+    <ng-container *ngIf="tienePermiso('ver_modulo_empresa')">
+        <ng-container *ngFor="let item of model0; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
     </ng-container>
-    <ng-container *ngFor="let item of model2; let i = index;">
-        <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-        <li *ngIf="item.separator" class="menu-separator"></li>
+    <ng-container *ngIf="tienePermiso('ver_modulo_seguridad')">
+        <ng-container *ngFor="let item of model1; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
     </ng-container>
-    <ng-container *ngFor="let item of model3; let i = index;">
-        <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-        <li *ngIf="item.separator" class="menu-separator"></li>
+    <ng-container *ngIf="tienePermiso('ver_modulo_portalWeb')">
+        <ng-container *ngFor="let item of model2; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
     </ng-container>
-    <ng-container *ngFor="let item of model4; let i = index;">
-        <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-        <li *ngIf="item.separator" class="menu-separator"></li>
+    <ng-container *ngIf="tienePermiso('ver_modulo_estructura_organica')">
+        <ng-container *ngFor="let item of model3; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
     </ng-container>
-    <ng-container *ngFor="let item of model5; let i = index;">
-        <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-        <li *ngIf="item.separator" class="menu-separator"></li>
+    <ng-container *ngIf="tienePermiso('ver_modulo_aulaVirtual')">
+        <ng-container *ngFor="let item of model4; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
     </ng-container>
-    <ng-container *ngFor="let item of model6; let i = index;">
-        <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-        <li *ngIf="item.separator" class="menu-separator"></li>
+    <ng-container *ngIf="tienePermiso('ver_modulo_agendaVirtual')">
+        <ng-container *ngFor="let item of model5; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
     </ng-container>
+    <ng-container *ngIf="tienePermiso('ver_modulo_ejecucionDeProyectos')">
+        <ng-container *ngFor="let item of model6; let i = index;">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="tienePermiso('ver_modulo_gestionDeIncidencias')">
     <ng-container *ngFor="let item of model7; let i = index;">
         <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
         <li *ngIf="item.separator" class="menu-separator"></li>
+    </ng-container>
     </ng-container>
 </ul>

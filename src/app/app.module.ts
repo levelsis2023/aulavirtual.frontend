@@ -10,6 +10,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 
 import { environment } from './environment/environment.development';
 import { TableModule } from 'primeng/table';
@@ -22,7 +23,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [
         AppComponent,
-        
+
+
     ],
     imports: [
         BrowserModule,
@@ -34,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         HttpClientModule,
         TableModule,
         CalendarModule,
-        
+        ReactiveFormsModule // Add ReactiveFormsModule to imports array
+
        
         
     ],

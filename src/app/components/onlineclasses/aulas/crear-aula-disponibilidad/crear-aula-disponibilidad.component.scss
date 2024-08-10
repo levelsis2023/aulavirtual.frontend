@@ -1,0 +1,14 @@
+/* Estilo para permitir que el calendario sobresalga del modal */
+.p-dialog .p-dialog-content {
+    position: relative;
+  }
+  
+  .p-calendar {
+    z-index: 1050; /* Asegúrate de que el calendario esté por encima del modal */
+  }
+  
+  .p-calendar .p-datepicker {
+    position: absolute; /* Permite que el calendario salga del contenedor */
+    z-index: 1050; /* Asegúrate de que el calendario esté por encima de otros elementos */
+  }
+  

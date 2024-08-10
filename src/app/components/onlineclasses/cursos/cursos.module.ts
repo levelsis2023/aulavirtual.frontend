@@ -32,10 +32,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CursosRoutingModule } from './cursos-routing.module';
 import { BandejaCursosComponent } from './bandeja-cursos/bandeja-cursos.component';
 import { RegCursosComponent } from './dialog/reg-cursos/reg-cursos.component';
+import { VerEvaluacionesComponent } from './bandeja-cursos/ver-evaluaciones/ver-evaluaciones.component';
+import { VerPreguntasComponent } from './bandeja-cursos/ver-preguntas/ver-preguntas.component';
+import { ResponderPreguntaComponent } from './bandeja-cursos/responder-pregunta/responder-pregunta.component';
+import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 @NgModule({
-  declarations: [ BandejaCursosComponent,RegCursosComponent],
+  declarations: [ BandejaCursosComponent,RegCursosComponent, VerEvaluacionesComponent, VerPreguntasComponent, ResponderPreguntaComponent],
   imports: [
     CommonModule,
     CursosRoutingModule,
@@ -66,7 +71,9 @@ import { RegCursosComponent } from './dialog/reg-cursos/reg-cursos.component';
     EditorModule,
     DialogModule,    
     DynamicDialogModule,      
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule, // Agrega ReactiveFormsModule al array de imports
+    NgxSpinnerModule
   ]
 })
 export class CursosModule { }

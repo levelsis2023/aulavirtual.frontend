@@ -1,83 +1,57 @@
 <p-panel> 
-<ng-template pTemplate="header">
-    <span class="text-primary font-semibold text-xl">Registrar Parametros</span>
-</ng-template>
-
-
-<ng-template pTemplate="content">
-    <div class="row">
-        <div class="grid p-fluid ">
-            <div class="field col-12 md:col-6">
-                <span class="p-float-label">
-                    <p-dropdown inputId="responsable" [autoDisplayFirst]="false" [options]="parametroGroupItemList" [showClear]="true"
-                                [(ngModel)]="itemSeleccionado" optionLabel="txAbreviatura" (ngModelChange)="selecionarParametroItem()"></p-dropdown>
-                    <label class="required">Grupo</label>
-                </span>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">
+            {{ esNuevo ? 'Registrar Parametros' : 'Editar Parametro' }}
+        </span>
+    </ng-template>
+    
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="grid p-fluid ">
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-autoComplete inputId="tx_nombre" [suggestions]="filteredItems" (completeMethod)="filterItems($event)"
+                                        [(ngModel)]="parametroDatos.tx_nombre" (keydown)="onKeydown($event)" [dropdown]="true" [forceSelection]="false" field="tx_nombre"
+                                        (onSelect)="onItemSelect($event)">
+                        </p-autoComplete>
+                        <label class="required">Grupo</label>
+                      </span>
+                </div>
+          
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" id="inputtext" pInputText [(ngModel)]="parametroDatos.txAbreviatura" [readonly]="parametroDatos.nativo">
+                        <label class="required">Abreviatura</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="grid p-fluid ">
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText [(ngModel)]="parametroDatos.txNombre" >
+                        <label class="required">Nombre</label>
+                    </span>
+                </div>
             </div>
             <div class="field col-12 md:col-6">
-                <span class="p-float-label">
-                    <input type="number" pInputText [(ngModel)]="parametroDatos.nuItemNro">
-                    <label class="required">Nro. Item</label>
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="grid p-fluid ">
-        <div class="field col-12 md:col-6">
-            <span class="p-float-label">
-                <input type="text" pInputText [(ngModel)]="parametroDatos.txNombre" [readonly]="!esNuevo">
-                <label class="required">Nombre</label>
-            </span>
-        </div>
-        <div class="field col-12 md:col-6">
-            <span class="p-float-label">
-                <input type="text" id="inputtext" pInputText [(ngModel)]="parametroDatos.txAbreviatura" [readonly]="!esNuevo">
-                <label class="required">Abreviatura</label>
-            </span>
-        </div>
-      </div>
-    </div>
-   <!-- <div class="row">
-        <div class="grid p-fluid ">
-        <div class="field col-12 md:col-12">
-            <span class="p-float-label">
-                <input type="text" pInputText [(ngModel)]="parametroDatos.txNombre" [readonly]="!esNuevo">
-                <label class="required">Dominio</label>
-            </span>
-        </div>
-     </div>
-    </div>  -->
-    <div class="row">
-        <div class="grid p-fluid ">
-            <div class="field col-12 md:col-12">
-                <span class="p-float-label">
-                    <textarea rows="2" cols="30" pInputTextarea style="font-size: 13px; width: 100%"
-                              [(ngModel)]="descripcionParametro"></textarea>
-                    <label class="required">Descripción</label>
-                </span>
-            </div>
-        </div>  
-       
-    </div>  
-   
-        
-     <div class="row">
-        <div class="flex justify-content-end flex-column sm:flex-row">
-            <div class="flex flex-wrap gap-2">
-                <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" *ngIf="acciones=='register'"
-                        (click)="guardarParametro()"></button>
-                <button pButton icon="pi pi-pencil" label="Guardar Cambios" iconPos="right" class="p-button-success p-button-sm" *ngIf="acciones=='edit'"
-                        (click)="updateParametros()"></button>
-                <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean"
-                        (click)="closeModal()"></button>
+                <label for="colorPicker" class="required">Color</label>
+                <p-colorPicker id="colorPicker" [(ngModel)]="parametroDatos.color" [style]="{'width':'100%'}"></p-colorPicker>
             </div>
         </div>
-     </div>
-   
 
-   </ng-template>
-       
-</p-panel>
+        <div class="row">
+            <div class="flex justify-content-end flex-column sm:flex-row">
+                <div class="flex flex-wrap gap-2">
+                    <button pButton icon="pi pi-plus" label="Guardar" iconPos="right" class="p-button-success p-button-sm" *ngIf="esNuevo"
+                    (click)="guardarParametro()"></button>
+            <button pButton icon="pi pi-pencil" label="Guardar Cambios" iconPos="right" class="p-button-success p-button-sm" *ngIf="!esNuevo"
+                    (click)="updateParametros()"></button>
+            <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean"
+                    (click)="closeModal()"></button>
+                </div>
+            </div>
+         </div>
+    </ng-template>
+    </p-panel>

@@ -1,4 +1,5 @@
 <p-panel>
+    <p-toast></p-toast>
     <ng-template pTemplate="header">
         <span class="text-primary font-semibold text-xl">Bandeja de Documentos</span>
     </ng-template>
@@ -6,8 +7,9 @@
         <div class="row mb-4">
             <div class="grid p-fluid">
                 <div class="field md:col-12">
-                    <p-table #dt1 [value]="carrerastecnicasList" [rows]="10" [loading]="loading"
+                    <p-table #dt1 [value]="DocumnetoGestionList" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
+                             [globalFilterFields]="['codigo', 'nombre','descripcion','costo']"
                         responsiveLayout="scroll" class="custom-search-input">
                         <ng-template pTemplate="caption">
                             <div class="flex justify-content-between flex-wrap">
@@ -27,6 +29,11 @@
                             <tr>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
+                                        #
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div class="flex justify-content-between align-items-center">
                                         Código
                                     </div>
                                 </th>
@@ -40,34 +47,41 @@
                                         Descripción
                                     </div>
                                 </th>
-                                <!-- <th style="min-width: 10rem" scope="col">
-                                    <div >
-                                        Configuraciones
-                                    </div>
-                                </th> -->
                                 <th style="min-width: 10rem" scope="col">
                                     <div >
                                         Recursos
                                     </div>
                                 </th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <div >
+                                        Acciones
+                                    </div>
+                                </th>
                             </tr>
                         </ng-template>
 
-                        <ng-template pTemplate="body" let-miembro>
+                        <ng-template pTemplate="body" let-documento let-rowIndex="rowIndex">
                             <tr>
-                                <td>140014Q</td>
-                                <td>Certificado de estudios</td>
-                                <td>Certificado de estudios del nivel secundario</td>
-                                <!-- <td >
-                                    <button pButton icon="pi pi-file-pdf" title="Descargar Documento"  class="p-button-rounded p-button-text p-button-success" style="width: 70px;" (click)="navigateTocurso()" style="border-radius: 30px;">
-                                   </button>
-                                   
-                                 
-                                </td> -->
-                                <td>recursos</td>
+                                <td>{{ rowIndex + 1 }}</td>
+                                <td>{{ documento.codigo }}</td>
+                                <td>{{ documento.nombre }}</td>
+                                <td>{{ documento.descripcion }}</td>
+                                <td>
+                                    <button pButton icon="pi pi-file-pdf" title="Descargar Documento"
+                                            class="p-button-rounded p-button-text p-button-success" style="width: 70px;"
+                                             style="border-radius: 30px;">
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <div class="flex justify-content-center flex-wrap gap-3 mb-4">
+                                        <p-button icon="pi pi-pencil" severity="info" (click)="openFormEditar(documento)" size="small"/>
+                                        <p-button icon="pi pi-trash" severity="danger" (click)="deleteDocumentoGestion(documento.id)" size="small"/>
+                                    </div>
+                                </td>
                             </tr>
                         </ng-template>
-                        
+
 
                         <ng-template pTemplate="emptymessage">
                             <tr>
@@ -85,5 +99,23 @@
             </div>
         </div>
     </ng-template>
+
+    <p-confirmDialog #cd  [style]="{width: '28vw'}">
+        <ng-template pTemplate="headless" let-message>
+            <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                <div
+                    class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+                    <i class="pi pi-question text-5xl"></i>
+                </div>
+                <span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}</span>
+                <p class="mb-0">{{ message.message }}</p>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button type="button" pButton icon="pi pi-times" label="Cancelar" class="p-button-close-clean" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Si" class="p-button-success" (click)="cd.accept()"></button>
+        </ng-template>
+    </p-confirmDialog>
 </p-panel>
 

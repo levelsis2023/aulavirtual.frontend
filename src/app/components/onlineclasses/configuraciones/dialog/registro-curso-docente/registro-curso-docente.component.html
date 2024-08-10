@@ -1,151 +1,149 @@
-<p-panel>        
-    <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl">Asignar Curso al Docente</span>
-    </ng-template>
+    <p-panel>
+        <ng-template pTemplate="header">
+            <span class="text-primary font-semibold text-xl">Asignar Curso al Docente</span>
+        </ng-template>
         <ng-template pTemplate="content">
-        <div class="row">
-            <div class="grid p-fluid ">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="nombreInstitucion" pInputText>
-                        <label for="nombreInstitucion">Código</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="director" pInputText>
-                        <label for="director">Nombre del curso</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">Siglas</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="logotipo" pInputText>
-                        <label for="logotipo">Logotipo</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="nombreInstitucion" pInputText>
+                            <label for="nombreInstitucion">Código</label>
+                        </span>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </div>
+                    <div class="col-12 md:col-6">
+
+                        <div class="field md:col-6">
+                            <span class="p-float-label p-input-icon-left">
+                                <i class="pi pi-user-edit"></i>
+                                <input type="text" id="director" pInputText>
+                                <label for="director">Nombre del curso</label>
+                            </span>
+                            <small style="color: brown;">Campo obligatorio *</small>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                <div class="field md:col-6">
-                    <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listcarrera"
-                            [(ngModel)]="seleccarrera" optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Carrera técnica </label>
-                        <small style="color: brown;">Campo obligatorio * </small>
-                    </span>
-                  
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label">
-                        <p-multiSelect inputId="dropdown" class="custom-multiselect" [options]="listciclos"
-                                [(ngModel)]="selecciclos" optionLabel="name" ></p-multiSelect>
-                        <label for="dropdown">Selecione ciclos </label>
-                        <small style="color: brown;">Campo obligatorio * </small>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                 <div class="field md:col-6">               
-                    <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listareaformativa"
-                            [(ngModel)]="selectunidadfromativa" optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Área de Infomración </label>
-                        <small style="color: brown;">Campo obligatorio * </small>
-                    </span>                 
-                 </div>
-                 <div class="field md:col-6">               
-                    <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listareaformativa"
-                            [(ngModel)]="selectunidadfromativa" optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Modúlo Formativo </label>
-                        <small style="color: brown;">Campo obligatorio * </small>
-                    </span>                 
-                 </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">Cantidad de Credito</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">% De Crédito</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="siglas" pInputText>
+                            <label for="siglas">Siglas</label>
+                        </span>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="logotipo" pInputText>
+                            <label for="logotipo">Logotipo</label>
+                        </span>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">Cantidad de Horas</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listcarrera"
+                                [(ngModel)]="seleccarrera" optionLabel="name"></p-dropdown>
+                            <label for="dropdown">Carrera técnica </label>
+                            <small style="color: brown;">Campo obligatorio * </small>
+                        </span>
+
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-multiSelect inputId="dropdown" class="custom-multiselect" [options]="listciclos"
+                                [(ngModel)]="selecciclos" optionLabel="name"></p-multiSelect>
+                            <label for="dropdown">Selecione ciclos </label>
+                            <small style="color: brown;">Campo obligatorio * </small>
+                        </span>
+                    </div>
                 </div>
-                <div class="field md:col-6">               
-                    <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="lsitadocente"
-                            [(ngModel)]="selectdocente" optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Seleccione Docente </label>
-                        <small style="color: brown;">Campo obligatorio * </small>
-                    </span>                 
-                 </div>
-             
             </div>
-        </div>
-        <div class="row">            
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listareaformativa"
+                                [(ngModel)]="selectunidadfromativa" optionLabel="name"></p-dropdown>
+                            <label for="dropdown">Área de Infomración </label>
+                            <small style="color: brown;">Campo obligatorio * </small>
+                        </span>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="listareaformativa"
+                                [(ngModel)]="selectunidadfromativa" optionLabel="name"></p-dropdown>
+                            <label for="dropdown">Modúlo Formativo </label>
+                            <small style="color: brown;">Campo obligatorio * </small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="siglas" pInputText>
+                            <label for="siglas">Cantidad de Credito</label>
+                        </span>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="siglas" pInputText>
+                            <label for="siglas">% De Crédito</label>
+                        </span>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="siglas" pInputText>
+                            <label for="siglas">Cantidad de Horas</label>
+                        </span>
+                        <small style="color: brown;">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="lsitadocente"
+                                [(ngModel)]="selectdocente" optionLabel="name"></p-dropdown>
+                            <label for="dropdown">Seleccione Docente </label>
+                            <small style="color: brown;">Campo obligatorio * </small>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
                 <div class="field col-12 md:col-12">
                     <label for="">Ingrese Contenido del Sylabus</label>
-                    <p-editor 
-                    [(ngModel)]="contsylabus" 
-                    [style]="{ height: '200px' }" 
-                     placeholder="">
+                    <p-editor [(ngModel)]="contsylabus" [style]="{ height: '200px' }" placeholder="">
                     </p-editor>
-                  
+
                 </div>
-            
-        </div>
+
+            </div>
 
 
-        <div class="row mb-5 text-right">               
-                    <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
-        
-        </div>
-        
-    </ng-template>
-    
-</p-panel>
+            <div class="row mb-5 text-right">
+                <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
 
+            </div>
 
+        </ng-template>
+
+    </p-panel>

@@ -1,163 +1,178 @@
 <p-panel>
+    <!-- if is loading add preloader-->
     <ng-template pTemplate="header">
         <span class="text-primary font-semibold text-xl">Registrar Alumno</span>
     </ng-template>
     <ng-template pTemplate="content">
-        <div class="row mb-4">
-            <div class="grid p-fluid ">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="nrodocumento" pInputText>
-                        <label for="nrodocumento">Código de Estudiante</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="tipodocu"
-                            [(ngModel)]="tipoDocumentoSeleccionado" optionLabel="name" ></p-dropdown>
-                        <label for="dropdown">Tipo de documento de identidad </label>
-                        <small style="color: brown;">Campo obligatorio * </small>
-                    </span>
-                </div>
-                
-            </div>
-        </div>
-        <div class="row mb-4">           
-            <div class="grid p-fluid ">
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="nrodocumento" pInputText>
-                        <label for="nrodocumento">Numero de Documento</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="siglas" pInputText>
-                        <label for="siglas">Nombres</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                
-            </div>
-        </div>
-         
-        <div class="row">
-            <div class="grid p-fluid">                
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="logotipo" pInputText>
-                        <label for="logotipo">Apellidos</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="colorFondo" pInputText>
-                        <label for="colorFondo">Nro de Celular</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">
-                <div class="field  md:col-6">
-                    <span class="p-float-label">
-                        <p-dropdown inputId="responsable" [autoDisplayFirst]="false"  [showClear]="true"
-                                    optionLabel="txAbreviatura"></p-dropdown>
-                        <label class="required">Carreta Profesional</label>
-                    </span>
-                </div>
-                <div class="field  md:col-6">
-                    <span class="p-float-label">
-                        <p-dropdown inputId="responsable" [autoDisplayFirst]="false"  [showClear]="true"
-                                    optionLabel="txAbreviatura"></p-dropdown>
-                        <label class="required">Ciclos academicos</label>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">                
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="logotipo" pInputText>
-                        <label for="logotipo">Apellidos</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field  md:col-6">
-                    <span class="p-float-label">
-                        <p-dropdown inputId="responsable" [autoDisplayFirst]="false"  [showClear]="true"
-                                    optionLabel="txAbreviatura"></p-dropdown>
-                        <label class="required">Genero</label>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="grid p-fluid">                
-                <div class="field md:col-6">
-                    <span class="p-float-label p-input-icon-left">
-                        <i class="pi pi-user-edit"></i>
-                        <input type="text" id="logotipo" pInputText>
-                        <label for="logotipo">Edad</label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio *</small>
-                </div>
-                <div class="field md:col-6">
-                    <span class="p-float-label">
-                        <p-calendar inputId="fechanacimiento" [(ngModel)]="fechanacimiento" [showTime]="false"
-                            [showSeconds]="false" dateFormat="dd-mm-yy"></p-calendar>
-                        <label for="fechanacimiento">Fecha de nacimiento </label>
-                    </span>
-                    <small style="color: brown;">Campo obligatorio * </small>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="grid p-fluid">
-                    <div class="field md:col-6">                
-                         <p-toast />
-                          <p-fileUpload 
-                        mode="basic" 
-                        chooseLabel="Adjunte foto de Perfil" 
-                        chooseIcon="pi pi-upload"
-                        name="demo[]" 
-                        url="https://www.primefaces.org/cdn/api/upload.php" 
-                        accept="image/*"                        
-                        (onUpload)="onUpload($event)" />                
-             
+        <form [formGroup]="alumnoForm" (ngSubmit)="saveAlumno()">
+            <div class="row mb-4">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="codigo" pInputText formControlName="codigo">
+                            <label for="codigo">Código de Estudiante</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('codigo')?.invalid && alumnoForm.get('codigo')?.touched">Campo obligatorio *</small>
                     </div>
-                    <div class="field md:col-6">                
-                        <p-toast />
-                         <p-fileUpload 
-                       mode="basic" 
-                       chooseLabel="Adjunte foto tamaño carnet" 
-                       chooseIcon="pi pi-upload"
-                       name="demo[]" 
-                       url="https://www.primefaces.org/cdn/api/upload.php" 
-                       accept="image/*"                        
-                       (onUpload)="onUpload($event)" />                
-            
-                   </div>
-            </div>            
-        </div>
-        <div class="row mb-5 text-right">               
-                    <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2"></button>
-                    <button pButton label="Cancelar" (click)="closeModal()" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>          
-        </div>
-        
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-dropdown inputId="tipoDocumento" [autoDisplayFirst]="false" [options]="tipodocu" formControlName="tipoDocumento" optionLabel="name"
+                            optionValue="value"     
+                            ></p-dropdown>
+                            <label for="tipoDocumento">Tipo de documento de identidad</label>
+                            <small style="color: brown;" *ngIf="alumnoForm.get('tipoDocumento')?.invalid && alumnoForm.get('tipoDocumento')?.touched">Campo obligatorio *</small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="numeroDocumento" pInputText formControlName="numeroDocumento">
+                            <label for="numeroDocumento">Numero de Documento</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('numeroDocumento')?.invalid && alumnoForm.get('numeroDocumento')?.touched">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="nombres" pInputText formControlName="nombres">
+                            <label for="nombres">Nombres</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('nombres')?.invalid && alumnoForm.get('nombres')?.touched">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="apellidos" pInputText formControlName="apellidos">
+                            <label for="apellidos">Apellidos</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('apellidos')?.invalid && alumnoForm.get('apellidos')?.touched">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="email" pInputText formControlName="email">
+                            <label for="email">Correo</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('email')?.invalid && alumnoForm.get('email')?.touched">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="contraseña" pInputText formControlName="contraseña">
+                            <label for="contraseña">Clave</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('contraseña')?.invalid && alumnoForm.get('contraseña')?.touched">Campo obligatorio *</small>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="direccion" pInputText formControlName="direccion">
+                            <label for="direccion">Direccion</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('direccion')?.invalid && alumnoForm.get('direccion')?.touched">Campo obligatorio *</small>
+                    </div>
+                    <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="nroCelular" pInputText formControlName="nroCelular">
+                            <label for="nroCelular">Nro de Celular</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('nroCelular')?.invalid && alumnoForm.get('nroCelular')?.touched">Campo obligatorio *</small>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('nroCelular')?.hasError('pattern') && alumnoForm.get('nroCelular')?.touched">Formato inválido *</small>
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="grid p-fluid">
+                        <div class="field md:col-6">
+                            <span class="p-float-label">
+                                <p-dropdown 
+                                inputId="carreraId"
+                                [options]="carrerasList"
+                                formControlName="carreraId"
+                                optionLabel="name"
+                                optionValue="value" 
+                                placeholder="Selecciona una carrera"
+                              ></p-dropdown>                               
+                               <label for="carreraId">Carrera Profesional</label>
+                            </span>
+                        </div>
+                        <div class="field md:col-6">
+                            <span class="p-float-label">
+                                <p-dropdown
+                                inputId="cicloId"
+                                [options]="ciclosList"
+                                formControlName="cicloId"
+                                optionLabel="name"
+                                optionValue="value" 
+                                placeholder="Selecciona un ciclo"
+                                ></p-dropdown>
+                                <label for="cicloId">Ciclos académicos</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="grid p-fluid">
+                    <!-- <div class="field md:col-6">
+                        <span class="p-float-label p-input-icon-left">
+                            <i class="pi pi-user-edit"></i>
+                            <input type="text" id="edad" pInputText formControlName="edad">
+                            <label for="edad">Edad</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('edad')?.invalid && alumnoForm.get('edad')?.touched">Campo obligatorio *</small>
+                    </div> -->
+                    <div class="field md:col-6">
+                        <span class="p-float-label">
+                            <p-calendar
+                            inputId="fechaNacimiento"
+                            formControlName="fechaNacimiento"
+                            [showTime]="false"
+                            [showSeconds]="false"
+                            (onSelect)="capturarFecha($event)"
+                            dateFormat="dd-mm-yy">  
+                            </p-calendar>                          
+                            <label for="fechaNacimiento">Fecha de nacimiento</label>
+                        </span>
+                        <small style="color: brown;" *ngIf="alumnoForm.get('fechaNacimiento')?.invalid && alumnoForm.get('fechaNacimiento')?.touched">Campo obligatorio *</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="grid p-fluid">
+                    <div class="field md:col-6">
+                        <p-toast></p-toast>
+                        <p-fileUpload mode="basic" chooseLabel="Adjunte foto de Perfil" chooseIcon="pi pi-upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                         (onUpload)="onUpload($event)"
+                         (onSelect)="onPerfilSelect($event)"
+
+                         ></p-fileUpload>
+                    </div>
+                    <div class="field md:col-6">
+                        <p-toast></p-toast>
+                        <p-fileUpload
+                        mode="basic" chooseLabel="Adjunte foto tamaño carnet" chooseIcon="pi pi-upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="onUpload($event)"
+                        (onSelect)="onCarnetSelect($event)"
+                        ></p-fileUpload>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5 text-right">
+                <button pButton label="Guardar" icon="pi pi-plus" id="btnGuardar" class="p-button-success mr-2" type="submit" ></button>
+                <button pButton label="Cancelar" (click)="closeModal()" icon="pi pi-times" id="btnCancelar" class="p-button-danger"></button>
+            </div>
+        </form>
+        <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="#fff" type="ball-spin"></ngx-spinner>
+
     </ng-template>
-    
 </p-panel>
-
-

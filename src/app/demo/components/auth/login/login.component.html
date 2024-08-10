@@ -11,14 +11,7 @@
             <div class="text-900 text-xl font-bold mb-6">Login</div>
         </div>
         <div class="row mb-4">
-            <div class="grid p-fluid">
-                <div class="p-float-label p-input-icon-left w-full mb-4">
-                    <span class="p-float-label">
-                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="tiporoles" [(ngModel)]="rol" class="w-full md:w-25rem" optionLabel="name"></p-dropdown>
-                        <label for="dropdown">Seleccione tipo de Usuario</label>
-                    </span>
-                </div>
-            </div>
+
         </div>
         <div class="row mb-6">
             <div class="grid p-fluid">
@@ -43,6 +36,8 @@
             <a class="text-600 cursor-pointer hover:text-primary transition-colors transition-duration-300">Términos y condiciones</a>
         </div>
     </div>
+    <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="white" type="ball-spin"></ngx-spinner>
+
 </div>
 
 <app-config [minimal]="true"></app-config>

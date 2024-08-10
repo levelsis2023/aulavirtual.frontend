@@ -1,0 +1,67 @@
+<p-panel>
+    <ng-template pTemplate="header">
+        <div class="d-flex justify-content-between"
+        >
+            <span class="text-primary font-semibold text-xl"
+           
+            >Asignar permiso</span>
+
+            <!-- dropdown for instituciones-->
+             <p-dropdown  *ngIf="!domain_id" [options]="instituciones" [(ngModel)]="selectedInstitucion" optionLabel="name"
+             optionValue="domain_id"
+             placeholder="Seleccione una institución" (onChange)="onInstitucionChange($event)"></p-dropdown>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="grid p-fluid">
+                <div class="field md:col-12">
+                    <p-table class="w-full custom-search-input" [value]="permisos">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="min-width: 10rem">ID</th>
+                                <th style="min-width: 10rem">Nombre</th>
+                                <th style="min-width: 10rem">Descripción</th>
+                                <th style="min-width: 10rem">Asignar</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-permiso>
+                            <tr>
+                                <td>{{ permiso.id }}</td>
+                                <td>{{ permiso.nombre }}</td>
+                                <td>{{ permiso.descripcion }}</td>
+                                <td><input type="checkbox" (change)="onCheckboxChange(permiso.id, $event)" [checked]="permisosSeleccionados.has(permiso.id)"></td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6">No se encontraron registros</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="loadingbody">
+                            <tr>
+                                <td colspan="6">
+                                    Cargando registros. Por favor espere.
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                    <div class="float-rigth">
+                        <button pButton label="Guardar" class="p-button-primary mr-2" style="color: #ffffff;
+                        background: #6366F1;
+                        border: 1px solid #6366F1;
+                        padding: 0.75rem 1.25rem;
+                        font-size: 1rem;
+                        transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+                        border-radius: 10px; cursor:pointer" (click)="guardarPermisos()" >Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-panel>

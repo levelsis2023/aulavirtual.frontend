@@ -1,0 +1,21 @@
+.alternativa-container {
+    display: flex;
+    align-items: center;
+    height: 3em;
+  }
+  
+  .alternativa-container .field {
+    margin-left: 10px; /* Ajusta el espacio entre el radio button y el campo de texto */
+  }
+
+  .grid{
+    margin-top: 1rem;
+  }
+
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Adjust as needed */
+  }

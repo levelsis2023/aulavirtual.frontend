@@ -1,0 +1,9 @@
+.alternativa-container {
+    display: flex;
+    align-items: center;
+    height: 3em;
+  }
+  
+  .alternativa-container .field {
+    margin-left: 10px; /* Ajusta el espacio entre el radio button y el campo de texto */
+  }

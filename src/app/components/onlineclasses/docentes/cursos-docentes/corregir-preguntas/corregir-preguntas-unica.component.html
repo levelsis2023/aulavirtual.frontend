@@ -1,0 +1,61 @@
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">
+            Responder Pregunta
+        </span>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="#fff" type="ball-spin"></ngx-spinner>
+
+        <form *ngIf="!loading" [formGroup]="preguntaForm" (ngSubmit)="guardarPregunta()">
+            <div class="row">
+                <div class="grid p-fluid">
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 67">
+                        <span class="p-float-label">
+                            <div class="centered-container">
+                                <span pTooltip="Responder pregunta" tooltipPosition="top" [innerHTML]="preguntaDocenteValue"></span>
+                              </div>
+                        </span>
+                    </div>
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 66">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="pregunta_docente" readonly>
+                            <label class="required">Formulación de Pregunta por Docente</label>
+                        </span>
+                    </div>
+                    <div *ngIf="preguntaForm?.get('tipoPregunta')?.value === 66" class="col-12">
+                        <div formArrayName="alternativas">
+                            <div *ngFor="let alternativa of getAlternativasControls(); let i = index" [formGroupName]="i" class="col-12">
+                                <div class="alternativa-container">
+                                    <input type="radio" name="respuesta_correcta_seleccionada" [value]="true" formControlName="respuesta_correcta_seleccionada" (change)="onRadioChange(i)">
+                                    <div class="field col-12">
+                                        <input type="text" pInputText formControlName="texto" [id]="'alternativa-' + i" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" *ngIf="preguntaForm?.get('tipoPregunta')?.value === 67">
+                        <span class="p-float-label">
+                            <div class="grid p-fluid">
+                                <div class="field col-12 md:col-12">
+                                    <label for="">Ingrese la respuesta</label>
+                                    <p-editor formControlName="respuesta_alumno" [style]="{ height: '90px' }" ></p-editor>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="flex justify-content-end flex-column sm:flex-row">
+                    <div class="flex flex-wrap gap-2">
+                        <button pButton icon="pi pi-check" label="Responder" iconPos="right" class="p-button-warning p-button-sm" type="submit"></button>
+                        <button pButton label="Cerrar" icon="pi pi-times" iconPos="right" class="p-button-close-clean" (click)="closeModal($event)"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+</p-panel>

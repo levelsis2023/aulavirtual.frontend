@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'
 import { ToastModule } from 'primeng/toast'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TableModule } from 'primeng/table'
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext'
@@ -38,7 +38,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TemasDocenteComponent } from './dialog/temas-docente/temas-docente.component';
 import { EvaluacionesDocenteMenuComponent } from './evaluaciones-docente-menu/evaluaciones-docente-menu/evaluaciones-docente-menu.component';
 import { BandejaPreguntasDocenteComponent } from './evaluaciones-docente-menu/bandeja-preguntas-docente/bandeja-preguntas-docente.component';
-
+import { EditDocenteComponent } from './dialog/edit-docente/edit-docente.component';
+import { HorarioComponent } from './horario/horario.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { BandejaPreguntasDocenteComponent } from './evaluaciones-docente-menu/ba
     AsistenciaAlumnoComponent,
     TemasDocenteComponent,
     EvaluacionesDocenteMenuComponent,
-    BandejaPreguntasDocenteComponent
+    BandejaPreguntasDocenteComponent,
+    EditDocenteComponent,
   ],
   imports: [
     CommonModule,
@@ -83,7 +85,8 @@ import { BandejaPreguntasDocenteComponent } from './evaluaciones-docente-menu/ba
     DialogModule,    
     DynamicDialogModule,      
     TranslateModule,
-    CheckboxModule
+    CheckboxModule,
+    ReactiveFormsModule
   ]
 })
 export class DocentesModule { }

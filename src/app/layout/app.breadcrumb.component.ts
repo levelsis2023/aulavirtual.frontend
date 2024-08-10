@@ -13,12 +13,13 @@ interface Breadcrumb {
     templateUrl: './app.breadcrumb.component.html'
 })
 export class AppBreadcrumbComponent {
-
+    institution: any;
     private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
 
     readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
     constructor(private router: Router) {
+        this.institution = JSON.parse(localStorage.getItem('company') || '{}')?.name;
         this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(event => {
             const root = this.router.routerState.snapshot.root;
             const breadcrumbs: Breadcrumb[] = [];

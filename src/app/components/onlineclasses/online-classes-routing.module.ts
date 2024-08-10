@@ -14,8 +14,10 @@ const routes: Routes = [];
    /* { path: 'registro-alumno', data: { breadcrumb: 'Registrar Alumno' }, loadChildren: () => import('./gestion-info-alumno/registrar-alumno/registrar-alumno.module').then(m => m.RegistrarAlumnoModule) }, */
     { path: 'ciclos-academicos', data: { breadcrumb: 'Ciclos Academicos' }, loadChildren: () => import('../onlineclasses/instituciones/ciclos/ciclos.module').then(m => m.CiclosModule) },
     { path: 'area-formacion', data: { breadcrumb: 'Área de Formación' }, loadChildren: () => import('../onlineclasses/instituciones/area-formacion/area-formacion.module').then(m => m.AreaFormacionModule) },
-    { path: 'unidades-formativas', data: { breadcrumb: 'Unidades Formativas' }, loadChildren: () => import('../onlineclasses/instituciones/unidades-formativas/unidades-formativas.module').then(m => m.UnidadesFormativasModule) },
-    { path: 'unidades-didacticas', data: { breadcrumb: 'Unidades Didacticas' }, loadChildren: () => import('../onlineclasses/instituciones/unidades-didacticas/unidades-didacticas.module').then(m => m.UnidadesDidacticasModule) },
+    { path: 'ciclos', data: { breadcrumb: 'Ciclos' }, loadChildren: () => import('../onlineclasses/instituciones/ciclos/ciclos.module').then(m => m.CiclosModule) },
+
+    { path: 'modulos-formativos', data: { breadcrumb: 'Modulos Formativos' }, loadChildren: () => import('./instituciones/modulos-formativos/modulos-formativos.module').then(m => m.ModulosFormativosModule) },
+    { path: 'estados', data: { breadcrumb: 'Estados' }, loadChildren: () => import('./instituciones/estados/estados.module').then(m => m.EstadosModule) },
     { path: 'estado-cursos', data: { breadcrumb: 'Estado de Cursos' }, loadChildren: () => import('../onlineclasses/instituciones/estado-cursos/estado-cursos.module').then(m => m.EstadoCursosModule) },
     { path: 'tipo-curso', data: { breadcrumb: 'Tipo de Curso' }, loadChildren: () => import('../onlineclasses/instituciones/tipo-curso/tipo-curso.module').then(m => m.TipoCursoModule) },
     { path: 'asigna-curso-docente', data: { breadcrumb: 'Asingna Curso Docente' }, loadChildren: () => import('../onlineclasses/configuraciones/asigna-curso-docente/asgina-curso-docente.module').then(m => m.AsginaCursoDocenteModule) },
@@ -25,7 +27,11 @@ const routes: Routes = [];
     { path: 'bandeja-carrtecnicas', data: { breadcrumb: 'Bandeja de Carreras técnicas' }, loadChildren: () => import('../onlineclasses/carreras-tecnicas/carreras-tecnicas.module').then(m => m.CarrerasTecnicasModule) },
     { path: 'bandeja-curso', data: { breadcrumb: 'Bandeja de cursos' }, loadChildren: () => import('../onlineclasses/cursos/cursos.module').then(m => m.CursosModule) },
     { path: 'bandeja-docente', data: { breadcrumb: 'Bandeja del docente' }, loadChildren: () => import('../onlineclasses/docentes/docentes.module').then(m => m.DocentesModule) },
+   
+   
     { path: 'cursos-docente', data: { breadcrumb: 'Cursos del Docente' }, loadChildren: () => import('../onlineclasses/docentes/cursos-docentes/cursos-docente.module').then(m => m.CursosDocenteModule) },
+
+
     { path: 'evaluacion-docente', data: { breadcrumb: 'Evaluación Docente' }, loadChildren: () => import('../onlineclasses/docentes/evaluaciones-docente-menu/evaluacion-docente-menu.module').then(m => m.EvaluacionDocenteMenuModule) },
     { path: 'documentos-alumnos', data: { breadcrumb: 'Documentos de gestión' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/documentos-gestion-alumno/documentos-gestion-alumno.module').then(m => m.DocumentosGestionAlumnoModule) },
     { path: 'documentos-alumnos', data: { breadcrumb: 'Documentos de gestión' }, loadChildren: () => import('../onlineclasses/gestion-info-alumno/documentos-gestion-alumno/documentos-gestion-alumno.module').then(m => m.DocumentosGestionAlumnoModule) },
@@ -46,7 +52,6 @@ const routes: Routes = [];
     { path: 'estado-de-avance', data: { breadcrumb: 'Estado de avance' }, loadChildren: () => import('../onlineclasses/estado-avance/estado-avance.module').then(m => m.EstadoAvanceModule) },
     { path: 'escala', data: { breadcrumb: 'Escala' }, loadChildren: () => import('../onlineclasses/escala/escala.module').then(m => m.EscalaModule) },
     { path: 'ocupacion-actual', data: { breadcrumb: 'Ocupación actual' }, loadChildren: () => import('../onlineclasses/ocupacion-actual/ocupacion-actual.module').then(m => m.OcupacionActualModule) },
-    { path: 'ciclos', data: { breadcrumb: 'Ciclos' }, loadChildren: () => import('../onlineclasses/ciclos/ciclos.module').then(m => m.CiclosModule) },
     { path: 'areas-de-formacion', data: { breadcrumb: 'Areas de formación' }, loadChildren: () => import('../onlineclasses/areas-formacion/areas-formacion.module').then(m => m.AreasFormacionModule) },
     { path: 'u-formativas', data: { breadcrumb: 'Unidades formativas' }, loadChildren: () => import('../onlineclasses/u-formativas/u-formativas.module').then(m => m.UFormativasModule) },
     { path: 'u-didacticas', data: { breadcrumb: 'Unidades didacticas' }, loadChildren: () => import('../onlineclasses/u-didacticas/u-didacticas.module').then(m => m.UDidacticasModule) },
@@ -54,11 +59,25 @@ const routes: Routes = [];
     { path: 't-cursos', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/t-cursos/t-cursos.module').then(m => m.TCursosModule) },
     { path: 'modalidad', data: { breadcrumb: 'Tipos de cursos' }, loadChildren: () => import('../onlineclasses/modalidad/modalidad.module').then(m => m.ModalidadModule) },
     { path: 'aula', data: { breadcrumb: 'Aula' }, loadChildren: () => import('../onlineclasses/aulas/aulas.module').then(m => m.AulasModule) },
+
+    { path: 'capacitaciones', data: { breadcrumb: 'Lista de capacitaciones' }, loadChildren: () => import('../onlineclasses/capacitaciones/capacitacion/capacitaciones.module').then(m => m.CapacitacionesModule) },
+    {
+      path:'foro-alumnos',data:{breadcrumb:'Foro de alumnos'},loadChildren:()=>import('../onlineclasses/alumnos/foro-alumnos/foro-alumnos.module').then(m=>m.ForoAlumnosRoutingModule)
+    },
     { path: 'tipo-de-actividad', data: { breadcrumb: 'Tipo de actividad' }, loadChildren: () => import('../onlineclasses/tipo-actividad/tipo-actividad.module').then(m => m.TipoActividadModule) }, 
     { path: 'registro-de-cursos', data: { breadcrumb: 'Registro de cursos' }, loadChildren: () => import('../onlineclasses/registro-cursos/registro-cursos.module').then(m => m.RegistroCursosModule) }, 
     { path: 'datos-personales', data: { breadcrumb: 'Datos personales' }, loadChildren: () => import('../onlineclasses/registro-alumnos/registro-alumnos.module').then(m => m.RegistroAlumnosModule) }, 
-
+    { path: 'lista-roles', data: { breadcrumb: 'Lista de roles' }, loadChildren: () => import('../onlineclasses/lista-roles/lista-roles.module').then(m => m.ListaRolesModule) }, 
+    { path: 'lista-empresas', data: { breadcrumb: 'Lista de empresas' }, loadChildren: () => import('../onlineclasses/lista-empresas/lista-empresas.module').then(m => m.ListaEmpresasModule) }, 
+    {path:'horario-docente',data:{breadcrumb:'Horario docente'},loadChildren:()=>import('../onlineclasses/docentes/horario/horario.module').then(m=>m.HorarioModule)},
+    {
+      path:'aulas',data:{breadcrumb:'Aulas'},loadChildren:()=>import('../onlineclasses/aulas/aulas.module').then(m=>m.AulasModule)
+    },
+    {
+      path:'configuracion-institucion',data:{breadcrumb:'Configuración de Institución'},loadChildren:()=>import('../onlineclasses/configuracion-empresa/configuracion-empresa.module').then(m=>m.ConfiguracionEmpresaModule)
+    }
   ])],
+  
   exports: [RouterModule]
 })
-export class OnlineClassesRoutingModule { } 
+export class OnlineClassesRoutingModule { }

@@ -6,7 +6,7 @@
         <div class="row mb-4">
             <div class="grid p-fluid">
                 <div class="field md:col-12">
-                    <p-table #dt1 [value]="instituciones" [rows]="10" [loading]="loading"
+                    <p-table #dt1 [value]="usuarios" [rows]="10" [loading]="loading"
                         [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
                         responsiveLayout="scroll" class="custom-search-input">
                         <ng-template pTemplate="caption">
@@ -32,19 +32,16 @@
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Cargo
-                                    </div>
-                                </th>
-                                <th style="min-width: 10rem" scope="col">
-                                    <div class="flex justify-content-between align-items-center">
                                         Email
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
-                                        Área
+                                        Cargo
                                     </div>
                                 </th>
+                                
+                               
                                 <th style="min-width: 10rem" scope="col">
                                     <div class="flex justify-content-between align-items-center">
                                         Configuraciones
@@ -55,19 +52,19 @@
 
                         <ng-template pTemplate="body" let-miembro>
                             <tr>
-                                <td>AAA</td>
-                                <td>BBBB</td>
-                                <td>CCCCCC</td>
-                                <td>DDDDDDDDDD</td>
-                                <td> <button pButton icon="pi pi-user-plus" class="p-button-rounded p-button-text p-button-action"
-                                      title="Perfil">
-                                  </button>
+                                <td>{{miembro.name}}</td>
+                                <td>{{miembro.email}}</td>
+                                <td>{{miembro.nombre}}
+                                <td> 
                                   <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-text p-button-action"
-                                      title="Editar">
+                                      
+                                  (click)="navigateToEditar(miembro.id)"
+                                  title="Editar">
                                   </button>
                                   <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-action"
-                                   title="Eliminar">
-                                </button>
+                                   title="Eliminar"
+                                      (click)="eliminar(miembro.id)"></button>
+
                                 </td>
                             </tr>
                         </ng-template>
@@ -87,6 +84,8 @@
                 </div>
             </div>
         </div>
+        <ngx-spinner *ngIf="loading" bdColor="rgba(0,0,0,0.5)" size="large" color="white" type="ball-spin"></ngx-spinner>
+
     </ng-template>
 </p-panel>
 

@@ -1,4 +1,4 @@
-{
+  {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "projects",
@@ -37,7 +37,9 @@
               "styles": [
                 "src/styles.scss",
                 "src/assets/layout/styles/layout/preloading.scss",
-                "src/assets/layout/styles/theme/theme-light/indigo/theme.scss"
+                "src/assets/layout/styles/theme/theme-light/indigo/theme.scss",
+                "node_modules/ngx-spinner/animations/ball-spin.css"
+
               ],
               "scripts": [],
                    
@@ -46,6 +48,7 @@
               ]
             },
             "configurations": {
+              
               "production": {
                 "budgets": [
                   {
@@ -68,6 +71,7 @@
                 "extractLicenses": false,
                 "sourceMap": true,
                 "namedChunks": true,
+
                 "fileReplacements": [
                             {
                               "replace": "src/environments/environment.ts",

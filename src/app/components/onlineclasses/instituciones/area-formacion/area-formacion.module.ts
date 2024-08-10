@@ -28,10 +28,11 @@ import { AreaFormacionComponent } from './area-formacion.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { EditorModule } from 'primeng/editor';
 import { DialogModule } from 'primeng/dialog';
-
+import { AeAreaFormacionComponent } from './ae-area-formacion/ae-area-formacion.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AreaFormacionComponent],
+  declarations: [AreaFormacionComponent, AeAreaFormacionComponent],
   imports: [
     CommonModule,
     AreaFormacionRoutingModule,
@@ -61,6 +62,8 @@ import { DialogModule } from 'primeng/dialog';
     EditorModule,
     DialogModule,
     TooltipModule,
+    ReactiveFormsModule // Add ReactiveFormsModule to imports
+
   ]
 })
 export class AreaFormacionModule { }

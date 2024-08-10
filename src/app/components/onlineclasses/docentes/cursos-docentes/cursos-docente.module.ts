@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'
 import { ToastModule } from 'primeng/toast'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TableModule } from 'primeng/table'
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext'
@@ -30,10 +30,16 @@ import { AppComponent } from 'src/app/app.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CursosDocenteRoutingModule } from './cursos-docente-routing.module';
+import { CorregirPreguntasComponent } from './corregir-preguntas/corregir-preguntas.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { CorregirPreguntasUnicaComponent } from './corregir-preguntas/corregir-preguntas-unica.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CorregirPreguntasComponent,
+    CorregirPreguntasUnicaComponent
+  ],
   imports: [
     CommonModule,
     CursosDocenteRoutingModule,
@@ -64,7 +70,9 @@ import { CursosDocenteRoutingModule } from './cursos-docente-routing.module';
     EditorModule,
     DialogModule,    
     DynamicDialogModule,      
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ]
 })
 export class CursosDocenteModule { }

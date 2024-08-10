@@ -25,11 +25,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { CiclosRoutingModule } from './ciclos-routing.module';
 import { CiclosComponent } from './ciclos.component';
+import { AeCiclosComponent } from './ae-ciclos/ae-ciclos.component';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 
 
 @NgModule({
   declarations: [
-    CiclosComponent
+    CiclosComponent,
+    AeCiclosComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +55,9 @@ import { CiclosComponent } from './ciclos.component';
     ToastModule,   
     TableModule,
     ConfirmPopupModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule // Add ReactiveFormsModule to imports
+
   ]
 })
 export class CiclosModule { }

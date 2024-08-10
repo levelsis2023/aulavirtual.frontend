@@ -6,6 +6,12 @@ import { GeneralService } from '../../service/general.service';
 import { Router } from '@angular/router';
 import { RegCarrerastecnicasComponent } from '../dialog/reg-carrerastecnicas/reg-carrerastecnicas.component';
 import { RegCursosComponent } from '../../cursos/dialog/reg-cursos/reg-cursos.component';
+import { EditarCarreraTecnicaComponent } from '../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
+import { VerCarreraTecnicaComponent } from '../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
+import { VerCursoDeCarreraComponent } from '../dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
+
+import Swal from 'sweetalert2';	
+import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
   selector: 'app-bandeja-carreratecnica',
@@ -14,108 +20,167 @@ import { RegCursosComponent } from '../../cursos/dialog/reg-cursos/reg-cursos.co
 })
 export class BandejaCarreratecnicaComponent {
 
-  
   loading: boolean = false;
-
 
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt1') tabledt1: Table | undefined;
   @Input() miembro: Miembro[] = [];
   @Output() miembrosActualizados = new EventEmitter<Miembro[]>();
-  
-  carrerastecnicasList = [
-    { codigo: '140014Q', nombre: 'Enfermería', cursosAsignados: 'Ninguno' },
-    { codigo: '001001478CD', nombre: 'Enfermería', cursosAsignados: 'Ninguno' },
-    // Agrega más carreras técnicas según sea necesario
-  ];
+
+  carrerastecnicasList: any[] = []; // Cambia el tipo a any[] para recibir los datos del backend
+  originalCarrerastecnicasList: any[] = []; // Add this line to store the original list
+
   ref: DynamicDialogRef | undefined;
-  
+
   constructor(
     private dialogService: DialogService,
-    private maestroService: GeneralService,
+    private carrerasTecnicasService: GeneralService,
     private router: Router,
-    
-  
-   
+    private helpersService: HelpersService,
   ) { }
 
-
   ngOnInit(): void {
-  //  this.listarmiembros();
-
+    this.listarCarrerasTecnicas();
   }
 
- /* listarmiembros() {
-    this.maestroService.listarmiembros().subscribe((response: any) => {
-      console.log("Lista de Miembros creados", response);
-      this.miembrosList = response;
-    })
+  listarCarrerasTecnicas() {
+    const domain_id= this.helpersService.getDominioId();
+    this.carrerasTecnicasService.getCarrerasTecnicas(domain_id).subscribe((response: any) => {
+      this.carrerastecnicasList = response;
+      this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
+    });
+  }
 
-  }*/
-  navigateToNuevo(){
-    this.ref = this.dialogService.open(RegCarrerastecnicasComponent, {  
+  navigateToNuevo() {
+    console.log("nuevo");
+
+    this.ref = this.dialogService.open(RegCarrerastecnicasComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header'
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-    }); 
-
+      console.log("Cerrando dialogo");
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+    });
   }
 
-  navigateTocurso(){
-    this.ref = this.dialogService.open(RegCursosComponent, {  
+  navigateAddCurso(id: number,total_creditos:number) {
+    this.ref = this.dialogService.open(RegCursosComponent, {
       width: '60%',
-      styleClass: 'custom-dialog-header'
+      styleClass: 'custom-dialog-header',
+      data: { id: id ,total_creditos:total_creditos}
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
     });
+  }
+
+
+  navigateTocurso(data: any) {
+    this.ref = this.dialogService.open(VerCursoDeCarreraComponent, {
+      width: '80%',
+      styleClass: 'custom-dialog-header',
+      data: { data: data}
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+    });
+  }
+
+  navigateToDetalle(data: any) {
+    this.ref = this.dialogService.open(VerCarreraTecnicaComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { data: data }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+    });
+  }
+
+  navigateToEdit(data: any) {
+    console.log("Editar", data);
+    this.ref = this.dialogService.open(EditarCarreraTecnicaComponent, {
+      width: '60%',
+      styleClass: 'custom-dialog-header',
+      data: { data: data }
+    });
+
+    this.ref.onClose.subscribe((data: any) => {
+      this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+    });
+  }
+
+  navigateToDelete(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.carrerasTecnicasService.eliminarCarreraTecnica(id).subscribe(
+          response => {
+            Swal.fire(
+              'Eliminado',
+              'La carrera técnica ha sido eliminada.',
+              'success'
+            );
+            // Aquí puedes actualizar la vista, por ejemplo, recargar la lista de carreras técnicas
+          },
+          error => {
+            Swal.fire(
+              'Error',
+              'Hubo un problema al eliminar la carrera técnica.',
+              'error'
+            );
+          }
+        );
+        this.listarCarrerasTecnicas(); // Recargar los datos de la tabla
+
+      }
+    });
+  }
+
+  onGlobalFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    console.log("Filtro Global", filterValue);
+    if (!filterValue) {
+      this.carrerastecnicasList = [...this.originalCarrerastecnicasList];
+      return;
     }
 
- 
-  navigateToDetalle(){
-
+    this.carrerastecnicasList = this.originalCarrerastecnicasList.filter(carrera =>
+      (carrera.codigo && carrera.codigo.toLowerCase().includes(filterValue)) ||
+      (carrera.nombres && carrera.nombres.toLowerCase().includes(filterValue)) ||
+      (carrera.cursos && carrera.cursos.toLowerCase().includes(filterValue))
+    );
   }
 
- 
-
-
-
-
-
-
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal(
-      (event.target as HTMLInputElement).value,
-      'contains'
-    )
+  editarMiembro() {
+    // Implementar la edición de miembro
   }
 
-
-  editarMiembro(){
-
+  eliminarMiembro() {
+    // Implementar la eliminación de miembro
   }
 
-  eliminarMiembro(){
-
+  agregarcurso() {
+    // Implementar la adición de curso
   }
 
-  agregarcurso(){
-
-  }
   onRowSelect(event: any) {
-    
     console.log("Organo-colegaido-sect");
   }
 
   onRowUnselect(event: any) {
-    
-    
+    // Implementar la acción al deseleccionar una fila
   }
-
 }

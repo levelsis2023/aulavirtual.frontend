@@ -33,6 +33,7 @@ import { ConfiguracionesComponent } from './configuraciones/configuraciones.comp
 import { AsignaCursoDocenteComponent } from '../configuraciones/asigna-curso-docente/asigna-curso-docente.component';
 import { RegistroCursoDocenteComponent } from '../configuraciones/dialog/registro-curso-docente/registro-curso-docente.component';
 import { EditorModule } from 'primeng/editor';
+import { VerEvaluacionesComponent } from './cursos/bandeja-cursos/ver-evaluaciones/ver-evaluaciones.component';
 
 
 
@@ -45,7 +46,7 @@ import { EditorModule } from 'primeng/editor';
     ConfiguracionesComponent,    
     AsignaCursoDocenteComponent,
     RegistroCursoDocenteComponent,
-    
+    VerEvaluacionesComponent,
     
   ],
   imports: [
