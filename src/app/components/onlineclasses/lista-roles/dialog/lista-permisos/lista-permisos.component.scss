@@ -44,9 +44,17 @@
     /* align-items: center; */
     cursor: pointer;
     margin-bottom: 2px;
-    background: #eef2fe;
     border-radius: 7px;
-    padding: 5px;
+
+}
+.d-flex{
+    display: flex;
+}
+.backgroundPurple{
+    background: #eef2fe;
+    margin: 2px;
+    padding: 3px;
+    border-radius: 4px;
 }
 .checkbox {
     margin-left: 2px;
