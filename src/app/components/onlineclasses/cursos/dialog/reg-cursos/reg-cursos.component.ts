@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { PrimeNGConfig } from 'primeng/api';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { GeneralService } from '../../../service/general.service';
 import Swal from 'sweetalert2';
 import { HelpersService } from 'src/app/helpers.service';
 import { CommonService } from '../../../service/common.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-reg-cursos',
   templateUrl: './reg-cursos.component.html',
   styleUrls: ['./reg-cursos.component.scss']
 })
-export class RegCursosComponent implements OnInit {
+export class RegCursosComponent implements OnInit, AfterViewInit {
+
+
   id: number = 0;
   cantidadTotalCreditos: number = 0;
   codigo: string = '';
@@ -28,21 +27,26 @@ export class RegCursosComponent implements OnInit {
   cantidadCreditos: number = 0;
   porcentajeCreditos: number = 0;
   cantidadHoras: number = 0;
-  syllabus: string = '';
-  tema: string = '';
+  syllabus: string = 'Holaaaaaaaaaaaaaaaaaaaaaa';
+  tema: string | undefined = 'Hola';
   asignacionDocentes: any = {};
   asignacionesDocentes: any[] = [];
   estados: any[] = [];
   estado: any = {};
   acciones: string = '';
   domain_id=1;
+
+  subscriptions: Subscription[] = [];
+  curso: any = {};
+
   constructor(
     public ref: DynamicDialogRef,
     private parametroService: GeneralService,
     public config: DynamicDialogConfig,
     public helperService: HelpersService,
     private commonService:CommonService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.id = this.config.data.id;
@@ -50,32 +54,40 @@ export class RegCursosComponent implements OnInit {
     this.acciones = this.config.data.acciones;
     this.domain_id = this.helperService.getDominioId();
 
-    Promise.all([
-      this.listarModulosFormativos(),
-      this.listarAreasFormacion(),
-      this.listarCiclos(),
-      this.listarEstados(),
-      this.listarDocentes(this.domain_id )
-    ]).then(() => {
-      if (this.config.data.acciones === 'editar' || this.config.data.acciones === 'ver') {
-        console.log(this.config.data.data);
-        this.codigo = this.config.data.data.codigo;
-        this.nombreCurso = this.config.data.data.nombre;
-        this.ciclo = this.config.data.data.ciclo_id;
-        this.areaFormacion = this.config.data.data.area_de_formacion_id;
-        this.moduloFormativo = this.config.data.data.modulo_formativo_id;
-        this.cantidadCreditos = this.config.data.data.cantidad_de_creditos;
-        this.porcentajeCreditos = this.config.data.data.porcentaje_de_creditos;
-        this.cantidadHoras = this.config.data.data.cantidad_de_horas;
-        this.syllabus = this.config.data.data.syllabus;
-        this.tema = this.config.data.data.tema;
-        this.asignacionDocentes =this.config.data.data.docente_id;
-        this.estado = this.config.data.data.estado_id;
-      }
-    });
+      Promise.all([
+          this.obtenerDatosCurso(this.config.data.data.id),
+          this.listarModulosFormativos(),
+          this.listarAreasFormacion(),
+          this.listarCiclos(),
+          this.listarEstados(),
+          this.listarDocentes(this.domain_id )
+      ]).then(() => {
+          if (this.config.data.acciones === 'editar' || this.config.data.acciones === 'ver') {
+              console.log(this.config.data.data);
+              this.codigo = this.curso.codigo;
+              this.nombreCurso = this.curso.nombre;
+              this.ciclo = this.curso.ciclo_id;
+              this.areaFormacion = this.curso.area_de_formacion_id;
+              this.moduloFormativo = this.curso.modulo_formativo_id;
+              this.cantidadCreditos = this.curso.cantidad_de_creditos;
+              this.porcentajeCreditos = this.curso.porcentaje_de_creditos;
+              this.cantidadHoras = this.curso.cantidad_de_horas;
+              this.syllabus = this.curso.syllabus;
+              // console.log(this.eSyllabus);
+              // this.eSyllabus?.writeValue(this.curso.syllabus);
+              // this.eSyllabus?.getQuill().setText(this.curso.syllabus);
+              this.tema = this.curso.tema;
+              this.asignacionDocentes =this.curso.docente_id;
+              this.estado = this.curso.estado_id;
+          }
+      });
   }
 
-  GuardarCurso(): void {
+  ngAfterViewInit(): void {
+
+  }
+
+    GuardarCurso(): void {
     console.log(this.asignacionDocentes)
     const curso = {
       codigo: this.codigo,
@@ -166,6 +178,21 @@ export class RegCursosComponent implements OnInit {
     }
   }
 
+  obtenerDatosCurso(id: number): Promise<void> {
+      console.log("Id curso:", id);
+      return new Promise((resolve, reject) => {
+          this.parametroService.getCursoById(id).subscribe(
+              (response: any) => {
+                  console.log("Datos Curso", response.Datos);
+                  this.curso = response.Datos;
+                  //this.modulosFormativos = response;
+                  resolve();
+              },
+              (error: any) => reject(error)
+          );
+      });
+  }
+
   listarModulosFormativos(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.parametroService.getModulosFormativos().subscribe(
@@ -238,4 +265,9 @@ export class RegCursosComponent implements OnInit {
   closeModal() {
     this.ref.close({ register: false });
   }
+
+
+    syllabusChange(event: any): void{
+      console.log(event);
+    }
 }

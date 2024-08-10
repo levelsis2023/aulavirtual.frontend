@@ -1,4 +1,4 @@
-<p-panel> 
+<p-panel>
     <ng-template pTemplate="header">
         <span class="text-primary font-semibold text-xl">
             <span *ngIf="acciones === 'add'">Registrar Cursos</span>
@@ -6,10 +6,10 @@
             <span *ngIf="acciones === 'editar'">Editar Curso</span>
         </span>
     </ng-template>
-    
+
     <ng-template pTemplate="content">
         <div class="row">
-            <div class="grid p-fluid ">                
+            <div class="grid p-fluid ">
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
                         <input type="text" pInputText [(ngModel)]="codigo" [disabled]="acciones === 'ver'">
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid ">                
+            <div class="grid p-fluid ">
                 <div class="field md:col-6">
                     <span class="p-float-label">
                         <p-dropdown inputId="dropdownCiclo" [options]="ciclos" optionLabel="nombre" [(ngModel)]="ciclo"
@@ -41,14 +41,14 @@
                         <label for="dropdownAreaFormacion">Áreas de formación </label>
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
-                </div>    
-            </div>    
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid ">                
+            <div class="grid p-fluid ">
                 <div class="field md:col-6">
                     <span class="p-float-label">
-                        <p-dropdown inputId="dropdownModuloFormativo" [options]="modulosFormativos" optionLabel="nombre" [(ngModel)]="moduloFormativo" 
+                        <p-dropdown inputId="dropdownModuloFormativo" [options]="modulosFormativos" optionLabel="nombre" [(ngModel)]="moduloFormativo"
                         optionValue="id" [disabled]="acciones === 'ver'"></p-dropdown>
                         <label for="dropdownModuloFormativo">Módulo formativo </label>
                         <small style="color: brown;">Campo obligatorio * </small>
@@ -60,42 +60,42 @@
                         <label class="required">Cantidad de créditos</label>
                     </span>
                 </div>
-            </div>    
+            </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid ">                
+            <div class="grid p-fluid ">
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
                         <input type="text" pInputText [(ngModel)]="porcentajeCreditos" [disabled]="acciones === 'ver'">
                         <label class="required">% de créditos</label>
                     </span>
-                </div>  
+                </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
                         <input type="text" pInputText [(ngModel)]="cantidadHoras" [disabled]="acciones === 'ver'">
                         <label class="required">Cantidad de horas</label>
                     </span>
-                </div>  
-            </div>    
-        </div>
-        <div class="row mt-2">
-            <div class="grid p-fluid">
-                <div class="field col-12 md:col-12">
-                    <label for="">Digite el syllabus</label>
-                    <p-editor [style]="{ height: '90px' }" [(ngModel)]="syllabus" [disabled]="acciones === 'ver'"></p-editor>
                 </div>
             </div>
         </div>
         <div class="row mt-2">
             <div class="grid p-fluid">
                 <div class="field col-12 md:col-12">
-                    <label for="">Digite el tema</label>
-                    <p-editor [style]="{ height: '90px' }" [(ngModel)]="tema" [disabled]="acciones === 'ver'"></p-editor>
+                    <label >Digite el syllabuss</label>
+                    <p-editor (onTextChange)="syllabusChange($event)" [style]="{ height: '90px' }" [(ngModel)]="syllabus"></p-editor>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="grid p-fluid">
+                <div class="field col-12 md:col-12">
+                    <label >Digite el tema</label>
+                    <p-editor [style]="{ height: '90px' }" ></p-editor>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="grid p-fluid ">                
+            <div class="grid p-fluid ">
                 <div class="field md:col-6">
                     <span class="p-float-label">
                         <p-dropdown inputId="dropdownAsignacionDocentes" [options]="asignacionesDocentes" optionLabel="label" [(ngModel)]="asignacionDocentes"
@@ -112,7 +112,7 @@
                         <small style="color: brown;">Campo obligatorio * </small>
                     </span>
                 </div>
-            </div>    
+            </div>
         </div>
         <div class="row">
             <div class="flex justify-content-end flex-column sm:flex-row">

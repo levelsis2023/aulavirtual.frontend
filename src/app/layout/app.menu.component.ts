@@ -49,11 +49,11 @@ export class AppMenuComponent implements OnInit {
         this.permisoService.fetchPermisos(rolId,this.domain_id);
         this.permisoService.permisos$.pipe(
             tap(permisos => {
-                this.permisos = permisos;   
+                this.permisos = permisos;
                 this.actualizarMenu();
             })
         ).subscribe();
-       
+
 
 
 
@@ -72,24 +72,23 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Empresas',
                                 icon: 'pi pi-fw pi-building',
-<<<<<<< HEAD
-                            },
-                            {
-                                label: 'Seguridad',
-                            },
-                            {
-                                label: 'Configuración',
-                                items: [
-                                    {
-                                        label: 'Roles (Perfiles y Permisos)',
-                                    },
-                                    {
-                                        label: 'Usuarios'
-                                    }
-                                ]
-=======
+// <<<<<<< HEAD
+//                             },
+//                             {
+//                                 label: 'Seguridad',
+//                             },
+//                             {
+//                                 label: 'Configuración',
+//                                 items: [
+//                                     {
+//                                         label: 'Roles (Perfiles y Permisos)',
+//                                     },
+//                                     {
+//                                         label: 'Usuarios'
+//                                     }
+//                                 ]
+// =======
                                 routerLink: ['/pl-virtual/lista-empresas']
->>>>>>> 6300b9f113e9e3c78c4ce0e2ae680091f1a71ef6
                             }
                         ]
                     }
@@ -332,8 +331,8 @@ export class AppMenuComponent implements OnInit {
                                      },
                                 ]
                             }
-                                    
-                                    
+
+
 
                             //     ]
                             // },
