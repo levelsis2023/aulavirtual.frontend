@@ -1,9 +1,9 @@
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { GeneralService } from '../../../service/general.service';
 import Swal from 'sweetalert2';
-import { AgregarEditarListaDeEvaluacionesPorGrupoComponent } from '../../../carreras-tecnicas/dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ae-lista-de-evaluaciones-por-grupo/agregar-editar-lista-de-evaluaciones-por-grupo.component';
 import { Component } from '@angular/core';
 import { VerPreguntasComponent } from '../ver-preguntas/ver-preguntas.component';
+import { VerListadoDeEvaluacionesPorGrupoComponent } from '../../../carreras-tecnicas/dialog/ver-curso-de-carrera/opciones/ver-lis-eval-grupo/ver-lis-eval-grupo.component';
 
 @Component({
   selector: 'app-ver-evaluaciones',
@@ -60,7 +60,7 @@ export class VerEvaluacionesComponent {
   }
 
   navigateAddCurso() {
-    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'add', idGrupoEvaluaciones: this.grupoEvaluaciones.id }
@@ -72,7 +72,7 @@ export class VerEvaluacionesComponent {
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'ver', idCurso: this.grupoEvaluaciones.id ,data: data }
@@ -84,7 +84,7 @@ export class VerEvaluacionesComponent {
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', idCurso: this.grupoEvaluaciones.id ,data: data } 

@@ -34,8 +34,9 @@ import { TableSelectCursosComponent } from './table-select-cursos.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TableSelectCursosComponent],
   imports: [
+    TableModule,
     CommonModule,
     TableSelectCursosRoutingModule,
     FormsModule,     
