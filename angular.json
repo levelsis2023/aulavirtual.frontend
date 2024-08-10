@@ -42,24 +42,26 @@
 
               ],
               "scripts": [],
-                   
+
               "allowedCommonJsDependencies": [
-                "sweetalert2"
+                "sweetalert2",
+                  "@ckeditor/ckeditor5-build-classic",
+                  "quill"
               ]
             },
             "configurations": {
-              
+
               "production": {
                 "budgets": [
                   {
                     "type": "initial",
-                    "maximumWarning": "1mb",
+                    "maximumWarning": "4mb",
                     "maximumError": "5mb"
                   },
                   {
                     "type": "anyComponentStyle",
-                    "maximumWarning": "2kb",
-                    "maximumError": "4kb"
+                    "maximumWarning": "2MB",
+                    "maximumError": "4MB"
                   }
                 ],
                 "outputHashing": "all"
@@ -131,5 +133,5 @@
       "analytics": false
     }
   }
-  
+
 
