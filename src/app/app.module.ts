@@ -15,12 +15,8 @@ import { TableSelectCursosComponent } from './components/onlineclasses/utils/tab
 import { environment } from './environment/environment.development';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
-<<<<<<< HEAD
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-=======
 import { CheckboxModule } from 'primeng/checkbox';
->>>>>>> main
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
   }
