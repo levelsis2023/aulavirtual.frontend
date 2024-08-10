@@ -37,13 +37,13 @@ export class SeleccionarAlumnosCursoComponent {
       this.loading = false;
     });
   }
-  onSelectAlumno(event:any,alumno: any) {
+  onSelectAlumno(alumno: any) {
       console.log('alumno cambio seleccionado');
     const data={
       domain_id: this.domainId??1,
       curso_id: this.curso,
       alumno_id: alumno.id,
-      is_participant: event.target.checked,
+      is_participant: alumno.is_participant,
     }
     this.alumnoService.updateAlumnoCurso(data).subscribe((data: any) => {
       this.getAlumnosCurso(this.domainId, this.curso);
@@ -52,7 +52,10 @@ export class SeleccionarAlumnosCursoComponent {
 
     onSelectAll(event: any): void{
         const checked = (event.target as HTMLInputElement).checked;
-        this.cursoAlumnoList[0].is_participant = checked ? 1 : 0;
+        this.cursoAlumnoList.forEach(alumn => {
+            alumn.is_participant = checked;
+            this.onSelectAlumno(alumn);
+        });
     }
 
     onGlobalFilter(event: Event) {

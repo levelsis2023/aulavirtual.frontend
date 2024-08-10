@@ -42,8 +42,8 @@
                                 <td>{{ alumno.celular }}</td>
                                 <td>{{ alumno.email }}</td>
                                 <td>
-                                    <input type="checkbox" (change)="onSelectAlumno($event, alumno)"
-                                    [checked]="alumno.is_participant" />
+                                    <input type="checkbox" [(ngModel)]="alumno.is_participant" (ngModelChange)="onSelectAlumno(alumno)"
+                                     />
                                 </td>
                             </tr>
                         </ng-template>
