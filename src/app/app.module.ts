@@ -11,10 +11,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
-
+import { TableSelectCursosComponent } from './components/onlineclasses/utils/table-select-cursos/table-select-cursos.component';
 import { environment } from './environment/environment.development';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -27,6 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     ],
     imports: [
+        CheckboxModule,
         BrowserModule,
         AppRoutingModule,
         AppLayoutModule,
