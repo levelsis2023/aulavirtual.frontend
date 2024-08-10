@@ -51,6 +51,7 @@ import { CrearForoCursoComponent } from './dialog/crear-foro-curso/crear-foro-cu
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CheckboxModule } from 'primeng/checkbox';
 import {VerSyllabusComponent} from "./dialog/ver-curso-de-carrera/opciones/ver-syllabus/ver-syllabus.component";
+import {VerTemasComponent} from "./dialog/ver-curso-de-carrera/opciones/ver-temas/ver-temas.component";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {VerSyllabusComponent} from "./dialog/ver-curso-de-carrera/opciones/ver-s
      AgregarEditarListaDeEvaluacionesPorGrupoComponent, VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent,
     MarcarAsistenciaCursoComponent,
     CrearForoCursoComponent,
-      VerSyllabusComponent
+      VerSyllabusComponent,
+      VerTemasComponent
   ],
   imports: [
     CommonModule,

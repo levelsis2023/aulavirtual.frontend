@@ -16,6 +16,7 @@ import { MarcarAsistenciaCursoComponent } from '../marcar-asistencia-curso/marca
 import { VerGrupoEvaluacionesComponent } from './opciones/ver-g-ev/ver-g-ev.component';
 import { CrearForoCursoComponent } from '../crear-foro-curso/crear-foro-curso.component';
 import {VerSyllabusComponent} from "./opciones/ver-syllabus/ver-syllabus.component";
+import {VerTemasComponent} from "./opciones/ver-temas/ver-temas.component";
 @Component({
   selector: 'app-ver-curso-de-carrera',
   templateUrl: './ver-curso-de-carrera.component.html',
@@ -186,6 +187,14 @@ export class VerCursoDeCarreraComponent {
       });
   }
 
+    verTemas(idCurso: number) {
+        this.ref = this.dialogService.open(VerTemasComponent, {
+            width: '80%',
+            styleClass: 'custom-dialog-header',
+            data: { cursoId: idCurso}
+        });
+    }
+
   verAlumnos(curso:any) {
     this.ref = this.dialogService.open(SeleccionarAlumnosCursoComponent, {
       width: '80%',
@@ -216,10 +225,6 @@ export class VerCursoDeCarreraComponent {
         cursoNombre: curso.nombre
        }
     });
-  }
-
-  verTemas(temas: string) {
-    console.log(temas);
   }
 
   verEvaluaciones(evaluaciones: any) {

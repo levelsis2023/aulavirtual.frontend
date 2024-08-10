@@ -5,9 +5,9 @@ import {Subscription} from "rxjs";
 import {GeneralService} from "../../../../../service/general.service";
 
 @Component({
-  selector: 'app-ver-syllabus',
-  templateUrl: './ver-syllabus.component.html',
-  styleUrls: ['./ver-syllabus.component.scss']
+  selector: 'app-ver-temas',
+  templateUrl: './ver-temas.component.html',
+  styleUrls: ['./ver-temas.component.scss']
 })
 export class VerTemasComponent implements OnInit{
 
@@ -34,15 +34,15 @@ export class VerTemasComponent implements OnInit{
     this.idCurso = this.config.data.cursoId;
 
       Promise.all([
-          this.obtenerSyllabus(this.idCurso),
+          this.obtenerTema(this.idCurso),
       ]).then(() => {
-          this.contenido = this.curso.syllabus;
+          this.contenido = this.curso.tema;
       });
   }
 
-    obtenerSyllabus(id: number): Promise<void> {
+    obtenerTema(id: number): Promise<void> {
       return new Promise((resolve, reject) => {
-          this.parametroService.getSyllabusByCurso(id).subscribe(
+          this.parametroService.getTemaByCurso(id).subscribe(
               (response: any) => {
                   console.log("Datos Curso", response.Datos);
                   this.curso = response.Datos;
