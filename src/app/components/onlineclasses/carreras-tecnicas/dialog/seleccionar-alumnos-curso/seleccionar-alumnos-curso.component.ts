@@ -9,7 +9,8 @@ import { GeneralService } from '../../../service/general.service';
 })
 export class SeleccionarAlumnosCursoComponent {
   loading: boolean = false;
-  cursoAlumnoList: any[] = [];
+    cursoAlumnoList: any[] = [];
+    originalCursoAlumnoList: any[] = [];
   curso: any;
   cursoNombre: string = '';
   domainId: any;
@@ -30,11 +31,14 @@ export class SeleccionarAlumnosCursoComponent {
       domainId,
       cursoId
     ).subscribe((data: any) => {
+        console.log('alumnos', data);
       this.cursoAlumnoList = data;
+      this.originalCursoAlumnoList = [...data];
       this.loading = false;
     });
   }
   onSelectAlumno(event:any,alumno: any) {
+      console.log('alumno cambio seleccionado');
     const data={
       domain_id: this.domainId??1,
       curso_id: this.curso,
@@ -45,4 +49,24 @@ export class SeleccionarAlumnosCursoComponent {
       this.getAlumnosCurso(this.domainId, this.curso);
     });
   }
+
+    onSelectAll(event: any): void{
+        const checked = (event.target as HTMLInputElement).checked;
+        this.cursoAlumnoList[0].is_participant = checked ? 1 : 0;
+    }
+
+    onGlobalFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+        console.log("Filtro Global", filterValue);
+        if (!filterValue) {
+            this.cursoAlumnoList = [...this.originalCursoAlumnoList];
+            return;
+        }
+
+        this.cursoAlumnoList = this.originalCursoAlumnoList.filter(alumno =>
+            (alumno.codigo && alumno.codigo.toLowerCase().includes(filterValue)) ||
+            (alumno.nombres && alumno.nombres.toLowerCase().includes(filterValue)) ||
+            (alumno.email && alumno.email.toLowerCase().includes(filterValue))
+        );
+    }
 }

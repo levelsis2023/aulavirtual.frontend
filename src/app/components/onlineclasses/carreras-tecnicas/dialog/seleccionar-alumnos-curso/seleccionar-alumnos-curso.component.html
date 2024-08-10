@@ -9,13 +9,30 @@
                     <p-table #dt1 [value]="cursoAlumnoList" [rows]="10" [loading]="loading" [rowHover]="true"
                         styleClass="p-datatable-gridlines"  responsiveLayout="scroll"
                         class="custom-search-input">
+
+
+                        <ng-template pTemplate="caption">
+                            <div class="flex justify-content-between flex-wrap">
+                                <div class="flex-grow-1 mb-2 mr-2">
+                                    <span class="p-input-icon-left w-full">
+                                        <input pInputText type="text" #filter (input)="onGlobalFilter($event)"
+                                               placeholder="Buscar alumnos" class="w-full" />
+                                    </span>
+                                </div>
+                            </div>
+                        </ng-template>
+
+
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="min-width: 10rem" scope="col">Código</th>
                                 <th style="min-width: 10rem" scope="col">Alumno</th>
                                 <th style="min-width: 10rem" scope="col">Celular</th>
                                 <th style="min-width: 10rem" scope="col">Correo</th>
-                                <th style="min-width: 10rem" scope="col">Seleccionar</th>
+                                <th style="min-width: 10rem" scope="col">
+                                    <input #selectAll type="checkbox" (change)="onSelectAll($event)"/>
+                                    {{ selectAll.checked ? 'Deseleccionar' : 'Seleccionar' }} Todos
+                                </th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-alumno>
@@ -25,7 +42,7 @@
                                 <td>{{ alumno.celular }}</td>
                                 <td>{{ alumno.email }}</td>
                                 <td>
-                                    <input type="checkbox" (change)="onSelectAlumno($event, alumno)" 
+                                    <input type="checkbox" (change)="onSelectAlumno($event, alumno)"
                                     [checked]="alumno.is_participant" />
                                 </td>
                             </tr>
