@@ -18,7 +18,7 @@
                     <div class="field md:col-6">
                         <span class="p-float-label">
                             <p-dropdown inputId="tipoDocumento" [autoDisplayFirst]="false" [options]="tipodocu" formControlName="tipoDocumento" optionLabel="name"
-                            optionValue="value"     
+                            optionValue="value"
                             ></p-dropdown>
                             <label for="tipoDocumento">Tipo de documento de identidad</label>
                             <small style="color: brown;" *ngIf="alumnoForm.get('tipoDocumento')?.invalid && alumnoForm.get('tipoDocumento')?.touched">Campo obligatorio *</small>
@@ -68,7 +68,7 @@
                         </span>
                         <small style="color: brown;" *ngIf="alumnoForm.get('contraseña')?.invalid && alumnoForm.get('contraseña')?.touched">Campo obligatorio *</small>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="row">
@@ -96,14 +96,14 @@
                     <div class="grid p-fluid">
                         <div class="field md:col-6">
                             <span class="p-float-label">
-                                <p-dropdown 
+                                <p-dropdown
                                 inputId="carreraId"
                                 [options]="carrerasList"
                                 formControlName="carreraId"
                                 optionLabel="name"
-                                optionValue="value" 
+                                optionValue="value"
                                 placeholder="Selecciona una carrera"
-                              ></p-dropdown>                               
+                              ></p-dropdown>
                                <label for="carreraId">Carrera Profesional</label>
                             </span>
                         </div>
@@ -114,7 +114,7 @@
                                 [options]="ciclosList"
                                 formControlName="cicloId"
                                 optionLabel="name"
-                                optionValue="value" 
+                                optionValue="value"
                                 placeholder="Selecciona un ciclo"
                                 ></p-dropdown>
                                 <label for="cicloId">Ciclos académicos</label>
@@ -140,8 +140,8 @@
                             [showTime]="false"
                             [showSeconds]="false"
                             (onSelect)="capturarFecha($event)"
-                            dateFormat="dd-mm-yy">  
-                            </p-calendar>                          
+                            dateFormat="dd-mm-yy">
+                            </p-calendar>
                             <label for="fechaNacimiento">Fecha de nacimiento</label>
                         </span>
                         <small style="color: brown;" *ngIf="alumnoForm.get('fechaNacimiento')?.invalid && alumnoForm.get('fechaNacimiento')?.touched">Campo obligatorio *</small>

@@ -199,6 +199,25 @@ export class GeneralService {
         })
       );
   }
+
+    getCursoById(id: number) {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}cursos/${id}`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    // console.log('Response body curso:', response.body);
+                    if (response.status === 200 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+
   getCursos(id: number) {
     return this.http
       .get<ApiResponse>(`${this.baseUrl}cursos/carrera/${id}`, { observe: 'response' })
@@ -216,6 +235,43 @@ export class GeneralService {
         })
       );
   }
+
+    getSyllabusByCurso(idCurso: number) {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}cursos/${idCurso}/syllabus`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    // console.log('Response body curso:', response.body);
+                    if (response.status === 200 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+
+    getTemaByCurso(idCurso: number) {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}cursos/${idCurso}/tema`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    // console.log('Response body curso:', response.body);
+                    if (response.status === 200 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+
   getAreaDeFormacion() {
     return this.http
       .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=area_de_formacion`, { observe: 'response' })
@@ -777,7 +833,7 @@ export class GeneralService {
         })
       );
   }
-  
+
 
 
 
@@ -1357,7 +1413,7 @@ export class GeneralService {
   saveCompany(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}company`, data);
   }
-  
+
 
 
   getCursosByDocente(id: number) {
@@ -1378,7 +1434,7 @@ export class GeneralService {
       );
   }
 
-  
+
   getCursosByAlumno(id: number) {
     return this.http
       .get<ApiResponse>(`${this.baseUrl}cursos-alumno/${id}`, { observe: 'response' })
@@ -1401,7 +1457,7 @@ export class GeneralService {
 
 
   }
-  
+
 
   guardarPreguntaAlumno(parametro: any): Observable<ApiResponse> {
     return this.http

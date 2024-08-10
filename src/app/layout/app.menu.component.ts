@@ -49,11 +49,11 @@ export class AppMenuComponent implements OnInit {
         this.permisoService.fetchPermisos(rolId,this.domain_id);
         this.permisoService.permisos$.pipe(
             tap(permisos => {
-                this.permisos = permisos;   
+                this.permisos = permisos;
                 this.actualizarMenu();
             })
         ).subscribe();
-       
+
 
 
 
@@ -72,6 +72,22 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Empresas',
                                 icon: 'pi pi-fw pi-building',
+// <<<<<<< HEAD
+//                             },
+//                             {
+//                                 label: 'Seguridad',
+//                             },
+//                             {
+//                                 label: 'Configuración',
+//                                 items: [
+//                                     {
+//                                         label: 'Roles (Perfiles y Permisos)',
+//                                     },
+//                                     {
+//                                         label: 'Usuarios'
+//                                     }
+//                                 ]
+// =======
                                 routerLink: ['/pl-virtual/lista-empresas']
                             }
                         ]
@@ -315,8 +331,8 @@ export class AppMenuComponent implements OnInit {
                                      },
                                 ]
                             }
-                                    
-                                    
+
+
 
                             //     ]
                             // },

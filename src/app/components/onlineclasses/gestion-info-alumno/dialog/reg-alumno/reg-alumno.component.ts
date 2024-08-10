@@ -177,10 +177,11 @@ export class RegAlumnoComponent {
     getCiclosDropdown() {
         this.commonService.getCiclosDropdown(this.domain_id).subscribe(
             (response) => {
+                console.log('ciclos', response);
                 this.ciclosList = response.map((ciclo: any) => {
                     return {
-                        name: ciclo.tx_nombre,
-                        value: ciclo.nu_id_parametro,
+                        name: ciclo.nombre,
+                        value: ciclo.id,
                     };
                 });
                 console.log('Ciclos', response);

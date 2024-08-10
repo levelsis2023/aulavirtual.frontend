@@ -44,7 +44,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
   imports: [
     CommonModule,
     CursosRoutingModule,
-    FormsModule,     
+    FormsModule,
     CalendarModule,
     TableModule,
     RatingModule,
@@ -69,8 +69,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ConfirmDialogModule,
     FileUploadModule,
     EditorModule,
-    DialogModule,    
-    DynamicDialogModule,      
+    DialogModule,
+    DynamicDialogModule,
     TranslateModule,
     ReactiveFormsModule, // Agrega ReactiveFormsModule al array de imports
     NgxSpinnerModule

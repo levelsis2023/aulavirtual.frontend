@@ -49,6 +49,8 @@ import { MarcarAsistenciaCursoComponent } from './dialog/marcar-asistencia-curso
 import { CrearForoCursoComponent } from './dialog/crear-foro-curso/crear-foro-curso.component'
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CheckboxModule } from 'primeng/checkbox';
+import {VerSyllabusComponent} from "./dialog/ver-curso-de-carrera/opciones/ver-syllabus/ver-syllabus.component";
+import {VerTemasComponent} from "./dialog/ver-curso-de-carrera/opciones/ver-temas/ver-temas.component";
 
 @NgModule({
   declarations: [
@@ -57,13 +59,15 @@ import { CheckboxModule } from 'primeng/checkbox';
     SeleccionarAlumnosCursoComponent, VerGrupoEvaluacionesComponent, AgregarEditarGrupoEvaluacionesComponent, VerListadoDeEvaluacionesPorGrupoComponent,
     VerListadoDePreguntasComponent, AgregarEditarListadoDePreguntasComponent,
     MarcarAsistenciaCursoComponent,
-    CrearForoCursoComponent
+    CrearForoCursoComponent,
+      VerSyllabusComponent,
+      VerTemasComponent
   ],
   imports: [
     CommonModule,
     CheckboxModule,
     CarrerasTecnicasRoutingModule,
-    FormsModule,     
+    FormsModule,
     CalendarModule,
     TableModule,
     RatingModule,
@@ -88,8 +92,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     ConfirmDialogModule,
     FileUploadModule,
     EditorModule,
-    DialogModule,    
-    DynamicDialogModule,      
+    DialogModule,
+    DynamicDialogModule,
     TranslateModule,
     ReactiveFormsModule,
     FullCalendarModule,
