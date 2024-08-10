@@ -9,12 +9,13 @@ import { RegCursosComponent } from '../../../cursos/dialog/reg-cursos/reg-cursos
 import { EditarCarreraTecnicaComponent } from '../../dialog/editar-carrera-tecnica/editar-carrera-tecnica.component';
 import { VerCarreraTecnicaComponent } from '../../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import { SeleccionarHorarioCarreraTecnicaComponent } from '../../dialog/horario-carrera-tecnica/seleccionar-horario-carrera-tecnica.component';
-import Swal from 'sweetalert2';	
+import Swal from 'sweetalert2';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { SeleccionarAlumnosCursoComponent } from '../seleccionar-alumnos-curso/seleccionar-alumnos-curso.component';
 import { MarcarAsistenciaCursoComponent } from '../marcar-asistencia-curso/marcar-asistencia-curso.component';
 import { VerGrupoEvaluacionesComponent } from './opciones/ver-g-ev/ver-g-ev.component';
 import { CrearForoCursoComponent } from '../crear-foro-curso/crear-foro-curso.component';
+import {VerSyllabusComponent} from "./opciones/ver-syllabus/ver-syllabus.component";
 @Component({
   selector: 'app-ver-curso-de-carrera',
   templateUrl: './ver-curso-de-carrera.component.html',
@@ -39,7 +40,7 @@ export class VerCursoDeCarreraComponent {
     private dialogService: DialogService,
     private cursosService: GeneralService,
     private router: Router,
-    public config: DynamicDialogConfig,   
+    public config: DynamicDialogConfig,
 
   ) { }
 
@@ -50,6 +51,7 @@ export class VerCursoDeCarreraComponent {
   listarCursos() {
     this.cursosService.getCursos(this.config.data.data.id).subscribe((response: any) => {
       this.carrerastecnicasList = response;
+      console.log('cursos', this.carrerastecnicasList);
       this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
     });
   }
@@ -88,7 +90,7 @@ export class VerCursoDeCarreraComponent {
     });
 
     this.ref.onClose.subscribe((data: any) => {
-      this.listarCursos(); 
+      this.listarCursos();
     });
   }
 
@@ -176,8 +178,12 @@ export class VerCursoDeCarreraComponent {
     );
   }
 
-  verSyllabus(syllabus: string) {
-    console.log(syllabus);
+  verSyllabus(idCurso: number) {
+      this.ref = this.dialogService.open(VerSyllabusComponent, {
+          width: '80%',
+          styleClass: 'custom-dialog-header',
+          data: { cursoId: idCurso}
+      });
   }
 
   verAlumnos(curso:any) {
@@ -240,5 +246,5 @@ export class VerCursoDeCarreraComponent {
     })
   }
 
- 
+
 }

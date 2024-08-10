@@ -235,6 +235,25 @@ export class GeneralService {
         })
       );
   }
+
+    getSyllabusByCurso(idCurso: number) {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}cursos/${idCurso}/syllabus`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    // console.log('Response body curso:', response.body);
+                    if (response.status === 200 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+
   getAreaDeFormacion() {
     return this.http
       .get<ApiResponse>(`${this.baseUrl}parametros?tx_nombre=area_de_formacion`, { observe: 'response' })
