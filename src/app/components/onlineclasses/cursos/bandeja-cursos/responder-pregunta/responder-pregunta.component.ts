@@ -31,6 +31,9 @@ export class ResponderPreguntaComponent {
   sanitizePregunta: SafeHtml = '';
   preguntaDocenteValue :any
   alumnoId: number | null = null;
+
+
+
   constructor(
     private fb: FormBuilder,
     private ref: DynamicDialogRef,
@@ -65,7 +68,7 @@ export class ResponderPreguntaComponent {
   }
 
   ngOnInit(): void {
-    
+
     this.idEvaluacion = this.config.data.idEvaluacion;
     this.acciones = this.config.data.acciones;
     this.sanitizePregunta = this.sanitizer.bypassSecurityTrustHtml(this.config.data.data.pregunta_docente);
@@ -79,7 +82,7 @@ export class ResponderPreguntaComponent {
           valor_pregunta: this.config.data.data.valor_pregunta,
           pregunta_docente: this.preguntaDocenteValue['changingThisBreaksApplicationSecurity'],
           respuesta_alumno: null
-     
+
         });
 
         this.setAlternativasv2(this.config.data.data.alternativas);
@@ -98,7 +101,7 @@ export class ResponderPreguntaComponent {
       }));
     });
   }
-  
+
   // Method to handle radio button change
   onRadioChange(selectedIndex: number): void {
     const alternativas = this.preguntaForm.get('alternativas') as FormArray;
@@ -134,7 +137,7 @@ export class ResponderPreguntaComponent {
 
     }
   }
-  
+
   setRespuestaAlumno(): void {
     const correctAnswerIndex = this.preguntaForm.value.alternativas.findIndex((alternativa: any) => alternativa.respuesta_correcta_seleccionada === true) + 1;
     this.preguntaForm.get('respuesta_alumno')?.setValue(correctAnswerIndex);

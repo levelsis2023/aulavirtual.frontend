@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { AsistenciaService } from '../../../service/asistencia.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-marcar-asistencia-curso',
   templateUrl: './marcar-asistencia-curso.component.html',
@@ -15,8 +17,21 @@ export class MarcarAsistenciaCursoComponent {
   docente_id: any;
   cursoNombre: any;
   fechas: string[] = [];
-  selectedFecha: string = ''; 
+  selectedFecha: string = '';
   initialLoad: boolean = true; // Variable para controlar la carga inicial
+
+
+    toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
 
   constructor(
     private ref: DynamicDialogRef,
@@ -44,7 +59,11 @@ export class MarcarAsistenciaCursoComponent {
       fecha: fecha
     };
     this.asistenciaService.getAsistenciaCurso(data).subscribe((data: any) => {
+
+        // console.log('asistencia', data);
+
       const fechaInicio = new Date(data.horarios[0].fecha_inicio);
+      // console.log('fechaInicio', fechaInicio);
       const fechaFin = new Date(data.horarios[0].fecha_fin);
       const classDays: any[] = [];
       data.horarios.forEach((element: any) => {
@@ -52,9 +71,9 @@ export class MarcarAsistenciaCursoComponent {
           classDays.push(element.day_id);
         }
       });
-      const dates = this.generateDatesWithDaysAndRange(fechaInicio, fechaFin, classDays);
+        this.fechas = this.generateDatesWithDaysAndRange(fechaInicio, fechaFin, classDays);
 
-      this.fechas = dates;
+      // this.fechas = fechas;
 
       // Si es la carga inicial, no llena la tabla
       if (isInitialLoad) {
@@ -66,6 +85,8 @@ export class MarcarAsistenciaCursoComponent {
         this.loading = false;
         this.asistenciaCursoList = data.participantes;
       }
+
+      this.loading = false;
     });
   }
 
@@ -80,6 +101,10 @@ export class MarcarAsistenciaCursoComponent {
     }
     console.log("data", data);
     this.asistenciaService.updateAsistenciaCurso(data).subscribe(() => {
+        this.toast.fire({
+            icon: "success",
+            title: "Asistencia registrada"
+        });
     });
   }
 

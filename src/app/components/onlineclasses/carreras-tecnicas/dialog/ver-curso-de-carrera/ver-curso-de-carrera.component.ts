@@ -50,10 +50,12 @@ export class VerCursoDeCarreraComponent {
   }
 
   listarCursos() {
+      this.loading = true;
     this.cursosService.getCursos(this.config.data.data.id).subscribe((response: any) => {
       this.carrerastecnicasList = response;
       console.log('cursos', this.carrerastecnicasList);
       this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
+        this.loading = false;
     });
   }
 

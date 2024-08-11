@@ -10,7 +10,7 @@ import { EditarCarreraTecnicaComponent } from '../dialog/editar-carrera-tecnica/
 import { VerCarreraTecnicaComponent } from '../dialog/ver-carrera-tecnica/ver-carrera-tecnica.component';
 import { VerCursoDeCarreraComponent } from '../dialog/ver-curso-de-carrera/ver-curso-de-carrera.component';
 
-import Swal from 'sweetalert2';	
+import Swal from 'sweetalert2';
 import { HelpersService } from 'src/app/helpers.service';
 
 @Component({
@@ -44,10 +44,12 @@ export class BandejaCarreratecnicaComponent {
   }
 
   listarCarrerasTecnicas() {
+      this.loading = true;
     const domain_id= this.helpersService.getDominioId();
     this.carrerasTecnicasService.getCarrerasTecnicas(domain_id).subscribe((response: any) => {
       this.carrerastecnicasList = response;
       this.originalCarrerastecnicasList = [...response]; // Actualiza la lista original después de obtener los datos
+        this.loading = false;
     });
   }
 
