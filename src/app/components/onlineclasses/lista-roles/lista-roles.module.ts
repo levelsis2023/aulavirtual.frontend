@@ -7,7 +7,7 @@ import { TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
 import { SliderModule } from 'primeng/slider';
-import { Panel, PanelModule } from 'primeng/panel';
+import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
@@ -15,10 +15,8 @@ import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FileUploadModule } from 'primeng/fileupload';
-import { ListaPostulantesRoutingModule } from '../lista-postulantes/lista-postulantes-routing.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EditorModule } from 'primeng/editor';
@@ -27,20 +25,22 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { ListaRolesComponent } from './lista-roles.component';
 import { RegistraRolComponent } from './dialog/registra-rol/registra-rol.component';
+import {ListaPermisosComponent} from "./dialog/lista-permisos/lista-permisos.component";
 //import pdrowpdown
 
 
 @NgModule({
   declarations: [
     ListaRolesComponent,
-    RegistraRolComponent
+    RegistraRolComponent,
+      ListaPermisosComponent
   ],
   imports: [
     CommonModule,
     PanelModule,
     DropdownModule,
     ListaRolesRoutingModule,
-    FormsModule,     
+    FormsModule,
     CalendarModule,
     TableModule,
     RatingModule,
@@ -53,18 +53,16 @@ import { RegistraRolComponent } from './dialog/registra-rol/registra-rol.compone
     MultiSelectModule,
     DropdownModule,
     ProgressBarModule,
-    ToastModule,
     ConfirmPopupModule,
     FileUploadModule,
     TooltipModule,
-    ToastModule,
     TableModule,
     ConfirmPopupModule,
     ConfirmDialogModule,
     FileUploadModule,
     EditorModule,
-    DialogModule,    
-    DynamicDialogModule,      
+    DialogModule,
+    DynamicDialogModule,
     TranslateModule,
     InputTextModule,
     MultiSelectModule

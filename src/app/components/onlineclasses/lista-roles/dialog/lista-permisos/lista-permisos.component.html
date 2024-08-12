@@ -39,10 +39,10 @@
                             <input class="checkbox" type="checkbox" [(ngModel)]="grupo.seleccionado" (change)="seleccionarGrupo(grupo)" />
                             <span class="font-semibold text-lg">{{ grupo.nombre }}</span>
                         </div>
-                    
+
                         <div *ngIf="grupo.expanded" class="grupo-content">
                             <ng-container *ngFor="let permiso of grupo.permisos">
-                                <ng-container 
+                                <ng-container
                                     *ngTemplateOutlet="renderPermisos; context: { $implicit: permiso, grupo: grupo }">
                                 </ng-container>
                             </ng-container>
@@ -75,7 +75,7 @@
                                             </g>
                                         </svg>
                                     </button>
-                        
+
                                     <input
                                         class="checkbox"
                                         type="checkbox"
@@ -84,7 +84,7 @@
                                     />
                                     <span class="ml-2">{{ permiso.nombre }}</span>
                                 </div>
-                        
+
                                 <div
                                     *ngIf="permiso.hijos && permiso.hijos.length > 0 && permiso.isExpanded"
                                     class="pl-3 border-left grupo-content"
@@ -98,9 +98,9 @@
                                 </div>
                             </div>
                         </ng-template>
-                        
-                        
-                    </div>     
+
+
+                    </div>
                     <div class="float-rigth">
                         <button
                             pButton
@@ -119,7 +119,6 @@
                             "
                             (click)="guardarPermisos()"
                         >
-                            Guardar
                         </button>
                     </div>
                 </div>

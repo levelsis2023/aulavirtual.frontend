@@ -1,16 +1,12 @@
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { PrimeNGConfig } from 'primeng/api';
+import {PrimeNGConfig} from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
 import { GeneralService } from '../../../service/general.service';
-import { CommonModule } from '@angular/common';
-import { PanelModule } from 'primeng/panel';
-import { FormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
 import { HelpersService } from 'src/app/helpers.service';
-import { DropdownModule } from 'primeng/dropdown';
+import {ToastGlobalService} from "../../../../../seguridad/service/toast-global.service";
 
 interface Permiso {
     id: number | null;
@@ -23,14 +19,15 @@ interface Permiso {
     selector: 'app-lista-permisos',
     templateUrl: './lista-permisos.component.html',
     styleUrls: ['./lista-permisos.component.scss'],
-    standalone: true,
-    imports: [
-        CommonModule,
-        PanelModule,
-        DropdownModule,
-        FormsModule,
-        TableModule,
-    ],
+    // standalone: true,
+    // imports: [
+    //     CommonModule,
+    //     PanelModule,
+    //     DropdownModule,
+    //     FormsModule,
+    //     TableModule,
+    //     ToastModule
+    // ],
 })
 export class ListaPermisosComponent {
     visible: boolean = false;
@@ -39,7 +36,7 @@ export class ListaPermisosComponent {
     permisosAgrupados: any[] = [];
     instituciones: any[] = [];
     permisosSeleccionados: Set<number> = new Set();
-    selectedInstitucion: any;
+    selectedInstitucion: any | null = null;
     idRol!: number;
     estado!: boolean;
     domain_id: any;
@@ -51,7 +48,8 @@ export class ListaPermisosComponent {
         public ref: DynamicDialogRef,
         private permisoService: GeneralService,
         public config: DynamicDialogConfig,
-        private helpersService: HelpersService
+        private helpersService: HelpersService,
+        private toastGlobalService: ToastGlobalService
     ) {
         this.domain_id = this.helpersService.getDominioId();
 
@@ -178,6 +176,12 @@ export class ListaPermisosComponent {
     }
 
     guardarPermisos() {
+
+        if(!this.domain_id && !this.selectedInstitucion){
+            this.toastGlobalService.add({ severity: 'warn', summary: null, detail: 'Debe seleccionar una institución' });
+            return;
+        }
+
         const data = {
             id: this.idRol,
             idPermisos: Array.from(this.permisosSeleccionados),
