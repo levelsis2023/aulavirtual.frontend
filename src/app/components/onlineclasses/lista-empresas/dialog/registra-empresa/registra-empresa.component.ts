@@ -51,9 +51,9 @@ export class RegistraEmpresaComponent {
     const empresa = {
       name: this.name,
       domain: this.domain,
-      database: this.database,
-      status: this.status,
-      rol_id: this.rol_id,
+      database: this.database ? this.database : 'BD',
+      status: this.status ? this.status : 1,
+      rol_id: this.rol_id ? localStorage.getItem('rol_id') : 0,
       domain_id: this.domain_id
     }
 

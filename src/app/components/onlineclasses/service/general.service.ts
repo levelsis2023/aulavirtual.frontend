@@ -13,6 +13,7 @@ import { HelpersService } from 'src/app/helpers.service';
 export class GeneralService {
 
   private baseUrl = `${environment.API_BASE}`;
+  private readonly ORGANIZACION_INSTITUCIONAL :string = `organizacion-institucional/`;
   private urlparametro = `${environment.API_BASE}`;
   private permisosSubject = new BehaviorSubject<any[]>([]);
   permisos$ = this.permisosSubject.asObservable();
@@ -777,7 +778,7 @@ export class GeneralService {
         })
       );
   }
-  
+
 
 
 
@@ -1357,7 +1358,7 @@ export class GeneralService {
   saveCompany(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}company`, data);
   }
-  
+
 
 
   getCursosByDocente(id: number) {
@@ -1378,7 +1379,7 @@ export class GeneralService {
       );
   }
 
-  
+
   getCursosByAlumno(id: number) {
     return this.http
       .get<ApiResponse>(`${this.baseUrl}cursos-alumno/${id}`, { observe: 'response' })
@@ -1401,7 +1402,7 @@ export class GeneralService {
 
 
   }
-  
+
 
   guardarPreguntaAlumno(parametro: any): Observable<ApiResponse> {
     return this.http
@@ -1458,4 +1459,57 @@ export class GeneralService {
         })
       );
   }
+
+    getGestionesEi(): Observable<ApiResponse> {
+        return this.http
+            .get<ApiResponse>(`${this.baseUrl}${this.ORGANIZACION_INSTITUCIONAL}action/${this.helpersService.getDominioId()}`, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+    actualizarGestionesEi(parametro: any): Observable<ApiResponse> {
+        return this.http
+            .put<ApiResponse>(`${this.baseUrl}${this.ORGANIZACION_INSTITUCIONAL}action/${this.helpersService.getDominioId()}/${parametro.id}`, parametro, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 200 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+    guardarGestionesEi(parametro: any): Observable<ApiResponse> {
+        return this.http
+            .post<ApiResponse>(`${this.baseUrl}${this.ORGANIZACION_INSTITUCIONAL}action/${this.helpersService.getDominioId()}`, parametro, { observe: 'response' })
+            .pipe(
+                tap((response: HttpResponse<ApiResponse>) => {
+                    console.log('HTTP Status Code:', response.status);
+                }),
+                map((response: HttpResponse<ApiResponse>) => {
+                    console.log('Response body:', response.body);
+                    if (response.status === 201 && response.body) {
+                        return response.body;
+                    } else {
+                        throw new Error(response.body ? response.body.responseMessage : 'Unknown error');
+                    }
+                })
+            );
+    }
+
 }

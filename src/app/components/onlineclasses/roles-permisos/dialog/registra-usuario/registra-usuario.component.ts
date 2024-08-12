@@ -210,10 +210,13 @@ export class RegistraUsuarioComponent {
       formData.append('rol_id', this.userForm.get('rolId')?.value);
       formData.append('lastname', this.userForm.get('lastname')?.value);
       if (this.isSuperAdmin) {
+          console.log("idUsuairo");
+
         formData.append('domain_id', this.userForm.get('dominioId')?.value);
       } else {
         formData.append('domain_id', this.dominioId.toString());
       }
+
       if(this.config.data.idUsuario){
         formData.append('id', this.config.data.idUsuario);
       }
