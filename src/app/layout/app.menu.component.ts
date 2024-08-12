@@ -50,7 +50,6 @@ export class AppMenuComponent implements OnInit {
         this.permisoService.permisos$.pipe(
             tap(permisos => {
                 this.permisos = permisos;
-                console.log("permisos: ", this.permisos);
                 this.actualizarMenu();
             })
         ).subscribe();
@@ -70,11 +69,11 @@ export class AppMenuComponent implements OnInit {
                         label: 'MULTI-EMPRESAS',
                         icon: 'pi pi-play',
                         items: [
-                            ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
+                            {
                                 label: 'Empresas',
                                 icon: 'pi pi-fw pi-building',
                                 routerLink: ['/pl-virtual/lista-empresas']
-                            }] : [],
+                            }
                         ]
                     }
                 ]
@@ -88,10 +87,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-play',
                         items: [
                            ...(this.tienePermiso('ver_seguridad_configuracion')) ? [{
-                               label: 'Configuración',
+                                label: 'Configuración',
                                icon: 'pi pi-fw pi-building',
-                               routerLink: ['/pl-virtual/configuracion-institucion'],
-                           }] : [],
+                                 routerLink: ['/pl-virtual/configuracion-institucion'],
+                             }
+                            ] : [],
 
                             ...(this.tienePermiso('ver_seguridad_roles')) ? [{
 

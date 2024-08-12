@@ -1,0 +1,97 @@
+.grupo-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 2px;
+    background: #eef2fe;
+    border-radius: 7px;
+    padding: 5px;
+    gap: 5px;
+}
+
+.grupo-header input {
+    width: 21px;
+    margin: 0;
+    height: 21px;
+}
+
+.grupo-content {
+    padding-left: 20px;
+}
+
+.rotate-icon {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn-link {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btn-link svg {
+    width: 16px;
+    height: 16px;
+    fill: #6366F1; /* Color de la flecha */
+}
+
+.opcionesCheck{
+    display: flex;
+    /* align-items: center; */
+    cursor: pointer;
+    margin-bottom: 2px;
+    border-radius: 7px;
+
+}
+.d-flex{
+    display: flex;
+}
+.backgroundPurple{
+    background: #eef2fe;
+    margin: 2px;
+    padding: 3px;
+    border-radius: 4px;
+}
+.checkbox {
+    margin-left: 2px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    appearance: none; /* Remueve el estilo nativo del checkbox */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 2px solid #B0BEC5;
+    border-radius: 4px;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.checkbox:checked {
+    background-color: #6366F1; /* Color de fondo cuando está marcado */
+    border-color: #6366F1;
+}
+
+.checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+input[type="checkbox"]:checked {
+    background-color: #6366F1; /* Color de fondo del checkbox cuando está marcado */
+    border-color: #6366F1; /* Cambia el borde del checkbox al mismo color */
+}

@@ -8,6 +8,8 @@ node_modules
 .idea
 sassdoc
 
+
+
 src/assets/theme/*/*.css
 src/assets/layout/css/*.css
 src/assets/sass/theme/_vendor_extensions
@@ -62,3 +64,4 @@ src/assets/demo/styles/badges.css
 src/assets/demo/styles/code.css
 src/assets/layout/styles/layout/preloading.css
 src/assets/layout/styles/theme/designer
+dist/apollo-ng/538.880b1e3ae8abf765.js
