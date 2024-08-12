@@ -6,7 +6,6 @@ import { GeneralService } from '../../../../../service/general.service';
 import { Router } from '@angular/router';
 import { RegCursosComponent } from '../../../../../cursos/dialog/reg-cursos/reg-cursos.component';
 import Swal from 'sweetalert2';
-import { AgregarEditarListaDeEvaluacionesPorGrupoComponent } from './ae-lista-de-evaluaciones-por-grupo/agregar-editar-lista-de-evaluaciones-por-grupo.component';
 import { VerListadoDePreguntasComponent } from '../ver-listado-de-preguntas/ver-listado-de-preguntas.component';
 
 @Component({
@@ -64,7 +63,7 @@ export class VerListadoDeEvaluacionesPorGrupoComponent {
   }
 
   navigateAddCurso() {
-    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'add', idGrupoEvaluaciones: this.grupoEvaluaciones.id }
@@ -76,7 +75,7 @@ export class VerListadoDeEvaluacionesPorGrupoComponent {
   }
 
   navigateToDetalle(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
       width: '80%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'ver', idCurso: this.grupoEvaluaciones.id ,data: data }
@@ -88,7 +87,7 @@ export class VerListadoDeEvaluacionesPorGrupoComponent {
   }
 
   navigateToEdit(data: any) {
-    this.ref = this.dialogService.open(AgregarEditarListaDeEvaluacionesPorGrupoComponent, {
+    this.ref = this.dialogService.open(VerListadoDeEvaluacionesPorGrupoComponent, {
       width: '60%',
       styleClass: 'custom-dialog-header',
       data: { acciones: 'actualizar', idCurso: this.grupoEvaluaciones.id ,data: data } 
