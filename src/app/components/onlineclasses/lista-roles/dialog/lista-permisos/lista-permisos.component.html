@@ -14,7 +14,8 @@
                 optionValue="domain_id"
                 placeholder="Seleccione una institución"
                 (onChange)="onInstitucionChange($event)"
-            ></p-dropdown>
+            >
+            </p-dropdown>
         </div>
     </ng-template>
 
@@ -23,10 +24,9 @@
             <div class="grid p-fluid">
                 <div class="field md:col-12">
                     <div *ngFor="let grupo of permisosAgrupados" class="mb-3">
-                        <!-- Encabezado del Grupo -->
                         <div class="d-flex align-items-center grupo-header">
-                            <button type="button" class="btn btn-link p-0 ml-2" (click)="grupo.isExpanded = !grupo.isExpanded">
-                                <svg [ngClass]="{'rotate-icon': grupo.isExpanded}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 307.053 307.053">
+                            <button type="button" class="btn btn-link p-0 ml-2" (click)="grupo.expanded = !grupo.expanded">
+                                <svg [ngClass]="{'rotate-icon': grupo.expanded}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 307.053 307.053">
                                     <g id="_x34_86._Down">
                                         <g>
                                             <path d="M302.445,80.796l-11.101-11.103c-6.123-6.131-16.074-6.131-22.209,0L153.67,183.707L37.907,67.959
@@ -39,14 +39,68 @@
                             <input class="checkbox" type="checkbox" [(ngModel)]="grupo.seleccionado" (change)="seleccionarGrupo(grupo)" />
                             <span class="font-semibold text-lg">{{ grupo.nombre }}</span>
                         </div>
-                        <!-- Lista de Permisos dentro del Grupo -->
-                        <div *ngIf="grupo.isExpanded" class="ml-4 pl-3 border-left grupo-content">
-                            <div *ngFor="let permiso of grupo.permisos" class="d-flex align-items-center opcionesCheck">
-                                <input class="checkbox" type="checkbox" [(ngModel)]="permiso.seleccionado" (change)="onCheckboxChange(permiso.id, $event, grupo)" />
-                                <span class="ml-2">{{ permiso.nombre }}</span>
-                            </div>
+                    
+                        <div *ngIf="grupo.expanded" class="grupo-content">
+                            <ng-container *ngFor="let permiso of grupo.permisos">
+                                <ng-container 
+                                    *ngTemplateOutlet="renderPermisos; context: { $implicit: permiso, grupo: grupo }">
+                                </ng-container>
+                            </ng-container>
                         </div>
-                    </div>
+
+                        <ng-template #renderPermisos let-permiso let-grupo="grupo">
+                            <div class="d-flex flex-column opcionesCheck">
+                                <div class="d-flex align-items-center backgroundPurple">
+                                    <button
+                                        *ngIf="permiso.hijos && permiso.hijos.length > 0"
+                                        type="button"
+                                        class="btn btn-link p-0 ml-2"
+                                        (click)="permiso.isExpanded = !permiso.isExpanded"
+                                    >
+                                        <svg
+                                            [ngClass]="{ 'rotate-icon': permiso.isExpanded }"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 307.053 307.053"
+                                        >
+                                            <g id="_x34_86._Down">
+                                                <g>
+                                                    <path
+                                                        d="M302.445,80.796l-11.101-11.103c-6.123-6.131-16.074-6.131-22.209,0L153.67,183.707L37.907,67.959
+                                                            c-6.134-6.13-16.08-6.13-22.209,0L4.597,79.06c-6.129,6.133-6.129,16.067,0,22.201l137.83,137.829
+                                                            c6.129,6.136,16.067,6.136,22.203,0l137.815-136.096C308.589,96.864,308.589,86.926,302.445,80.796z"
+                                                    />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </button>
+                        
+                                    <input
+                                        class="checkbox"
+                                        type="checkbox"
+                                        [(ngModel)]="permiso.seleccionado"
+                                        (change)="onCheckboxChange(permiso.id, $event, grupo)"
+                                    />
+                                    <span class="ml-2">{{ permiso.nombre }}</span>
+                                </div>
+                        
+                                <div
+                                    *ngIf="permiso.hijos && permiso.hijos.length > 0 && permiso.isExpanded"
+                                    class="pl-3 border-left grupo-content"
+                                >
+                                    <ng-container *ngFor="let hijo of permiso.hijos">
+                                        <ng-container
+                                            *ngTemplateOutlet="renderPermisos; context: { $implicit: hijo, grupo: grupo }"
+                                        >
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-template>
+                        
+                        
+                    </div>     
                     <div class="float-rigth">
                         <button
                             pButton
