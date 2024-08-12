@@ -22,17 +22,22 @@ export class AppSidebarComponent {
         this.domain_id = this.helpersService.getDominioId();
         this.generalService.getCompany(this.domain_id).subscribe((response: any) => {
           console.log("response", response);
-            //save in local storage
-            if(localStorage.getItem('company')){
-                localStorage.removeItem('company');
+          if(response && response.data){
+              //save in local storage
+              if(localStorage.getItem('company')){
+                  localStorage.removeItem('company');
+              }
+              localStorage.setItem('company', JSON.stringify(response.data));
+              this.logoUrl = response.data.logo_url;
+          }
+          else{
+              this.logoUrl = 'http://143.198.161.217/storage/companies/2/zzzzzgua.jpg';
+          }
+            if (!localStorage.getItem('company')) {
+                localStorage.setItem('company', JSON.stringify({ logo_url: 'http://143.198.161.217/storage/companies/2/zzzzzgua.jpg' }));
             }
-            localStorage.setItem('company', JSON.stringify(response.data));
-            this.logoUrl = response.data.logo_url;
         });
     }
-    
-
-
 
     onMouseEnter() {
         if (!this.layoutService.state.anchored) {
@@ -41,8 +46,8 @@ export class AppSidebarComponent {
                 this.timeout = null;
             }
             this.layoutService.state.sidebarActive = true;
-           
-    
+
+
         }
     }
 
