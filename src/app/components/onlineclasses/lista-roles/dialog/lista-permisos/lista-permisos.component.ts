@@ -36,7 +36,7 @@ export class ListaPermisosComponent {
     visible: boolean = false;
     nombre: string = '';
     permisos!: any[];
-    permisosAgrupados: any[] = []; // Aquí almacenarás los permisos agrupados
+    permisosAgrupados: any[] = [];
     instituciones: any[] = [];
     permisosSeleccionados: Set<number> = new Set();
     selectedInstitucion: any;
@@ -51,15 +51,13 @@ export class ListaPermisosComponent {
         public ref: DynamicDialogRef,
         private permisoService: GeneralService,
         public config: DynamicDialogConfig,
-        private helpersService: HelpersService,
-        private cd: ChangeDetectorRef
+        private helpersService: HelpersService
     ) {
         this.domain_id = this.helpersService.getDominioId();
 
         this.permisoService
             .getPermisos(this.domain_id)
             .subscribe((response: any) => {
-                console.log('Lista de permisos', response);
                 this.permisos = response;
                 this.organizarPermisosPorGrupo();
             });
@@ -77,10 +75,7 @@ export class ListaPermisosComponent {
                     this.permisosSeleccionados = new Set(
                         response.map((permission) => permission.id)
                     );
-                    console.log('this.permisosSeleccionados');
-                    console.log(this.permisosSeleccionados);
-                    this.organizarPermisosPorGrupo(); // Asegúrate de reorganizar los permisos después de cargar los seleccionados
-                    this.cd.detectChanges();
+                    this.organizarPermisosPorGrupo();
                 });
         }
     }
@@ -97,44 +92,40 @@ export class ListaPermisosComponent {
                 this.permisosSeleccionados = new Set(
                     response.map((permission) => permission.id)
                 );
-                console.log('this.permisosSeleccionados');
-                console.log(this.permisosSeleccionados);
-                this.organizarPermisosPorGrupo(); // Reorganiza los permisos después del cambio de institución
+                this.organizarPermisosPorGrupo();
             });
     }
 
     onCheckboxChange(permisoId: number | null, event: Event, grupo: any) {
         if (permisoId === null) {
-            console.warn(`Permiso con ID nulo detectado en el grupo ${grupo.nombre}`);
+            console.warn(
+                `Permiso con ID nulo detectado en el grupo ${grupo.nombre}`
+            );
             return;
         }
-    
+
         const isChecked = (event.target as HTMLInputElement).checked;
-        const permisoSeleccionado = this.findPermisoById(grupo.permisos, permisoId);
-        
+        const permisoSeleccionado = this.findPermisoById(
+            grupo.permisos,
+            permisoId
+        );
+
         if (permisoSeleccionado) {
             this.togglePermisoSeleccion(permisoSeleccionado, isChecked);
         }
-    
-        // Verifica si todos los permisos en el grupo están seleccionados
+
         this.verificarSeleccionGrupo(grupo);
-    
-        this.cd.detectChanges(); // Forzar la actualización de la vista
     }
-    
-    
-    
+
     togglePermisoSeleccion(permiso: Permiso, isChecked: boolean) {
         permiso.seleccionado = isChecked;
-    
-        // Propagar selección a los hijos
+
         if (permiso.hijos && permiso.hijos.length > 0) {
             permiso.hijos.forEach((hijo: Permiso) => {
-                this.togglePermisoSeleccion(hijo, isChecked); 
+                this.togglePermisoSeleccion(hijo, isChecked);
             });
         }
-    
-        // Actualizar el set de permisos seleccionados
+
         if (permiso.id !== null) {
             if (isChecked) {
                 this.permisosSeleccionados.add(permiso.id);
@@ -143,26 +134,32 @@ export class ListaPermisosComponent {
             }
         }
     }
+
     verificarSeleccionGrupo(grupo: any) {
-        grupo.seleccionado = grupo.permisos.every((permiso: Permiso) => this.verificarSeleccionPermiso(permiso));
+        grupo.seleccionado = grupo.permisos.every((permiso: Permiso) =>
+            this.verificarSeleccionPermiso(permiso)
+        );
     }
-    
+
     verificarSeleccionPermiso(permiso: Permiso): boolean {
         if (permiso.hijos && permiso.hijos.length > 0) {
-            return permiso.hijos.every(hijo => this.verificarSeleccionPermiso(hijo));
+            return permiso.hijos.every((hijo) =>
+                this.verificarSeleccionPermiso(hijo)
+            );
         }
         return permiso.seleccionado;
     }
+
     ngOnInit() {
         this.organizarPermisosPorGrupo();
     }
-    
+
     findPermisoById(permisos: Permiso[], id: number | null): Permiso | null {
         if (id === null) {
             console.warn(`Intento de búsqueda de un permiso con ID nulo`);
             return null;
         }
-    
+
         for (const permiso of permisos) {
             if (permiso.id === id) {
                 return permiso;
@@ -175,7 +172,7 @@ export class ListaPermisosComponent {
         }
         return null;
     }
-    
+
     toggleGroup(grupo: any) {
         grupo.isExpanded = !grupo.isExpanded;
     }
@@ -186,7 +183,6 @@ export class ListaPermisosComponent {
             idPermisos: Array.from(this.permisosSeleccionados),
             domain_id: this.domain_id ?? this.selectedInstitucion,
         };
-        console.log(data);
         this.permisoService.guardarRolPermisos(data).subscribe(
             (response: any) => {
                 this.closeModal();
@@ -195,9 +191,7 @@ export class ListaPermisosComponent {
                     text: 'Los Datos se registraron correctamente',
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
-                }).then(() => {
-                    // Acciones después del guardado, si es necesario
-                });
+                }).then(() => {});
             },
             (error: any) => {
                 console.error('Error al guardar el rol', error);
@@ -208,29 +202,61 @@ export class ListaPermisosComponent {
     seleccionarGrupo(grupo: any) {
         grupo.permisos.forEach((permiso: Permiso) => {
             this.togglePermisoSeleccion(permiso, grupo.seleccionado);
-    
+
             if (permiso.hijos && permiso.hijos.length > 0) {
                 permiso.hijos.forEach((hijo: Permiso) => {
                     this.togglePermisoSeleccion(hijo, grupo.seleccionado);
                 });
             }
         });
-    
-        this.cd.detectChanges(); // Asegúrate de que la vista se actualice
     }
-    ngAfterViewInit() {
-        this.organizarPermisosPorGrupo();
-        this.cd.detectChanges(); // Forzar la detección de cambios después de que la vista esté completamente cargada
-    }
+
     organizarPermisosPorGrupo() {
         const grupos: { [key: string]: any } = {
             Seguridad: {
                 nombre: 'Seguridad',
-                id: 3,  // id correspondiente al permiso de "ver_modulo_seguridad"
+                id: null,
                 seleccionado: false,
                 permisos: [
-                    { id: 4, nombre: 'Configuración', seleccionado: false, hijos: [] },
-                    { id: 9, nombre: 'Roles y Permisos', seleccionado: false, hijos: [] },
+                    {
+                        id: null,
+                        nombre: 'Configuración',
+                        seleccionado: false,
+                        hijos: [],
+                    },
+                    {
+                        id: null,
+                        nombre: 'Roles y Permisos',
+                        seleccionado: false,
+                        permisosInternos: [
+                            {
+                                id: null,
+                                nombre: 'Crear Rol',
+                                seleccionado: false,
+                            },
+                            {
+                                id: null,
+                                nombre: 'Editar Rol',
+                                seleccionado: false,
+                            },
+                            {
+                                id: null,
+                                nombre: 'Eliminar Rol',
+                                seleccionado: false,
+                            },
+                            {
+                                id: null,
+                                nombre: 'Asignar Permiso',
+                                seleccionado: false,
+                            },
+                            {
+                                id: null,
+                                nombre: 'Ver Roles',
+                                seleccionado: false,
+                            },
+                        ],
+                        isExpanded: false,
+                    },
                     {
                         id: 10,
                         nombre: 'Usuarios',
@@ -248,12 +274,17 @@ export class ListaPermisosComponent {
             },
             EstructuraOrganica: {
                 nombre: 'ESTRUCTURA ORGÁNICA',
-                id: 2,  // id correspondiente al permiso de "ver_modulo_estructura_organica"
+                id: null,
                 seleccionado: false,
                 permisos: [
-                    { id: 15, nombre: 'Mantenimientos', seleccionado: false, hijos: [] },
                     {
-                        id: 16,
+                        id: null,
+                        nombre: 'Mantenimientos',
+                        seleccionado: false,
+                        hijos: [],
+                    },
+                    {
+                        id: null,
                         nombre: 'Instituciones',
                         seleccionado: false,
                         hijos: [
@@ -266,19 +297,51 @@ export class ListaPermisosComponent {
                                 nombre: 'ÁREAS',
                                 seleccionado: false,
                                 hijos: [
-                                    { id: 22, nombre: 'Nuevo', seleccionado: false },
-                                    { id: 23, nombre: 'Ver', seleccionado: false },
-                                    { id: 24, nombre: 'Editar', seleccionado: false },
-                                    { id: 25, nombre: 'Eliminar', seleccionado: false },
+                                    {
+                                        id: 22,
+                                        nombre: 'Nuevo',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 23,
+                                        nombre: 'Ver',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 24,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 25,
+                                        nombre: 'Eliminar',
+                                        seleccionado: false,
+                                    },
                                     {
                                         id: 26,
                                         nombre: 'PUESTOS Y PERFILES',
                                         seleccionado: false,
                                         hijos: [
-                                            { id: 27, nombre: 'Nuevo', seleccionado: false },
-                                            { id: 28, nombre: 'Ver', seleccionado: false },
-                                            { id: 29, nombre: 'Editar', seleccionado: false },
-                                            { id: 30, nombre: 'Eliminar', seleccionado: false },
+                                            {
+                                                id: 27,
+                                                nombre: 'Nuevo',
+                                                seleccionado: false,
+                                            },
+                                            {
+                                                id: 28,
+                                                nombre: 'Ver',
+                                                seleccionado: false,
+                                            },
+                                            {
+                                                id: 29,
+                                                nombre: 'Editar',
+                                                seleccionado: false,
+                                            },
+                                            {
+                                                id: 30,
+                                                nombre: 'Eliminar',
+                                                seleccionado: false,
+                                            },
                                         ],
                                         isExpanded: false,
                                     },
@@ -293,109 +356,208 @@ export class ListaPermisosComponent {
             },
             AulaVirtual: {
                 nombre: 'AULA VIRTUAL',
-                id: 10,  // id correspondiente al permiso de "ver_modulo_aulaVirtual"
+                id: null,
                 seleccionado: false,
                 permisos: [
                     {
                         id: 31,
                         nombre: 'MANTENIMIENTOS',
                         seleccionado: false,
+                        hijos: [],
+                        isExpanded: false,
+                    },
+                    {
+                        id: null,
+                        nombre: 'CARRERAS TÉCNICAS',
+                        seleccionado: false,
                         hijos: [
+                            { id: 33, nombre: 'Nuevo', seleccionado: false },
+                            { id: 34, nombre: 'Editar', seleccionado: false },
+                            { id: 35, nombre: 'Ver', seleccionado: false },
+                            { id: 36, nombre: 'Eliminar', seleccionado: false },
                             {
-                                id: 32,
-                                nombre: 'CARRERAS TÉCNICAS',
+                                id: 37,
+                                nombre: 'CURSO',
                                 seleccionado: false,
                                 hijos: [
-                                    { id: 33, nombre: 'Nuevo', seleccionado: false },
-                                    { id: 34, nombre: 'Editar', seleccionado: false },
-                                    { id: 35, nombre: 'Ver', seleccionado: false },
-                                    { id: 36, nombre: 'Eliminar', seleccionado: false },
                                     {
-                                        id: 37,
-                                        nombre: 'CURSO',
+                                        id: 38,
+                                        nombre: 'Nuevo',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 39,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 40,
+                                        nombre: 'Ver',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 41,
+                                        nombre: 'Eliminar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 42,
+                                        nombre: 'SYLLABUS',
                                         seleccionado: false,
                                         hijos: [
-                                            { id: 38, nombre: 'Nuevo', seleccionado: false },
-                                            { id: 39, nombre: 'Editar', seleccionado: false },
-                                            { id: 40, nombre: 'Ver', seleccionado: false },
-                                            { id: 41, nombre: 'Eliminar', seleccionado: false },
                                             {
-                                                id: 42,
-                                                nombre: 'SYLLABUS',
+                                                id: 43,
+                                                nombre: 'Ver',
                                                 seleccionado: false,
-                                                hijos: [
-                                                    { id: 43, nombre: 'Ver', seleccionado: false },
-                                                ],
-                                                isExpanded: false,
+                                            },
+                                        ],
+                                        isExpanded: false,
+                                    },
+                                    {
+                                        id: 44,
+                                        nombre: 'ALUMNOS',
+                                        seleccionado: false,
+                                        hijos: [
+                                            {
+                                                id: 45,
+                                                nombre: 'Ver',
+                                                seleccionado: false,
                                             },
                                             {
-                                                id: 44,
-                                                nombre: 'ALUMNOS',
+                                                id: 46,
+                                                nombre: 'Asignar',
                                                 seleccionado: false,
-                                                hijos: [
-                                                    { id: 45, nombre: 'Ver', seleccionado: false },
-                                                    { id: 46, nombre: 'Asignar', seleccionado: false },
-                                                ],
-                                                isExpanded: false,
+                                            },
+                                        ],
+                                        isExpanded: false,
+                                    },
+                                    {
+                                        id: 47,
+                                        nombre: 'HORARIOS',
+                                        seleccionado: false,
+                                        hijos: [
+                                            {
+                                                id: 48,
+                                                nombre: 'Ver',
+                                                seleccionado: false,
                                             },
                                             {
-                                                id: 47,
-                                                nombre: 'HORARIOS',
+                                                id: 49,
+                                                nombre: 'Programar',
                                                 seleccionado: false,
-                                                hijos: [
-                                                    { id: 48, nombre: 'Ver', seleccionado: false },
-                                                    { id: 49, nombre: 'Programar', seleccionado: false },
-                                                ],
-                                                isExpanded: false,
+                                            },
+                                        ],
+                                        isExpanded: false,
+                                    },
+                                    {
+                                        id: 50,
+                                        nombre: 'ASISTENCIA',
+                                        seleccionado: false,
+                                        hijos: [
+                                            {
+                                                id: 51,
+                                                nombre: 'Ver',
+                                                seleccionado: false,
                                             },
                                             {
-                                                id: 50,
-                                                nombre: 'ASISTENCIA',
+                                                id: 52,
+                                                nombre: 'Programar',
                                                 seleccionado: false,
-                                                hijos: [
-                                                    { id: 51, nombre: 'Ver', seleccionado: false },
-                                                    { id: 52, nombre: 'Programar', seleccionado: false },
-                                                ],
-                                                isExpanded: false,
+                                            },
+                                        ],
+                                        isExpanded: false,
+                                    },
+                                    {
+                                        id: 53,
+                                        nombre: 'TEMAS',
+                                        seleccionado: false,
+                                        hijos: [
+                                            {
+                                                id: 54,
+                                                nombre: 'Ver',
+                                                seleccionado: false,
+                                            },
+                                        ],
+                                        isExpanded: false,
+                                    },
+                                    {
+                                        id: 55,
+                                        nombre: 'GRUPOS DE EVALUACIONES',
+                                        seleccionado: false,
+                                        hijos: [
+                                            {
+                                                id: 56,
+                                                nombre: 'Nuevo',
+                                                seleccionado: false,
                                             },
                                             {
-                                                id: 53,
-                                                nombre: 'TEMAS',
+                                                id: 57,
+                                                nombre: 'Editar',
                                                 seleccionado: false,
-                                                hijos: [
-                                                    { id: 54, nombre: 'Ver', seleccionado: false },
-                                                ],
-                                                isExpanded: false,
                                             },
                                             {
-                                                id: 55,
-                                                nombre: 'GRUPOS DE EVALUACIONES',
+                                                id: 58,
+                                                nombre: 'Ver',
+                                                seleccionado: false,
+                                            },
+                                            {
+                                                id: 59,
+                                                nombre: 'Eliminar',
+                                                seleccionado: false,
+                                            },
+                                            {
+                                                id: 60,
+                                                nombre: 'EVALUACIONES DE GRUPO',
                                                 seleccionado: false,
                                                 hijos: [
-                                                    { id: 56, nombre: 'Nuevo', seleccionado: false },
-                                                    { id: 57, nombre: 'Editar', seleccionado: false },
-                                                    { id: 58, nombre: 'Ver', seleccionado: false },
-                                                    { id: 59, nombre: 'Eliminar', seleccionado: false },
                                                     {
-                                                        id: 60,
-                                                        nombre: 'EVALUACIONES DE GRUPO',
+                                                        id: 61,
+                                                        nombre: 'Nuevo',
+                                                        seleccionado: false,
+                                                    },
+                                                    {
+                                                        id: 62,
+                                                        nombre: 'Editar',
+                                                        seleccionado: false,
+                                                    },
+                                                    {
+                                                        id: 63,
+                                                        nombre: 'Ver',
+                                                        seleccionado: false,
+                                                    },
+                                                    {
+                                                        id: 64,
+                                                        nombre: 'Eliminar',
+                                                        seleccionado: false,
+                                                    },
+                                                    {
+                                                        id: 65,
+                                                        nombre: 'PREGUNTAS',
                                                         seleccionado: false,
                                                         hijos: [
-                                                            { id: 61, nombre: 'Nuevo', seleccionado: false },
-                                                            { id: 62, nombre: 'Editar', seleccionado: false },
-                                                            { id: 63, nombre: 'Ver', seleccionado: false },
-                                                            { id: 64, nombre: 'Eliminar', seleccionado: false },
                                                             {
-                                                                id: 65,
-                                                                nombre: 'PREGUNTAS',
-                                                                seleccionado: false,
-                                                                hijos: [
-                                                                    { id: 66, nombre: 'Nuevo', seleccionado: false },
-                                                                    { id: 67, nombre: 'Editar', seleccionado: false },
-                                                                    { id: 68, nombre: 'Ver', seleccionado: false },
-                                                                    { id: 69, nombre: 'Eliminar', seleccionado: false },
-                                                                ],
-                                                                isExpanded: false,
+                                                                id: 66,
+                                                                nombre: 'Nuevo',
+                                                                seleccionado:
+                                                                    false,
+                                                            },
+                                                            {
+                                                                id: 67,
+                                                                nombre: 'Editar',
+                                                                seleccionado:
+                                                                    false,
+                                                            },
+                                                            {
+                                                                id: 68,
+                                                                nombre: 'Ver',
+                                                                seleccionado:
+                                                                    false,
+                                                            },
+                                                            {
+                                                                id: 69,
+                                                                nombre: 'Eliminar',
+                                                                seleccionado:
+                                                                    false,
                                                             },
                                                         ],
                                                         isExpanded: false,
@@ -412,113 +574,264 @@ export class ListaPermisosComponent {
                         ],
                         isExpanded: false,
                     },
-                ],
-                isExpanded: false,
-            },
-            Alumnos: {
-                nombre: 'ALUMNOS',
-                id: 70,  // Asigna un ID único al grupo de Alumnos
-                seleccionado: false,
-                permisos: [
                     {
-                        id: 71,
-                        nombre: 'Datos Personales',
+                        id: null,
+                        nombre: 'ALUMNOS',
                         seleccionado: false,
                         hijos: [
-                            { id: 72, nombre: 'Nuevo', seleccionado: false },
-                            { id: 73, nombre: 'Editar', seleccionado: false },
-                            { id: 74, nombre: 'Ver', seleccionado: false },
-                            { id: 75, nombre: 'Eliminar', seleccionado: false },
+                            {
+                                id: null,
+                                nombre: 'Datos Personales',
+                                seleccionado: false,
+                                hijos: [
+                                    {
+                                        id: 72,
+                                        nombre: 'Nuevo',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 73,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 74,
+                                        nombre: 'Ver',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 75,
+                                        nombre: 'Eliminar',
+                                        seleccionado: false,
+                                    },
+                                ],
+                            },
+                            {
+                                id: 76,
+                                nombre: 'Documentos de Gestión',
+                                seleccionado: false,
+                                hijos: [
+                                    {
+                                        id: 77,
+                                        nombre: 'Nuevo',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 78,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 79,
+                                        nombre: 'Ver',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 80,
+                                        nombre: 'Eliminar',
+                                        seleccionado: false,
+                                    },
+                                ],
+                            },
+                            {
+                                id: 81,
+                                nombre: 'Avance Curricular',
+                                seleccionado: false,
+                                hijos: [
+                                    {
+                                        id: 82,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 83,
+                                        nombre: 'Ver',
+                                        seleccionado: false,
+                                    },
+                                ],
+                            },
+                            { id: 84, nombre: 'Cursos', seleccionado: false },
+                            { id: 85, nombre: 'Horarios', seleccionado: false },
                         ],
+                        isExpanded: false,
                     },
                     {
-                        id: 76,
-                        nombre: 'Documentos de Gestión',
+                        id: null,
+                        nombre: 'DOCENTES',
                         seleccionado: false,
                         hijos: [
-                            { id: 77, nombre: 'Nuevo', seleccionado: false },
-                            { id: 78, nombre: 'Editar', seleccionado: false },
-                            { id: 79, nombre: 'Ver', seleccionado: false },
-                            { id: 80, nombre: 'Eliminar', seleccionado: false },
+                            {
+                                id: null,
+                                nombre: 'Datos Personales',
+                                seleccionado: false,
+                                hijos: [
+                                    {
+                                        id: 88,
+                                        nombre: 'Nuevo',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 89,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 90,
+                                        nombre: 'Ver',
+                                        seleccionado: false,
+                                    },
+                                    {
+                                        id: 91,
+                                        nombre: 'Eliminar',
+                                        seleccionado: false,
+                                    },
+                                ],
+                            },
+                            {
+                                id: 92,
+                                nombre: 'Horarios',
+                                seleccionado: false,
+                                hijos: [
+                                    {
+                                        id: 93,
+                                        nombre: 'Editar',
+                                        seleccionado: false,
+                                    },
+                                ],
+                            },
+                            { id: 94, nombre: 'Cursos', seleccionado: false },
                         ],
+                        isExpanded: false,
                     },
-                    {
-                        id: 81,
-                        nombre: 'Avance Curricular',
-                        seleccionado: false,
-                        hijos: [
-                            { id: 82, nombre: 'Editar', seleccionado: false },
-                            { id: 83, nombre: 'Ver', seleccionado: false },
-                        ],
-                    },
-                    { id: 84, nombre: 'Cursos', seleccionado: false },
-                    { id: 85, nombre: 'Horarios', seleccionado: false },
-                ],
-                isExpanded: false,
-            },
-            Docentes: {
-                nombre: 'DOCENTES',
-                id: 86,  // Asigna un ID único al grupo de Docentes
-                seleccionado: false,
-                permisos: [
-                    {
-                        id: 87,
-                        nombre: 'Datos Personales',
-                        seleccionado: false,
-                        hijos: [
-                            { id: 88, nombre: 'Nuevo', seleccionado: false },
-                            { id: 89, nombre: 'Editar', seleccionado: false },
-                            { id: 90, nombre: 'Ver', seleccionado: false },
-                            { id: 91, nombre: 'Eliminar', seleccionado: false },
-                        ],
-                    },
-                    {
-                        id: 92,
-                        nombre: 'Horarios',
-                        seleccionado: false,
-                        hijos: [
-                            { id: 93, nombre: 'Editar', seleccionado: false },
-                        ],
-                    },
-                    { id: 94, nombre: 'Cursos', seleccionado: false },
                 ],
                 isExpanded: false,
             },
         };
-    
-        // Aquí acomodamos los permisos que vienen del backend
+
         this.permisos.forEach((permiso) => {
-            // Mapear los permisos del backend a los grupos
-            if (permiso.nombre === 'ver_modulo_estructura_organica') {
-                grupos['EstructuraOrganica'].id = permiso.id;
-                grupos['EstructuraOrganica'].seleccionado = this.permisosSeleccionados.has(permiso.id);
+            switch (permiso.nombre) {
+                case 'ver_modulo_seguridad':
+                    grupos['Seguridad'].id = permiso.id;
+                    grupos['Seguridad'].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'ver_seguridad_configuracion':
+                    grupos['Seguridad'].permisos[0].id = permiso.id;
+                    grupos['Seguridad'].permisos[0].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'roles_crearRol':
+                    grupos['Seguridad'].permisos[1].permisosInternos[0].id =
+                        permiso.id;
+                    grupos[
+                        'Seguridad'
+                    ].permisos[1].permisosInternos[0].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'roles_editarRol':
+                    grupos['Seguridad'].permisos[1].permisosInternos[1].id =
+                        permiso.id;
+                    grupos[
+                        'Seguridad'
+                    ].permisos[1].permisosInternos[1].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'roles_eliminarRol':
+                    grupos['Seguridad'].permisos[1].permisosInternos[2].id =
+                        permiso.id;
+                    grupos[
+                        'Seguridad'
+                    ].permisos[1].permisosInternos[2].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'roles_asignarPermiso':
+                    grupos['Seguridad'].permisos[1].permisosInternos[3].id =
+                        permiso.id;
+                    grupos[
+                        'Seguridad'
+                    ].permisos[1].permisosInternos[3].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'ver_seguridad_roles':
+                    grupos['Seguridad'].permisos[1].permisosInternos[4].id =
+                        permiso.id;
+                    grupos[
+                        'Seguridad'
+                    ].permisos[1].permisosInternos[4].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+                case 'aula_virtual_alumno':
+                    grupos['AulaVirtual'].permisos[2].id = permiso.id;
+                    grupos['AulaVirtual'].permisos[2].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'ver_modulo_estructura_organica':
+                    grupos['EstructuraOrganica'].id = permiso.id;
+                    grupos['EstructuraOrganica'].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+                case 'aula_virtual_docente_datos_personales':
+                    grupos['AulaVirtual'].permisos[3].hijos[0].id = permiso.id;
+                    grupos['AulaVirtual'].permisos[3].hijos[0].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+                case 'ver_modulo_aulaVirtual':
+                    grupos['AulaVirtual'].id = permiso.id;
+                    grupos['AulaVirtual'].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'aula_virtual_carreras':
+                    grupos['AulaVirtual'].permisos[1].id = permiso.id;
+                    grupos['AulaVirtual'].permisos[1].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'aula_virtual_alumno_datos_personales':
+                    grupos['AulaVirtual'].permisos[2].hijos[0].id = permiso.id;
+                    grupos['AulaVirtual'].permisos[2].hijos[0].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
+
+                case 'aula_virtual_docente':
+                    grupos['AulaVirtual'].permisos[3].id = permiso.id;
+                    grupos['AulaVirtual'].permisos[3].seleccionado =
+                        this.permisosSeleccionados.has(permiso.id);
+                    break;
             }
         });
-    
-        // Convertimos el objeto grupos a un array de grupos para facilitar su uso en el template
+
         this.permisosAgrupados = Object.values(grupos);
-    
-        // Asegúrate de propagar la selección correctamente
+
         this.propagateSelection(this.permisosAgrupados);
-        this.permisosAgrupados.forEach(grupo => {
+        this.permisosAgrupados.forEach((grupo) => {
             this.verificarSeleccionGrupo(grupo);
         });
-        // Forzar la detección de cambios para asegurarse de que la vista se actualice
-        this.cd.detectChanges();
     }
-    
+
     propagateSelection(permisos: Permiso[]) {
         permisos.forEach((permiso: Permiso) => {
-            if (permiso.seleccionado && permiso.hijos && permiso.hijos.length > 0) {
-                this.togglePermisoSeleccion(permiso, true); // Marcar todos los hijos si el padre está marcado
+            if (
+                permiso.seleccionado &&
+                permiso.hijos &&
+                permiso.hijos.length > 0
+            ) {
+                this.togglePermisoSeleccion(permiso, true);
             }
-    
-            // Si hay permisos hijos, propagar la selección recursivamente
+
             if (permiso.hijos && permiso.hijos.length > 0) {
                 this.propagateSelection(permiso.hijos);
             }
         });
     }
+
     closeDialog() {
         this.visible = false;
     }
