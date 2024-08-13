@@ -1,0 +1,56 @@
+
+<p-panel>
+    <ng-template pTemplate="header">
+        <span class="text-primary font-semibold text-xl">Bienvenido Ceiber Garibay</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <form [formGroup]="postulanteForm" (ngSubmit)="savePostulante()">
+            <div class="row mb-4">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Nombre</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;" class="pi pi-user-edit"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 40vw;">
+                        <p style="position: relative;top: 1vh;">Genero</p>
+                        <p-dropdown 
+                            
+                            class="custom-dropdown"
+                            formControlName="genero"
+                            [options]="tipoGenero"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                            >
+                            
+                        </p-dropdown>
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -2vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Teléfono</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;" class="pi pi-phone"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Fecha de Nacimiento</p>
+                        <p-calendar 
+                            dateFormat="dd/mm/yy"
+                            placeholder="dd/mm/aaaa"
+                        />
+
+                        
+                    </span>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+</p-panel>

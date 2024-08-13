@@ -17,6 +17,7 @@ import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
   }

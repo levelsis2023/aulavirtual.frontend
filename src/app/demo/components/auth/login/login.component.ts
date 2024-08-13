@@ -82,7 +82,12 @@ export class LoginComponent implements OnInit {
 							confirmButtonText: 'Aceptar',
 						}).then(() => {
 						});
-						this.router.navigate(['/pl-virtual']);
+						if(user.rol_id !== 21){
+                            this.router.navigate(['/pl-virtual']);
+                        }
+                        else{
+                            this.router.navigate(['/formulario-oi']);
+                        }
 
 					} else {
 						this.spinner.hide();
