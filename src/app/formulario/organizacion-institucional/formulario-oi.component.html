@@ -5,7 +5,32 @@
     </ng-template>
     <ng-template pTemplate="content">
         <form [formGroup]="postulanteForm" (ngSubmit)="savePostulante()">
-            <div class="row mb-4">
+            
+            <div class="row mb-4" style="top: -3vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Código concursante:</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;" class="pi pi-phone"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Código de puesto asignado:</p>
+                        <p-calendar 
+                            dateFormat="dd/mm/yy"
+                            placeholder="dd/mm/aaaa"
+                        />
+
+                        
+                    </span>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div class="row mb-4" style="position: relative; top: -5vh;">
                 <div class="field md:col-12">
                     <span class="p-float-label p-input-icon-left">
                         <p style="position: relative;top: 1vh;">Nombre</p>
@@ -15,7 +40,7 @@
                     </span>
                     
                     <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 40vw;">
-                        <p style="position: relative;top: 1vh;">Genero</p>
+                        <p style="position: relative;top: 1vh;">Genero:</p>
                         <p-dropdown 
                             
                             class="custom-dropdown"
@@ -31,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="row mb-4" style="top: -2vh;position: relative;">
+            <div class="row mb-4" style="top: -6vh;position: relative;">
                 <div class="field md:col-12">
                     <span class="p-float-label p-input-icon-left">
                         <p style="position: relative;top: 1vh;">Teléfono</p>
@@ -41,7 +66,7 @@
                     </span>
                     
                     <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
-                        <p style="position: relative;top: 1vh;">Fecha de Nacimiento</p>
+                        <p style="position: relative;top: 1vh;">Fecha de Nacimiento:</p>
                         <p-calendar 
                             dateFormat="dd/mm/yy"
                             placeholder="dd/mm/aaaa"
@@ -51,6 +76,531 @@
                     </span>
                 </div>
             </div>
+
+            <div class="row mb-4" style="top: -7vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Edad</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Email:</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;" class="pi pi-envelope"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -7vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Contraseña(<span style="font-size: 11px;"> Opcional - Si completa se actualizara la contraseña </span>):</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;" class="pi pi-lock"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Doc. Identidad:</p>
+                        <p-dropdown 
+                            formControlName="documento"
+                            [options]="tipoDocumento"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                        ></p-dropdown>
+
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -7vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Numero de documento:</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Estado civil:</p>
+                        <p-dropdown 
+                            formControlName="civil"
+                            [options]="estadoCivil"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                        ></p-dropdown>
+
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -8vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Numero de hijos:</p>
+                        <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;"></i>
+                        <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Grado de instrucción:</p>
+                        <p-dropdown 
+                            formControlName="instrucción"
+                            [options]="gradoInstruccion"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                        ></p-dropdown>
+
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -8vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;top: 1vh;">Profesión:</p>
+                        <p-dropdown 
+                            formControlName="profesion"
+                            [options]="profesion"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                        ></p-dropdown>
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Ocupación Actual:</p>
+                        <p-dropdown 
+                            formControlName="actual"
+                            [options]="ocupacionActual"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                        ></p-dropdown>
+
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -8vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left">
+                        <p style="position: relative;">Imagen:</p>
+                        
+                        <div style="border: 1px solid #cbd5e1;position: relative;height: 45px; top: -1vh;
+                        border-radius: 5px; width: 45vw;">
+                            <p-fileUpload
+                                mode = "basic"
+                                accept="image/*"
+                                chooseLabel="Seleccionar Archivo"
+
+                            />
+                            <label style=" left: 14vw;">Sin archivos seleccionados</label>
+                        </div>
+                        
+                        
+                    </span>
+                    
+                    <span class="p-float-label p-input-icon-left" style="position: relative;left: 5vw; width: 50vw; top: -2vh;">
+                        <p style="position: relative;top: 1vh;">Estado Actual:</p>
+                        <p-dropdown 
+                            formControlName="estado"
+                            [options]="estadoActual"
+                            optionLabel="name"
+                            placeholder="Seleccione"
+                        ></p-dropdown>
+
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="top: -10vh;position: relative;">
+                <div class="field md:col-12">
+                    <span class="p-float-label p-input-icon-left" style="position: relative; width: 50vw;">
+                        <p style="position: relative;top: 1vh;">Fecha de Afiliación:</p>
+                        <p-calendar 
+                            dateFormat="dd/mm/yy"
+                            placeholder="dd/mm/aaaa"
+                        />  
+                    </span>
+
+                    <span class="p-float-label p-input-icon-left" style="position: relative;width: 30vw; ">
+                        <p style="position: relative;top: 3vh;">Descargar</p>
+                        <span style="position: relative ; left: 5vw; bottom: 3vh;">
+                            <p-button icon="pi pi-download" />
+                        </span>
+                        
+                    </span>
+
+                    <span style="position: relative; left: 10vw; top: 10vh;">
+                        <p-button label="Guardar"  />
+                    </span>
+                </div>
+            </div>
+        
+
+            <div style="position: relative; border: 1px solid; width: 96vw; height: 65vh;left: 1vw; background-color: white; display: flex;
+                    flex-direction: column; color: #9b9797; border-radius: 10px;">
+                <span style="position: relative ;  left: 2vw; width: 92vw;  top: 4vh; height: 17vh">
+                    <p style="font-size: 15px; color: black;"> Información Académica</p>
+                    <p-button label="Añadir" /><br>
+        
+                </span>
+                <hr style="width: 96vw; color: #F2F2F2;">
+                <p style="left: 3vw; position: relative; font-size: 15px; font-weight: bold;">ID<span style="left: 2vw;position: relative;">ESTUDIOS</span>
+                    <span style="left: 12vw;position: relative;">CARRERA</span><span style="left: 14vw;position: relative;">V</span>
+                    <span style="left: 16vw;position: relative;">IMAGEN</span><span style="left: 19vw;position: relative;">ESTADO</span>
+                    <span style="left: 22vw;position: relative;">AVANCE</span><span style="left: 25vw;position: relative;">INSTITUCION</span>
+                    <span style="left: 29vw;position: relative;">F. INICIO</span><span style="left: 33vw;position: relative;">F.TERMINO</span>
+                    <span style="left: 36vw;position: relative;">OBSERVACIONES</span><span style="left: 39vw;position: relative;">ACCIONES</span>
+                </p>
+                <hr style="width: 94vw; color: #F2F2F2;left: 1vw; position: relative;">
+                <span style="position: relative;  width: 90vw; height: 10vh; left: 3vw;">
+                    
+                </span><br><br>
+                <hr style="width: 94vw; color: #F2F2F2;left: 1vw; position: relative;">
+
+                <div class="row mb-4" style="position: relative; top: -2vh;">
+                    <div class="field md:col-12">
+                        <span class="p-float-label p-input-icon-left" style="position: relative; left: 2vw;">
+                            <p style="position: relative;top: 1vh;color: black;">Nivel de cargo::</p>
+                            <p-dropdown 
+                                formControlName="cargo"
+                                [options]="nivelCargo"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                            
+                        </span>
+                        
+                        <span class="p-float-label p-input-icon-left" style="position: relative;left: 3vw; width: 40vw;">
+                            <p style="position: relative;top: 1vh; color: black;">Puntaje:</p>
+                            <p-dropdown 
+                                formControlName="puntaje"
+                                [options]="puntaje"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                        </span>
+
+                        <span style="position: relative; left: 2.5vw;top: 8.1vh;">
+                            <p-button label="Guardar"  />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="position: relative; border: 1px solid; width: 96vw; height: 75vh;left: 1vw; background-color: white; display: flex;
+                    flex-direction: column; color: #9b9797; border-radius: 10px; top: 3vh;">
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 4vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;"> Capacitaciones</p>
+                    <p-button label="Añadir" /><br>
+        
+                </span>
+                <hr style="width: 96vw; border: 1px solid #F2F2F2;position: absolute; top: 15vh;">
+                <p style="left: 3vw;top:18vh ;position: absolute; font-size: 15px; font-weight: bold;">ID<span style="left: 2vw;position: relative;">NOMBRE</span>
+                    <span style="left: 6vw;position: relative;">ESTADO</span><span style="left: 10vw;position: relative;">V</span>
+                    <span style="left: 13vw;position: relative;">IMAGEN</span><span style="left: 16vw;position: relative;">INSTITUCIÓN</span>
+                    <span style="left: 22vw;position: relative;">F.INICIO</span><span style="left: 27vw;position: relative;">F.TERMINO</span>
+                    <span style="left: 31vw;position: relative;">TIEMPO</span><span style="left: 34vw;position: relative;">TIEMPO CAPA.</span>
+                    <span style="left: 38vw;position: relative;">OBSERVACIONES</span>
+                </p>
+                <hr style="width: 94vw;border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 20vh;">
+                <span style="position: absolute;  width: 90vw; height: 10vh; left: 3vw; top: 25vh;">
+                    
+                </span><br><br>
+                <hr style="width: 94vw; border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 39vh;">
+
+                <div class="row mb-4" style="position: absolute; top: 40vh;">
+                    <div class="field md:col-12">
+                        <span class="p-float-label p-input-icon-left" style="position: relative; left: 2vw;">
+                            <p style="position: relative;top: 1vh;color: black;">Nivel de cargo::</p>
+                            <p-dropdown 
+                                formControlName="cargo"
+                                [options]="nivelCargo"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                            
+                        </span>
+                        
+                        <span class="p-float-label p-input-icon-left" style="position: relative;left: 3vw; width: 40vw;">
+                            <p style="position: relative;top: 1vh; color: black;">Puntaje:</p>
+                            <p-dropdown 
+                                formControlName="puntaje"
+                                [options]="puntaje"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                        </span>
+
+                        <div class="row mb-4" style="position: relative; left: 1vw;">
+                            <div class="field md:col-12">
+                                <span class="p-float-label p-input-icon-left">
+                                    <p style="position: relative;top: 1vh;color: black;">Tiempo validado:</p>
+                                    <i style="position: absolute;top: 6.5vh; z-index:2; font-size: 20px;"></i>
+                                    <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                                    
+                                </span>
+                                
+                            </div>
+                        </div>
+            
+
+                        <span style="position: relative; left: 87.5vw;bottom: 1.8vh;">
+                            <p-button label="Guardar"  />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div style="position: relative; border: 1px solid; width: 96vw; height: 75vh;left: 1vw; background-color: white; display: flex;
+                    flex-direction: column; color: #9b9797; border-radius: 10px; top: 6vh;">
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 4vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;"> Experiencia Laboral</p>
+                    <p-button label="Añadir" /><br>
+        
+                </span>
+                <hr style="width: 96vw; border: 1px solid #F2F2F2;position: absolute; top: 15vh;">
+                <p style="left: 3vw;top:18vh ;position: absolute; font-size: 15px; font-weight: bold;">ID<span style="left: 2vw;position: relative;">PUESTO</span>
+                    <span style="left: 5vw;position: relative;">INSTITUCION</span><span style="left: 9vw;position: relative;">V</span>
+                    <span style="left: 12vw;position: relative;">IMAGEN</span><span style="left: 15vw;position: relative;">EXP. GEN</span>
+                    <span style="left: 20vw;position: relative;">EXP. ESP</span><span style="left: 24vw;position: relative;">AREA</span>
+                    <span style="left: 29vw;position: relative;">VINCULO LAB.</span><span style="left: 32vw;position: relative;">F.INICIO</span>
+                    <span style="left: 35vw;position: relative;">F.TERMINO</span><span style="left: 38vw;position: relative;">OBSERVACIONES</span>
+                </p>
+                <hr style="width: 94vw;border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 20vh;">
+                <span style="position: absolute; width: 90vw; height: 10vh; left: 3vw; top: 25vh;">
+                    
+                </span><br><br>
+                <hr style="width: 94vw; border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 39vh;">
+
+                <div class="row mb-4" style="position: absolute; top: 40vh;">
+                    <div class="field md:col-12">
+                        <span class="p-float-label p-input-icon-left" style="position: relative; left: 2vw;">
+                            <p style="position: relative;top: 1vh;color: black;">Nivel de cargo::</p>
+                            <p-dropdown 
+                                formControlName="cargo"
+                                [options]="nivelCargo"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                            
+                        </span>
+                        
+                        <span class="p-float-label p-input-icon-left" style="position: relative;left: 3vw; width: 40vw;">
+                            <p style="position: relative;top: 1vh; color: black;">Puntaje:</p>
+                            <p-dropdown 
+                                formControlName="puntaje"
+                                [options]="puntaje"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                        </span>
+
+                        <div class="row mb-4" style="position: relative; left: 1vw;">
+                            <div class="field md:col-12">
+                                <span class="p-float-label p-input-icon-left">
+                                    <p style="position: relative;top: 1vh;color: black;">Tiempo validado:</p>
+                                
+                                    <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                                    
+                                </span>
+
+                                <span class="p-float-label p-input-icon-left" style="position: relative;left: 1vw; width: 40vw;">
+                                    <p style="position: relative;top: 1vh; color: black;">Tiempo Experiencia General:</p>
+                                    <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                                </span>
+                                
+                            </div>
+                        </div>
+            
+
+                        <span style="position: relative; left: 87.5vw;bottom: 1.8vh;">
+                            <p-button label="Guardar"  />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="position: relative; border: 1px solid; width: 96vw; height: 225vh;left: 1vw; background-color: white; display: flex;
+                    flex-direction: column; color: #9b9797; border-radius: 10px; top: 9vh;">
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 4vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;">Referencias</p>
+        
+                </span>
+                <hr style="width: 96vw; border: 1px solid #F2F2F2;position: absolute; top: 10vh;">
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 12vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;"> Personas que le recomiendan</p>
+                    <p-button label="Añadir" />
+                </span>
+
+                
+                
+                <p style="left: 3vw;top:25vh ;position: absolute; font-size: 15px; font-weight: bold;">ID<span style="left: 15vw;position: relative;">NOMBRE</span>
+                    <span style="left: 25vw;position: relative;">CELULAR</span><span style="left: 35vw;position: relative;">OCUPACION</span>
+                    <span style="left: 45vw;position: relative;">RAZON</span><span style="left: 60vw;position: relative;">ACCIONES</span>
+                </p>
+                <hr style="width: 94vw;border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 28vh;">
+                <span style="position: absolute;  width: 90vw; height: 10vh; left: 3vw; top: 33vh;">
+                    
+                </span>
+
+
+
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 50vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;"> Referencias Laborales</p>
+                    <p-button label="Añadir" />
+                </span>
+
+                
+                
+                <p style="left: 3vw;top:64vh ;position: absolute; font-size: 15px; font-weight: bold;">ID<span style="left: 20vw;position: relative;">NOMBRE</span>
+                    <span style="left: 35vw;position: relative;">CELULAR</span><span style="left: 50vw;position: relative;">OCUPACION</span>
+                    <span style="left: 63vw;position: relative;">ACCIONES</span>
+                </p>
+                <hr style="width: 94vw;border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 67vh;">
+                <span style="position: absolute;  width: 90vw; height: 10vh; left: 3vw; top: 72vh;">
+                    
+                </span>
+
+
+
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 90vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;"> Referencias Personales (Familia)</p>
+                    <p-button label="Añadir" />
+                </span>
+
+                
+                
+                <p style="left: 3vw;top:104vh ;position: absolute; font-size: 15px; font-weight: bold;">ID<span style="left: 20vw;position: relative;">NOMBRE</span>
+                    <span style="left: 35vw;position: relative;">CELULAR</span><span style="left: 50vw;position: relative;">PARENTESCO</span>
+                    <span style="left: 63vw;position: relative;">ACCIONES</span>
+                </p>
+                <hr style="width: 94vw;border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 107vh;">
+                <span style="position: absolute; width: 90vw; height: 10vh; left: 3vw; top: 112vh;">
+                    
+                </span>
+
+
+
+
+                <span style="position: absolute ;  left: 2vw; width: 92vw;  top: 130vh; height: 11vh;">
+                    <p style="font-size: 15px; color: black;">Comportamientos</p>
+                    <p-button label="Añadir" />
+                </span>
+
+                
+                
+                <p style="left: 3vw;top:144vh ;position: absolute; font-size: 15px; font-weight: bold;">ID<span style="left: 2vw;position: relative;">NOMBRE ACTIVIDAD</span>
+                    <span style="left: 5vw;position: relative;">TIPO DOCUMENTO</span><span style="left: 8vw;position: relative;">NUMERO DOCUMENTO</span>
+                    <span style="left: 12VW;position: relative;">DESCRIPCION</span><span style="left: 15VW;position: relative;">OBSERVACIONES</span>
+                    <span style="left: 19VW;position: relative;">RECURSOS</span><span style="left: 22VW;position: relative;">FECHA</span>
+                    <span style="left: 25VW;position: relative;">ACCIONES</span>
+                </p>
+                <hr style="width: 94vw;border: 1px solid #F2F2F2;left: 1vw; position: absolute; top: 147vh;">
+                <span style="position: absolute;  width: 90vw; height: 10vh; left: 3vw; top: 152vh;">
+                    
+                </span>
+
+                <hr style="position: absolute; width: 94vw; top:165vh">
+
+
+
+                <div class="row mb-4" style="position: absolute; top: 170vh;">
+                    <div class="field md:col-12">
+                        <span class="p-float-label p-input-icon-left" style="position: relative; left: 2vw;">
+                            <p style="position: relative;top: 1vh;color: black;">Observaciones:</p>
+                            <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                        </span>
+                        
+                        <span class="p-float-label p-input-icon-left" style="position: relative;left: 3vw; width: 40vw;">
+                            <p style="position: relative;top: 1vh; color: black;">Gestion:</p>
+                            <p-dropdown 
+                                formControlName="gestion"
+                                [options]="gestion"
+                                optionLabel="name"
+                                placeholder="Seleccione"
+                            ></p-dropdown>
+                        </span>
+
+                        <div class="row mb-4" style="position: relative; left: 1vw; top: 1vh;">
+                            <div class="field md:col-12">
+                                <span class="p-float-label p-input-icon-left">
+                                    <p style="position: relative;top: 1vh;color: black;">Aceptación:</p>
+                                
+                                <p-dropdown 
+                                    formControlName="puntaje"
+                                    [options]="puntaje"
+                                    optionLabel="name"
+                                    placeholder="Seleccione"
+                                ></p-dropdown>
+                                    
+                                </span>
+
+                                <span class="p-float-label p-input-icon-left" style="position: relative;left: 1vw; width: 40vw;">
+                                    <p style="position: relative;top: 1vh;color: black;">Nivel de Cargo Final:</p>
+                                
+                                <p-dropdown 
+                                    formControlName="cargo"
+                                    [options]="nivelCargo"
+                                    optionLabel="name"
+                                    placeholder="Seleccione"
+                                ></p-dropdown>
+                                </span>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row mb-4" style="position: relative; left: 1vw; top: -2vh;">
+                            <div class="field md:col-12">
+                                <span class="p-float-label p-input-icon-left">
+                                    <p style="position: relative;top: 1vh;color: black;">Puntaje:</p>
+                                
+                                <p-dropdown 
+                                    formControlName="puntaje"
+                                    [options]="puntaje"
+                                    optionLabel="name"
+                                    placeholder="Seleccione"
+                                ></p-dropdown>
+                                    
+                                </span>
+
+                                <span class="p-float-label p-input-icon-left" style="position: relative;left: 1vw; width: 40vw;">
+                                    <p style="position: relative;top: 1vh;color: black;">Institución:</p>
+                                
+                                    <input style="width: 45vw; position: relative;z-index: 1;" type="text" id="nombre" pInputText formControlName="nombres">
+                                </span>
+                                
+                            </div>
+                        </div>
+            
+
+                        <span style="position: relative; left: 87.5vw;top: 1vh;">
+                            <p-button label="Guardar"  />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="position: relative;  width: 96vw; height: 15vh;left: 1vw; background-color: white; display: flex;
+                    flex-direction: column;  top: 10vh; ">
+
+            </div>
+
         </form>
     </ng-template>
 </p-panel>
+
