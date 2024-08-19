@@ -53,9 +53,9 @@ export class RegCursosComponent implements OnInit, AfterViewInit {
     this.cantidadTotalCreditos = this.config.data.total_creditos;
     this.acciones = this.config.data.acciones;
     this.domain_id = this.helperService.getDominioId();
-
+    
       Promise.all([
-          this.obtenerDatosCurso(this.config.data.data.id),
+          this.obtenerDatosCurso(this.config.data.id),
           this.listarModulosFormativos(),
           this.listarAreasFormacion(),
           this.listarCiclos(),
