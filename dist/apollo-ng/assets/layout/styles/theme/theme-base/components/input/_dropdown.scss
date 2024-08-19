@@ -3,6 +3,7 @@
     border: $inputBorder;
     transition: $formElementTransition;
     border-radius: $borderRadius;
+    width: 45vw;
 
     &:not(.p-disabled):hover {
         border-color: $inputHoverBorderColor;
@@ -23,7 +24,7 @@
         border: 0 none;
 
         &.p-placeholder {
-            color: $inputPlaceholderTextColor;
+            color: rgb(189, 187, 187);
         }
 
         &:enabled:focus {

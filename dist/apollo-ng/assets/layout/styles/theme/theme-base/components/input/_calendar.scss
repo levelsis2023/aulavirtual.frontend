@@ -237,6 +237,7 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
 p-calendar.p-calendar-clearable {
     .p-inputtext {
         padding-right: nth($inputPadding, 2) * 2 + $primeIconFontSize;
+        color: red;
     }
     
     .p-calendar-clear-icon {

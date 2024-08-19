@@ -6,7 +6,8 @@
     font-size: $fontSize;
     transition: $formElementTransition;
     border-radius: $borderRadius;
-
+    
+    
     &:enabled:hover {
         background: $buttonHoverBg;
         color: $buttonTextHoverColor;
@@ -168,6 +169,8 @@
         }
     }
 }
+
+
 
 .p-fluid {
     .p-button {
@@ -561,4 +564,6 @@
         color: $linkButtonColor;
         border-color:  transparent;
     }
+
+    
 }

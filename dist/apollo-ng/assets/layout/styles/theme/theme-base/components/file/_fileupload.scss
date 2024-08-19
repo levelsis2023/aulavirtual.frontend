@@ -1,5 +1,4 @@
 .p-fileupload {
-
     .p-fileupload-buttonbar {
         background: $panelHeaderBg;
         padding: $panelHeaderPadding;
@@ -11,7 +10,6 @@
 
         .p-button {
             margin-right: $inlineSpacing;
-            
 
             &.p-fileupload-choose.p-focus {
                 @include focused();
@@ -54,7 +52,7 @@
 
     &:not(.p-disabled):active {
         background: $buttonActiveBg;
-        color: $re;
+        color: $buttonTextActiveColor;
         border-color: $buttonActiveBorderColor;
     }
 }
